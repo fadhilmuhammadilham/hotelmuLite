@@ -1,6 +1,6 @@
 {
-  "appId": "id.hotelmu.outletpos",
-  "appName": "Outlet POS",
+  "appId": "id.hotelmu.restopos",
+  "appName": "Resto POS",
   "webDir": "www",
   "bundledWebRuntime": false,
   "server": {
