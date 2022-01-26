@@ -1,0 +1,87 @@
+<!-- App Header -->
+<div class="appHeader">
+    <div class="left">
+        <a href="javascript:history.back()" class="headerButton">
+            <svg class="icon bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                    clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
+    <div class="pageTitle">
+        Buat Pesanan Baru
+    </div>
+    <div class="right">
+
+        <a href="javascript:;" class="headerButton d-none" id="eraser-btn">
+            <svg class="icon bi" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                class="bi bi-eraser" viewBox="0 0 16 16">
+                <path
+                    d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z" />
+            </svg>
+        </a>
+    </div>
+</div>
+<!-- * App Header -->
+
+<!-- Extra Header -->
+<div class="extraHeader pos">
+    <form class="search-form">
+        <div class="form-group searchbox">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Cari menu yang anda jual" id="searchProduct">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-scan-barcode">
+                        <svg class="icon bi bi-hr" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 8a.5.5 0 01.5-.5h15a.5.5 0 010 1H.5A.5.5 0 010 8z"
+                                clip-rule="evenodd" />
+                            <path
+                                d="M4 3h8a1 1 0 011 1v2.5h1V4a2 2 0 00-2-2H4a2 2 0 00-2 2v2.5h1V4a1 1 0 011-1zM3 9.5H2V12a2 2 0 002 2h8a2 2 0 002-2V9.5h-1V12a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {{!-- <i class="input-icon">
+                <svg class="icon bi bi-search" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M12.442 12.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                        clip-rule="evenodd"></path>
+                    <path fill-rule="evenodd"
+                        d="M8.5 14a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM15 8.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </i> --}}
+        </div>
+    </form>
+</div>
+<!-- * Extra Header -->
+
+<!-- Extra Header -->
+<div class="extraHeader pos eh-2 p-0">
+    <ul class="nav nav-tabs lined category-tabs" id="nav-category" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" role="tab">
+                <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span>
+                </div>
+            </a>
+        </li>
+        {{!-- {{> pos-nav-cat}} --}}
+    </ul>
+</div>
+<!-- * Extra Header -->
+
+<!-- App Capsule -->
+<div id="appCapsule" class="extra-header-active posa eha-2 full-height pb-0">
+    <div class="tab-content" id="content-product">
+        <div class="tab-pane fade show active" role="tabpanel">
+            <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span>
+            </div>
+        </div>
+        {{!-- {{> pos-item}} --}}
+    </div>
+</div>
+<!-- * App Capsule -->

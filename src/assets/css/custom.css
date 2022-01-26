@@ -1,0 +1,73 @@
+.image-listview.text > li:after {
+    left: 0;
+}
+
+.image-listview.text > li a.item:after {
+    background-image: none;
+    display: none;
+}
+
+.image-listview > li a.item {
+    padding-right: 16px;
+}
+
+@-webkit-keyframes placeHolderShimmer {
+	0% {
+		background-position: -468px 0
+	}
+
+	100% {
+		background-position: 468px 0
+	}
+}
+
+@keyframes placeHolderShimmer {
+	0% {
+		background-position: -468px 0
+	}
+
+	100% {
+		background-position: 468px 0
+	}
+}
+
+.animated-background {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-name: placeHolderShimmer;
+	animation-name: placeHolderShimmer;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	background: #f6f7f8;
+	background: #eeeeee;
+	background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+	background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+	background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+	-webkit-background-size: 800px 104px;
+	background-size: 800px 104px;
+	color: transparent;
+    border-radius: 6px;
+}
+
+.extraHeader.pos{
+	height: 46px;
+}
+.extraHeader.pos.eh-2{
+	height: 42px;
+}
+
+.extraHeader.pos.eh-2{
+	top: 102.5px;
+}
+
+.pos .nav-tabs.lined .nav-item .nav-link {
+    height: 42px;
+}
+
+#appCapsule.extra-header-active.posa.eha-2 {
+    padding-top: 140px;
+}

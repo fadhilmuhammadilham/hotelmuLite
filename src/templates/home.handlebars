@@ -1,0 +1,78 @@
+<!-- App Capsule -->
+<div id="appCapsule" class="pt-2">
+
+    <div class="header-large-title">
+        <h1 class="title">Hi, <span id="name">{{ name }}</span></h1>
+        <h4 class="subtitle">Selamat datang di Hotelmu POS</h4>
+    </div>
+
+    <div class="section mt-2 mb-2">
+        <div id="alertWrapper">
+            {{!-- <div class="alert alert-warning">Device ini belum diatur pengaturan tokonya.</div> --}}
+        </div>
+        <!-- <div>UTC Date : <span id="utcDate"></span></div>
+			<div>Local Date : <span id="localDate"></span></div> -->
+        <div class="card" id="sessionCard">
+            <div class="card-header d-flex">
+                <div class="flex-grow-1 d-flex align-self-center">
+                    Shift
+                </div>
+                <div>
+                    {{#if isSessionOpened}}
+                    <button class="btn btn-sm btn-secondary rounded" id="closeSessionButton" data-toggle="modal"
+                        data-target="#dialogConfirmCloseSession">Tutup</button>
+                    {{else}}
+                    <a href="/session/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
+                    {{/if}}
+                </div>
+            </div>
+            {{#if isSessionOpened}}
+            <div id="sessionCardBody" class="card-body">
+                <div class="flex-grow-1 ">
+                    {{!-- <div id="nameDiv" class="font-weight-bold">POS/2021/02/25/0001</div> --}}
+                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">2021-02-25</span></div>
+                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">08:00:00</span></div>
+                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp0</span></div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+
+    <div class="section mt-3 mb-3">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle">Penjualan Hari Ini</h6>
+                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between"
+                            id="totalSaleToday">
+                            <span class="animated-background">Rp1.500.000</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle">Transaksi Hari Ini</h6>
+                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between"
+                            id="totalTransactionToday">
+                            <span class="animated-background">500</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="listview-title mt-2">Penjualan Terbaru</div>
+    <ul class="listview image-listview text" id="new-transaction-list">
+        <li class="justify-content-center">
+            <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span></div>
+        </li>
+    </ul>
+</div>
+<!-- * App Capsule -->
+{{> buttom-menus }}

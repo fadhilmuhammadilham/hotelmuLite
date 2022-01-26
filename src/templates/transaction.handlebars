@@ -1,0 +1,41 @@
+<!-- App Header -->
+<div class="appHeader justify-left">
+    <div class="ml-1">
+        <input type="text" class="form-control" placeholder="Cari transaksi ...">
+    </div>
+    <div class="mx-2 flex-grow-1">
+        <div class="border rounded p-1 d-flex justify-content-center align-items-center">
+            <span class="flex-grow-1">Status</span>
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </div>
+    {{!-- <div class="left">
+    </div>
+    <div class="pageTitle">
+        Transaksi
+    </div>
+    <div class="right">
+        <a href="javascript:;" class="headerButton" data-toggle="modal" data-target="#ModalForm">
+            <svg class="icon bi bi-search" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M12.442 12.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                    clip-rule="evenodd"></path>
+                <path fill-rule="evenodd"
+                    d="M8.5 14a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM15 8.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </a>
+    </div> --}}
+</div>
+<!-- * App Header -->
+<!-- App Capsule -->
+<div id="appCapsule">
+    <ul class="listview image-listview text" id="transaction-list">
+        <li class="justify-content-center">
+            <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span></div>
+        </li>
+    </ul>
+</div>
+<!-- * App Capsule -->
+{{> buttom-menus }}

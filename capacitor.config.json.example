@@ -1,0 +1,10 @@
+{
+  "appId": "id.hotelmu.outletpos",
+  "appName": "Outlet POS",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "http://0.0.0.0:8000",
+    "cleartext": true
+  }
+}
