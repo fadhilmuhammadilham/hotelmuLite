@@ -3,6 +3,8 @@ import homeView from "../templates/home.handlebars"
 import TransactionApi from "../repositories/api/TransactionApi"
 import listTransaction from '../templates/transaction-list.handlebars'
 import $ from 'jquery'
+import currency from '../templates/helpers/currency'
+import UserLocalStorage from "../repositories/localstorage/UserLocalStorage"
 
 class Home extends Page {
   constructor(params) {
@@ -29,7 +31,8 @@ class Home extends Page {
 
   action() {
     this.getSummary((summary) => {
-      $('#totalSaleToday').html(`Rp${summary.sales_today}`)
+      let total_sales = currency(summary.sales_today)
+      $('#totalSaleToday').html(`Rp${total_sales}`)
       $('#totalTransactionToday').html(summary.transactions_today)
     })
 
@@ -40,7 +43,7 @@ class Home extends Page {
   }
 
   render() {
-    return homeView({name: "fatah", isSessionOpened: false})
+    return homeView({name: UserLocalStorage.get('name'), isSessionOpened: false})
   }
 }
 

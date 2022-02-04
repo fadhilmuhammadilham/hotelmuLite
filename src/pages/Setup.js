@@ -32,14 +32,15 @@ class Setup extends Page {
 
       submitButton.attr('disabled', false)
       submitButton.html('Submit')
-      if (res.status) {
-        ConfigLocalStorage.set('hotelId', idInput.val())
-        Redirect('/login', true)
-      }
-      else {
+      // if (res.status) {
+      //   ConfigLocalStorage.set('hotelId', idInput.val())
+      //   Redirect('/login', true)
+      // }
+      // else {
+      //   alert(res.message)
+      // }
 
-        alert(res.message)
-      }
+      console.log(res);
       
     }) 
   }

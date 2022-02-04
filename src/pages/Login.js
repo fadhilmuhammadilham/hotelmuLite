@@ -4,6 +4,7 @@ import loginView from '../templates/login.handlebars'
 import $ from 'jquery'
 import UserApi from "../repositories/api/UserApi";
 import { setCookie } from '../core/Cookies'
+import UserLocalStorage from "../repositories/localstorage/UserLocalStorage";
 
 class Login extends Page {
   constructor(params) {
@@ -23,6 +24,7 @@ class Login extends Page {
 
       if (res.status) {
         setCookie('token', res.data.token, res.data.expire)
+        UserLocalStorage.set(res.data.userdata)
         Redirect('/', true)
       }
       else {
