@@ -1,0 +1,54 @@
+<!-- App Header -->
+<div class="appHeader no-border">
+    <div class="left">
+        <a href="javascript:history.back()" class="headerButton">
+            <svg class="icon bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                    clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
+    <div class="pageTitle">
+        Pengaturan
+    </div>
+    <div class="right">
+
+    </div>
+</div>
+<!-- * App Header -->
+
+{{!-- App Capsule --}}
+<div id="appCapsule" >
+    <ul class="listview simple-listview">
+        <li>
+            ID Hotel
+            <span>{{ hotel_id }}</span>
+        </li>
+    </ul>
+    <div class="section">
+        <div class="mt-2">
+            <button type="button" class="btn btn-danger btn-block" id="reset-btn">Reset</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade dialogbox" id="DialogBasic-reset" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi Reset</h5>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin akan Reset ID Hotel? Jika anda reset ID Hotel anda akan diarahkan ke halaman Setup Hotel
+            </div>
+            <div class="modal-footer">
+                <div class="btn-inline">
+                    <a href="#" class="btn btn-text-secondary" data-dismiss="modal">Kembali</a>
+                    <a href="#" class="btn btn-text-danger" id="confirm-reset">Reset</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- * App Capsule --}}

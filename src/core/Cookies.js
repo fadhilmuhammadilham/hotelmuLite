@@ -2,6 +2,7 @@ function setCookie(cname, cvalue, expr) {
   const d = new Date();
   d.setTime(expr);
   let expires = "expires="+d.toUTCString();
+  console.log(expires);
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 

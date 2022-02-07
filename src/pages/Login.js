@@ -23,8 +23,8 @@ class Login extends Page {
       $('#login-btn').html('Submit')
 
       if (res.status) {
-        setCookie('token', res.data.token, res.data.expire)
-        UserLocalStorage.set(res.data.userdata)
+        setCookie('token', res.data.token, res.data.expires+"000")
+        UserLocalStorage.set(res.data.user)
         Redirect('/', true)
       }
       else {
