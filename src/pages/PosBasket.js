@@ -4,6 +4,8 @@ import basketItemView from '../templates/basket-item.handlebars'
 import BasketService from "../services/BasketService"
 import $ from "jquery"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
+import TableLocalStorage from "../repositories/localstorage/TableLocalStorage"
+import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 
 class PosBasket extends Page {
   constructor(params) {
@@ -72,6 +74,12 @@ class PosBasket extends Page {
 			basketService.removeItem(id)
 			viewBasket(basketService)
 		})
+
+    if(BasketLocalStorage.get('table')){
+      let table = BasketLocalStorage.get('table');
+      let nama_meja = table.table_name;
+      $('#nomor-meja').text(nama_meja)
+    }
   }
 
   render() {

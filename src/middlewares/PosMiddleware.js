@@ -1,5 +1,6 @@
 import Redirect from "../core/Redirect";
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage";
+import TableLocalStorage from "../repositories/localstorage/TableLocalStorage";
 import Middleware from "./Middleware";
 
 class MustSelectTypeMiddleware extends Middleware {
@@ -46,10 +47,11 @@ class MustSelectedPaymentTypeMiddleware extends Middleware {
 
 class MustSelectedRoomOrTableMiddleware extends Middleware {
   before() {
-    const payment = BasketLocalStorage.get('payment')
+    const table = BasketLocalStorage.get('table')
 
-    if (!payment) {
+    if (!table.id) {
       // Redirect('/pos/basket', true);
+      alert('Silahkan Pilih Meja Terlebih Dahulu');
       window.history.back()
       return false
     }
@@ -58,4 +60,18 @@ class MustSelectedRoomOrTableMiddleware extends Middleware {
   }
 }
 
-export { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware }
+class MustNotSelectItemMiddleware extends Middleware {
+  before() {
+    const item = BasketLocalStorage.get('items')
+
+    if(item.length > 0){
+      alert('Silahkan Kosongkan Keranjang Terlebih Dahulu');
+      Redirect('/pos')
+      return false;
+    }
+
+    return true;
+  }
+}
+
+export { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware }

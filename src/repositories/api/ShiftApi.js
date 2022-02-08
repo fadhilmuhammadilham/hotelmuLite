@@ -13,7 +13,7 @@ class ShiftApi {
                 'Content-Type': 'application/json'
             },
             mode: 'cors',
-            body: JSON.stringify({begining_balance: begining_balance})
+            body: JSON.stringify({ begining_balance: begining_balance })
         })
 
         let json = await response.json();

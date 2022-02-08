@@ -9,6 +9,7 @@ class BasketService {
     this.totalPrice = typeof basketLocalStorage.totalPrice != 'undefined' ? basketLocalStorage.totalPrice: 0
     this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty: 0
     this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment: {}
+    this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table: {}
 
   }
 
@@ -77,6 +78,12 @@ class BasketService {
 
   setPayment(payment) {
     this.payment = payment
+
+    BasketLocalStorage.save(this)
+  }
+
+  setTable(table) {
+    this.table = table
 
     BasketLocalStorage.save(this)
   }

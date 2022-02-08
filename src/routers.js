@@ -10,7 +10,7 @@ import MustNotLoginMidlleware from "./middlewares/MustNotLoginMiddleware"
 import { 
   MustChooseHotelMidlleware, MustNotChooseHotelMidlleware
 } from './middlewares/SetupMiddleware'
-import {MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware} from './middlewares/PosMiddleware';
+import {MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware} from './middlewares/PosMiddleware';
 import {MustOpenShiftMidlleware, MustCloseShiftMiddleware} from "./middlewares/ShiftMiddleware"
 import PosPayment from "./pages/PosPayment"
 import PosPaymentCash from "./pages/PosPaymentCash"
@@ -21,6 +21,7 @@ import Profile from "./pages/Profile"
 import Settings from "./pages/Settings"
 import ShiftOpen from "./pages/ShiftOpen"
 import ShiftClose from "./pages/ShiftClose"
+import PosTable from "./pages/PosTable"
 
 const routers = [
   { path: "/", view: Home, middlewares: [MustLoginMidlleware] },
@@ -30,8 +31,9 @@ const routers = [
   { path: "/shift/open", view: ShiftOpen, middlewares: [MustLoginMidlleware, MustCloseShiftMiddleware] },
   { path: "/shift/close", view: ShiftClose, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
   { path: "/pos", view: Pos, middlewares: [MustLoginMidlleware, MustSelectTypeMiddleware] },
-  { path: "/pos/type", view: PosType, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
+  { path: "/pos/type", view: PosType, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware, MustNotSelectItemMiddleware] },
   { path: "/pos/basket", view: PosBasket, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
+  { path: "/pos/table", view: PosTable, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
   { path: "/pos/payment", view: PosPayment, middlewares: [MustLoginMidlleware, MustSelectedRoomOrTableMiddleware] },
   { path: "/pos/payment/cash", view: PosPaymentCash, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
   { path: "/pos/payment/finish", view: PosPaymentFinish, middlewares: [MustLoginMidlleware] },
