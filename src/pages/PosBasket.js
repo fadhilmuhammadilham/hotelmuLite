@@ -6,6 +6,8 @@ import $ from "jquery"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
 import TableLocalStorage from "../repositories/localstorage/TableLocalStorage"
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
+import TransactionApi from "../repositories/api/TransactionApi"
+import Redirect from "../core/Redirect"
 
 class PosBasket extends Page {
   constructor(params) {
@@ -22,6 +24,12 @@ class PosBasket extends Page {
 
     viewBasket(basketService)
 
+    if(!BasketLocalStorage.get('table')){
+      console.log('waww')
+    }else{
+      console.log(BasketLocalStorage.get('table'))
+    }
+    
     $('#print').on('click', () => {
       listPrinters({type: 'bluetooth'}, res => {
         console.log(res)
@@ -80,6 +88,41 @@ class PosBasket extends Page {
       let nama_meja = table.table_name;
       $('#nomor-meja').text(nama_meja)
     }
+
+    if(BasketLocalStorage.get('guest')) {
+      let guest = BasketLocalStorage.get('guest');
+      let nama_tamu = guest.guest_name
+      $('#nama-tamu').text(nama_tamu)
+    }
+
+    $('#save-transaction').on('click', async (e) => {
+      const jumlah_tamu = $('#jumlah-tamu').val()
+      let is_room = BasketLocalStorage.get('type').isroom
+      let table = BasketLocalStorage.get('table')
+      e.preventDefault()
+      console.log(table.hasOwnProperty('id'))
+
+      if(!table.hasOwnProperty('id') && is_room !== "1"){
+        alert('Silahkan Pilih Meja terlebih dahulu!')
+      }
+
+      if(jumlah_tamu === "0"){
+        alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
+      }
+
+      if(table.hasOwnProperty('id') && jumlah_tamu !== "0"){
+          let res = await TransactionApi.save(jumlah_tamu)
+
+          if(res.status){
+            alert("Transaksi Berhasil Disimpan")
+            basketService.clear()
+            Redirect('/', true)
+          }else{
+            alert("Transaksi Gagal Disimpan")
+            console.log(res);
+          }
+      }
+    })
   }
 
   render() {

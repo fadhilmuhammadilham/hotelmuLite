@@ -1,3 +1,5 @@
+import API from "../../configs/ApiConfig";
+
 class HotelApi {
   static async signin(hotelId, securityCode) {
     // const hotels = [
@@ -16,7 +18,7 @@ class HotelApi {
 
     // return response
 
-    let url = "https://api.hotelmu.id/pos/setup";
+    let url = `${API.url}/setup`;
 
     let response = await fetch(url, {
       method: 'post',

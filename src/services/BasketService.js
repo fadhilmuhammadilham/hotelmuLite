@@ -10,6 +10,7 @@ class BasketService {
     this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty: 0
     this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment: {}
     this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table: {}
+    this.guest = typeof basketLocalStorage.guest != 'undefined' ? basketLocalStorage.guest: {}
 
   }
 
@@ -84,6 +85,12 @@ class BasketService {
 
   setTable(table) {
     this.table = table
+
+    BasketLocalStorage.save(this)
+  }
+
+  setGuest(guest) {
+    this.guest = guest
 
     BasketLocalStorage.save(this)
   }

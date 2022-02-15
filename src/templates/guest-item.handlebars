@@ -1,0 +1,9 @@
+{{#each guests as | guest |}}
+    <li data-id="{{guest.id}}" data-name="{{guest.name}}" class="guest-id">
+       <a href="javascript:;">
+           {{guest.name}}
+       </a>
+    </li>
+{{else}}
+<div class="alert alert-warning text-center m-2">Tidak Ada Daftar Tamu!</div>
+{{/each}}

@@ -8,7 +8,7 @@ class MustOpenShiftMidlleware extends Middleware {
 
     if (!shift_id) {
       alert("Silahkan Buka Shift Terlebih Dahulu")
-      Redirect('/', true)
+      window.history.back();
       return false
     }
 
@@ -22,7 +22,7 @@ class MustCloseShiftMiddleware extends Middleware {
 
     if (shift_id) {
       alert("Silahkan Tutup Shift Terlebih Dahulu")
-      Redirect('/', true)
+      window.history.back();
       return false
     }
 

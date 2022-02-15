@@ -1,3 +1,4 @@
+import API from "../../configs/ApiConfig";
 import { getCookie } from "../../core/Cookies"
 import BasketLocalStorage from "../localstorage/BasketLocalStorage"
 
@@ -20,21 +21,25 @@ class ItemApi {
     // return await proccess
     
     let type = BasketLocalStorage.get('type')
-    let url = `https://api.hotelmu.id/pos/resto/item?outlet_id=${type.id}`
+    let url = `${API.url}/resto/item?outlet_id=${type.id}`
     let bearer = "Bearer " + getCookie('token');
 
-    let response = await fetch(url, {
-      method: 'GET',
-      headers: {
-          'Authorization': bearer,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-    })
-
-    let json = await response.json();
-
-    return json;
+    try {
+      let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': bearer,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+      })
+  
+      let json = await response.json();
+  
+      return json;
+    } catch (error) {
+      console.log(error) 
+    }
   }
 }
 

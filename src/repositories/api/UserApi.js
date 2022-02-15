@@ -1,4 +1,4 @@
-import { isNumeric } from "jquery"
+import API from "../../configs/ApiConfig";
 import ConfigLocalStorage from "../localstorage/ConfigLocalStorage";
 
 class UserApi {
@@ -15,21 +15,26 @@ class UserApi {
     //   resolve(user ? { status: true, data: { token: '1234567890', expire: (d.getTime() + (0.5 * 24 * 60 * 60 * 1000)), userdata: {username: user.username, name: user.name}}, message: "Login berhasil" }: { status: false, message: "Login gagal" })
     // }, 1000))
 
-    let url = "https://api.hotelmu.id/pos/resto/login";
+    let url = `${API.url}/resto/login`;
     let hotelId = ConfigLocalStorage.get('hotelId');
 
-    let response = await fetch(url, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({hotel_id: hotelId, username: username, password: password}),
-    })
+    try {
+      let response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({hotel_id: hotelId, username: username, password: password}),
+      })
+  
+      let json = await response.json();
+  
+      return json
+    } catch (error) {
+      console.log(error);
+    }
 
-    let json = await response.json();
-
-    return json
   }
 }
 

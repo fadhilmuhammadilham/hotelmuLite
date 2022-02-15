@@ -15,6 +15,7 @@ class PosPayment extends Page {
   async action() {
     const basketService = new BasketService()
     basketService.clear()
+    
     const types = await TypeApi.getAll()
     $('#type-items').html(posTypeItemView({types:types.data}))
 

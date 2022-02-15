@@ -8,6 +8,7 @@ import UserLocalStorage from "../repositories/localstorage/UserLocalStorage"
 import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 import ShiftApi from "../repositories/api/ShiftApi"
 import Redirect from "../core/Redirect"
+import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
 
 class Home extends Page {
   constructor(params) {
@@ -33,6 +34,8 @@ class Home extends Page {
   }
 
   action() {
+    TransactionLocalStorage.removeAll()
+
     this.getSummary((summary) => {
       let total_sales = currency(summary.sales_today)
       $('#totalSaleToday').html(`Rp${total_sales}`)
@@ -65,6 +68,14 @@ class Home extends Page {
 
       $('#closeSessionButton').html(`Tutup`)
       $('#closeSessionButton').removeAttr('disabled');
+    })
+
+    $(document).on('click', '.trx-item', (e) => {
+      let trx_id = $(e.currentTarget).data('trx_id')
+      let status = $(e.currentTarget).data('status')
+
+      TransactionLocalStorage.set({'id': trx_id, 'status': status})
+      Redirect(`/transaction/detail`, false)
     })
   }
 

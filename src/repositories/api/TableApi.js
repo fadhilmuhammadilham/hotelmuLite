@@ -1,24 +1,35 @@
+import API from "../../configs/ApiConfig";
 import { getCookie } from "../../core/Cookies";
 import BasketLocalStorage from "../localstorage/BasketLocalStorage";
 
 class TableApi {
-    static async getAll() {
+    static async getAll(outlet) {
         let outlet_id = BasketLocalStorage.get('type')
         let bearer = 'Bearer ' + getCookie('token')
-        let url = `https://api.hotelmu.id/pos/resto/table?outlet_id=${outlet_id.id}`
+        let url = `${API.url}/resto/table`
 
-        let response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': bearer,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        })
+        if(outlet_id.hasOwnProperty('id')){
+            url = `${API.url}/resto/table?outlet_id=${outlet_id.id}`
+        }else{
+            url = `${API.url}/resto/table?outlet_id=${outlet}`
+        }
 
-        let json = await response.json()
-
-        return json;
+        try {
+            let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': bearer,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+    
+            let json = await response.json()
+    
+            return json;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

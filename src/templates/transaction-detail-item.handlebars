@@ -1,0 +1,16 @@
+{{#each items as | item |}}
+<li class="product">
+    <div class="item">
+        <div class="imageWrapper">
+            <img src="/images/placeholder.jpg" alt="image" class="imaged w48">
+        </div>
+        <div class="in">
+            <div>
+                {{item.name}}
+                <div class="text-muted">Rp{{[helpers/currency] item.price}}</div>
+            </div>
+            <span>{{item.qty}} Item</span>
+        </div>
+    </div>
+</li>
+{{/each}}

@@ -1,5 +1,5 @@
 {{#each transactions as | transaction |}}
-<li>
+<li class="trx-item" data-trx_id="{{ transaction.id }}" data-status="{{ transaction.status.name }}">
     <a href="javascript:;" class="item">
         <div class="in">
             <div class="w-50">
@@ -7,9 +7,9 @@
                 <div class="text-muted">{{ transaction.trx_date }}</div>
             </div>
             <div class="flex-grow-1">
-                {{#if transaction.status}}<span class="badge badge-success mr-3">Sukses</span>{{else}}<span class="badge badge-secondary mr-3">Draft</span>{{/if}}
+                <span class="badge {{ transaction.status.badge }} mr-3">{{ transaction.status.name }}</span>
             </div>
-            <div class="font-weight-bold">Rp{{[helpers/currency] transaction.total_price }}</div>
+            <div class="font-weight-bold">Rp{{[helpers/currency] transaction.total_prices }}</div>
         </div>
     </a>
 </li>

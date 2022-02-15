@@ -1,0 +1,63 @@
+<!-- App Header -->
+<div class="appHeader no-border">
+    <div class="left">
+        <a href="javascript:history.back()" class="headerButton">
+            <svg class="icon bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                    clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
+    <div class="pageTitle">
+        Detail Transaksi
+    </div>
+    <div class="right">
+
+    </div>
+</div>
+<!-- * App Header -->
+
+{{!-- App Capsule --}}
+<div id="appCapsule" >
+    <ul class="listview simple-listview">
+        <li>
+            No Transaksi
+            <span id="no-trx"></span>
+        </li>
+        <li>
+            Tanggal Transaksi
+            <span id="trx-date"></span>
+        </li>
+        <li>
+            Nomor Meja
+            <span id="nomor-meja"></span>
+        </li>
+        <li>
+            Nama Tamu
+            <span id="nama-tamu"></span>
+        </li>
+        <li>
+            Total Harga
+            <span id="total-harga"></span>
+        </li>
+        <li>
+            Status
+            <span>{{ is_draft }}</span>
+        </li>
+    </ul>
+    <div class="listview-title mt-2">Daftar Items</div>
+    <ul class="listview image-listview media items-list">
+       
+    </ul>
+</div>
+{{!-- * App Capsule --}}
+
+{{!-- Bottom Menu --}}
+{{#if ([helpers/equal] is_draft 'Draft')}}
+<div class="appBottomMenu">
+    <button class="btn btn-success btn-block">Lanjutkan Transaksi</button>
+</div>
+{{/if}}
+{{!-- * Bottom Menu --}}

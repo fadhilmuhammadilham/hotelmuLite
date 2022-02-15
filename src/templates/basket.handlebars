@@ -42,15 +42,29 @@
                 <span class="badge badge-dark" id="nomor-meja"></span>
             </a>
         </li>
+        <li>
+            <a href="/pos/guest" data-link>
+                Tamu
+                <span class="badge badge-dark" id="nama-tamu"></span>
+            </a>
+        </li>
     </ul>
 
+    <div class="section mt-1">
+        <div class="form-group basic">
+            <div class="input-wrapper">
+                <label for="Jumlah Tamu" class="label">Jumlah Tamu</label>
+                <input type="number" value="1" class="form-control" id="jumlah-tamu" name="jumlah_tamu" placeholder="Jumlah Tamu" min="0" required>
+            </div>
+        </div>
+    </div>
     <div class="section pt-4 pb-4">&nbsp;</div>
 
 
     <div class="form-button-group pt-2">
         <div class="row">
             <div class="col-6 mb-2">
-                <button type="button" data-action="save" class="btn btn-outline-secondary btn-block">
+                <button type="button" class="btn btn-outline-secondary btn-block" id="save-transaction">
                     Simpan
                 </button>
             </div>
