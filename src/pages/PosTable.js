@@ -4,6 +4,8 @@ import tableView from "../templates/table.handlebars";
 import tableItemView from "../templates/table-item.handlebars"
 import $ from "jquery";
 import BasketService from "../services/BasketService";
+import TransactionService from "../services/TransactionService";
+import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage";
 
 class PosTable extends Page {
     constructor(params) {
@@ -23,14 +25,20 @@ class PosTable extends Page {
     async action() {
         const dataTables = await this.getTables();
         const basketService = new BasketService();
+        const transactionService = new TransactionService();
 
         $('.items-table').html(tableItemView({tables: dataTables}))
 
         $('.table-id').on('click', (e) => {
             let id = $(e.currentTarget).data('id')
             let name = $(e.currentTarget).data('name')
+            let table = BasketLocalStorage.get('table')
 
-            basketService.setTable({id: id, table_name: name});
+            if(table){
+                basketService.setTable({id: id, table_name: name});
+            }else{
+                transactionService.setTable(id)
+            }
             window.history.back();
         })
     }

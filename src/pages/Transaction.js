@@ -43,6 +43,7 @@ class Transaction extends Page {
     //   console.log(event);
     //   console.log(body);
     // })
+    
     $('#eraser-btn').on('click', () => {
       TransactionFilterLocalStorage.removeAll()
       window.location.reload()

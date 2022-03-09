@@ -9,6 +9,7 @@ import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 import ShiftApi from "../repositories/api/ShiftApi"
 import Redirect from "../core/Redirect"
 import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
+import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 
 class Home extends Page {
   constructor(params) {
@@ -35,7 +36,8 @@ class Home extends Page {
 
   action() {
     TransactionLocalStorage.removeAll()
-
+    BasketLocalStorage.clear()
+    
     this.getSummary((summary) => {
       let total_sales = currency(summary.sales_today)
       $('#totalSaleToday').html(`Rp${total_sales}`)
@@ -70,19 +72,17 @@ class Home extends Page {
       $('#closeSessionButton').removeAttr('disabled');
     })
 
-    $(document).on('click', '.trx-item', (e) => {
-      let trx_id = $(e.currentTarget).data('trx_id')
-      let status = $(e.currentTarget).data('status')
+    $('#new-transaction-list').off('click').on('click', '.item-transaction', async (even) => {
+      let trx_id = $(even.currentTarget).data('trx_id')
 
-      TransactionLocalStorage.set({'id': trx_id, 'status': status})
+      let trx = await TransactionApi.detail(trx_id);
+      TransactionLocalStorage.set(trx.data)
       Redirect(`/transaction/detail`, false)
     })
   }
 
   render() {
-
     let shiftId = ShiftLocalStorage.get('id');
-
     return homeView({name: UserLocalStorage.get('name'), isSessionOpened: shiftId ? true : false, shift: ShiftLocalStorage.getAll()})
   }
 }

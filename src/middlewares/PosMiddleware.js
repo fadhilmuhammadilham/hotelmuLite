@@ -1,6 +1,7 @@
 import Redirect from "../core/Redirect";
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage";
 import TableLocalStorage from "../repositories/localstorage/TableLocalStorage";
+import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 import Middleware from "./Middleware";
 
 class MustSelectTypeMiddleware extends Middleware {
@@ -20,8 +21,9 @@ class MustSelectTypeMiddleware extends Middleware {
 class MustHaveSelectedItemsMiddleware extends Middleware {
   before() {
     const items = BasketLocalStorage.get('items')
+    const items_draft = TransactionLocalStorage.get('items')
 
-    if (!items) {
+    if (!items && !items_draft) {
       window.history.back()
       // Redirect('/pos', true);
       return false

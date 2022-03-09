@@ -25,6 +25,12 @@ import PosTable from "./pages/PosTable"
 import TransactionFilter from "./pages/TransactionFilter"
 import PosGuest from "./pages/PosGuest"
 import TransactionDetail from "./pages/TransactionDetail"
+import PosPaymentDebit from "./pages/PosPaymentDebit"
+import PosEDC from "./pages/PosEDC"
+import PosDraft from "./pages/PosDraft"
+import ReportMonthly from "./pages/ReportMonthly"
+import ReportAnnual from "./pages/ReportAnnual"
+import PosBasketDraft from "./pages/PosBasketDraft"
 
 const routers = [
   { path: "/", view: Home, middlewares: [MustLoginMidlleware] },
@@ -39,11 +45,17 @@ const routers = [
   { path: "/pos/type", view: PosType, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware, MustNotSelectItemMiddleware] },
   { path: "/pos/basket", view: PosBasket, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
   { path: "/pos/table", view: PosTable, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
-  { path: "/pos/guest", view: PosGuest, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
   { path: "/pos/payment", view: PosPayment, middlewares: [MustLoginMidlleware, MustSelectedRoomOrTableMiddleware] },
   { path: "/pos/payment/cash", view: PosPaymentCash, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
+  { path: "/pos/payment/debit", view: PosPaymentDebit, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
+  { path: "/pos/payment/debit/edc", view: PosEDC, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
+  { path: "/pos/payment/guest", view: PosGuest, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
   { path: "/pos/payment/finish", view: PosPaymentFinish, middlewares: [MustLoginMidlleware] },
+  { path: "/pos/draft", view: PosDraft, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
+  { path: "/pos/draft/basket", view: PosBasketDraft, middlewares: [MustLoginMidlleware] },
   { path: "/report", view: Report, middlewares: [MustLoginMidlleware] },
+  { path: "/report/monthly", view: ReportMonthly, middlewares: [MustLoginMidlleware] },
+  { path: "/report/annual", view: ReportAnnual, middlewares: [MustLoginMidlleware] },
   { path: "/other", view: Other, middlewares: [MustLoginMidlleware] },
   { path: "/profile", view: Profile, middlewares: [MustLoginMidlleware] },
   { path: "/settings", view: Settings, middlewares: [MustLoginMidlleware] },

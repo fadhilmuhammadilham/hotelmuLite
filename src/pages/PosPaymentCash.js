@@ -3,6 +3,10 @@ import posPaymentCashView from "../templates/pos-payment-cash.handlebars"
 import BasketService from "../services/BasketService"
 import $ from 'jquery'
 import Redirect from "../core/Redirect"
+import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
+import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
+import TransactionApi from "../repositories/api/TransactionApi"
+import round from "../templates/helpers/round"
 
 class PosPaymentCash extends Page {
   constructor(params) {
@@ -13,12 +17,16 @@ class PosPaymentCash extends Page {
   async action() {
     var payment_value = 0
 	  let refund = 0
+    let d = new Date()
+    let month = d.getMonth() + 1
+    let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
 
     const checkValue = () => {
-      if (payment_value >= this.basketService.totalPrice) {
+      let discount = this.basketService.totalDiscount > 0 ? this.basketService.totalAfterDiscount : this.basketService.totalPrice
+      if (payment_value >= discount) {
         $('.form-button-group').removeClass('d-none')
   
-        refund = payment_value - this.basketService.totalPrice
+        refund = payment_value - discount
       }
       else $('.form-button-group').addClass('d-none')
   
@@ -37,10 +45,10 @@ class PosPaymentCash extends Page {
     checkValue()
 
     const sugestionPay = () => {
-      var total = Math.round(this.basketService.totalPrice / 10000.1) * 10000
+      var total = this.basketService.totalDiscount > 0 ? Math.round(this.basketService.totalAfterDiscount / 10000.1) * 10000 : Math.round(this.basketService.totalPrice / 10000.1) * 10000
       total = this.basketService.totalPrice > total ? total + 5000: total
   
-      var sugs = [5000, 10000, 20000, 50000, 100000, 150000, 200000]
+      var sugs = [5000, 10000, 20000, 50000, 100000, 150000, 200000, 300000, 500000, 750000, 1000000]
   
       sugs = sugs.filter((sug) => {
         return sug > total
@@ -90,13 +98,47 @@ class PosPaymentCash extends Page {
 			checkValue()
 		})
 
-    const paymentConfirmed = (status) => {
-      this.basketService.setPayment({
-        type: 'cash',
-        payment_value: payment_value,
-        refund: refund
-      })
-      Redirect('/pos/payment/finish')
+    const paymentConfirmed = async (status) => {
+      if(BasketLocalStorage.get('discount').hasOwnProperty('discount_type')){
+        this.basketService.setPayment({
+          payment_method: 0,
+          shift_id: ShiftLocalStorage.get('id'),
+          payment_date: date,
+          round: round(this.basketService.totalAfterDiscount, 100),
+          total_payment: payment_value,
+          refund: refund,
+          discount_type: parseInt(BasketLocalStorage.get('discount').discount_type),
+          discount: parseFloat(this.basketService.discount.discount),
+          discount_note: parseInt(BasketLocalStorage.get('discount').discount_note)
+        })
+        let res = await TransactionApi.save()
+
+        if(res.status) {
+          let payment = await TransactionApi.payment(res.data)
+
+          if(payment.status) {
+            Redirect('/pos/payment/finish')
+          }
+        }
+      }else{
+        this.basketService.setPayment({
+          payment_method: 0,
+          shift_id: ShiftLocalStorage.get('id'),
+          payment_date: date,
+          round: round(this.basketService.totalPrice, 100),
+          total_payment: payment_value,
+          refund: refund,
+        })
+        let res = await TransactionApi.save()
+
+        if(res.status) {
+          let payment = await TransactionApi.payment(res.data)
+
+          if(payment.status) {
+            Redirect('/pos/payment/finish')
+          }
+        }
+      }
     }
     
 		$('#pay-confirm-btn').on('click', (e) => {
@@ -106,7 +148,7 @@ class PosPaymentCash extends Page {
   }
 
   render() {
-    return posPaymentCashView({totalPrice: this.basketService.totalPrice})
+    return posPaymentCashView({totalPrice: this.basketService.totalAfterDiscount === 0 ? this.basketService.totalPrice : this.basketService.totalAfterDiscount})
   }
 }
 
