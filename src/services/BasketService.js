@@ -98,7 +98,7 @@ class BasketService {
       if(id == item.id && item.discount > 0) {
         subTotal = (item.discount / 100) * price
         priceAfterDiscount = price - subTotal
-        item.priceAfterDiscount = Math.round(priceAfterDiscount)
+        item.priceAfterDiscount = Math.floor(priceAfterDiscount)
       }
 
       return item
@@ -119,7 +119,7 @@ class BasketService {
     {
       totalDisc = (this.discount.discount / 100) * price
       totalAfterDisc = price - totalDisc
-      totalAfterDisc = Math.round(totalAfterDisc)
+      totalAfterDisc = Math.floor(totalAfterDisc)
 
       this.totalDiscount = totalDisc
       this.totalAfterDiscount = totalAfterDisc

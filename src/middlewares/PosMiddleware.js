@@ -36,8 +36,9 @@ class MustHaveSelectedItemsMiddleware extends Middleware {
 class MustSelectedPaymentTypeMiddleware extends Middleware {
   before() {
     const payment = BasketLocalStorage.get('payment')
+    const payment_draft = TransactionLocalStorage.get('payment')
 
-    if (!payment) {
+    if (!payment && !payment_draft) {
       // Redirect('/pos/payment', true);
       window.history.back()
       return false
@@ -50,8 +51,9 @@ class MustSelectedPaymentTypeMiddleware extends Middleware {
 class MustSelectedRoomOrTableMiddleware extends Middleware {
   before() {
     const table = BasketLocalStorage.get('table')
+    const table_id = TransactionLocalStorage.get('table_id')
 
-    if (!table.id) {
+    if (!table.id && !table_id) {
       // Redirect('/pos/basket', true);
       alert('Silahkan Pilih Meja Terlebih Dahulu');
       window.history.back()

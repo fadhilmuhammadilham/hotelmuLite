@@ -47,7 +47,11 @@
                         {{#if ([helpers/equal] item.priceAfterDiscount 0)}}
                             Rp{{ [helpers/currency] item.total }}
                         {{else}}
+                            {{#if ([helpers/equal] type 'basket')}}
                             <strike>Rp{{ [helpers/currency] item.total }}</strike> ({{item.discount}}%) Rp{{[helpers/currency] item.priceAfterDiscount}} 
+                            {{else}}
+                            <strike>Rp{{ [helpers/currency] item.total }}</strike> ({{item.disc}}%) Rp{{[helpers/currency] item.priceAfterDiscount}} 
+                            {{/if}}
                         {{/if}}
                     </div>
                 </div>
@@ -63,6 +67,7 @@
     </ul>
 
     <div class="listview-title mt-2">Transaksi</div>
+    {{#if ([helpers/equal] type 'basket')}}
     <ul class="listview simple-listview">
         <li>Jumlah item <span class="text-bold" id="total-qty">{{basket.totalQty}}</span></li>
         <li>Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] basket.totalPrice}}</span></li>
@@ -71,6 +76,16 @@
         <li>Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency] basket.payment.total_payment}}</span></li>
         <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] basket.payment.refund}}</span></li>
     </ul>
+    {{else}}
+    <ul class="listview simple-listview">
+        <li>Jumlah item <span class="text-bold" id="total-qty">{{basket.totalqty}}</span></li>
+        <li>Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] basket.total_prices}}</span></li>
+        <li class="d-none">Diskon <span class="text-bold" id="total-disc"></span></li>
+        <li class="d-none">Total Pembayaran <span class="text-bold" id="total-after-disc"></span></li>
+        <li>Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency] basket.payment.total_payment}}</span></li>
+        <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] basket.payment.refund}}</span></li>
+    </ul>
+    {{/if}}
 
     <div class="section pt-4 pb-4">&nbsp;</div>
 

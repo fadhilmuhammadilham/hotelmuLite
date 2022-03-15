@@ -34,9 +34,9 @@ class PosBasketDraft extends Page {
         }
     }
 
-    async updateItem(item_id, item) {
+    async updateItem(item_id, item, disc, note) {
         try {
-            let res = await TransactionApi.updateItem(item_id, item)
+            let res = await TransactionApi.updateItem(item_id, item, disc, note)
 
             return res.status
         } catch (error) {
@@ -57,6 +57,7 @@ class PosBasketDraft extends Page {
     async action() {
         const transactionService = new TransactionService()
         const viewBasket = (transactionService) => {
+            console.log(transactionService);
             $('.basket-items').html(basketItemView({items: transactionService.items}))
             $('#total-payment').text('Rp'+transactionService.total_prices.format())
             $('#total-diskon').text('(Rp'+transactionService.totalDiscount.format()+')')
@@ -81,10 +82,12 @@ class PosBasketDraft extends Page {
       
                 for(const item of transactionService.items) {
                 //   body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-                  body += `[L]${item.name}[R]${item.total.format()}\n${item.price} x ${item.qty}\n\n`
-                //   if(item.note.length > 0){
-                //     body += `[L]*${item.note}\n\n`
-                //   }
+                  body += `[L]${item.name}[R]${item.total.format()}\n${item.price} x ${item.qty}\n`
+                  if(item.note.length > 0){
+                    body += `[L]*${item.note}\n`
+                  }
+                  body += `\n`
+
                 }
                 body += `\n`
                 body += `[L][L]Jumlah item[R]${transactionService.totalqty.format()}\n`
@@ -137,38 +140,51 @@ class PosBasketDraft extends Page {
             }
         })
 
-        $(document).on('click', '.btn-delete-product', (e) => {
+        $(document).on('click', '.btn-delete-product', async (e) => {
             let id = $(e.currentTarget).closest('li').data('id')
 
             transactionService.removeItem(id)
-            viewBasket(transactionService)
+            let res = await this.deleteItem(id)
+            if(res){
+                viewBasket(transactionService)
+            }
         })
 
         $(document).on('click', '.item-select', (e) => {
             let id = $(e.currentTarget).closest('li').data('id')
             let item = TransactionLocalStorage.get('items')
             $('#item_id').val(id)
-            $('#molda-diskon').modal('show')
+            $('#modal-diskon').modal('show')
 
             item.forEach((menu, index) => {
                 if(id == menu.id) {
-                    $('#diskon-item').val(menu.discount)
+                    $('#diskon-item').val(menu.disc)
                     $('#catatan_item').val(menu.note)
                 }
             })
         })
 
-        $('#btn-terapkan').on('click', (e) => {
+        $('#btn-terapkan').on('click', async (e) => {
             let item_id = $('#item_id').val()
             let discount = $('#diskon-item').val()
             let note = $('#catatan_item').val()
-            
-            $('#molda-diskon').modal('hide')
+            let item = TransactionLocalStorage.get('items')
+            let item_filter = item.find(item => item.id === parseInt(item_id))
+            let qty = item_filter.qty
 
-            $('#item_id').val('')
-            $('#diskon-item').val('')
-            $('#catatan_item').val('')
-            window.location.reload();
+            transactionService.discAndNoteHandler(item_id, parseFloat(discount), note)
+            
+            let res = await this.updateItem(item_id, qty, parseFloat(discount), note)
+
+            if(res){
+                $('#modal-diskon').modal('hide')
+    
+                $('#item_id').val('')
+                $('#diskon-item').val('')
+                $('#catatan_item').val('')
+                window.location.reload();
+            }
+
         })
 
         $(document).on('keyup', '#jumlah-tamu', () => {
@@ -182,8 +198,8 @@ class PosBasketDraft extends Page {
             $('#nomor-meja').text(meja.name)
         }
 
-        if(TransactionLocalStorage.get('numberOfGuest') > 0){
-            $('#jumlah-tamu').val(TransactionLocalStorage.get('numberOfGuest'))
+        if(TransactionLocalStorage.get('number_of_guest') > 0){
+            $('#jumlah-tamu').val(TransactionLocalStorage.get('number_of_guest'))
         }
 
         const checkDiscount = () => {
@@ -238,12 +254,12 @@ class PosBasketDraft extends Page {
 
         if(TransactionLocalStorage.get('discount').hasOwnProperty('discount')) {
             let disc_item = TransactionLocalStorage.get('discount');
-
+            console.log(disc_item.discount);
             $('#jumlah-diskon').val(disc_item.discount);
 
             $('.type-disc').each((index, item) => {
                 if($(item).data('type_id') === disc_item.discount_type) {
-                    $(iten).addClass('active')
+                    $(item).addClass('active')
                 }
             })
 
@@ -259,6 +275,28 @@ class PosBasketDraft extends Page {
                 discount_note: disc_item.discount_note
             })
         }
+
+        $('#save-transaction').on('click', async (e) => {
+            let jumlah_tamu = TransactionLocalStorage.get('number_of_guest')
+            let trx_id = TransactionLocalStorage.get('id')
+            e.preventDefault()
+
+            if(jumlah_tamu == 0) {
+                alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
+            }
+
+            if(jumlah_tamu !== 0){
+                let res = await TransactionApi.update(trx_id, 0)
+
+                if(res.status){
+                    alert("Transaksi Berhasil Disimpan")
+                    Redirect('/', true)
+                }else{
+                    alert("Transaksi Gagal Disimpan")
+                    console.log(res);
+                }
+            }
+        })
     }
 
     render() {

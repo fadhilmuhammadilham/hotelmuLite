@@ -181,7 +181,7 @@ class PosBasket extends Page {
       let item_id = $('#item_id').val()
       let discount = $('#diskon-item').val()
       let note = $('#catatan_item').val()
-      basketService.discAndNoteHandler(item_id, parseInt(discount), note)
+      basketService.discAndNoteHandler(item_id, parseFloat(discount), note)
       
       $('#modal-diskon').modal('hide')
 

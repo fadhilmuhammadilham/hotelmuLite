@@ -116,6 +116,9 @@ class TransactionApi {
     let outlet_id = parseInt(BasketLocalStorage.get('type').id)
     let nog = BasketLocalStorage.get('numberOfGuest')
     let items_data = BasketLocalStorage.get('items')
+    let discount = BasketLocalStorage.get('discount').discount > 0 ? BasketLocalStorage.get('discount').discount : 0
+    let discount_type = BasketLocalStorage.get('discount').hasOwnProperty('discount_type') ? BasketLocalStorage.get('discount').discount_type : null
+    let discount_note = BasketLocalStorage.get('discount').hasOwnProperty('discount_note') ? BasketLocalStorage.get('discount').discount_note : null
     let items = []
 
     items_data.forEach((item) => {
@@ -139,6 +142,9 @@ class TransactionApi {
           outlet_id: outlet_id,
           number_of_guest: nog,
           status: 0,
+          discount: discount,
+          discount_type: discount_type,
+          discount_note: discount_note,
           items: items
         })
       })
@@ -149,6 +155,50 @@ class TransactionApi {
 
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  static async update(trx_id, status) {
+    let url = `${API.url}/resto/transaction/${trx_id}`
+    let bearer = 'Bearer ' + getCookie('token')
+    let d = new Date()
+    let month = d.getMonth() + 1
+    let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
+    let guest_id = TransactionLocalStorage.get('guest_id') !== null ? TransactionLocalStorage.get('guest_id') : null
+    let table_id = TransactionLocalStorage.get('table_id')
+    let outlet_id = TransactionLocalStorage.get('outlet_id')
+    let number_of_guest = TransactionLocalStorage.get('number_of_guest')
+    let discount = TransactionLocalStorage.get('discount').discount > 0 ? TransactionLocalStorage.get('discount').discount : 0
+    let discount_type = TransactionLocalStorage.get('discount').discount_type !== "" ? TransactionLocalStorage.get('discount').discount_type : null
+    let discount_note = TransactionLocalStorage.get('discount').discount_note !== "" ? TransactionLocalStorage.get('discount').discount_note : null
+
+    try {
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          trx_date: date,
+          guest_id: guest_id,
+          waiter_id: 2,
+          table_id: table_id,
+          outlet_id: outlet_id,
+          number_of_guest: number_of_guest,
+          status: status,
+          discount: discount,
+          discount_type: discount_type,
+          discount_note: discount_note
+        })
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -178,7 +228,9 @@ class TransactionApi {
   static async payment(trx_id) {
     let url = `${API.url}/resto/transaction/${trx_id}/payment`
     let bearer = 'Bearer ' + getCookie('token')
-    let payment_data = BasketLocalStorage.get('payment')
+    let payment_data = BasketLocalStorage.get('payment') != false ? BasketLocalStorage.get('payment') : TransactionLocalStorage.get('payment')
+
+    console.log(payment_data);
 
     try {
       let response = await fetch(url,  {
@@ -224,11 +276,11 @@ class TransactionApi {
     }
   }
 
-  static async updateItem(item_id, qty, disc) {
+  static async updateItem(item_id, qty, disc, note) {
     let trx_id = TransactionLocalStorage.get('id')
     let url = `${API.url}/resto/transaction/${trx_id}/item/${item_id}`
     let bearer = 'Bearer ' + getCookie('token')
-    let items = {item_id: item_id, qty: qty, discount: disc, note: ""}
+    let items = {item_id: item_id, qty: qty, discount: disc, note: note}
 
     try {
       let response = await fetch(url, {

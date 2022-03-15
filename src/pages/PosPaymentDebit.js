@@ -8,15 +8,24 @@ import EDCLocalStorage from "../repositories/localstorage/EDCLocalStorage";
 import Redirect from "../core/Redirect";
 import TransactionApi from "../repositories/api/TransactionApi";
 import round from "../templates/helpers/round"
+import TransactionService from "../services/TransactionService";
+import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 
 class PosPaymentEDC extends Page {
     constructor(params) {
         super(params)
         this.basketService = new BasketService()
+        this.transactionService = new TransactionService()
     }
 
     async action() {
-        var payment_value = BasketLocalStorage.get('totalPrice')
+        var payment_value = 0
+        if(BasketLocalStorage.get('totalPrice')){
+            payment_value = this.basketService.totalPrice
+        }else{
+            payment_value = this.transactionService.total_prices
+        }
+
         let d = new Date()
         let month = d.getMonth() + 1
         let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
@@ -50,62 +59,111 @@ class PosPaymentEDC extends Page {
         }
 
         $(document).on('keyup', '#card_number', () => {
-            console.log($('#card_number').val().length)
+            // console.log($('#card_number').val().length)
             checkValue()
         })
 
         $(document).on('keyup', '#trace_number', () => {
-            console.log($('#trace_number').val().length)
+            // console.log($('#trace_number').val().length)
             checkValue()
         })
 
         const paymentConfirmed = async (status) => {
-            if(BasketLocalStorage.get('discount').hasOwnProperty('discount_type')){
-                this.basketService.setPayment({
-                    payment_method: 1,
-                    shift_id: ShiftLocalStorage.get('id'),
-                    payment_date: date,
-                    round: round(this.basketService.totalAfterDiscount, 100),
-                    total_payment: this.basketService.totalAfterDiscount,
-                    refund: 0,
-                    discount_type: parseInt(BasketLocalStorage.get('discount').discount_type),
-                    discount: parseFloat(this.basketService.discount.discount),
-                    discount_note: parseInt(BasketLocalStorage.get('discount').discount_note),
-                    card_type: card_type,
-                    card_number: $('#card_number').val(),
-                    trace_number: $('#trace_number').val(),
-                    edc_id: EDCLocalStorage.get('id')
-                })
+            if(BasketLocalStorage.get('type')){
+                if(BasketLocalStorage.get('discount').hasOwnProperty('discount_type')){
+                    this.basketService.setPayment({
+                        payment_method: 1,
+                        shift_id: ShiftLocalStorage.get('id'),
+                        payment_date: date,
+                        round: round(this.basketService.totalAfterDiscount, 100),
+                        total_payment: this.basketService.totalAfterDiscount,
+                        refund: 0,
+                        discount_type: parseInt(BasketLocalStorage.get('discount').discount_type),
+                        discount: parseFloat(this.basketService.discount.discount),
+                        discount_note: parseInt(BasketLocalStorage.get('discount').discount_note),
+                        card_type: card_type,
+                        card_number: $('#card_number').val(),
+                        trace_number: $('#trace_number').val(),
+                        edc_id: EDCLocalStorage.get('id')
+                    })
+    
+                    console.log(BasketLocalStorage.get('payment'));
+                    let res = await TransactionApi.save();
+    
+                    if(res.status) {
+                        let payment = await TransactionApi.payment(res.data)
+    
+                        if(payment.status){
+                            Redirect('/pos/payment/finish')
+                        }
+                    }    
+                }else{
+                    this.basketService.setPayment({
+                        payment_method: 1,
+                        shift_id: ShiftLocalStorage.get('id'),
+                        payment_date: date,
+                        round: round(this.basketService.totalPrice, 100),
+                        total_payment: this.basketService.totalPrice,
+                        refund: 0,
+                        card_type: card_type,
+                        card_number: $('#card_number').val(),
+                        trace_number: $('#trace_number').val(),
+                        edc_id: EDCLocalStorage.get('id')
+                    })
+                    let res = await TransactionApi.save();
+    
+                    if(res.status) {
+                        let payment = await TransactionApi.payment(res.data)
+    
+                        if(payment.status){
+                            Redirect('/pos/payment/finish')
+                        }
+                    }
+                }
+            }else{
+                if(TransactionLocalStorage.get('discount').discount > 0){
+                    this.transactionService.setPayment({
+                        payment_method: 1,
+                        shift_id: ShiftLocalStorage.get('id'),
+                        payment_date: date,
+                        round: round(this.transactionService.totalAfterDiscount, 100),
+                        total_payment: this.transactionService.totalAfterDiscount,
+                        refund: 0,
+                        card_type: card_type,
+                        card_number: $('#card_number').val(),
+                        trace_number: $('#trace_number').val(),
+                        edc_id: EDCLocalStorage.get('id'),
+                        discount_type: parseInt(TransactionLocalStorage.get('discount').discount_type),
+                        discount: parseFloat(this.transactionService.discount.discount),
+                        discount_note: parseInt(TransactionLocalStorage.get('discount').discount_note),
+                    })
 
-                console.log(BasketLocalStorage.get('payment'));
-                let res = await TransactionApi.save();
+                    console.log(this.transactionService);
 
-                if(res.status) {
-                    let payment = await TransactionApi.payment(res.data)
+                    let payment = await TransactionApi.payment(TransactionLocalStorage.get('id'))
 
-                    if(payment.status){
+                    if(payment.status) {
                         Redirect('/pos/payment/finish')
                     }
-                }    
-            }else{
-                this.basketService.setPayment({
-                    payment_method: 1,
-                    shift_id: ShiftLocalStorage.get('id'),
-                    payment_date: date,
-                    round: round(this.basketService.totalPrice, 100),
-                    total_payment: this.basketService.totalPrice,
-                    refund: 0,
-                    card_type: card_type,
-                    card_number: $('#card_number').val(),
-                    trace_number: $('#trace_number').val(),
-                    edc_id: EDCLocalStorage.get('id')
-                })
-                let res = await TransactionApi.save();
+                }else{
+                    this.transactionService.setPayment({
+                        payment_method: 1,
+                        shift_id: ShiftLocalStorage.get('id'),
+                        payment_date: date,
+                        round: round(this.transactionService.total_prices, 100),
+                        total_payment: this.transactionService.total_prices,
+                        refund: 0,
+                        card_type: card_type,
+                        card_number: $('#card_number').val(),
+                        trace_number: $('#trace_number').val(),
+                        edc_id: EDCLocalStorage.get('id'),
+                    })
 
-                if(res.status) {
-                    let payment = await TransactionApi.payment(res.data)
+                    console.log(this.transactionService);
 
-                    if(payment.status){
+                    let payment = await TransactionApi.payment(TransactionLocalStorage.get('id'))
+
+                    if(payment.status) {
                         Redirect('/pos/payment/finish')
                     }
                 }
@@ -119,7 +177,11 @@ class PosPaymentEDC extends Page {
     }
 
     render() {
-        return edcView({totalPrice: this.basketService.totalAfterDiscount === 0 ? this.basketService.totalPrice : this.basketService.totalAfterDiscount})
+        if(BasketLocalStorage.get('type')){
+            return edcView({totalPrice: this.basketService.Discount === 0 ? this.basketService.totalPrice : this.basketService.totalAfterDiscount})
+        }else{
+            return edcView({totalPrice: this.transactionService.Discount === 0 ? this.transactionService.total_prices : this.transactionService.totalAfterDiscount})
+        }
     }
 }
 

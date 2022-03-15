@@ -34,9 +34,9 @@ class PosDraft extends Page {
         }
     }
 
-    async updateItem(item_id, item, disc) {
+    async updateItem(item_id, item, disc, note) {
         try {
-            let res = await TransactionApi.updateItem(item_id, item, disc)
+            let res = await TransactionApi.updateItem(item_id, item, disc, note)
 
             return res.status
         } catch (error) {
@@ -119,7 +119,7 @@ class PosDraft extends Page {
             {
                 transactionService.addItem(product)
                 let item = transactionService.items.find((item) => item.id == parseInt(item_id))
-                let result = await this.updateItem(item_id, item.qty, item.disc)
+                let result = await this.updateItem(item_id, item.qty, item.disc, item.note)
                 if(result){
                     console.log(result);  
                     viewBasket(transactionService) 
@@ -137,9 +137,9 @@ class PosDraft extends Page {
             
         })
 
-        $('#cart').on('click', (e) => {
-            transactionService.initiateBasket()
-        })
+        // $('#cart').on('click', (e) => {
+        //     transactionService.initiateBasket()
+        // })
     }
 
 
