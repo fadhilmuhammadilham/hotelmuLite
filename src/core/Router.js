@@ -36,8 +36,6 @@ const Router = async () => {
       resolve(re)
     })
     let re = await pro
-    console.log(middleware)
-    console.log(pro)
     if (!re) return
   }
 

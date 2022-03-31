@@ -5,7 +5,7 @@ class HotelApi {
     //   {hotelId: 'HT-002', securityCode: '234567'},
     //   {hotelId: 'HT-003', securityCode: '345678'},
     // ]
-    
+
     // let postCheckHotel = new Promise(resolve => setTimeout(() => {
     //   let hotel = hotels.find(hotel => hotelId==hotel.hotelId && securityCode == hotel.securityCode)
 
@@ -18,26 +18,23 @@ class HotelApi {
 
     let url = "https://api.hotelmu.id/pos/setup";
 
-    let postCheckHotel = new Promise (resolve => {
-        let response = fetch(url, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        mode: 'no-cors',
-        body: JSON.stringify({hotel_id : hotelId, security_code : securityCode})
-        })
+    let response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ hotel_id: hotelId, security_code: securityCode })
+    })
 
-        if (response.ok) {
-            let json = response.json()
-            resolve(json)
-        }
-    });
+    console.log(response)
+    let json = await response.json()
+    // if (response.ok) {
+    // }
 
-    let response = await postCheckHotel;
-    
-    return response;
+    // let response = await postCheckHotel;
+
+    return json;
   }
 }
 
