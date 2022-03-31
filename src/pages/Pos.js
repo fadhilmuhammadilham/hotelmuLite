@@ -61,7 +61,7 @@ class Pos extends Page {
 
     viewItem(dataItems)
 
-    $(document).on('keyup', '#searchProduct', () => {
+    $('#searchProduct').on('keyup', () => {
       let searchValue = $('#searchProduct').val()
 
       if (searchValue.length > 0) $('#eraser-btn').removeClass('d-none')
@@ -71,17 +71,18 @@ class Pos extends Page {
       viewItem(itemsFiltered)
     })
 
-    $(document).on('click', '#eraser-btn', () => $('#searchProduct').val('').trigger('keyup'))
+    $('#eraser-btn').on('click', () => $('#searchProduct').val('').trigger('keyup'))
 
-    $(document).on('submit', '.search-form', (e) => {
+    $('.search-form').on('submit', (e) => {
       e.preventDefault()
     })
 
-    $(document).on('click', '.product', (even) => {
+    $('.product').on('click', (even) => {
       let product = $(even.currentTarget).data('id')
 
-      product = dataItems.find((item) => item.id == product)
+      product = dataItems.find((item) => item.id == parseInt(product))
 
+      console.log(product)
       basketService.addItem(product)
       viewBasket(basketService)
     })

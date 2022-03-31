@@ -22,7 +22,7 @@
                     <button class="btn btn-sm btn-secondary rounded" id="closeSessionButton" data-toggle="modal"
                         data-target="#dialogConfirmCloseSession">Tutup</button>
                     {{else}}
-                    <a href="/session/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
+                    <a href="/shift/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
                     {{/if}}
                 </div>
             </div>
@@ -30,9 +30,9 @@
             <div id="sessionCardBody" class="card-body">
                 <div class="flex-grow-1 ">
                     {{!-- <div id="nameDiv" class="font-weight-bold">POS/2021/02/25/0001</div> --}}
-                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">2021-02-25</span></div>
-                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">08:00:00</span></div>
-                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp0</span></div>
+                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">{{ shift.start }}</span></div>
+                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">{{ shift.start_time }}</span></div>
+                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp{{ [helpers/currency] shift.begining_balance }}</span></div>
                 </div>
             </div>
             {{/if}}
@@ -75,4 +75,23 @@
     </ul>
 </div>
 <!-- * App Capsule -->
+
+<div class="modal fade dialogbox" id="DialogBasic-close-shift" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi Tutup Shift</h5>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin akan tutup shift?
+            </div>
+            <div class="modal-footer">
+                <div class="btn-inline">
+                    <a href="#" class="btn btn-text-secondary" data-dismiss="modal">Kembali</a>
+                    <a href="#" class="btn btn-text-danger" id="confirm-close-shift">Tutup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {{> buttom-menus }}

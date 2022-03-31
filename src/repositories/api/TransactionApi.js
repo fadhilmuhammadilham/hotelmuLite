@@ -1,43 +1,43 @@
+import API from "../../configs/ApiConfig"
+import { getCookie } from "../../core/Cookies"
+import BasketLocalStorage from "../localstorage/BasketLocalStorage"
+import ShiftLocalStorage from "../localstorage/ShiftLocalStorage"
+import TransactionFilterLocalStorage from "../localstorage/TransactionFilterLocalStorage"
+import TransactionLocalStorage from "../localstorage/TransactionLocalStorage"
+
 class TransactionApi {
   static async getAll({limit, order}) {
-    let transactions = [
-      { id: 1, trx_number: 'FN-0001', trx_date: '2022-01-16 10:35:00', total_price: 100000, status: 1},
-      { id: 2, trx_number: 'FN-0002', trx_date: '2022-01-16 10:36:00', total_price: 50000, status: 0},
-      { id: 3, trx_number: 'FN-0003', trx_date: '2022-01-16 10:37:00', total_price: 100000, status: 1},
-      { id: 4, trx_number: 'FN-0004', trx_date: '2022-01-16 10:38:00', total_price: 100000, status: 1},
-      { id: 5, trx_number: 'FN-0005', trx_date: '2022-01-16 10:39:00', total_price: 100000, status: 1},
-      { id: 6, trx_number: 'FN-0006', trx_date: '2022-01-16 10:40:00', total_price: 100000, status: 1},
-      { id: 7, trx_number: 'FN-0007', trx_date: '2022-01-16 10:41:00', total_price: 25000, status: 1},
-      { id: 8, trx_number: 'FN-0008', trx_date: '2022-01-16 10:42:00', total_price: 50500, status: 1},
-      { id: 9, trx_number: 'FN-0009', trx_date: '2022-01-16 10:43:00', total_price: 100000, status: 1},
-      { id:10, trx_number: 'FN-0010', trx_date: '2022-01-16 10:44:00', total_price: 32000, status: 1},
-      { id:11, trx_number: 'FN-0011', trx_date: '2022-01-16 10:45:00', total_price: 5000, status: 1},
-      { id:12, trx_number: 'FN-0012', trx_date: '2022-01-16 10:46:00', total_price: 35000, status: 0},
-      { id:13, trx_number: 'FN-0013', trx_date: '2022-01-16 10:47:00', total_price: 100000, status: 1},
-    ]
+    let url = `${API.url}/resto/transaction`
+    let bearer = 'Bearer ' + getCookie('token')
 
-    if (typeof order != 'undefined') {
-      switch (order) {
-        case 'desc':
-          transactions = transactions.sort((a, b) => b.id - a.id)
-          break
-        case 'asc':
-          transactions = transactions.sort((a, b) => a.id - b.id)
-          break
-      }
+    if(typeof limit != 'undefined'){
+      url = `${API.url}/resto/transaction?limit=${limit}`
     }
 
-    if (typeof limit != 'undefined') {
-      transactions = transactions.slice(0, limit)
+    try{
+      let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+
+      let json = await response.json();
+      let status = {"Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info"}
+
+      json.data = json.data.map(item => {
+        item.total_prices = parseFloat(item.total_prices)
+        item.status.badge = status[item.status.name]
+        return item
+      })
+
+      return json
+
+    }catch(err){
+      console.log(err)
     }
-
-    let proccess = new Promise(resolve => setTimeout(() => resolve({
-      status: true,
-      data: transactions,
-      message: "Data transaction berhasil diakses"
-    }), 600))
-
-    return await proccess
   }
 
   static async summary() {
@@ -53,6 +53,275 @@ class TransactionApi {
     }), 600))
 
     return await proccess
+  }
+
+  static async getByFilter() {
+    let bearer = 'Bearer ' + getCookie('token')
+    let trx_number = TransactionFilterLocalStorage.get('code')
+    let trx_date = TransactionFilterLocalStorage.get('date')
+    let status = TransactionFilterLocalStorage.get('status')
+    let url = `${API.url}/resto/transaction?limit=25`
+
+    if(trx_number.length === 0 && trx_date.length > 0 && status.length > 0){
+      url = url + `&filter[trx_date]=${trx_date}&filter[status]=${status}`
+    }else if(trx_number.length > 0 && trx_date.length === 0 && status.length > 0){
+      url = url + `&search[trx_number]=${trx_number}&filter[status]=${status}`
+    }else if(trx_number.length > 0 && trx_date.length > 0 && status.length === 0){
+      url = url + `&search[trx_number]=${trx_number}&filter[trx_date]=${trx_date}`
+    }else if(trx_number.length > 0 && trx_date.length === 0 && status.length === 0){
+      url = url + `&search[trx_number]=${trx_number}`
+    }else if(trx_number.length === 0 && trx_date.length > 0 && status.length === 0){
+      url = url + `&filter[trx_date]=${trx_date}`
+    }else if(trx_number.length === 0 && trx_date.length === 0 && status.length > 0){
+      url = url + `&filter[status]=${status}`
+    }else{
+      url = url + `&search[trx_number]=${trx_number}&filter[trx_date]=${trx_date}&filter[status]=${status}`
+    }
+
+    try {
+      let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+
+      let json = await response.json()
+      let status = {"Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info"}
+
+      json.data = json.data.map(item => {
+        item.total_prices = parseFloat(item.total_prices)
+        item.status.badge = status[item.status.name]
+        return item
+      }) 
+
+      return json
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  static async save() {
+    let url = `${API.url}/resto/transaction`
+    let bearer = 'Bearer ' + getCookie('token')
+    let d = new Date()
+    let month = d.getMonth() + 1
+    let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
+    let shift_id = ShiftLocalStorage.get('id')
+    let guest_id = BasketLocalStorage.get('guest').hasOwnProperty('id') ? BasketLocalStorage.get('guest').id : 0
+    let table_id = BasketLocalStorage.get('table').id
+    let outlet_id = parseInt(BasketLocalStorage.get('type').id)
+    let nog = BasketLocalStorage.get('numberOfGuest')
+    let items_data = BasketLocalStorage.get('items')
+    let discount = BasketLocalStorage.get('discount').discount > 0 ? BasketLocalStorage.get('discount').discount : 0
+    let discount_type = BasketLocalStorage.get('discount').hasOwnProperty('discount_type') ? BasketLocalStorage.get('discount').discount_type : null
+    let discount_note = BasketLocalStorage.get('discount').hasOwnProperty('discount_note') ? BasketLocalStorage.get('discount').discount_note : null
+    let items = []
+
+    items_data.forEach((item) => {
+      items.push({item_id: item.id, qty: item.qty, discount: item.discount, note: item.note})
+    })
+
+    try {
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': bearer,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          trx_date: date,
+          shift_id: shift_id,
+          guest_id: guest_id,
+          waiter_id: 2,
+          table_id: table_id,
+          outlet_id: outlet_id,
+          number_of_guest: nog,
+          status: 0,
+          discount: discount,
+          discount_type: discount_type,
+          discount_note: discount_note,
+          items: items
+        })
+      })
+
+      let json = await response.json();
+
+      return json;
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  static async update(trx_id, status) {
+    let url = `${API.url}/resto/transaction/${trx_id}`
+    let bearer = 'Bearer ' + getCookie('token')
+    let d = new Date()
+    let month = d.getMonth() + 1
+    let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
+    let guest_id = TransactionLocalStorage.get('guest_id') !== null ? TransactionLocalStorage.get('guest_id') : null
+    let table_id = TransactionLocalStorage.get('table_id')
+    let outlet_id = TransactionLocalStorage.get('outlet_id')
+    let number_of_guest = TransactionLocalStorage.get('number_of_guest')
+    let discount = TransactionLocalStorage.get('discount').discount > 0 ? TransactionLocalStorage.get('discount').discount : 0
+    let discount_type = TransactionLocalStorage.get('discount').discount_type !== "" ? TransactionLocalStorage.get('discount').discount_type : null
+    let discount_note = TransactionLocalStorage.get('discount').discount_note !== "" ? TransactionLocalStorage.get('discount').discount_note : null
+
+    try {
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          trx_date: date,
+          guest_id: guest_id,
+          waiter_id: 2,
+          table_id: table_id,
+          outlet_id: outlet_id,
+          number_of_guest: number_of_guest,
+          status: status,
+          discount: discount,
+          discount_type: discount_type,
+          discount_note: discount_note
+        })
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async detail(trx_id) {
+    let url = `${API.url}/resto/transaction/${trx_id}`
+    let bearer = 'Bearer ' + getCookie('token')
+
+    try {
+      let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+
+      let json = await response.json()
+
+      return json
+      
+    } catch (error) {
+      console.log(error);      
+    }
+  }
+
+  static async payment(trx_id) {
+    let url = `${API.url}/resto/transaction/${trx_id}/payment`
+    let bearer = 'Bearer ' + getCookie('token')
+    let payment_data = BasketLocalStorage.get('payment') != false ? BasketLocalStorage.get('payment') : TransactionLocalStorage.get('payment')
+
+    console.log(payment_data);
+
+    try {
+      let response = await fetch(url,  {
+        method: 'POST',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payment_data)
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);      
+    }
+  }
+
+  static async addItem(item) {
+    let trx_id = TransactionLocalStorage.get('id')
+    let url = `${API.url}/resto/transaction/${trx_id}/item`
+    let bearer = 'Bearer ' + getCookie('token')
+    let items = {item_id: item.id, qty: 1, discount: 0, note: ""}
+
+    try {
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(items)
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async updateItem(item_id, qty, disc, note) {
+    let trx_id = TransactionLocalStorage.get('id')
+    let url = `${API.url}/resto/transaction/${trx_id}/item/${item_id}`
+    let bearer = 'Bearer ' + getCookie('token')
+    let items = {item_id: item_id, qty: qty, discount: disc, note: note}
+
+    try {
+      let response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(items)
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async deleteItem(item_id) {
+    let trx_id = TransactionLocalStorage.get('id')
+    let url = `${API.url}/resto/transaction/${trx_id}/item/${item_id}`
+    let bearer = 'Bearer ' + getCookie('token')
+
+    try {
+      let response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+
+      let json = await response.json()
+
+      return json
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
