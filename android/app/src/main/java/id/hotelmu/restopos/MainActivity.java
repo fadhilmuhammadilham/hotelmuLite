@@ -1,4 +1,4 @@
-package id.hotelmu.outletpos;
+package id.hotelmu.restopos;
 
 import com.getcapacitor.BridgeActivity;
 

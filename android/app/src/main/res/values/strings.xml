@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Outlet POS</string>
-    <string name="title_activity_main">Outlet POS</string>
-    <string name="package_name">id.hotelmu.outletpos</string>
-    <string name="custom_url_scheme">id.hotelmu.outletpos</string>
+    <string name="app_name">Resto POS</string>
+    <string name="title_activity_main">Resto POS</string>
+    <string name="package_name">id.hotelmu.restopos</string>
+    <string name="custom_url_scheme">id.hotelmu.restopos</string>
 </resources>
