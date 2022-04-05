@@ -52,7 +52,7 @@
     <ul class="listview simple-listview">
         <li>
             Tipe Pembayaran
-            <span>{{ data.payment.settlement }}</span>
+            <span>{{ payment_method }}</span>
         </li>
         <li>
             Tanggal Pembayaran
@@ -61,6 +61,10 @@
         <li>
             Total Harga
             <span>Rp{{ [helpers/currency] price }}</span>
+        </li>
+        <li>
+            Diskon
+            <span>{{ discount }}</span>
         </li>
         <li>
             Total Pembayaran
