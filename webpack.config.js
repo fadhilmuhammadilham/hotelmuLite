@@ -5,7 +5,11 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "www"),
-    clean: true,
+    clean: {
+      keep(asset) {
+        return asset.includes('index.html');
+      },
+    },
     assetModuleFilename: 'images/[name][ext][query]'
   },
   module: {
