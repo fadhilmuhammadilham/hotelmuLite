@@ -24,7 +24,7 @@ class PosBasket extends Page {
     }
 
     let type_id
-    let discount_note;
+    let discount_note
 
     viewBasket(basketService)
     
@@ -213,6 +213,23 @@ class PosBasket extends Page {
           discount_note: discount_note
         })
         viewBasket(basketService)
+
+        let jml_disc = $('#jumlah-diskon').val()
+        if(type_id === 0) {
+          if(parseInt(jml_disc) > 99){
+            $('#jumlah-diskon').val(100)
+            $('#cat_diskon').removeClass('d-none')
+          }else{
+            $('#cat_diskon').addClass('d-none')
+          }
+        }else{
+          if(parseInt(jml_disc) > basketService.totalPrice) {
+            $('#jumlah-diskon').val(basketService.totalPrice)
+            $('#cat_diskon').removeClass('d-none')
+          }else{
+            $('#cat_diskon').addClass('d-none')
+          }
+        }
       }
     }
 
