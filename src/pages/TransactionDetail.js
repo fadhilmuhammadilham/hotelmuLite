@@ -27,10 +27,27 @@ class TransactionDetail extends Page {
     render() {
         let data = TransactionLocalStorage.getAll()
         let total_price = parseInt(data.total_prices)
-        let total_payment = parseInt(data.payment.total_payment)
-        let refund = parseInt(data.payment.refund)
+        let total_payment = data.payment.total_payment != null ? parseInt(data.payment.total_payment): 0
+        let total_before_discount = parseFloat(data.total_before_discount)
+        let refund = data.payment.refund != null ? parseInt(data.payment.refund): 0
 
-        return transactionDetailView({data: data, price: total_price, pay: total_payment, refund: refund})
+        console.log({
+            data: data, 
+            price: total_price, 
+            pay: total_payment, 
+            refund: refund, 
+            payment_method: (data.payment.payment_method == 'Debit' ? data.payment.settlement: data.payment.payment_method),
+            discount: data.discount > 0 ? (data.discounttype == '%' ? `${data.discount} (${(total_before_discount * (data.discount/100))})`: `(Rp${data.discount})`): ''
+        })
+
+        return transactionDetailView({
+            data: data, 
+            price: total_price, 
+            pay: total_payment, 
+            refund: refund, 
+            payment_method: (data.payment.payment_method == 'Debit' ? data.payment.settlement: data.payment.payment_method),
+            discount: data.discount > 0 ? (data.discounttype == '%' ? `${data.discount}% (Rp${(total_before_discount * (data.discount/100))})`: `(Rp${data.discount})`): ''
+        })
     }
 }
 

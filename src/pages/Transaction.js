@@ -5,6 +5,8 @@ import TransactionApi from "../repositories/api/TransactionApi";
 import $ from 'jquery'
 import InfiniteScroll from 'infinite-scroll'
 import TransactionFilterLocalStorage from "../repositories/localstorage/TransactionFilterLocalStorage";
+import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
+import Redirect from "../core/Redirect"
 
 class Transaction extends Page {
   constructor(params) {
@@ -59,6 +61,14 @@ class Transaction extends Page {
     }
 
     $('#transaction-list').html(transactionListView({transactions}))
+
+    $('#transaction-list').off('click').on('click', '.item-transaction', async (even) => {
+      let trx_id = $(even.currentTarget).data('trx_id')
+
+      let trx = await TransactionApi.detail(trx_id);
+      TransactionLocalStorage.set(trx.data)
+      Redirect(`/transaction/detail`, false)
+    })
   }
 
   render() {
