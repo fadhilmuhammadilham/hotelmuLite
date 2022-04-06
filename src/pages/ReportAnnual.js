@@ -29,7 +29,7 @@ class ReportAnnual extends Page {
         let year = d.getFullYear()
         const recentData = await this.getRecentYear(year)
 
-        $('#tahun').text("Tahun " + ' ' + year)
+        $('#tahun').text(year)
         
         for(let i = year; i > year - 10; i--) {
             $('select#tahun-selected').append('<option value="'+ i +'">'+i+'</option>')
@@ -42,7 +42,7 @@ class ReportAnnual extends Page {
 
             let res = await this.getRecentYear(year_selected)
             $('.item-transaksi').html(reportItem({transaction_data: res, type: "annual"}))
-            $('#tahun').text('Tahun ' + ' ' + year_selected)
+            $('#tahun').text(year_selected)
         })
 
         $('#eraser-btn').on('click', (e) => {

@@ -38,7 +38,7 @@ class ReportMonthly extends Page {
         let bulan = [
             "Januari", "Februari", "Maret", "April", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
         ]
-        $('#bulan').text("Bulan " + bulan[d.getMonth()] + ' ' + d.getFullYear())
+        $('#bulan').text(bulan[d.getMonth()] + ' ' + d.getFullYear())
         let m = d.getMonth + 1;
         let year = d.getFullYear();
 
@@ -55,8 +55,8 @@ class ReportMonthly extends Page {
             let res = await this.getMonthly(year_selected, month_selected)
             console.log(res);
             if(res.status){
-                $('.item-transaksi').html(reportItem({transaction_data: res.data}))
-                $('#bulan').text('Bulan ' + $('#bulan-selected option:selected').text() + ' ' + year_selected);
+                $('#bulan').text('' + $('#bulan-selected option:selected').text() + ' ' + year_selected);
+                $('.item-transaksi').html(reportItem({transaction_data: res.data, type: "month"}))
             }
         })
 
