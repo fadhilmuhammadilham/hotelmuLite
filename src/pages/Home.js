@@ -72,13 +72,6 @@ class Home extends Page {
       $('#closeSessionButton').removeAttr('disabled');
     })
 
-    $('#new-transaction-list').off('click').on('click', '.item-transaction', async (even) => {
-      let trx_id = $(even.currentTarget).data('trx_id')
-
-      let trx = await TransactionApi.detail(trx_id);
-      TransactionLocalStorage.set(trx.data)
-      Redirect(`/transaction/detail`, false)
-    })
   }
 
   render() {

@@ -1,6 +1,6 @@
 {{#each transactions as | transaction |}}
 <li class="trx-item">
-    <a href="javascript:;" class="item item-transaction" data-trx_id="{{ transaction.id }}">
+    <a href="/transaction/{{ transaction.id }}" class="item item-transaction" data-link data-trx_id="{{ transaction.id }}">
         <div class="in">
             <div class="w-50">
                 <div>#{{ transaction.trx_number }}</div>

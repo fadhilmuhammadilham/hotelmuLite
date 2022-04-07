@@ -38,7 +38,7 @@ const routers = [
   { path: "/setup", view: Setup, middlewares: [MustNotChooseHotelMidlleware] },
   { path: "/transaction", view: Transaction, middlewares: [MustLoginMidlleware] },
   { path: "/transaction/filter", view: TransactionFilter, middlewares: [MustLoginMidlleware] },
-  { path: "/transaction/detail", view: TransactionDetail, middlewares: [MustLoginMidlleware] },
+  { path: "/transaction/:id", view: TransactionDetail, middlewares: [MustLoginMidlleware] },
   { path: "/shift/open", view: ShiftOpen, middlewares: [MustLoginMidlleware, MustCloseShiftMiddleware] },
   { path: "/shift/close", view: ShiftClose, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
   { path: "/pos", view: Pos, middlewares: [MustLoginMidlleware, MustSelectTypeMiddleware] },

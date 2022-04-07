@@ -16,7 +16,9 @@ class Transaction extends Page {
   async getTransaction() {
     try {
       let res = await TransactionApi.getAll({limit: 20, order:'desc'})
-      return res.data
+
+      const transactions = res.data
+      $('#transaction-list').html(transactionListView({transactions}))
     } catch (error) {
       console.log(error)
     }
@@ -25,7 +27,9 @@ class Transaction extends Page {
   async getFilteredTransaction() {
     try {
       let res = await TransactionApi.getByFilter();
-      return res.data
+
+      const transactions = res.data
+      $('#transaction-list').html(transactionListView({transactions}))
     } catch (error) {
       console.log(error)      
     }
@@ -46,29 +50,20 @@ class Transaction extends Page {
     //   console.log(body);
     // })
     
-    $('#eraser-btn').on('click', () => {
+    $('#eraser-btn').on('click', async () => {
       TransactionFilterLocalStorage.removeAll()
-      window.location.reload()
+      await this.getTransaction()
+      $('#eraser-btn').remove()
     })
 
     let is_filtered = TransactionFilterLocalStorage.getAll();
-    let transactions
 
     if(Object.keys(is_filtered).length === 0){
-      transactions = await this.getTransaction()
+      await this.getTransaction()
     }else{
-      transactions = await this.getFilteredTransaction()
+      await this.getFilteredTransaction()
     }
 
-    $('#transaction-list').html(transactionListView({transactions}))
-
-    $('#transaction-list').off('click').on('click', '.item-transaction', async (even) => {
-      let trx_id = $(even.currentTarget).data('trx_id')
-
-      let trx = await TransactionApi.detail(trx_id);
-      TransactionLocalStorage.set(trx.data)
-      Redirect(`/transaction/detail`, false)
-    })
   }
 
   render() {

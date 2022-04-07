@@ -21,7 +21,7 @@
 
 {{!-- App Capsule --}}
 <div id="appCapsule" >
-    <div class="listview-title mt-2">Informasi Transaksi</div>
+    <div class="listview-title">Informasi Transaksi</div>
     <ul class="listview simple-listview">
         <li>
             No Transaksi
@@ -33,19 +33,17 @@
         </li>
         <li>
             Nomor Meja
-            <span id="nomor-meja"></span>
+            <span id="nomor-meja">{{ data.table.name }}</span>
         </li>
-        {{#if ([helpers/equal] data.guest_name null)}} 
-        {{else}} 
+        {{#if ([helpers/nequal] data.guest_name null)}} 
         <li>
             Nama Tamu
-            {{!-- <span class="text-muted">(Tidak Ada Nama Tamu)</span>  --}}
             <span>{{ data.guest_name }} </span>
         </li>
         {{/if}}
         <li>
             Status
-            <span>{{ data.status.name }}</span>
+            <span class="badge {{ data.status.badge }}">{{ data.status.name }}</span>
         </li>
     </ul>
     <div class="listview-title mt-2">Informasi Pembayaran</div>
@@ -59,12 +57,16 @@
             <span>{{ data.payment.payment_date }}</span>
         </li>
         <li>
-            Total Harga
-            <span>Rp{{ [helpers/currency] price }}</span>
+            Subtotal
+            <span>Rp{{ [helpers/currency] subtotal }}</span>
         </li>
         <li>
             Diskon
             <span>{{ discount }}</span>
+        </li>
+        <li>
+            Total
+            <span class="font-weight-bold">Rp{{ [helpers/currency] price }}</span>
         </li>
         <li>
             Total Pembayaran

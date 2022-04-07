@@ -216,7 +216,12 @@ class TransactionApi {
         },
       })
 
+      let status = {"Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info"}
       let json = await response.json()
+
+      if (typeof json.data != 'undefined') {
+        json.data.status.badge = status[json.data.status.name]
+      }
 
       return json
       
