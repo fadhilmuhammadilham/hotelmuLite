@@ -4,46 +4,51 @@ import $ from "jquery"
 import openShiftView from "../templates/shift-open.handlebars"
 import ShiftApi from "../repositories/api/ShiftApi"
 import Redirect from "../core/Redirect"
+import AutoNumeric from "autonumeric"
 
 class ShiftOpen extends Page {
-    constructor(params) {
-        super(params)
+  constructor(params) {
+    super(params)
+  }
+
+  action() {
+    const submitButton = $('#open-shift-btn')
+    const beginBalance = new AutoNumeric('#saldo-awal', {
+      digitGroupSeparator: '.',
+      decimalCharacter: ',',
+      decimalPlaces: 0
+    });
+
+    const checkFrom = () => {
+      if (beginBalance.get().length < 1) submitButton.attr('disabled', true)
+      else submitButton.removeAttr('disabled')
     }
 
-    action() {
-        const saldoAwal = $('#saldo-awal')
-        const submitButton = $('#open-shift-btn')
+    $('#saldo-awal').on('keyup', checkFrom);
 
-        const checkFrom = () => {
-            if(saldoAwal.val().length < 1) submitButton.attr('disabled', true)
-            else submitButton.removeAttr('disabled')
-        }
+    $('#form-shift').on('submit', async (e) => {
+      submitButton.attr('disabled', true)
+      submitButton.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
 
-        $('#saldo-awal').on('keyup', checkFrom);
+      e.preventDefault()
 
-        $('#form-shift').on('submit', async (e) => {
-            submitButton.attr('disabled', true)
-            submitButton.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
+      let res = await ShiftApi.open(beginBalance.get())
 
-            e.preventDefault()
+      if (res.status) {
+        ShiftLocalStorage.set(res.data)
+        Redirect('/', true)
+      } else {
+        alert(res.message)
+      }
 
-            let res = await ShiftApi.open(saldoAwal.val())
+      submitButton.attr('disabled', false)
+      submitButton.html('Submit')
+    })
+  }
 
-            if(res.status){
-                ShiftLocalStorage.set(res.data)
-                Redirect('/', true)
-            }else{
-                alert(res.message)
-            }
-
-            submitButton.attr('disabled', false)
-            submitButton.html('Submit')
-        })
-    }
-
-    render() {
-        return openShiftView();
-    }
+  render() {
+    return openShiftView();
+  }
 }
 
 export default ShiftOpen
