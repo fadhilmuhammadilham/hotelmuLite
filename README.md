@@ -45,3 +45,37 @@ Pada saat menjalankan aplikasi develompent pada android diperlukan engine dari c
 5. Jalankan debug dari Android Studio
 
 Untuk lebih detail silahkan baca pada dokumentasi [Capacitor](https://capacitorjs.com/docs "Capacitor Docs")
+### Melakukan build ke aplikasi android
+- Apabila dalam mode development. Ubah terlebih dahulu konfigurasi capacitor dalam berkas `capacitor.config.json`. Yaitu dengan menghapus bagian atribut `server`.
+
+    - Mode development
+    ```json
+    {
+        "appId": "id.hotelmu.restopos",
+        "appName": "Resto POS",
+        "webDir": "www",
+        "bundledWebRuntime": false,
+        "server": {
+            "url": "http://192.168.0.7:8000",
+            "cleartext": true
+        }
+    }
+    ```
+    - Mode Build
+    ```json
+    {
+        "appId": "id.hotelmu.restopos",
+        "appName": "Resto POS",
+        "webDir": "www",
+        "bundledWebRuntime": false
+    }
+    ```
+    kemudian lakukan sinkronisasi ulang engine capacitor-nya `npx cap sync`
+- Build aplikasi menggunakan perintah terminal berikut:
+
+    ```npm run build```
+
+- Kemuadian buka projek menggunakan program Android Studio dengan menjalankan perintah 
+
+    `npx cap open android`
+- Build aplikasi menggunakan program Android Studio
