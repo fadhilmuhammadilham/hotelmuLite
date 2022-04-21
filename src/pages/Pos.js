@@ -45,7 +45,7 @@ class Pos extends Page {
 
     const viewBasket = (basketService) => {
       if (basketService.items.length > 0) {
-        $('#app').append(posBasketView({ qty: basketService.totalQty, totalPrice: basketService.totalPrice }))
+        $('#basket-secion').html(posBasketView({ qty: basketService.totalQty, totalSub: basketService.totalSub }))
       } else {
         if ($('#cart').length > 0) $('#cart').remove()
       }

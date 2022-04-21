@@ -6,9 +6,10 @@ class BasketService {
     
     this.type = typeof basketLocalStorage.type != 'undefined' ? basketLocalStorage.type: {}
     this.items = typeof basketLocalStorage.items != 'undefined' ? basketLocalStorage.items: []
-    this.totalPrice = typeof basketLocalStorage.totalPrice != 'undefined' ? basketLocalStorage.totalPrice: 0
+    this.total = typeof basketLocalStorage.total != 'undefined' ? basketLocalStorage.total: 0
+    this.totalSub = typeof basketLocalStorage.totalSub != 'undefined' ? basketLocalStorage.totalSub: 0
+    this.totalRound = typeof basketLocalStorage.totalRound != 'undefined' ? basketLocalStorage.totalRound: 0
     this.totalDiscount = typeof basketLocalStorage.totalDiscount != 'undefined' ? basketLocalStorage.totalDiscount: 0
-    this.totalAfterDiscount = typeof basketLocalStorage.totalAfterDiscount != 'undefined' ? basketLocalStorage.totalAfterDiscount: 0
     this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty: 0
     this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment: {}
     this.discount = typeof basketLocalStorage.discount != 'undefined' ? basketLocalStorage.discount: {"discount": 0}
@@ -21,13 +22,33 @@ class BasketService {
     BasketLocalStorage.clear()
     this.calculateTotal()
     this.calculateDiscount()
+    this.calculateRound()
     this.discount = {"discount": 0}
     this.numberOfGuest = 0
   }
 
   calculateTotal() {
-    this.totalPrice = this.items.map(item => item.discount > 0 ? item.priceAfterDiscount : item.total).reduce((a, b) => a + b, 0)
+    this.totalSub = this.items.map(item => item.discount > 0 ? item.totalSub : item.total).reduce((a, b) => a + b, 0)
+    this.total = this.totalSub
     this.totalQty = this.items.map(item => item.qty).reduce((a, b) => a + b, 0)
+  }
+
+  calculateRound() {
+    this.totalRound = this.round(this.total, 100)
+    if (this.totalRound > 0) this.total = this.total + this.totalRound
+  }
+
+  round(payment, multiple) {
+    let round = payment
+    let remains = payment % multiple
+
+    if (remains < multiple && remains > 0) {
+      let min = multiple - remains
+      round = payment + min
+    }
+
+    Math.floor(round)
+    return (round - payment)
   }
 
   addItem(_item) {
@@ -37,14 +58,15 @@ class BasketService {
       this.items = this.items.map((item) => {
         if (_item.id === item.id) {
           item.qty += 1
-          item.total = item.price * item.qty
+          item.totalSub = item.price * item.qty
+
           this.calculateDiscountItem(item.id)
         }
 
         return item
       })
     } else {
-      _item = { ..._item, qty: 1, total: _item.price, discount: 0, note: "", priceAfterDiscount: 0 }
+      _item = { ..._item, qty: 1, totalSub: _item.price, total: _item.price, discount: 0, note: "" }
 
       this.items = [...this.items, _item]
     }
@@ -52,6 +74,7 @@ class BasketService {
     this.calculateDiscountItem(_item.id)
     this.calculateTotal()
     this.calculateDiscount()
+    this.calculateRound()
     BasketLocalStorage.save(this)
   }
 
@@ -61,7 +84,7 @@ class BasketService {
         if (_type === '+') item.qty += 1
         else item.qty -= 1
 
-        item.total = item.price * item.qty
+        item.totalSub = item.price * item.qty
       }
 
       return item
@@ -72,6 +95,7 @@ class BasketService {
     this.calculateDiscountItem(id)
     this.calculateTotal()
     this.calculateDiscount()
+    this.calculateRound()
     BasketLocalStorage.save(this)
   }
 
@@ -90,28 +114,22 @@ class BasketService {
   }
 
   calculateDiscountItem(id) {
-    let subTotal = 0
-    let priceAfterDiscount = 0
-
     this.items = this.items.map((item) => {
-      let price = item.total 
-      if(id == item.id && item.discount > 0) {
-        subTotal = (item.discount / 100) * price
-        priceAfterDiscount = price - subTotal
-        item.priceAfterDiscount = Math.floor(priceAfterDiscount)
+      if(item.discount > 0) {
+        item.total = Math.floor(item.totalSub - ((item.discount / 100) * item.totalSub))
       }
 
       return item
-
     })
 
     this.calculateTotal()
     this.calculateDiscount()
+    this.calculateRound()
     BasketLocalStorage.save(this)
   } 
 
   calculateDiscount() {
-    let price = this.totalPrice
+    let price = this.totalSub
     let totalDisc = 0
     let totalAfterDisc = 0
 
@@ -122,7 +140,7 @@ class BasketService {
       totalAfterDisc = Math.floor(totalAfterDisc)
 
       this.totalDiscount = totalDisc
-      this.totalAfterDiscount = totalAfterDisc
+      this.total = totalAfterDisc
 
       BasketLocalStorage.save(this)
     }
@@ -132,7 +150,7 @@ class BasketService {
       totalAfterDisc = price - this.discount.discount
 
       this.totalDiscount = totalDisc
-      this.totalAfterDiscount = totalAfterDisc
+      this.total = totalAfterDisc
 
       BasketLocalStorage.save(this)
     }
@@ -144,14 +162,17 @@ class BasketService {
     this.calculateDiscountItem(id)
     this.calculateTotal()
     this.calculateDiscount()
+    this.calculateRound()
     BasketLocalStorage.save(this)
   }
 
   setDiscount(disc) {
     this.discount = disc
-
     BasketLocalStorage.save(this)
+
     this.calculateDiscount()
+    this.calculateRound()
+    BasketLocalStorage.save(this)
   }
 
   setType(type) {

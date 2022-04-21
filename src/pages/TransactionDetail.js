@@ -24,6 +24,14 @@ class TransactionDetail extends Page {
 
   setupDetail() {
     let data = TransactionLocalStorage.getAll()
+    
+    data.items = data.items.map((item) => {
+      item.price_after_disc = item.price - (item.price * (item.disc / 100))
+      return item
+    })
+
+    TransactionLocalStorage.set(data)
+    
     let total_price = parseFloat(data.total_prices)
     let total_payment = data.payment.total_payment != null ? parseFloat(data.payment.total_payment) : 0
     let total_before_discount = parseFloat(data.total_before_discount)
@@ -36,7 +44,7 @@ class TransactionDetail extends Page {
       pay: total_payment,
       refund: refund,
       payment_method: (data.payment.payment_method == 'Debit' ? data.payment.settlement : data.payment.payment_method),
-      discount: data.discount > 0 ? (data.discounttype == '%' ? `${data.discount}% (Rp${(total_before_discount * (data.discount / 100))})` : `(Rp${data.discount})`) : '(Rp0)'
+      discount: data.discount > 0 ? (data.discounttype == '%' ? `${data.discount}% (Rp${(total_before_discount * (data.discount / 100)).format()})` : `(Rp${data.discount})`) : '(Rp0)'
     }))
   }
 
