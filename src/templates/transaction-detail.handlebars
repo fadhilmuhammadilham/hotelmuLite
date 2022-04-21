@@ -45,17 +45,6 @@
             Status
             <span class="badge {{ data.status.badge }}">{{ data.status.name }}</span>
         </li>
-    </ul>
-    <div class="listview-title mt-2">Informasi Pembayaran</div>
-    <ul class="listview simple-listview">
-        <li>
-            Tipe Pembayaran
-            <span>{{ payment_method }}</span>
-        </li>
-        <li>
-            Tanggal Pembayaran
-            <span>{{ data.payment.payment_date }}</span>
-        </li>
         <li>
             Subtotal
             <span>Rp{{ [helpers/currency] subtotal }}</span>
@@ -68,6 +57,18 @@
             Total
             <span class="font-weight-bold">Rp{{ [helpers/currency] price }}</span>
         </li>
+    </ul>
+    <div class="listview-title mt-2">Informasi Pembayaran</div>
+    <ul class="listview simple-listview">
+        <li>
+            Tipe Pembayaran
+            <span>{{ payment_method }}</span>
+        </li>
+        <li>
+            Tanggal Pembayaran
+            <span>{{ data.payment.payment_date }}</span>
+        </li>
+        
         <li>
             Total Pembayaran
             <span>Rp{{ [helpers/currency] pay }}</span>
