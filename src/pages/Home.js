@@ -18,7 +18,7 @@ class Home extends Page {
 
   async getSummary(cb) {
     try {
-      let res = await TransactionApi.summary()
+      let res = await TransactionApi.summaryToday()
       cb(res.data)
     } catch (error) {
       console.log(error)
@@ -49,9 +49,9 @@ class Home extends Page {
     BasketLocalStorage.clear()
     
     this.getSummary((summary) => {
-      let total_sales = currency(summary.sales_today)
-      $('#totalSaleToday').html(`Rp${total_sales}`)
-      $('#totalTransactionToday').html(summary.transactions_today)
+      let total_sales = parseFloat(summary.total_sales)
+      $('#totalSaleToday').html(`Rp${total_sales.format()}`)
+      $('#totalTransactionToday').html(summary.total_transactions)
     })
 
     this.getNewTransaction((newTransactions) => {
@@ -105,7 +105,7 @@ class Home extends Page {
     }
     
     this.getOpenedShift(shift => {
-      if (!ShiftLocalStorage.isExists()) {
+      if (!ShiftLocalStorage.isExists() && typeof shift.user.id != "undefined") {
         ShiftLocalStorage.set(shift)
         viewShiftOpened(shift)
         actionShift()

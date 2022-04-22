@@ -40,19 +40,24 @@ class TransactionApi {
     }
   }
 
-  static async summary() {
-    let summaries = {
-      sales_today: 1500000,
-      transactions_today: 50
-    }
-    
-    let proccess = new Promise(resolve => setTimeout(() => resolve({
-      status: true,
-      data: summaries,
-      message: "Data summary transaction berhasil diakses"
-    }), 600))
+  static async summaryToday() {
+    let url = `${API.url}/resto/report/summary/today`;
+    let bearer = "Bearer " + getCookie('token')
 
-    return await proccess
+    try {
+      let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': bearer,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   static async getByFilter() {
