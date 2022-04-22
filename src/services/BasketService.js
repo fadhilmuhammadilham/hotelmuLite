@@ -28,7 +28,7 @@ class BasketService {
   }
 
   calculateTotal() {
-    this.totalSub = this.items.map(item => item.discount > 0 ? item.totalSub : item.total).reduce((a, b) => a + b, 0)
+    this.totalSub = this.items.map(item => item.discount > 0 ? item.total : item.totalSub).reduce((a, b) => a + b, 0)
     this.total = this.totalSub
     this.totalQty = this.items.map(item => item.qty).reduce((a, b) => a + b, 0)
   }
@@ -115,6 +115,7 @@ class BasketService {
 
   calculateDiscountItem(id) {
     this.items = this.items.map((item) => {
+      item.total = item.totalSub
       if(item.discount > 0) {
         item.total = Math.floor(item.totalSub - ((item.discount / 100) * item.totalSub))
       }

@@ -190,6 +190,8 @@ class PosBasket extends Page {
       $('#item_id').val('')
       $('#diskon-item').val('')
       $('#catatan_item').val('')
+
+      viewBasket(basketService)
     })
 
     $(document).on('keyup', '#jumlah-tamu', () => {
