@@ -22,6 +22,7 @@ const ShiftLocalStorage = {
   removeAll: () => {
     localStorage.removeItem('shift')
   },
+  isExists: () => localStorage.hasOwnProperty('shift')
 }
 
 export default ShiftLocalStorage

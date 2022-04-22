@@ -49,22 +49,22 @@ class ShiftApi {
 	}
 
 	static async opened() {
-    let url = `${API.url}/resto/shift/opened`;
-    let bearer = 'Bearer ' + getCookie('token')
+		let url = `${API.url}/resto/shift/opened`;
+		let bearer = 'Bearer ' + getCookie('token')
 
-    let response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization' : bearer,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    })
+		let response = await fetch(url, {
+			method: 'GET',
+			headers: {
+				'Authorization': bearer,
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		})
 
-    let json = await response.json();
+		let json = await response.json();
 
-    return json;
-  }
+		return json;
+	}
 }
 
 export default ShiftApi
