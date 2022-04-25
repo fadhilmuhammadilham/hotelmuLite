@@ -24,7 +24,7 @@
     <div class="section mt-2 mb-2">
         <div class="transaction-total">
             <h5>Nilai Transaksi</h5>
-            <h2 class="value-transaction">Rp{{[helpers/currency] totalPrice}}</h2>
+            <h2 class="value-transaction">Rp{{[helpers/currency] total}}</h2>
         </div>
     </div>
 
@@ -44,10 +44,7 @@
     <div class="section mt-2">
         <div class="form-group basic hide collapse" id="payment-nominal">
             <div class="input-wrapper">
-                <input type="text" class="form-control" id="payment_nominal" placeholder="Jumlah Pembayaran">
-                <i class="clear-input">
-                    <ion-icon name="close-circle"></ion-icon>
-                </i>
+                <input type="tel" class="form-control" id="payment_nominal" placeholder="Jumlah Pembayaran">
             </div>
         </div>
     </div>
@@ -91,7 +88,7 @@
                     <div class="action-sheet-content">
                         <p>
                             Anda akan menyelesaikan pembayaran dengan nilai transaksi sebesar <br>
-                            <span class="value-transaction">Rp{{[helpers/currency] totalPrice}}</span>
+                            <span class="value-transaction">Rp{{[helpers/currency] total}}</span>
                         </p>
                         <div class="text-bold mb-2 d-flex justify-content-between">Uang diterima <span id="cash-recive"
                                 class="text-right">Rp0</span></div>

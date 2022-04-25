@@ -19,9 +19,9 @@ class PosPayment extends Page {
 
   render() {
     if (BasketLocalStorage.get('items')) {
-      return posPaymentView({ totalPrice: BasketLocalStorage.get('total') })
+      return posPaymentView({ total: BasketLocalStorage.get('total') })
     } else {
-      return posPaymentView({ totalPrice: TransactionLocalStorage.get('totalDiscount') === 0 ? TransactionLocalStorage.get('total_prices') : TransactionLocalStorage.get('totalAfterDiscount') })
+      return posPaymentView({ total: TransactionLocalStorage.get('totalDiscount') === 0 ? TransactionLocalStorage.get('total_prices') : TransactionLocalStorage.get('totalAfterDiscount') })
     }
   }
 }

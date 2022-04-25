@@ -27,7 +27,7 @@ class PosPaymentCash extends Page {
     const checkValue = () => {
       let discount
       if(this.basketService.items.length > 0){
-        discount = this.basketService.totalDiscount > 0 ? this.basketService.totalAfterDiscount : this.basketService.totalPrice
+        discount = this.basketService.total
       }else{
         discount = this.transactionService.totalDiscount > 0 ? this.transactionService.totalAfterDiscount : this.transactionService.total_prices
       }
@@ -55,7 +55,7 @@ class PosPaymentCash extends Page {
 
     const sugestionPay = () => {
       if(this.basketService.items.length > 0){
-        let totalPrices = this.basketService.totalDiscount > 0 ? this.basketService.totalAfterDiscount: this.basketService.totalPrice
+        let totalPrices = this.basketService.total
         let total = Math.round(totalPrices / 10000.1) * 10000
         total = totalPrices > total ? total + 5000 : total
 
@@ -97,8 +97,6 @@ class PosPaymentCash extends Page {
     
         $('#uangpas').attr('data-value', totalPrices)
       }
-  
-      
     }
 
     if ($('#payment-suggestion').length > 0) sugestionPay()
@@ -209,9 +207,9 @@ class PosPaymentCash extends Page {
 
   render() {
     if(this.basketService.items.length > 0){
-      return posPaymentCashView({totalPrice: this.basketService.totalDiscount === 0 ? this.basketService.totalPrice : this.basketService.totalAfterDiscount})
+      return posPaymentCashView({total: this.basketService.total})
     }else{
-      return posPaymentCashView({totalPrice: this.transactionService.totalDiscount === 0 ? this.transactionService.total_prices : this.transactionService.totalAfterDiscount})
+      return posPaymentCashView({total: this.transactionService.totalDiscount === 0 ? this.transactionService.total_prices : this.transactionService.totalAfterDiscount})
     }
   }
 }
