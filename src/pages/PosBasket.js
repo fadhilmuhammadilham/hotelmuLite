@@ -16,21 +16,21 @@ class PosBasket extends Page {
   async action() {
     const basketService = new BasketService()
     const viewBasket = (basketService) => {
-      $('.basket-items').html(basketItemView({items: basketService.items}))
-      $('#total-sub').text('Rp'+basketService.totalSub.format())
-      $('#total-discount').text('(Rp'+basketService.totalDiscount.format()+')')
-      $('#total').text('Rp'+basketService.total.format())
-			$('#total-qty').text(basketService.totalQty.format())
-			$('#total-round').text(basketService.totalRound.format())
+      $('.basket-items').html(basketItemView({ items: basketService.items }))
+      $('#total-sub').text('Rp' + basketService.totalSub.format())
+      $('#total-discount').text('(Rp' + basketService.totalDiscount.format() + ')')
+      $('#total').text('Rp' + basketService.total.format())
+      $('#total-qty').text(basketService.totalQty.format())
+      $('#total-round').text(basketService.totalRound.format())
     }
 
-    let type_id = typeof basketService.discount.discount_type != "undefined" ? basketService.discount.discount_type: null
+    let type_id = typeof basketService.discount.discount_type != "undefined" ? basketService.discount.discount_type : null
     let discount_note
 
     viewBasket(basketService)
-    
+
     $('#print').on('click', () => {
-      listPrinters({type: 'bluetooth'}, res => {
+      listPrinters({ type: 'bluetooth' }, res => {
         console.log(res)
         if (typeof res[0] != 'undefined') {
           const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
@@ -39,18 +39,18 @@ class PosBasket extends Page {
 
           let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
 
-          for(const item of basketService.items) {
+          for (const item of basketService.items) {
             body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if(item.note.length > 0){
+            if (item.note.length > 0) {
               body += `[L]*${item.note}\n\n`
             }
           }
           body += `\n`
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-            
-          
-          
+
+
+
           printFormattedTextAndCut({
             type: 'bluetooth',
             id: res[0].address,
@@ -66,9 +66,9 @@ class PosBasket extends Page {
         alert("Printer tidak terdeteksi")
       })
     })
-    
+
     $('#printKitchen').on('click', () => {
-      listPrinters({type: 'bluetooth'}, res => {
+      listPrinters({ type: 'bluetooth' }, res => {
         console.log(res)
         if (typeof res[0] != 'undefined') {
           const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
@@ -77,18 +77,18 @@ class PosBasket extends Page {
 
           let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
 
-          for(const item of basketService.items) {
+          for (const item of basketService.items) {
             body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if(item.note.length > 0){
+            if (item.note.length > 0) {
               body += `[L]*${item.note}\n\n`
             }
           }
           body += `\n`
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-            
-          
-          
+
+
+
           printFormattedTextAndCut({
             type: 'bluetooth',
             id: res[0].address,
@@ -104,9 +104,9 @@ class PosBasket extends Page {
         alert("Printer tidak terdeteksi")
       })
     })
-    
+
     $('#printBeverage').on('click', () => {
-      listPrinters({type: 'bluetooth'}, res => {
+      listPrinters({ type: 'bluetooth' }, res => {
         console.log(res)
         if (typeof res[0] != 'undefined') {
           const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
@@ -115,18 +115,18 @@ class PosBasket extends Page {
 
           let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
 
-          for(const item of basketService.items) {
+          for (const item of basketService.items) {
             body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if(item.note.length > 0){
+            if (item.note.length > 0) {
               body += `[L]*${item.note}\n\n`
             }
           }
           body += `\n`
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-            
-          
-          
+
+
+
           printFormattedTextAndCut({
             type: 'bluetooth',
             id: res[0].address,
@@ -144,25 +144,25 @@ class PosBasket extends Page {
     })
 
     $(document).on('click', '.btn-min', (event) => {
-			let id = $(event.currentTarget).closest('li').data('id')
-			
-			basketService.qtyHandler(id, '-');
-			viewBasket(basketService)
-		})
+      let id = $(event.currentTarget).closest('li').data('id')
 
-		$(document).on('click', '.btn-plus', (event) => {
-			let id = $(event.currentTarget).closest('li').data('id')
-			
-			basketService.qtyHandler(id, '+');
-			viewBasket(basketService)
-		})
-		
-		$(document).on('click', '.btn-delete-product', (event) => {
-			let id = $(event.currentTarget).closest('li').data('id')
-			
-			basketService.removeItem(id)
-			viewBasket(basketService)
-		})
+      basketService.qtyHandler(id, '-');
+      viewBasket(basketService)
+    })
+
+    $(document).on('click', '.btn-plus', (event) => {
+      let id = $(event.currentTarget).closest('li').data('id')
+
+      basketService.qtyHandler(id, '+');
+      viewBasket(basketService)
+    })
+
+    $(document).on('click', '.btn-delete-product', (event) => {
+      let id = $(event.currentTarget).closest('li').data('id')
+
+      basketService.removeItem(id)
+      viewBasket(basketService)
+    })
 
     $(document).on('click', '.item-select', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
@@ -171,20 +171,23 @@ class PosBasket extends Page {
       $('#modal-diskon').modal('show')
 
       item.forEach((menu, index) => {
-        if(id == menu.id){
+        if (id == menu.id) {
           $('#diskon-item').val(menu.discount)
           $('#catatan_item').val(menu.note)
         }
       })
     })
 
-    $('#btn-terapkan').on('click', (e) => {
+    $('#discount-form').on('submit', (e) => {
+      e.preventDefault()
+
       let item_id = $('#item_id').val()
       let discount = $('#diskon-item').val()
       let note = $('#catatan_item').val()
+
       basketService.discAndNoteHandler(item_id, parseFloat(discount || 0), note)
-      $('.basket-items').html(basketItemView({items: basketService.items}))
-      
+      $('.basket-items').html(basketItemView({ items: basketService.items }))
+
       $('#modal-diskon').modal('hide')
 
       $('#item_id').val('')
@@ -198,18 +201,18 @@ class PosBasket extends Page {
       basketService.setNumberOfGuest(parseInt($('#jumlah-tamu').val()))
     })
 
-    if(BasketLocalStorage.get('table')){
+    if (BasketLocalStorage.get('table')) {
       let table = BasketLocalStorage.get('table');
       let nama_meja = table.table_name;
       $('#nomor-meja').text(nama_meja)
     }
 
-    if(BasketLocalStorage.get('numberOfGuest') !== 0){
+    if (BasketLocalStorage.get('numberOfGuest') !== 0) {
       $('#jumlah-tamu').val(BasketLocalStorage.get('numberOfGuest'))
     }
 
     const checkDiscount = () => {
-      if($('.type-disc').hasClass('active') && $('#jumlah-diskon').val().length > 0){
+      if ($('.type-disc').hasClass('active') && $('#jumlah-diskon').val().length > 0) {
         basketService.setDiscount({
           discount_type: type_id,
           discount: parseFloat($('#jumlah-diskon').val()),
@@ -218,18 +221,18 @@ class PosBasket extends Page {
         viewBasket(basketService)
 
         let jml_disc = $('#jumlah-diskon').val()
-        if(type_id === 0) {
-          if(parseInt(jml_disc) > 99){
+        if (type_id === 0) {
+          if (parseInt(jml_disc) > 99) {
             $('#jumlah-diskon').val(100)
             $('#cat_diskon').removeClass('d-none')
-          }else{
+          } else {
             $('#cat_diskon').addClass('d-none')
           }
-        }else{
-          if(parseInt(jml_disc) > basketService.totalSub) {
+        } else {
+          if (parseInt(jml_disc) > basketService.totalSub) {
             $('#jumlah-diskon').val(basketService.totalSub)
             $('#cat_diskon').removeClass('d-none')
-          }else{
+          } else {
             $('#cat_diskon').addClass('d-none')
           }
         }
@@ -256,38 +259,38 @@ class PosBasket extends Page {
       checkDiscount()
 
       let jml_disc = $('#jumlah-diskon').val()
-      if(type_id === 0) {
+      if (type_id === 0) {
         $('#jumlah-diskon').attr('maxlength', 3)
-        if(parseInt(jml_disc) > 99){
+        if (parseInt(jml_disc) > 99) {
           $('#jumlah-diskon').val(100)
           $('#cat_diskon').removeClass('d-none')
-        }else{
+        } else {
           $('#cat_diskon').addClass('d-none')
         }
-      }else{
+      } else {
         $('#jumlah-diskon').attr('maxlength', basketService.totalSub.toString().length)
-        if(parseInt(jml_disc) > basketService.totalSub) {
+        if (parseInt(jml_disc) > basketService.totalSub) {
           $('#jumlah-diskon').val(basketService.totalSub)
           $('#cat_diskon').removeClass('d-none')
-        }else{
+        } else {
           $('#cat_diskon').addClass('d-none')
         }
       }
     })
 
-    if(BasketLocalStorage.get('discount').hasOwnProperty('discount')){
+    if (BasketLocalStorage.get('discount').hasOwnProperty('discount')) {
       let disc_item = BasketLocalStorage.get('discount');
 
       $('#jumlah-diskon').val(disc_item.discount);
-      
+
       $('.type-disc').each((index, item) => {
-        if($(item).data('type_id') === disc_item.discount_type){
+        if ($(item).data('type_id') === disc_item.discount_type) {
           $(item).addClass('active')
         }
       })
-      
+
       $('.note-disc').each((index, item) => {
-        if($(item).data('note_type') === disc_item.discount_note){
+        if ($(item).data('note_type') === disc_item.discount_note) {
           $(item).addClass('active')
         }
       })
@@ -306,22 +309,22 @@ class PosBasket extends Page {
       e.preventDefault()
       console.log(table.hasOwnProperty('id'))
 
-      if(!table.hasOwnProperty('id') && is_room !== "1"){
+      if (!table.hasOwnProperty('id') && is_room !== "1") {
         alert('Silahkan Pilih Meja terlebih dahulu!')
       }
 
-      if(jumlah_tamu === "0"){
+      if (jumlah_tamu === "0") {
         alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
       }
 
-      if(table.hasOwnProperty('id') && jumlah_tamu !== "0"){
+      if (table.hasOwnProperty('id') && jumlah_tamu !== "0") {
         let res = await TransactionApi.save()
 
-        if(res.status){
+        if (res.status) {
           alert("Transaksi Berhasil Disimpan")
           basketService.clear()
           Redirect('/', true)
-        }else{
+        } else {
           alert("Transaksi Gagal Disimpan")
           console.log(res);
         }

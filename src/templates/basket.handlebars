@@ -1,190 +1,205 @@
 <!-- App Header -->
 <div class="appHeader">
-    <div class="left">
-        <a href="javascript:history.back()" class="headerButton">
-            <svg class="icon bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
-                    clip-rule="evenodd" />
-            </svg>
-        </a>
-    </div>
-    <div class="pageTitle">
-        Keranjang Belanja
-    </div>
-    <div class="right">
+	<div class="left">
+		<a href="javascript:history.back()" class="headerButton">
+			<svg class="icon bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+				xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd"
+					d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+					clip-rule="evenodd"></path>
+			</svg>
+		</a>
+	</div>
+	<div class="pageTitle">
+		Keranjang Belanja
+	</div>
+	<div class="right">
 
-    </div>
+	</div>
 </div>
 <!-- * App Header -->
 
 <!-- App Capsule -->
 <div id="appCapsule">
-    <div class="listview-title">Daftar item</div>
-    <ul class="listview image-listview media basket-items">
-        <li class="justify-content-center">
-            <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span></div>
-        </li>
-    </ul>
+	<div class="listview-title">Daftar item</div>
+	<ul class="listview image-listview media basket-items">
+		<li class="justify-content-center">
+			<div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span></div>
+		</li>
+	</ul>
 
-    <div class="listview-title mt-2">Info Pesanan</div>
-    <ul class="listview link-listview">
-        <li>
-            <a href="/pos/table" data-link>
-                Meja
-                <span class="badge badge-dark" id="nomor-meja"></span>
-            </a>
-        </li>
-    </ul>
+	<div class="listview-title mt-2">Info Pesanan</div>
+	<ul class="listview link-listview">
+		<li>
+			<a href="/pos/table" data-link>
+				Meja
+				<span class="badge badge-dark" id="nomor-meja"></span>
+			</a>
+		</li>
+	</ul>
 
-    <ul class="listview simple-listview">
-        
-        <div class="section mt-1">
-            <div class="form-group basic">
-                <div class="input-wrapper">
-                    <label for="Jumlah Tamu" class="label">Jumlah Tamu</label>
-                    <input type="number" class="form-control" id="jumlah-tamu" name="jumlah_tamu" placeholder="Jumlah Tamu" min="0" required>
-                </div>
-            </div>
-        </div>
-    </ul>
+	<ul class="listview simple-listview">
 
-    <div class="listview-title mt-1">Diskon</div>
-    <ul class="listview simple-listview mt-1">
-        <div class="section">
-            <div class="form-group basic">
-                <label for="tipe_diskon" class="label">Tipe Diskon</label>
-                <div class="row mt-1">
-                    <div class="col-6">
-                        <a href="javascript:;" class="btn btn-outline-secondary btn-block text-center type-disc" data-type_id="0" id="persen">Persen</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="javascript:;" class="btn btn-outline-secondary btn-block text-center type-disc" data-type_id="1" id="nominal">Nominal</a>
-                    </div>
-                </div>
+		<div class="section mt-1">
+			<div class="form-group basic">
+				<div class="input-wrapper">
+					<label for="Jumlah Tamu" class="label">Jumlah Tamu</label>
+					<input type="number" class="form-control" id="jumlah-tamu" name="jumlah_tamu"
+						placeholder="Jumlah Tamu" min="0" required />
+				</div>
+			</div>
+		</div>
+	</ul>
 
-                <div class="form-group basic mt-1" id="form-jumlah-diskon">
-                    <div class="input-wrapper">
-                        <label for="Jumlah Diskon" class="label">Jumlah Diskon</label>
-                        <input type="tel" class="form-control" id="jumlah-diskon" name="jumlah_diskon" placeholder="Jumlah Diskon" value=0 min="0" required>
-                    </div>
-                </div>
+	<div class="listview-title mt-1">Diskon</div>
+	<ul class="listview simple-listview mt-1">
+		<div class="section">
+			<div class="form-group basic">
+				<label for="tipe_diskon" class="label">Tipe Diskon</label>
+				<div class="row mt-1">
+					<div class="col-6">
+						<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center type-disc"
+							data-type_id="0" id="persen">Persen</a>
+					</div>
+					<div class="col-6">
+						<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center type-disc"
+							data-type_id="1" id="nominal">Nominal</a>
+					</div>
+				</div>
 
-                <div class="form-group basic mt-1 d-none" id="cat_diskon">
-                    <label for="catatan_diskon" class="label">Catatan Diskon</label>
-                    <div class="input-wrapper mt-1">
-                        <div class="row">
-                            <div class="col-4">
-                                <a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc" data-note_type="0" id="compliment">Compliment</a>
-                            </div>
-                            <div class="col-4">
-                                <a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc" data-note_type="1" id="officer-check">Officer Check</a>
-                            </div>
-                            <div class="col-4">
-                                <a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc" data-note_type="2" id="entertaint">Entertaint</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ul>
+				<div class="form-group basic mt-1" id="form-jumlah-diskon">
+					<div class="input-wrapper">
+						<label for="Jumlah Diskon" class="label">Jumlah Diskon</label>
+						<input type="tel" class="form-control" id="jumlah-diskon" name="jumlah_diskon"
+							placeholder="Jumlah Diskon" value="0" min="0" required />
+					</div>
+				</div>
 
-    <div class="listview-title mt-2">Transaksi</div>
-    <ul class="listview simple-listview">
-        <li>Jumlah item <span class="text-bold" id="total-qty">0</span></li>
-        <li>Subtotal <span class="text-bold" id="total-sub">0</span></li>
-        <li>Diskon <span class="text-bold" id="total-discount">-</span></li>
-        <li>Round <span class="text-bold" id="total-round">0</span></li>
-        <li>Total <span class="text-bold" id="total">0</span></li>
-    </ul>
+				<div class="form-group basic mt-1 d-none" id="cat_diskon">
+					<label for="catatan_diskon" class="label">Catatan Diskon</label>
+					<div class="input-wrapper mt-1">
+						<div class="row">
+							<div class="col-4">
+								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+									data-note_type="0" id="compliment">Compliment</a>
+							</div>
+							<div class="col-4">
+								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+									data-note_type="1" id="officer-check">Officer Check</a>
+							</div>
+							<div class="col-4">
+								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+									data-note_type="2" id="entertaint">Entertaint</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ul>
 
-    <div class="section pt-4 pb-4">&nbsp;</div>
+	<div class="listview-title mt-2">Transaksi</div>
+	<ul class="listview simple-listview">
+		<li>Jumlah item <span class="text-bold" id="total-qty">0</span></li>
+		<li>Subtotal <span class="text-bold" id="total-sub">0</span></li>
+		<li>Diskon <span class="text-bold" id="total-discount">-</span></li>
+		<li>Round <span class="text-bold" id="total-round">0</span></li>
+		<li>Total <span class="text-bold" id="total">0</span></li>
+	</ul>
 
-    <div class="form-button-group pt-2">
-        <div class="row">
-            <div class="col-6 mb-2">
-                <button type="button" class="btn btn-outline-secondary btn-block" id="save-transaction">
-                    Simpan
-                </button>
-            </div>
-            <div class="col-6 mb-2">
-                <button type="button" data-toggle="modal" data-target="#printStruk" class="btn btn-outline-secondary btn-block">
-                    Cetak
-                </button>
-            </div>
-            <div class="col-12 mb-2">
-                <a href="/pos/payment" class="btn btn-primary btn-block" data-link>
-                    Pilih pembayaran
-                </a>
-            </div>
-        </div>
-    </div>
+	<div class="section pt-4 pb-4">&nbsp;</div>
 
-    <div class="modal fade dialogbox" id="printStruk" data-backdrop="static" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                {{!-- <div class="modal-header">
-                    <h5 class="modal-title">Cetak Struk</h5>
-                </div> --}}
-                {{!-- <div class="modal-body">
-                    
-                </div> --}}
-                <div class="modal-footer">
-                    <div class="btn-list">
-                        <a href="javascript:;" id="print" class="btn btn-text-secondary btn-block" >Cetak Semua</a>
-                        <a href="javascript:;" id="printKitchen" class="btn btn-text-secondary btn-block" >Cetak Untuk Dapur</a>
-                        <a href="javascript:;" id="printBeverage" class="btn btn-text-secondary btn-block" >Cetak Untuk Pantry</a>
-                        <a href="javascript:;" class="btn btn-text-primary btn-block" data-dismiss="modal">Kembali</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="form-button-group pt-2">
+		<div class="row">
+			<div class="col-6 mb-2">
+				<button type="button" class="btn btn-outline-secondary btn-block" id="save-transaction">
+					Simpan
+				</button>
+			</div>
+			<div class="col-6 mb-2">
+				<button type="button" data-toggle="modal" data-target="#printStruk"
+					class="btn btn-outline-secondary btn-block">
+					Cetak
+				</button>
+			</div>
+			<div class="col-12 mb-2">
+				<a href="/pos/payment" class="btn btn-primary btn-block" data-link>
+					Pilih pembayaran
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <!-- Form Action Sheet -->
-    <div class="modal fade action-sheet" id="modal-diskon" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Diskon dan Catatan Item</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="action-sheet-content">
-                        <form>
-                            <div class="form-group basic">
-                                <div class="input-wrapper">
-                                    <label class="label" for="diskon-item">Diskon (%)</label>
-                                    <input type="hidden" id="item_id">
-                                    <input type="number" class="form-control" id="diskon-item"
-                                        placeholder="Masukkan Diskon (%)">
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                            </div>
+	<div class="modal fade dialogbox" id="printStruk" data-backdrop="static" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				{{! <div class="modal-header">
+					<h5 class="modal-title">Cetak Struk</h5>
+				</div> }}
+				{{! <div class="modal-body">
 
-                            <div class="form-group basic">
-                                <div class="input-wrapper">
-                                    <label class="label" for="catatan">Catatan</label>
-                                    {{!-- <input type="password" class="form-control" id="password3"
-                                        placeholder="Type a password"> --}}
-                                    <textarea name="catatan_item" class="form-control" id="catatan_item" cols="5" rows="3"></textarea>
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                            </div>
-                            <div class="form-group basic">
-                                <button type="button" class="btn btn-secondary btn-block btn-lg" id="btn-terapkan">Terapkan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- * Form Action Sheet -->
+				</div> }}
+				<div class="modal-footer">
+					<div class="btn-list">
+						<a href="javascript:;" id="print" class="btn btn-text-secondary btn-block">Cetak Semua</a>
+						<a href="javascript:;" id="printKitchen" class="btn btn-text-secondary btn-block">Cetak Untuk
+							Dapur</a>
+						<a href="javascript:;" id="printBeverage" class="btn btn-text-secondary btn-block">Cetak Untuk
+							Pantry</a>
+						<a href="javascript:;" class="btn btn-text-primary btn-block" data-dismiss="modal">Kembali</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Form Action Sheet -->
+	<div class="modal fade dialogbox" id="modal-diskon" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Diskon dan Catatan Item</h5>
+				</div>
+				<form id="discount-form">
+					<div class="modal-body mb-0">
+						<div class="action-sheet-content">
+							<div class="form-group basic">
+								<div class="input-wrapper">
+									<label class="label" for="diskon-item">Diskon (%)</label>
+									<input type="hidden" id="item_id" />
+									<input type="tel" class="form-control" id="diskon-item"
+										placeholder="Masukkan Diskon (%)" />
+									<i class="clear-input">
+										<ion-icon name="close-circle"></ion-icon>
+									</i>
+								</div>
+							</div>
+
+							<div class="form-group basic mb-0">
+
+								<label class="label" for="catatan">Catatan</label>
+								{{! <input type="password" class="form-control" id="password3"
+									placeholder="Type a password"> }}
+								<textarea name="catatan_item" class="form-control" id="catatan_item" cols="5"
+									rows="2"></textarea>
+
+							</div>
+							{{!-- <div class="form-group basic">
+								<button type="button" class="btn btn-secondary btn-block btn-lg"
+									id="btn-terapkan">Terapkan</button>
+							</div> --}}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="btn-inline">
+							<button type="button" class="btn btn-text-secondary" data-dismiss="modal">Batal</button>
+							<button type="submit" class="btn btn-text-primary" id="btn-terapkan">Terapkan</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- * Form Action Sheet -->
 </div>
 <!-- * App Capsule -->
