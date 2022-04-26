@@ -49,8 +49,6 @@ class PosBasket extends Page {
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
 
-
-
           printFormattedTextAndCut({
             type: 'bluetooth',
             id: res[0].address,
@@ -87,8 +85,6 @@ class PosBasket extends Page {
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
 
-
-
           printFormattedTextAndCut({
             type: 'bluetooth',
             id: res[0].address,
@@ -124,8 +120,6 @@ class PosBasket extends Page {
           body += `\n`
           body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
           body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-
-
 
           printFormattedTextAndCut({
             type: 'bluetooth',
