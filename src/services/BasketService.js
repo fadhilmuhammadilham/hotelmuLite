@@ -1,21 +1,23 @@
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
+import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 
 class BasketService {
   constructor() {
     const basketLocalStorage = BasketLocalStorage.getAll()
-    
-    this.type = typeof basketLocalStorage.type != 'undefined' ? basketLocalStorage.type: {}
-    this.items = typeof basketLocalStorage.items != 'undefined' ? basketLocalStorage.items: []
-    this.total = typeof basketLocalStorage.total != 'undefined' ? basketLocalStorage.total: 0
-    this.totalSub = typeof basketLocalStorage.totalSub != 'undefined' ? basketLocalStorage.totalSub: 0
-    this.totalRound = typeof basketLocalStorage.totalRound != 'undefined' ? basketLocalStorage.totalRound: 0
-    this.totalDiscount = typeof basketLocalStorage.totalDiscount != 'undefined' ? basketLocalStorage.totalDiscount: 0
-    this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty: 0
-    this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment: {}
-    this.discount = typeof basketLocalStorage.discount != 'undefined' ? basketLocalStorage.discount: {"discount": 0}
-    this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table: {}
-    this.guest = typeof basketLocalStorage.guest != 'undefined' ? basketLocalStorage.guest: {}
-    this.numberOfGuest = typeof basketLocalStorage.numberOfGuest != 'undefined' ? basketLocalStorage.numberOfGuest: 0
+
+    this.shift = typeof basketLocalStorage.shift != 'undefined' ? basketLocalStorage.shift : ShiftLocalStorage.getAll()
+    this.type = typeof basketLocalStorage.type != 'undefined' ? basketLocalStorage.type : {}
+    this.items = typeof basketLocalStorage.items != 'undefined' ? basketLocalStorage.items : []
+    this.total = typeof basketLocalStorage.total != 'undefined' ? basketLocalStorage.total : 0
+    this.totalSub = typeof basketLocalStorage.totalSub != 'undefined' ? basketLocalStorage.totalSub : 0
+    this.totalRound = typeof basketLocalStorage.totalRound != 'undefined' ? basketLocalStorage.totalRound : 0
+    this.totalDiscount = typeof basketLocalStorage.totalDiscount != 'undefined' ? basketLocalStorage.totalDiscount : 0
+    this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty : 0
+    this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment : {}
+    this.discount = typeof basketLocalStorage.discount != 'undefined' ? basketLocalStorage.discount : { "discount": 0 }
+    this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table : {}
+    this.guest = typeof basketLocalStorage.guest != 'undefined' ? basketLocalStorage.guest : {}
+    this.numberOfGuest = typeof basketLocalStorage.numberOfGuest != 'undefined' ? basketLocalStorage.numberOfGuest : 0
   }
 
   clear() {
@@ -23,7 +25,7 @@ class BasketService {
     this.calculateTotal()
     this.calculateDiscount()
     this.calculateRound()
-    this.discount = {"discount": 0}
+    this.discount = { "discount": 0 }
     this.numberOfGuest = 0
   }
 
@@ -47,8 +49,9 @@ class BasketService {
       round = payment + min
     }
 
-    Math.floor(round)
-    return (round - payment)
+    round = parseFloat(round.toFixed(2))
+
+    return parseFloat((round - payment).toFixed(2))
   }
 
   addItem(_item) {
@@ -101,7 +104,7 @@ class BasketService {
 
   discAndNoteHandler(id, discount, note) {
     this.items = this.items.map((item) => {
-      if(id == item.id) {
+      if (id == item.id) {
         item.discount = discount
         item.note = note
       }
@@ -116,8 +119,8 @@ class BasketService {
   calculateDiscountItem(id) {
     this.items = this.items.map((item) => {
       item.total = item.totalSub
-      if(item.discount > 0) {
-        item.total = Math.floor(item.totalSub - ((item.discount / 100) * item.totalSub))
+      if (item.discount > 0) {
+        item.total = parseFloat((item.totalSub - ((item.discount / 100) * item.totalSub)).toFixed(2))
       }
 
       return item
@@ -127,34 +130,25 @@ class BasketService {
     this.calculateDiscount()
     this.calculateRound()
     BasketLocalStorage.save(this)
-  } 
+  }
 
   calculateDiscount() {
-    let price = this.totalSub
     let totalDisc = 0
     let totalAfterDisc = 0
 
-    if(parseInt(this.discount.discount_type) === 0)
-    {
-      totalDisc = (this.discount.discount / 100) * price
-      totalAfterDisc = price - totalDisc
-      totalAfterDisc = Math.floor(totalAfterDisc)
-
-      this.totalDiscount = totalDisc
-      this.total = totalAfterDisc
-
-      BasketLocalStorage.save(this)
+    if (parseInt(this.discount.discount_type) === 0) {
+      totalDisc = parseFloat(((this.discount.discount / 100) * this.totalSub).toFixed(2))
+      totalAfterDisc = parseFloat((this.totalSub - totalDisc).toFixed(2))
     }
-    else
-    {
+    else {
       totalDisc = this.discount.discount
-      totalAfterDisc = price - this.discount.discount
-
-      this.totalDiscount = totalDisc
-      this.total = totalAfterDisc
-
-      BasketLocalStorage.save(this)
+      totalAfterDisc = this.totalSub - this.discount.discount
     }
+
+    this.totalDiscount = totalDisc
+    this.total = totalAfterDisc
+
+    BasketLocalStorage.save(this)
   }
 
   removeItem(id) {

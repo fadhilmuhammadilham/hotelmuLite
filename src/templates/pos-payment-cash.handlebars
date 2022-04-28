@@ -24,7 +24,7 @@
     <div class="section mt-2 mb-2">
         <div class="transaction-total">
             <h5>Nilai Transaksi</h5>
-            <h2 class="value-transaction">Rp{{[helpers/currency] total}}</h2>
+            <h2 class="value-transaction">Rp{{[helpers/currency] total 2}}</h2>
         </div>
     </div>
 
@@ -41,10 +41,12 @@
         </div>
     </div>
 
-    <div class="section mt-2">
-        <div class="form-group basic hide collapse" id="payment-nominal">
+    <div class="section mt-3">
+        <div class="form-group boxed hide collapse" id="payment-nominal">
             <div class="input-wrapper">
-                <input type="tel" class="form-control" id="payment_nominal" placeholder="Jumlah Pembayaran">
+                <label class="label" for="payment_nominal">Jumlah Pembayaran</label>
+                <input type="tel" class="form-control text-right pr-2" id="payment_nominal" autocomplete="off"
+                    placeholder="">
             </div>
         </div>
     </div>

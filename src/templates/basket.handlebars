@@ -38,20 +38,45 @@
 		</li>
 	</ul>
 
-	<ul class="listview simple-listview">
-
-		<div class="section mt-1">
-			<div class="form-group basic">
-				<div class="input-wrapper">
-					<label for="Jumlah Tamu" class="label">Jumlah Tamu</label>
-					<input type="number" class="form-control" id="jumlah-tamu" name="jumlah_tamu"
-						placeholder="Jumlah Tamu" min="0" required />
+	<ul class="listview image-listview media">
+		<li>
+			<div class="item">
+				<div class="in">
+					<div class="text-item">Jumlah Tamu</div>
+					<div class="form-guest-total">
+						<div class="input-group input-group-sm">
+							<div class="input-group-prepend" id="button-addon3">
+								<button class="btn btn-outline-secondary btn-min" type="button">
+									<svg class="bi productbi-dash" width="1em" height="1em" viewBox="0 0 16 16"
+										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+											d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z"
+											clip-rule="evenodd" />
+									</svg>
+								</button>
+							</div>
+							<input type="number" class="form-control text-center" id="jumlah-tamu" name="jumlah_tamu"
+								min="0" value="0">
+							<div class=" input-group-append" id="button-addon4">
+								<button class="btn btn-outline-secondary btn-plus" type="button"><svg class="bi bi-plus"
+										width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+											d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+											clip-rule="evenodd" />
+										<path fill-rule="evenodd"
+											d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+											clip-rule="evenodd" />
+									</svg></button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</li>
 	</ul>
 
-	<div class="listview-title mt-1">Diskon</div>
+	<div class="listview-title mt-1" id="discount-section">Diskon</div>
 	<ul class="listview simple-listview mt-1">
 		<div class="section">
 			<div class="form-group basic">
@@ -66,31 +91,31 @@
 							data-type_id="1" id="nominal">Nominal</a>
 					</div>
 				</div>
+			</div>
 
-				<div class="form-group basic mt-1" id="form-jumlah-diskon">
-					<div class="input-wrapper">
-						<label for="Jumlah Diskon" class="label">Jumlah Diskon</label>
-						<input type="tel" class="form-control" id="jumlah-diskon" name="jumlah_diskon"
-							placeholder="Jumlah Diskon" value="0" min="0" required />
-					</div>
+			<div class="form-group pt-0 boxed" id="form-jumlah-diskon">
+				<div class="input-wrapper">
+					<label for="Jumlah Diskon" class="label">Jumlah Diskon</label>
+					<input type="tel" class="form-control text-right pr-2" id="jumlah-diskon" autocomplete="off"
+						name="jumlah_diskon" placeholder="Jumlah Diskon" min="0" required />
 				</div>
+			</div>
 
-				<div class="form-group basic mt-1 d-none" id="cat_diskon">
-					<label for="catatan_diskon" class="label">Catatan Diskon</label>
-					<div class="input-wrapper mt-1">
-						<div class="row">
-							<div class="col-4">
-								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
-									data-note_type="0" id="compliment">Compliment</a>
-							</div>
-							<div class="col-4">
-								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
-									data-note_type="1" id="officer-check">Officer Check</a>
-							</div>
-							<div class="col-4">
-								<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
-									data-note_type="2" id="entertaint">Entertaint</a>
-							</div>
+			<div class="form-group basic pt-0 d-none" id="cat_diskon">
+				<label for="catatan_diskon" class="label">Catatan Diskon</label>
+				<div class="input-wrapper mt-1">
+					<div class="row">
+						<div class="col-4">
+							<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+								data-note_type="0" id="compliment">Compliment</a>
+						</div>
+						<div class="col-4">
+							<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+								data-note_type="1" id="officer-check">Officer Check</a>
+						</div>
+						<div class="col-4">
+							<a href="javascript:;" class="btn btn-outline-secondary btn-block text-center note-disc"
+								data-note_type="2" id="entertaint">Entertaint</a>
 						</div>
 					</div>
 				</div>
@@ -107,9 +132,9 @@
 		<li>Total <span class="text-bold" id="total">0</span></li>
 	</ul>
 
-	<div class="section pt-4 pb-4">&nbsp;</div>
+	<div class="section pt-4 pb-4" id="end-section">&nbsp;</div>
 
-	<div class="form-button-group pt-2">
+	<div class="form-button-group pt-2 bt-1">
 		<div class="row">
 			<div class="col-6 mb-2">
 				<button type="button" class="btn btn-outline-secondary btn-block" id="save-transaction">

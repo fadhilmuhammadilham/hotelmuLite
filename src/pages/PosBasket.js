@@ -7,6 +7,7 @@ import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 import TransactionApi from "../repositories/api/TransactionApi"
 import Redirect from "../core/Redirect"
+import AutoNumeric from 'autonumeric'
 
 class PosBasket extends Page {
   constructor(params) {
@@ -17,15 +18,15 @@ class PosBasket extends Page {
     const basketService = new BasketService()
     const viewBasket = (basketService) => {
       $('.basket-items').html(basketItemView({ items: basketService.items }))
-      $('#total-sub').text('Rp' + basketService.totalSub.format())
-      $('#total-discount').text('(Rp' + basketService.totalDiscount.format() + ')')
-      $('#total').text('Rp' + basketService.total.format())
+      $('#total-sub').text('Rp' + basketService.totalSub.format(2))
+      $('#total-discount').text('(Rp' + basketService.totalDiscount.format(2) + ')')
+      $('#total').text('Rp' + basketService.total.format(2))
       $('#total-qty').text(basketService.totalQty.format())
-      $('#total-round').text(basketService.totalRound.format())
+      $('#total-round').text('Rp' + basketService.totalRound.format(2))
     }
 
     let type_id = typeof basketService.discount.discount_type != "undefined" ? basketService.discount.discount_type : null
-    let discount_note
+    let discount_note = typeof basketService.discount.discount_note != "undefined" ? basketService.discount.discount_note : null
 
     viewBasket(basketService)
 
@@ -137,14 +138,14 @@ class PosBasket extends Page {
       })
     })
 
-    $(document).on('click', '.btn-min', (event) => {
+    $(document).on('click', '.form-qty .btn-min', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
 
       basketService.qtyHandler(id, '-');
       viewBasket(basketService)
     })
 
-    $(document).on('click', '.btn-plus', (event) => {
+    $(document).on('click', '.form-qty .btn-plus', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
 
       basketService.qtyHandler(id, '+');
@@ -166,10 +167,14 @@ class PosBasket extends Page {
 
       item.forEach((menu, index) => {
         if (id == menu.id) {
-          $('#diskon-item').val(menu.discount)
+          $('#diskon-item').val(menu.discount || '')
           $('#catatan_item').val(menu.note)
         }
       })
+    })
+
+    $('#modal-diskon').on('shown.bs.modal', () => {
+      $('#diskon-item').trigger('focus')
     })
 
     $('#discount-form').on('submit', (e) => {
@@ -191,8 +196,24 @@ class PosBasket extends Page {
       viewBasket(basketService)
     })
 
-    $(document).on('keyup', '#jumlah-tamu', () => {
+    $(document).on('keyup change', '#jumlah-tamu', () => {
       basketService.setNumberOfGuest(parseInt($('#jumlah-tamu').val()))
+    })
+
+    $('.form-guest-total .btn-min').on('click', (event) => {
+      let guestTotal = $('#jumlah-tamu').val()
+      guestTotal = guestTotal - 1
+
+      $('#jumlah-tamu').val(guestTotal < 0 ? 0 : guestTotal)
+      $('#jumlah-tamu').trigger('change')
+    })
+
+    $('.form-guest-total .btn-plus').on('click', (event) => {
+      let guestTotal = $('#jumlah-tamu').val()
+      guestTotal = parseInt(guestTotal) + 1
+
+      $('#jumlah-tamu').val(guestTotal < 0 ? 0 : guestTotal)
+      $('#jumlah-tamu').trigger('change')
     })
 
     if (BasketLocalStorage.get('table')) {
@@ -202,25 +223,46 @@ class PosBasket extends Page {
     }
 
     if (BasketLocalStorage.get('numberOfGuest') !== 0) {
-      $('#jumlah-tamu').val(BasketLocalStorage.get('numberOfGuest'))
+      $('#jumlah-tamu').val(BasketLocalStorage.get('numberOfGuest') || 0)
+    }
+
+    const discountInput = new AutoNumeric('#jumlah-diskon', {
+      digitGroupSeparator: '.',
+      decimalCharacter: ',',
+      decimalCharacterAlternative: '.',
+      minimumValue: 0
+    });
+
+    if (typeof basketService.discount != 'undefined') {
+      discountInput.set(basketService.discount.discount)
+
+      if (typeof basketService.discount.discount_type != 'undefined') $('.type-disc').each((index, item) => {
+        if ($(item).data('type_id') == basketService.discount.discount_type) {
+          $(item).addClass('active')
+        }
+      })
+
+      if (typeof basketService.discount.discount_note != 'undefined') $('.note-disc').each((index, item) => {
+        if ($(item).data('note_type') == basketService.discount.discount_note) {
+          $(item).addClass('active')
+        }
+      })
     }
 
     const checkDiscount = () => {
-      if ($('.type-disc').hasClass('active') && $('#jumlah-diskon').val().length > 0) {
-        basketService.setDiscount({
-          discount_type: type_id,
-          discount: parseFloat($('#jumlah-diskon').val()),
-          discount_note: discount_note
-        })
-        viewBasket(basketService)
+      if ($('.type-disc').hasClass('active')) {
 
-        let jml_disc = $('#jumlah-diskon').val()
+        let jml_disc = discountInput.get()
         if (type_id === 0) {
           if (parseInt(jml_disc) > 99) {
-            $('#jumlah-diskon').val(100)
+            discountInput.set(100)
             $('#cat_diskon').removeClass('d-none')
           } else {
             $('#cat_diskon').addClass('d-none')
+            discount_note = null
+            $('.note-disc').each((index, item) => {
+              $(item).removeClass('active')
+            })
           }
         } else {
           if (parseInt(jml_disc) > basketService.totalSub) {
@@ -228,18 +270,32 @@ class PosBasket extends Page {
             $('#cat_diskon').removeClass('d-none')
           } else {
             $('#cat_diskon').addClass('d-none')
+            discount_note = null
+            $('.note-disc').each((index, item) => {
+              $(item).removeClass('active')
+            })
           }
         }
+
+        basketService.setDiscount({
+          discount_type: type_id,
+          discount: parseFloat(discountInput.get() || 0),
+          discount_note: discount_note
+        })
+        viewBasket(basketService)
       }
     }
 
     checkDiscount()
 
     $('.type-disc').on('click', (e) => {
+
       $('.type-disc').removeClass('active')
       $(e.currentTarget).addClass('active')
       type_id = $(e.currentTarget).data('type_id')
       checkDiscount();
+
+      $('#jumlah-diskon').trigger('focus')
     })
 
     $('.note-disc').on('click', (e) => {
@@ -249,52 +305,28 @@ class PosBasket extends Page {
       checkDiscount();
     })
 
-    $(document).on('keyup', '#jumlah-diskon', () => {
-      checkDiscount()
-
-      let jml_disc = $('#jumlah-diskon').val()
+    $('#jumlah-diskon').on('keyup change', () => {
+      let jml_disc = discountInput.get()
       if (type_id === 0) {
-        $('#jumlah-diskon').attr('maxlength', 3)
+        $('#jumlah-diskon').attr('max', 100)
         if (parseInt(jml_disc) > 99) {
-          $('#jumlah-diskon').val(100)
+          discountInput.set(100)
           $('#cat_diskon').removeClass('d-none')
         } else {
           $('#cat_diskon').addClass('d-none')
         }
       } else {
-        $('#jumlah-diskon').attr('maxlength', basketService.totalSub.toString().length)
+        $('#jumlah-diskon').attr('max', basketService.totalSub)
         if (parseInt(jml_disc) > basketService.totalSub) {
-          $('#jumlah-diskon').val(basketService.totalSub)
+          discountInput.set(basketService.totalSub)
           $('#cat_diskon').removeClass('d-none')
         } else {
           $('#cat_diskon').addClass('d-none')
         }
       }
+
+      checkDiscount()
     })
-
-    if (BasketLocalStorage.get('discount').hasOwnProperty('discount')) {
-      let disc_item = BasketLocalStorage.get('discount');
-
-      $('#jumlah-diskon').val(disc_item.discount);
-
-      $('.type-disc').each((index, item) => {
-        if ($(item).data('type_id') === disc_item.discount_type) {
-          $(item).addClass('active')
-        }
-      })
-
-      $('.note-disc').each((index, item) => {
-        if ($(item).data('note_type') === disc_item.discount_note) {
-          $(item).addClass('active')
-        }
-      })
-
-      basketService.setDiscount({
-        discount_type: disc_item.discount_type,
-        discount: disc_item.discount,
-        discount_note: disc_item.discount_note
-      })
-    }
 
     $('#save-transaction').on('click', async (e) => {
       let is_room = BasketLocalStorage.get('type').isroom
@@ -305,6 +337,8 @@ class PosBasket extends Page {
 
       if (!table.hasOwnProperty('id') && is_room !== "1") {
         alert('Silahkan Pilih Meja terlebih dahulu!')
+
+        return
       }
 
       if (jumlah_tamu === "0") {
@@ -312,8 +346,9 @@ class PosBasket extends Page {
       }
 
       if (table.hasOwnProperty('id') && jumlah_tamu !== "0") {
-        let res = await TransactionApi.save()
-
+        let res = await TransactionApi.save(basketService)
+        console.log(res)
+        return
         if (res.status) {
           alert("Transaksi Berhasil Disimpan")
           basketService.clear()
