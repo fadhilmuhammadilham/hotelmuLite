@@ -104,7 +104,6 @@ class TransactionApi {
       })
 
       return json
-
     } catch (error) {
       console.log(error)
     }
@@ -118,7 +117,7 @@ class TransactionApi {
       return { item_id: item.id, qty: item.qty, price: item.price, discount: item.discount, note: item.note, total_sub: item.totalSub, total: item.total }
     })
 
-    console.log({
+    const transactionData = {
       trx_date: DateCustom.getNowFormated(),
       shift_id: basketService.shift.id,
       guest_id: typeof basketService.guest.id != 'undefined' ? basketService.guest.id : 0,
@@ -134,9 +133,11 @@ class TransactionApi {
       discount_note: typeof basketService.discount.discount_note != 'undefined' ? basketService.discount.discount_note : null,
       round: basketService.totalRound,
       total: basketService.total
-    })
+    }
 
-    return { status: false }
+    console.log(transactionData)
+
+    return { status: true }
 
     try {
       let response = await fetch(url, {
@@ -155,17 +156,19 @@ class TransactionApi {
           outlet_id: basketService.type.id,
           number_of_guest: basketService.numberOfGuest,
           status: 0,
+          items: items,
+          total_sub: basketService.totalSub,
           discount: basketService.discount.discount,
           discount_type: typeof basketService.discount.discount_type != 'undefined' ? basketService.discount.discount_type : null,
           discount_note: typeof basketService.discount.discount_note != 'undefined' ? basketService.discount.discount_note : null,
-          items: items
+          round: basketService.totalRound,
+          total: basketService.total
         })
       })
 
       let json = await response.json();
 
       return json;
-
     } catch (error) {
       console.log(error)
       throw new Error("Gagal menyimpan transaksi")
@@ -244,12 +247,13 @@ class TransactionApi {
     }
   }
 
-  static async payment(trx_id) {
-    let url = `${API.url}/resto/transaction/${trx_id}/payment`
+  static async payment(basketService) {
+    let url = `${API.url}/resto/transaction/${basketService.id}/payment`
     let bearer = 'Bearer ' + getCookie('token')
-    let payment_data = BasketLocalStorage.get('payment') != false ? BasketLocalStorage.get('payment') : TransactionLocalStorage.get('payment')
 
-    console.log(payment_data);
+    console.log({ url: url, payment: basketService.payment })
+
+    return { status: false }
 
     try {
       let response = await fetch(url, {
@@ -259,7 +263,7 @@ class TransactionApi {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payment_data)
+        body: JSON.stringify(basketService.payment)
       })
 
       let json = await response.json()

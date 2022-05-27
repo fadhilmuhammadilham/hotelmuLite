@@ -5,6 +5,7 @@ class BasketService {
   constructor() {
     const basketLocalStorage = BasketLocalStorage.getAll()
 
+    this.id = typeof basketLocalStorage.id != 'undefined' ? basketLocalStorage.id : 0;
     this.shift = typeof basketLocalStorage.shift != 'undefined' ? basketLocalStorage.shift : ShiftLocalStorage.getAll()
     this.type = typeof basketLocalStorage.type != 'undefined' ? basketLocalStorage.type : {}
     this.items = typeof basketLocalStorage.items != 'undefined' ? basketLocalStorage.items : []
@@ -158,6 +159,12 @@ class BasketService {
     this.calculateTotal()
     this.calculateDiscount()
     this.calculateRound()
+    BasketLocalStorage.save(this)
+  }
+
+  setId(id) {
+    this.id = id
+
     BasketLocalStorage.save(this)
   }
 

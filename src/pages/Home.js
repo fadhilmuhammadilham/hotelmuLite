@@ -27,7 +27,7 @@ class Home extends Page {
 
   async getNewTransaction(cb) {
     try {
-      let res = await TransactionApi.getAll({limit: 10, order: 'desc'})
+      let res = await TransactionApi.getAll({ limit: 10, order: 'desc' })
       cb(res.data)
     } catch (error) {
       console.log(error)
@@ -37,7 +37,6 @@ class Home extends Page {
   async getOpenedShift(cb) {
     try {
       let res = await ShiftApi.opened()
-      console.log(res)
       cb(res.data)
     } catch (error) {
       console.log(error)
@@ -47,7 +46,7 @@ class Home extends Page {
   action() {
     TransactionLocalStorage.removeAll()
     BasketLocalStorage.clear()
-    
+
     this.getSummary((summary) => {
       let total_sales = parseFloat(summary.total_sales)
       $('#totalSaleToday').html(`Rp${total_sales.format()}`)
@@ -55,30 +54,30 @@ class Home extends Page {
     })
 
     this.getNewTransaction((newTransactions) => {
-      $('#new-transaction-list').html(listTransaction({transactions: newTransactions}))
+      $('#new-transaction-list').html(listTransaction({ transactions: newTransactions }))
     })
 
     const actionShift = () => {
-      $('#closeSessionButton').on('click', function(){
+      $('#closeSessionButton').on('click', function () {
         $('#DialogBasic-close-shift').modal('show');
       })
-      
-      $('#confirm-close-shift').on('click', async function(e) {
+
+      $('#confirm-close-shift').on('click', async function (e) {
         $('#closeSessionButton').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
         $('#closeSessionButton').attr('disabled', true);
         $('#DialogBasic-close-shift').modal('hide');
-  
+
         e.preventDefault();
-  
+
         let res = await ShiftApi.close(ShiftLocalStorage.get('id'))
-  
-        if(res.status){
+
+        if (res.status) {
           ShiftLocalStorage.set(res.data);
           Redirect('/shift/close');
-        }else{
+        } else {
           alert(res.message);
         }
-  
+
         $('#closeSessionButton').html(`Tutup`)
         $('#closeSessionButton').removeAttr('disabled');
       })
@@ -97,13 +96,13 @@ class Home extends Page {
       
       <div id="sessionCardBody" class="card-body">
           <div class="flex-grow-1 ">
-              <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">${ shift.start }</span></div>
-              <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">${ shift.start_time }</span></div>
-              <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp${ shift.begining_balance.format() }</span></div>
+              <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">${shift.start}</span></div>
+              <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">${shift.start_time}</span></div>
+              <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp${shift.begining_balance.format()}</span></div>
           </div>
       </div>`)
     }
-    
+
     this.getOpenedShift(shift => {
       if (!ShiftLocalStorage.isExists() && typeof shift.user.id != "undefined") {
         ShiftLocalStorage.set(shift)
@@ -117,7 +116,7 @@ class Home extends Page {
 
   render() {
     let shiftId = ShiftLocalStorage.get('id');
-    return homeView({name: UserLocalStorage.get('name'), isSessionOpened: shiftId ? true : false, shift: ShiftLocalStorage.getAll()})
+    return homeView({ name: UserLocalStorage.get('name'), isSessionOpened: shiftId ? true : false, shift: ShiftLocalStorage.getAll() })
   }
 }
 

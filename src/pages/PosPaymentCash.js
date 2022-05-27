@@ -63,15 +63,15 @@ class PosPaymentCash extends Page {
     try {
       let res = await TransactionApi.save(this.basketService)
 
-      if (res.status) {
-        let payment = await TransactionApi.payment(res.data.id)
+      if (!res.status) throw new Error("Simpan transaksi gagal")
 
-        if (payment.status) {
-          $('#pay-modal').modal('hide')
-          Redirect('/pos/payment/finish')
-        }
+      let payment = await TransactionApi.payment(this.basketService)
+
+      if (payment.status) {
+        $('#pay-modal').modal('hide')
+        Redirect('/pos/payment/finish')
       }
-      else throw new Error("Simpan transaksi gagal")
+
     } catch (error) {
       alert(error.message)
     }
