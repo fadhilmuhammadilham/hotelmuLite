@@ -1,134 +1,98 @@
 import $ from 'jquery'
 import Page from "./Page"
 import posPaymentFinishView from "../templates/pos-payment-finish.handlebars"
-import BasketService from "../services/BasketService"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
-import BasketLocalStorage from '../repositories/localstorage/BasketLocalStorage'
-import currency from '../templates/helpers/currency'
-import TransactionService from '../services/TransactionService'
+import TransactionApi from '../repositories/api/TransactionApi'
 
 class PosPaymentFinish extends Page {
   constructor(params) {
     super(params)
-    this.basketService = new BasketService()
-    this.transactionService = new TransactionService()
+  }
+
+  async getDetail(cb) {
+    try {
+      let trx = await TransactionApi.detail(this.params.transaction_id);
+
+      trx.data.discount_text = trx.data.discount > 0 ? (trx.data.discount_type == '%' ? `${trx.data.discount}% (Rp${(trx.data.total_sub * (trx.data.discount / 100)).format()})` : `(Rp${trx.data.discount})`) : '(Rp0)'
+
+      cb(trx.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  print(transactionDetail) {
+
+    listPrinters({ type: 'bluetooth' }, res => {
+      if (typeof res[0] == 'undefined') {
+        alert("Printer tidak terdeteksi")
+        return
+      }
+
+      let body = `[C]<b>HOTELMU POS</b>\n[C]${transactionDetail.trx_date}\n\n`
+      body += `[C]#${transactionDetail.trx_number}\n`
+
+      body += `[C]${pay_method[transactionDetail.payment.payment_method]}\n`
+
+      for (const item of transactionDetail.items) {
+        if (item.discount > 0) {
+          body += `[L]${item.name}[R](${item.discount}%) ${item.total.format()}\n<s>${item.price}</s> ${item.price_after_discount} x ${item.qty}\n\n`
+        } else {
+          body += `[L]${item.name}[R]${item.total.format()}\n${item.price} x ${item.qty}\n\n`
+        }
+      }
+
+      body += `\n`
+      body += `[L]Sub Total[R]${transactionDetail.total_sub.format()}\n`
+      body += `[L]Diskon[R]${transactionDetail.discount_text}\n`
+      body += `[L]Round[R]${transactionDetail.round.format()}\n`
+      body += `[L]Total[R]${transactionDetail.total.format()}\n`
+      body += `[L]Pembayaran[R]${transactionDetail.payment.total_payment.format()}\n`
+      body += `[L]Kembalian[R]${transactionDetail.payment.refund.format()}\n`
+
+      printFormattedTextAndCut({
+        type: 'bluetooth',
+        id: res[0].address,
+        mmFeedPaper: 50,
+        text: body
+      })
+
+    }, err => {
+      console.log(err)
+      alert("Printer tidak terdeteksi")
+    })
   }
 
   async action() {
-    const basketService = this.basketService
-    const transactionService = this.transactionService
 
-    let pay_method = {0: "Tunai", 1: "Debit/Credit", 2: "Tagihan Kamar"}
-
-    const print = () => {
-      listPrinters({ type: 'bluetooth' }, res => {
-        console.log(res)
-        if (typeof res[0] != 'undefined') {
-          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
-          let time = new Date()
-          time = [(time.getDate() < 10 ? '0' + time.getDate() : time.getDate()), months[time.getMonth()], time.getFullYear()].join(' ') + ' ' + [time.getHours(), time.getMinutes(), time.getSeconds()].join(':')
-
-          let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
-          // body += `[C]#FN-0001\n`
-          if(BasketLocalStorage.get('type')){
-
-            body += `[C]${pay_method[basketService.payment.payment_method]}\n`
-  
-            // for (const item of basketService.items) body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            for (const item of basketService.items) {
-  
-              if(item.discount > 0){
-                body += `[L]${item.name}[R](${item.discount}%) ${item.priceAfterDiscount.format()}\n${item.price} x ${item.qty}\n\n`
-              }else{
-                body += `[L]${item.name}[R]${item.total.format()}\n${item.price} x ${item.qty}\n\n`
-              }
-  
-            } 
-  
-            body += `\n`
-            body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
-            body += `[L][L]Total[R]${basketService.totalPrice.format()}\n`
-            body += `[L][L]Pembayaran[R]${basketService.payment.total_payment.format()}\n`
-            body += `[L][L]Kembalian[R]${basketService.payment.refund.format()}\n`
-          
-          }else{
-            body += `[C]${pay_method[transactionService.payment.payment_method]}\n`
-  
-            // for (const item of transactionService.items) body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            for (const item of transactionService.items) {
-  
-              if(item.discount > 0){
-                body += `[L]${item.name}[R](${item.disc}%) ${item.priceAfterDiscount.format()}\n${item.price} x ${item.qty}\n\n`
-              }else{
-                body += `[L]${item.name}[R]${item.total.format()}\n${item.price} x ${item.qty}\n\n`
-              }
-  
-            } 
-  
-            body += `\n`
-            body += `[L][L]Jumlah item[R]${transactionService.totalqty.format()}\n`
-            body += `[L][L]Total[R]${transactionService.total_prices.format()}\n`
-            body += `[L][L]Pembayaran[R]${transactionService.payment.total_payment.format()}\n`
-            body += `[L][L]Kembalian[R]${transactionService.payment.refund.format()}\n`
-          }
-
-          printFormattedTextAndCut({
-            type: 'bluetooth',
-            id: res[0].address,
-            mmFeedPaper: 50,
-            text: body
-          })
-        }
-        else {
-          alert("Printer tidak terdeteksi")
-        }
-      }, err => {
-        console.log(err)
-        alert("Printer tidak terdeteksi")
-      })
-    }
-
-    if(BasketLocalStorage.get('type')){
-      if(basketService.totalDiscount === 0){
-        $('#total-disc').text('Rp'+0)
-        $('#total-after-disc').text('Rp'+0)
-      }else{
-        $('#total-disc').closest('li').removeClass('d-none')
-        $('#total-after-disc').closest('li').removeClass('d-none')
-  
-        $('#total-disc').text('Rp'+currency(basketService.totalDiscount))
-        $('#total-after-disc').text('Rp'+currency(basketService.totalAfterDiscount))
+    this.getDetail((transactionDetail) => {
+      if (transactionDetail.payment.payment_method == 'Credit') {
+        transactionDetail.payment.payment_method = transactionDetail.payment.payment_method_settlement + ' (' + transactionDetail.payment.edc.name + ')'
       }
-    }else{
-      if(transactionService.totalDiscount === 0){
-        $('#total-disc').text('Rp'+0)
-        $('#total-after-disc').text('Rp'+0)
-      }else{
-        $('#total-disc').closest('li').removeClass('d-none')
-        $('#total-after-disc').closest('li').removeClass('d-none')
-  
-        $('#total-disc').text('Rp'+currency(transactionService.totalDiscount))
-        $('#total-after-disc').text('Rp'+currency(transactionService.totalAfterDiscount))
-      }
-    }
 
-    $('#print-receive-btn').on('click', () => print())
+      $('#app').html(posPaymentFinishView(transactionDetail))
+      $('#print-receive-btn').on('click', () => this.print(transactionDetail))
 
-    // BasketLocalStorage.clear()
-    print()
+      this.print(transactionDetail)
+    })
+
   }
 
   render() {
-    let pay_method = {0: "Tunai", 1: "Debit/Credit", 2: "Tagihan Kamar"}
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
-    let time = new Date()
-    time = [(time.getDate() < 10 ? '0' + time.getDate() : time.getDate()), months[time.getMonth()], time.getFullYear()].join(' ') + ' ' + [time.getHours(), time.getMinutes(), time.getSeconds()].join(':')
 
-    if(BasketLocalStorage.get('type')){
-      return posPaymentFinishView({ basket:this.basketService, pay_method: pay_method[this.basketService.payment.payment_method], time: time, type: 'basket' })
-    }else{
-      return posPaymentFinishView({ basket:this.transactionService, pay_method: pay_method[this.transactionService.payment.payment_method], time: time, type: 'draft' })
-    }
+    return `<div class="text-center py-3" style="
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99999;
+      background: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;">
+      <span class="spinner-border" role="status" aria-hidden="true"></span>
+    </div>`
   }
 }
 

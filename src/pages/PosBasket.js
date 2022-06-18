@@ -4,14 +4,72 @@ import basketItemView from '../templates/basket-item.handlebars'
 import BasketService from "../services/BasketService"
 import $ from "jquery"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
-import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 import TransactionApi from "../repositories/api/TransactionApi"
 import Redirect from "../core/Redirect"
 import AutoNumeric from 'autonumeric'
+import DateCustom from "../utils/DateCustom"
+import { Toast } from '@capacitor/toast';
 
 class PosBasket extends Page {
   constructor(params) {
     super(params)
+  }
+
+  async print(basketService, type = 0) {
+    const types = { 1: 'Dapur', 2: 'Pantry' }
+    let items = basketService.items
+    let _type = ''
+
+    if (type != 0) {
+      _type = types[type]
+      items = basketService.items.filter(item => parseInt(item.category.type) == type)
+    }
+
+    if (items.length < 1) {
+      // alert("Tidak ada menu")
+      await Toast.show({
+        text: `Tidak ada menu untuk ${_type}`
+      });
+      return
+    }
+
+    listPrinters({ type: 'bluetooth' }, res => {
+
+      if (typeof res[0] != 'undefined') {
+        let time = DateCustom.getNowFormated()
+
+        let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
+
+        if (type != 0) body += `[C]${_type}\n\n`
+
+        for (const item of items) {
+          body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
+          if (item.note.length > 0) {
+            body += `[L]*${item.note}\n\n`
+          }
+        }
+
+        body += `\n`
+
+        if (type == 0) {
+          body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
+          body += `[L][L]Total[R]${basketService.total.format()}\n`
+        }
+
+        printFormattedTextAndCut({
+          type: 'bluetooth',
+          id: res[0].address,
+          mmFeedPaper: 50,
+          text: body
+        })
+      }
+      else {
+        alert("Printer tidak terdeteksi")
+      }
+    }, err => {
+      console.log(err)
+      alert("Printer tidak terdeteksi")
+    })
   }
 
   async action() {
@@ -31,111 +89,15 @@ class PosBasket extends Page {
     viewBasket(basketService)
 
     $('#print').on('click', () => {
-      listPrinters({ type: 'bluetooth' }, res => {
-        console.log(res)
-        if (typeof res[0] != 'undefined') {
-          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
-          let time = new Date()
-          time = [(time.getDate() < 10 ? '0' + time.getDate() : time.getDate()), months[time.getMonth()], time.getFullYear()].join(' ') + ' ' + [time.getHours(), time.getMinutes(), time.getSeconds()].join(':')
-
-          let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
-
-          for (const item of basketService.items) {
-            body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if (item.note.length > 0) {
-              body += `[L]*${item.note}\n\n`
-            }
-          }
-          body += `\n`
-          body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
-          body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-
-          printFormattedTextAndCut({
-            type: 'bluetooth',
-            id: res[0].address,
-            mmFeedPaper: 50,
-            text: body
-          })
-        }
-        else {
-          alert("Printer tidak terdeteksi")
-        }
-      }, err => {
-        console.log(err)
-        alert("Printer tidak terdeteksi")
-      })
+      this.print(basketService)
     })
 
     $('#printKitchen').on('click', () => {
-      listPrinters({ type: 'bluetooth' }, res => {
-        console.log(res)
-        if (typeof res[0] != 'undefined') {
-          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
-          let time = new Date()
-          time = [(time.getDate() < 10 ? '0' + time.getDate() : time.getDate()), months[time.getMonth()], time.getFullYear()].join(' ') + ' ' + [time.getHours(), time.getMinutes(), time.getSeconds()].join(':')
-
-          let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
-
-          for (const item of basketService.items) {
-            body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if (item.note.length > 0) {
-              body += `[L]*${item.note}\n\n`
-            }
-          }
-          body += `\n`
-          body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
-          body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-
-          printFormattedTextAndCut({
-            type: 'bluetooth',
-            id: res[0].address,
-            mmFeedPaper: 50,
-            text: body
-          })
-        }
-        else {
-          alert("Printer tidak terdeteksi")
-        }
-      }, err => {
-        console.log(err)
-        alert("Printer tidak terdeteksi")
-      })
+      this.print(basketService, 1)
     })
 
     $('#printBeverage').on('click', () => {
-      listPrinters({ type: 'bluetooth' }, res => {
-        console.log(res)
-        if (typeof res[0] != 'undefined') {
-          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
-          let time = new Date()
-          time = [(time.getDate() < 10 ? '0' + time.getDate() : time.getDate()), months[time.getMonth()], time.getFullYear()].join(' ') + ' ' + [time.getHours(), time.getMinutes(), time.getSeconds()].join(':')
-
-          let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
-
-          for (const item of basketService.items) {
-            body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-            if (item.note.length > 0) {
-              body += `[L]*${item.note}\n\n`
-            }
-          }
-          body += `\n`
-          body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
-          body += `[L][L]Total[R]${basketService.totalSub.format()}\n`
-
-          printFormattedTextAndCut({
-            type: 'bluetooth',
-            id: res[0].address,
-            mmFeedPaper: 50,
-            text: body
-          })
-        }
-        else {
-          alert("Printer tidak terdeteksi")
-        }
-      }, err => {
-        console.log(err)
-        alert("Printer tidak terdeteksi")
-      })
+      this.print(basketService, 2)
     })
 
     $(document).on('click', '.form-qty .btn-min', (event) => {
@@ -161,7 +123,7 @@ class PosBasket extends Page {
 
     $(document).on('click', '.item-select', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
-      let item = BasketLocalStorage.get('items')
+      let item = basketService.items
       $('#item_id').val(id)
       $('#modal-diskon').modal('show')
 
@@ -216,14 +178,14 @@ class PosBasket extends Page {
       $('#jumlah-tamu').trigger('change')
     })
 
-    if (BasketLocalStorage.get('table')) {
-      let table = BasketLocalStorage.get('table');
+    if (basketService.table) {
+      let table = basketService.table;
       let nama_meja = table.table_name;
       $('#nomor-meja').text(nama_meja)
     }
 
-    if (BasketLocalStorage.get('numberOfGuest') !== 0) {
-      $('#jumlah-tamu').val(BasketLocalStorage.get('numberOfGuest') || 0)
+    if (basketService.numberOfGuest !== 0) {
+      $('#jumlah-tamu').val(basketService.numberOfGuest || 0)
     }
 
     const discountInput = new AutoNumeric('#jumlah-diskon', {
@@ -329,35 +291,34 @@ class PosBasket extends Page {
     })
 
     $('#save-transaction').on('click', async (e) => {
-      let is_room = BasketLocalStorage.get('type').isroom
-      let table = BasketLocalStorage.get('table')
-      let jumlah_tamu = BasketLocalStorage.get('numberOfGuest');
       e.preventDefault()
-      console.log(table.hasOwnProperty('id'))
 
-      if (!table.hasOwnProperty('id') && is_room !== "1") {
+      let isRoom = basketService.type.isroom
+      let table = basketService.table
+      let numberOfGuest = basketService.numberOfGuest
+
+      if (typeof table.id == "undefined" && isRoom !== "1") {
         alert('Silahkan Pilih Meja terlebih dahulu!')
 
         return
       }
 
-      if (jumlah_tamu === "0") {
+      if (numberOfGuest === "0") {
         alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
+        return
       }
 
-      if (table.hasOwnProperty('id') && jumlah_tamu !== "0") {
-        let res = await TransactionApi.save(basketService)
-        console.log(res)
+      let res = await TransactionApi.save(basketService)
+
+      if (!res.status) {
+        alert("Transaksi Gagal Disimpan")
+
         return
-        if (res.status) {
-          alert("Transaksi Berhasil Disimpan")
-          basketService.clear()
-          Redirect('/', true)
-        } else {
-          alert("Transaksi Gagal Disimpan")
-          console.log(res);
-        }
       }
+
+      alert("Transaksi Berhasil Disimpan")
+      basketService.clear()
+      Redirect('/', true)
     })
   }
 

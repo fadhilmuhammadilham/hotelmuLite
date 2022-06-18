@@ -7,8 +7,13 @@
         <div class="in">
             <div>
                 {{item.name}}
-                <div class="text-muted">{{item.qty}} X {{#if ([helpers/nequal] item.disc 0)}}<s>Rp{{[helpers/currency] item.price}}</s>{{else}}Rp{{[helpers/currency] item.price}}{{/if}} </div>
-                {{#if ([helpers/nequal] item.disc 0)}}<div class="text-muted">Rp{{[helpers/currency] item.price_after_disc}} (disc {{item.disc}}%)</div>{{/if}}
+                <div class="text-muted">{{item.qty}} X {{#if ([helpers/nequal] item.discount
+                    0)}}<s>Rp{{[helpers/currency]
+                        item.price}}</s>{{else}}Rp{{[helpers/currency] item.price}}{{/if}} </div>
+                {{#if ([helpers/nequal] item.discount 0)}}
+                <div class="text-muted">Rp{{[helpers/currency] item.price_after_disc}}
+                    (disc
+                    {{item.discount}}%)</div>{{/if}}
             </div>
             <span>Rp{{[helpers/currency]item.total}}</span>
         </div>

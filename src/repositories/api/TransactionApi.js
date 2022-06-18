@@ -98,7 +98,6 @@ class TransactionApi {
       let status = { "Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info" }
 
       json.data = json.data.map(item => {
-        item.total_prices = parseFloat(item.total_prices)
         item.status.badge = status[item.status.name]
         return item
       })
@@ -114,7 +113,7 @@ class TransactionApi {
     let bearer = 'Bearer ' + getCookie('token')
 
     let items = basketService.items.map(item => {
-      return { item_id: item.id, qty: item.qty, price: item.price, discount: item.discount, note: item.note, total_sub: item.totalSub, total: item.total }
+      return { item_id: item.id, name: item.name, qty: item.qty, price: item.price, discount: item.discount, note: item.note, total_sub: item.totalSub, total: item.total }
     })
 
     const transactionData = {
@@ -135,10 +134,6 @@ class TransactionApi {
       total: basketService.total
     }
 
-    console.log(transactionData)
-
-    return { status: true }
-
     try {
       let response = await fetch(url, {
         method: 'POST',
@@ -147,23 +142,7 @@ class TransactionApi {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          trx_date: DateCustom.getNowFormated(),
-          shift_id: basketService.shift.id,
-          guest_id: typeof basketService.guest.id != 'undefined' ? basketService.guest.id : 0,
-          waiter_id: basketService.shift.user.id,
-          table_id: basketService.table.id,
-          outlet_id: basketService.type.id,
-          number_of_guest: basketService.numberOfGuest,
-          status: 0,
-          items: items,
-          total_sub: basketService.totalSub,
-          discount: basketService.discount.discount,
-          discount_type: typeof basketService.discount.discount_type != 'undefined' ? basketService.discount.discount_type : null,
-          discount_note: typeof basketService.discount.discount_note != 'undefined' ? basketService.discount.discount_note : null,
-          round: basketService.totalRound,
-          total: basketService.total
-        })
+        body: JSON.stringify(transactionData)
       })
 
       let json = await response.json();
@@ -250,10 +229,6 @@ class TransactionApi {
   static async payment(basketService) {
     let url = `${API.url}/resto/transaction/${basketService.id}/payment`
     let bearer = 'Bearer ' + getCookie('token')
-
-    console.log({ url: url, payment: basketService.payment })
-
-    return { status: false }
 
     try {
       let response = await fetch(url, {

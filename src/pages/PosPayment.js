@@ -18,11 +18,11 @@ class PosPayment extends Page {
   }
 
   render() {
-    if (BasketLocalStorage.get('items')) {
-      return posPaymentView({ total: BasketLocalStorage.get('total') })
-    } else {
-      return posPaymentView({ total: TransactionLocalStorage.get('totalDiscount') === 0 ? TransactionLocalStorage.get('total_prices') : TransactionLocalStorage.get('totalAfterDiscount') })
-    }
+    return posPaymentView({ total: BasketLocalStorage.get('total') })
+    // if (BasketLocalStorage.get('items')) {
+    // } else {
+    //   return posPaymentView({ total: TransactionLocalStorage.get('totalDiscount') === 0 ? TransactionLocalStorage.get('total_prices') : TransactionLocalStorage.get('totalAfterDiscount') })
+    // }
   }
 }
 

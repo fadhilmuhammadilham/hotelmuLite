@@ -20,7 +20,7 @@
 <!-- * App Header -->
 
 {{!-- App Capsule --}}
-<div id="appCapsule" >
+<div id="appCapsule">
     <div class="listview-title">Informasi Transaksi</div>
     <ul class="listview simple-listview">
         <li>
@@ -31,11 +31,11 @@
             Tanggal Transaksi
             <span>{{ data.trx_date }}</span>
         </li>
-        <li>
+        {{!-- <li>
             Nomor Meja
             <span id="nomor-meja">{{ data.table.name }}</span>
-        </li>
-        {{#if ([helpers/nequal] data.guest_name null)}} 
+        </li> --}}
+        {{#if ([helpers/nequal] data.guest_name null)}}
         <li>
             Nama Tamu
             <span>{{ data.guest_name }} </span>
@@ -47,41 +47,45 @@
         </li>
         <li>
             Subtotal
-            <span>Rp{{ [helpers/currency] subtotal }}</span>
+            <span>Rp{{ [helpers/currency] data.total_sub }}</span>
         </li>
         <li>
             Diskon
-            <span>{{ discount }}</span>
+            <span>{{ data.discount }}</span>
+        </li>
+        <li>
+            Round
+            <span>Rp{{ [helpers/currency] data.round }}</span>
         </li>
         <li>
             Total
-            <span class="font-weight-bold">Rp{{ [helpers/currency] price }}</span>
+            <span class="font-weight-bold">Rp{{ [helpers/currency] data.total }}</span>
         </li>
     </ul>
     <div class="listview-title mt-2">Informasi Pembayaran</div>
     <ul class="listview simple-listview">
         <li>
             Tipe Pembayaran
-            <span>{{ payment_method }}</span>
+            <span>{{ data.payment.payment_method }}</span>
         </li>
         <li>
             Tanggal Pembayaran
             <span>{{ data.payment.payment_date }}</span>
         </li>
-        
+
         <li>
             Total Pembayaran
-            <span>Rp{{ [helpers/currency] pay }}</span>
+            <span>Rp{{ [helpers/currency] data.payment.total_payment }}</span>
         </li>
         <li>
             Kembalian
-            <span>Rp{{ [helpers/currency] refund }}</span>
+            <span>Rp{{ [helpers/currency] data.payment.refund }}</span>
         </li>
     </ul>
 
     <div class="listview-title mt-2">Daftar Items</div>
     <ul class="listview image-listview media items-list">
-       
+
     </ul>
 </div>
 {{!-- * App Capsule --}}

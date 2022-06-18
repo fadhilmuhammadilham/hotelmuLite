@@ -3,6 +3,7 @@ import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 import TableLocalStorage from "../repositories/localstorage/TableLocalStorage";
 import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 import Middleware from "./Middleware";
+import BasketService from "../services/BasketService";
 
 class MustSelectTypeMiddleware extends Middleware {
   before() {
@@ -68,7 +69,7 @@ class MustNotSelectItemMiddleware extends Middleware {
   before() {
     const item = BasketLocalStorage.get('items')
 
-    if(item.length > 0){
+    if (item.length > 0) {
       alert('Silahkan Kosongkan Keranjang Terlebih Dahulu');
       Redirect('/pos')
       return false;
@@ -78,4 +79,24 @@ class MustNotSelectItemMiddleware extends Middleware {
   }
 }
 
-export { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware }
+class TransactionValidateMiddleware extends Middleware {
+  before() {
+    const basketService = new BasketService()
+
+    if (!basketService.table.id) {
+      alert('Silahkan pilih meja terlebih dahulu');
+      window.history.back()
+      return false;
+    }
+
+    if (basketService.numberOfGuest < 1) {
+      alert('Isi jumlah tamu terlebih dahulu');
+      window.history.back()
+      return false;
+    }
+
+    return true;
+  }
+}
+
+export { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware, TransactionValidateMiddleware }

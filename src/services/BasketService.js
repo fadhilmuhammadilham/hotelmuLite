@@ -168,6 +168,12 @@ class BasketService {
     BasketLocalStorage.save(this)
   }
 
+  setTrxNumber(trxNumber) {
+    this.trxNumber = trxNumber
+
+    BasketLocalStorage.save(this)
+  }
+
   setDiscount(disc) {
     this.discount = disc
     BasketLocalStorage.save(this)

@@ -25,35 +25,35 @@
 <div id="appCapsule">
     <div class="section mt-2">
         <h3 class="text-center">Transaksi berhasil</h3>
-        <p class="text-muted text-center mb-3" id="t-date">{{time}}</p>
+        <p class="text-muted text-center mb-3" id="t-date">{{trx_date}}</p>
 
         <div class="mb-2 d-flex justify-content-between">Tipe pembayaran <span id="payment-method"
-                class="text-right">{{pay_method}}</span></div>
-        <div class="mb-2 d-flex justify-content-between">Order ID <span id="order-id" class="text-right">00000001</span>
+                class="text-right">{{payment.payment_method}}</span></div>
+        <div class="mb-2 d-flex justify-content-between">Order ID <span id="order-id" class="text-right">{{ trx_number
+                }}</span>
         </div>
     </div>
 
     <div class="listview-title">Daftar item</div>
     <ul class="listview image-listview media basket-items">
-        {{#each basket.items as | item |}}
-        <li>
+        {{#each items as | item |}}
+        <li class="product">
             <div class="item">
+                <div class="imageWrapper">
+                    <img src="/images/placeholder.jpg" alt="image" class="imaged w48">
+                </div>
                 <div class="in">
-                    <div class="text-item">
-                        {{ item.name }}
-                        <div class="text-muted">{{ item.qty }} x Rp{{ [helpers/currency] item.price}}</div>
-                    </div>
                     <div>
-                        {{#if ([helpers/equal] item.priceAfterDiscount 0)}}
-                            Rp{{ [helpers/currency] item.total }}
-                        {{else}}
-                            {{#if ([helpers/equal] type 'basket')}}
-                            <strike>Rp{{ [helpers/currency] item.total }}</strike> ({{item.discount}}%) Rp{{[helpers/currency] item.priceAfterDiscount}} 
-                            {{else}}
-                            <strike>Rp{{ [helpers/currency] item.total }}</strike> ({{item.disc}}%) Rp{{[helpers/currency] item.priceAfterDiscount}} 
-                            {{/if}}
-                        {{/if}}
+                        {{item.name}}
+                        <div class="text-muted">{{item.qty}} X {{#if ([helpers/nequal] item.discount
+                            0)}}<s>Rp{{[helpers/currency]
+                                item.price}}</s>{{else}}Rp{{[helpers/currency] item.price}}{{/if}} </div>
+                        {{#if ([helpers/nequal] item.discount 0)}}
+                        <div class="text-muted">Rp{{[helpers/currency] item.price_after_discount}}
+                            (disc
+                            {{item.discount}}%)</div>{{/if}}
                     </div>
+                    <span>Rp{{[helpers/currency]item.total}}</span>
                 </div>
             </div>
         </li>
@@ -64,28 +64,19 @@
             </div>
         </li>
         {{/each}}
+
     </ul>
 
     <div class="listview-title mt-2">Transaksi</div>
-    {{#if ([helpers/equal] type 'basket')}}
     <ul class="listview simple-listview">
-        <li>Jumlah item <span class="text-bold" id="total-qty">{{basket.totalQty}}</span></li>
-        <li>Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] basket.totalPrice}}</span></li>
-        <li class="d-none">Diskon <span class="text-bold" id="total-disc"></span></li>
-        <li class="d-none">Total Pembayaran <span class="text-bold" id="total-after-disc"></span></li>
-        <li>Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency] basket.payment.total_payment}}</span></li>
-        <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] basket.payment.refund}}</span></li>
+        <li>Sub Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] total_sub}}</span></li>
+        <li>Diskon <span class="text-bold">{{ discount_text }}</span></li>
+        <li>Round <span class="text-bold">Rp{{[helpers/currency] round}}</span></li>
+        <li>Total <span class="text-bold">Rp{{[helpers/currency] total}}</span></li>
+        <li>Total Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency]
+                payment.total_payment}}</span></li>
+        <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] payment.refund}}</span></li>
     </ul>
-    {{else}}
-    <ul class="listview simple-listview">
-        <li>Jumlah item <span class="text-bold" id="total-qty">{{basket.totalqty}}</span></li>
-        <li>Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] basket.total_prices}}</span></li>
-        <li class="d-none">Diskon <span class="text-bold" id="total-disc"></span></li>
-        <li class="d-none">Total Pembayaran <span class="text-bold" id="total-after-disc"></span></li>
-        <li>Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency] basket.payment.total_payment}}</span></li>
-        <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] basket.payment.refund}}</span></li>
-    </ul>
-    {{/if}}
 
     <div class="section pt-4 pb-4">&nbsp;</div>
 
