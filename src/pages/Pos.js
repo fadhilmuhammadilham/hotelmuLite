@@ -12,9 +12,9 @@ class Pos extends Page {
     super(params)
   }
 
-  async getItems() {
+  async getItems(outletId) {
     try {
-      let res = await ItemApi.getAll()
+      let res = await ItemApi.getAll(outletId)
 
       return res.data
     } catch (error) {
@@ -24,7 +24,7 @@ class Pos extends Page {
 
   async action() {
     const basketService = new BasketService()
-    const dataItems = await this.getItems()
+    const dataItems = await this.getItems(basketService.type.id)
 
     const itemsFormat = (items) => {
       let cats = []

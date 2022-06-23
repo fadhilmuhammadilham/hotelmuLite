@@ -8,15 +8,18 @@ import posBasketView from '../templates/pos-basket-draft.handlebars'
 import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 import TransactionService from "../services/TransactionService";
 import TransactionApi from "../repositories/api/TransactionApi";
+import BasketService from "../services/BasketService";
 
 class PosDraft extends Page {
   constructor(params) {
     super(params)
+
+    this.basketService = new BasketService()
   }
 
   async getItems() {
     try {
-      let res = await ItemApi.getFromTransaction()
+      let res = await ItemApi.getAll(this.basketService.type.id)
 
       return res.data
     } catch (error) {
@@ -55,9 +58,8 @@ class PosDraft extends Page {
   }
 
   async action() {
-    const transactionService = new TransactionService()
+    const basketService = new BasketService()
     const dataItems = await this.getItems()
-    const transaction = TransactionLocalStorage.getAll();
 
     const itemsFormat = (items) => {
       let cats = []
@@ -78,13 +80,13 @@ class PosDraft extends Page {
 
     const viewBasket = (transaction) => {
       if (transaction.items.length > 0) {
-        $('#app').append(posBasketView({ qty: transaction.totalqty, totalPrice: transaction.total_prices }))
+        $('#app').append(posBasketView({ qty: transaction.totalQty, totalSub: transaction.totalSub }))
       } else {
         if ($('#cart').length > 0) $('#cart').remove()
       }
     }
 
-    viewBasket(transactionService)
+    viewBasket(basketService)
 
     const viewItem = (items) => {
       items = itemsFormat(items)
@@ -116,20 +118,20 @@ class PosDraft extends Page {
       let product = dataItems.find((item) => item.id == parseInt(item_id))
 
       if (is_exist.length) {
-        transactionService.addItem(product)
-        let item = transactionService.items.find((item) => item.id == parseInt(item_id))
+        basketService.addItem(product)
+        let item = basketService.items.find((item) => item.id == parseInt(item_id))
         let result = await this.updateItem(item_id, item.qty, item.disc, item.note)
         if (result) {
           console.log(result);
-          viewBasket(transactionService)
+          viewBasket(basketService)
         }
       }
       else {
-        transactionService.addItem(product)
+        basketService.addItem(product)
         let result = await this.addItems(product)
         if (result) {
           console.log(result);
-          viewBasket(transactionService)
+          viewBasket(basketService)
         }
       }
 

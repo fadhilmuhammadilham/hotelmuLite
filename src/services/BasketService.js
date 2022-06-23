@@ -19,6 +19,7 @@ class BasketService {
     this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table : {}
     this.guest = typeof basketLocalStorage.guest != 'undefined' ? basketLocalStorage.guest : {}
     this.numberOfGuest = typeof basketLocalStorage.numberOfGuest != 'undefined' ? basketLocalStorage.numberOfGuest : 0
+    this.status = typeof basketLocalStorage.status != 'undefined' ? basketLocalStorage.status : 0
   }
 
   clear() {
@@ -209,6 +210,12 @@ class BasketService {
 
   setNumberOfGuest(number) {
     this.numberOfGuest = number
+
+    BasketLocalStorage.save(this)
+  }
+
+  setStatus(status) {
+    this.status = status
 
     BasketLocalStorage.save(this)
   }

@@ -124,7 +124,7 @@ class TransactionApi {
       table_id: basketService.table.id,
       outlet_id: basketService.type.id,
       number_of_guest: basketService.numberOfGuest,
-      status: 0,
+      status: basketService.status,
       items: items,
       total_sub: basketService.totalSub,
       discount: basketService.discount.discount,

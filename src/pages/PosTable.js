@@ -4,48 +4,41 @@ import tableView from "../templates/table.handlebars";
 import tableItemView from "../templates/table-item.handlebars"
 import $ from "jquery";
 import BasketService from "../services/BasketService";
-import TransactionService from "../services/TransactionService";
-import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage";
 
 class PosTable extends Page {
-    constructor(params) {
-        super(params)
+  constructor(params) {
+    super(params)
+  }
+
+  async getTables() {
+    try {
+      let res = await TableApi.getAll();
+
+      return res.data;
+    } catch (err) {
+      console.log(err)
     }
+  }
 
-    async getTables() {
-        try{
-            let res = await TableApi.getAll();
+  async action() {
+    const dataTables = await this.getTables();
+    const basketService = new BasketService();
 
-            return res.data;
-        }catch(err){
-            console.log(err)
-        }
-    }
+    $('.items-table').html(tableItemView({ tables: dataTables }))
 
-    async action() {
-        const dataTables = await this.getTables();
-        const basketService = new BasketService();
-        const transactionService = new TransactionService();
+    $('.table-id').on('click', (e) => {
+      let id = $(e.currentTarget).data('id')
+      let name = $(e.currentTarget).data('name')
 
-        $('.items-table').html(tableItemView({tables: dataTables}))
+      basketService.setTable({ id: id, name: name });
 
-        $('.table-id').on('click', (e) => {
-            let id = $(e.currentTarget).data('id')
-            let name = $(e.currentTarget).data('name')
-            let table = BasketLocalStorage.get('table')
+      window.history.back();
+    })
+  }
 
-            if(table){
-                basketService.setTable({id: id, table_name: name});
-            }else{
-                transactionService.setTable(id)
-            }
-            window.history.back();
-        })
-    }
-
-    render() {
-        return tableView();
-    }
+  render() {
+    return tableView();
+  }
 }
 
 export default PosTable;

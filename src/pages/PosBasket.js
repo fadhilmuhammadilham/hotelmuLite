@@ -179,9 +179,7 @@ class PosBasket extends Page {
     })
 
     if (basketService.table) {
-      let table = basketService.table;
-      let nama_meja = table.table_name;
-      $('#nomor-meja').text(nama_meja)
+      $('#nomor-meja').text(basketService.table.name)
     }
 
     if (basketService.numberOfGuest !== 0) {
@@ -213,10 +211,11 @@ class PosBasket extends Page {
 
     const checkDiscount = () => {
       if ($('.type-disc').hasClass('active')) {
-
+        let isFree = false
         let jml_disc = discountInput.get()
         if (type_id === 0) {
-          if (parseInt(jml_disc) > 99) {
+          if (parseFloat(jml_disc) > 99) {
+            isFree = true
             discountInput.set(100)
             $('#cat_diskon').removeClass('d-none')
           } else {
@@ -227,7 +226,8 @@ class PosBasket extends Page {
             })
           }
         } else {
-          if (parseInt(jml_disc) > basketService.totalSub) {
+          if (parseFloat(jml_disc) > basketService.totalSub) {
+            isFree = true
             $('#jumlah-diskon').val(basketService.totalSub)
             $('#cat_diskon').removeClass('d-none')
           } else {
@@ -245,6 +245,13 @@ class PosBasket extends Page {
           discount_note: discount_note
         })
         viewBasket(basketService)
+
+        if (!$('#choose-payment-btn').attr('data-link')) $('#choose-payment-btn').attr('data-link', null)
+        $('#choose-payment-btn').text('Pilih pembayaran')
+        if (isFree) {
+          $('#choose-payment-btn').removeAttr('data-link')
+          $('#choose-payment-btn').text('Simpan Transaksi')
+        }
       }
     }
 
@@ -298,27 +305,85 @@ class PosBasket extends Page {
       let numberOfGuest = basketService.numberOfGuest
 
       if (typeof table.id == "undefined" && isRoom !== "1") {
-        alert('Silahkan Pilih Meja terlebih dahulu!')
+        await Toast.show({
+          text: 'Silahkan Pilih Meja terlebih dahulu!'
+        })
 
         return
       }
 
-      if (numberOfGuest === "0") {
-        alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
+      if (numberOfGuest === "0" && isRoom != "1") {
+        await Toast.show({
+          text: 'Silahkan isi Jumlah Tamu terlebih dahulu!'
+        })
+
         return
       }
 
       let res = await TransactionApi.save(basketService)
 
       if (!res.status) {
-        alert("Transaksi Gagal Disimpan")
+        await Toast.show({
+          text: 'Transaksi Gagal Disimpan'
+        });
 
         return
       }
 
-      alert("Transaksi Berhasil Disimpan")
+      await Toast.show({
+        text: 'Transaksi Berhasil Disimpan'
+      });
+
       basketService.clear()
       Redirect('/', true)
+    })
+
+    $('#choose-payment-btn').on('click', async (e) => {
+      e.preventDefault()
+
+      if ((basketService.discount.discount_type == '0' && basketService.discount.discount != '100') ||
+        (basketService.discount.discount_type == '1' && basketService.discount.discount != basketService.totalSub)) {
+        return
+      }
+
+      if (typeof basketService.table.id == "undefined" && basketService.type.isroom !== "1") {
+        await Toast.show({
+          text: 'Silahkan Pilih Meja terlebih dahulu!'
+        })
+
+        return
+      }
+
+      if (basketService.numberOfGuest === "0" && basketService.type.isroom != "1") {
+        await Toast.show({
+          text: 'Silahkan isi Jumlah Tamu terlebih dahulu!'
+        })
+
+        return
+      }
+
+      if (basketService.discount.discount_note == null) {
+        await Toast.show({
+          text: 'Pilih catatan diskon!'
+        })
+
+        return
+      }
+
+      basketService.setStatus(1);
+
+      let res = await TransactionApi.save(basketService)
+
+      if (!res.status) {
+        await Toast.show({
+          text: 'Transaksi Gagal Disimpan'
+        });
+
+        return
+      }
+
+      basketService.clear()
+      Redirect('/pos/payment/finish/' + res.data.id, true)
     })
   }
 
