@@ -5,8 +5,6 @@ import posView from "../templates/pos-draft.handlebars"
 import posItemView from '../templates/pos-item.handlebars'
 import posCategoryView from '../templates/pos-nav-cat.handlebars'
 import posBasketView from '../templates/pos-basket-draft.handlebars'
-import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
-import TransactionService from "../services/TransactionService";
 import TransactionApi from "../repositories/api/TransactionApi";
 import BasketService from "../services/BasketService";
 
@@ -27,9 +25,9 @@ class PosDraft extends Page {
     }
   }
 
-  async addItems(item) {
+  async addItems(trxId, item) {
     try {
-      let res = await TransactionApi.addItem(item)
+      let res = await TransactionApi.addItem(trxId, item)
 
       return res.status
     } catch (error) {
@@ -37,28 +35,17 @@ class PosDraft extends Page {
     }
   }
 
-  async updateItem(item_id, item, disc, note) {
+  async updateItem(trxId, itemId, qty, disc, note) {
     try {
-      let res = await TransactionApi.updateItem(item_id, item, disc, note)
+      let res = await TransactionApi.updateItem(trxId, itemId, qty, disc, note)
 
-      return res.status
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async deleteItem(item_id) {
-    try {
-      let res = await TransactionApi.deleteItem(item_id)
-
-      return res.status
+      return res.status 
     } catch (error) {
       console.log(error);
     }
   }
 
   async action() {
-    const basketService = new BasketService()
     const dataItems = await this.getItems()
 
     const itemsFormat = (items) => {
@@ -86,7 +73,7 @@ class PosDraft extends Page {
       }
     }
 
-    viewBasket(basketService)
+    viewBasket(this.basketService)
 
     const viewItem = (items) => {
       items = itemsFormat(items)
@@ -113,35 +100,29 @@ class PosDraft extends Page {
     })
 
     $('.product').on('click', async (even) => {
-      let item_id = $(even.currentTarget).data('id')
-      let is_exist = transaction.items.filter(item => item.id === parseInt(item_id))
-      let product = dataItems.find((item) => item.id == parseInt(item_id))
+      let itemId = $(even.currentTarget).data('id')
+      let isExist = this.basketService.items.filter(item => item.id === parseInt(itemId))
+      let product = dataItems.find((item) => item.id == parseInt(itemId))
 
-      if (is_exist.length) {
-        basketService.addItem(product)
-        let item = basketService.items.find((item) => item.id == parseInt(item_id))
-        let result = await this.updateItem(item_id, item.qty, item.disc, item.note)
+      if (isExist.length > 0) {
+        this.basketService.addItem(product)
+        let item = this.basketService.items.find((item) => item.id == parseInt(itemId))
+        let result = await this.updateItem(this.basketService.id, itemId, item.qty, item.disc, item.note)
         if (result) {
           console.log(result);
-          viewBasket(basketService)
+          viewBasket(this.basketService)
         }
       }
       else {
-        basketService.addItem(product)
-        let result = await this.addItems(product)
+        this.basketService.addItem(product)
+        let result = await this.addItems(this.basketService.id, product)
         if (result) {
           console.log(result);
-          viewBasket(basketService)
+          viewBasket(this.basketService)
         }
       }
-
     })
-
-    // $('#cart').on('click', (e) => {
-    //     transactionService.initiateBasket()
-    // })
   }
-
 
   render() {
     return posView()

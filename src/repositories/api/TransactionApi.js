@@ -249,9 +249,8 @@ class TransactionApi {
     }
   }
 
-  static async addItem(item) {
-    let trx_id = TransactionLocalStorage.get('id')
-    let url = `${API.url}/resto/transaction/${trx_id}/item`
+  static async addItem(trxId, item) {
+    let url = `${API.url}/resto/transaction/${trxId}/item`
     let bearer = 'Bearer ' + getCookie('token')
     let items = { item_id: item.id, qty: 1, discount: 0, note: "" }
 
@@ -274,11 +273,11 @@ class TransactionApi {
     }
   }
 
-  static async updateItem(item_id, qty, disc, note) {
-    let trx_id = TransactionLocalStorage.get('id')
-    let url = `${API.url}/resto/transaction/${trx_id}/item/${item_id}`
+  static async updateItem(trxId, itemId, qty, disc, note) {
+    let url = `${API.url}/resto/transaction/${trxId}/item/${itemId}`
+
     let bearer = 'Bearer ' + getCookie('token')
-    let items = { item_id: item_id, qty: qty, discount: disc, note: note }
+    let items = { item_id: itemId, qty: qty, discount: disc, note: note }
 
     try {
       let response = await fetch(url, {
@@ -299,9 +298,8 @@ class TransactionApi {
     }
   }
 
-  static async deleteItem(item_id) {
-    let trx_id = TransactionLocalStorage.get('id')
-    let url = `${API.url}/resto/transaction/${trx_id}/item/${item_id}`
+  static async deleteItem(trxId, itemId) {
+    let url = `${API.url}/resto/transaction/${trxId}/item/${itemId}`
     let bearer = 'Bearer ' + getCookie('token')
 
     try {

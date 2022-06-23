@@ -10,9 +10,9 @@ class PosTable extends Page {
     super(params)
   }
 
-  async getTables() {
+  async getTables(outletId) {
     try {
-      let res = await TableApi.getAll();
+      let res = await TableApi.getAll(outletId);
 
       return res.data;
     } catch (err) {
@@ -21,8 +21,8 @@ class PosTable extends Page {
   }
 
   async action() {
-    const dataTables = await this.getTables();
     const basketService = new BasketService();
+    const dataTables = await this.getTables(basketService.type.id);
 
     $('.items-table').html(tableItemView({ tables: dataTables }))
 

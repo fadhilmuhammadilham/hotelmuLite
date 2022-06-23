@@ -81,8 +81,13 @@ class PosBasket extends Page {
       $('#total').text('Rp' + basketService.total.format(2))
       $('#total-qty').text(basketService.totalQty.format())
       $('#total-round').text('Rp' + basketService.totalRound.format(2))
+      
     }
-
+    
+    if (basketService.type.isroom == '1') {
+      $('#order-info').addClass('d-none');
+    }
+    
     let type_id = typeof basketService.discount.discount_type != "undefined" ? basketService.discount.discount_type : null
     let discount_note = typeof basketService.discount.discount_note != "undefined" ? basketService.discount.discount_note : null
 

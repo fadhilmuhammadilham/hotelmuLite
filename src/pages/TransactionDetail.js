@@ -53,7 +53,8 @@ class TransactionDetail extends Page {
           totalSub: item.total_sub,
           discount: item.discount,
           total: item.total,
-          type: item.type
+          type: item.type,
+          note: item.note
         })
       }
 
@@ -71,7 +72,8 @@ class TransactionDetail extends Page {
           discount_note: data.discount_note,
         },
         table: data.table,
-        numberOfGuest: data.numberOfGuest
+        numberOfGuest: data.numberOfGuest,
+        status: data.status
       }))
 
       let basketService = new BasketService()

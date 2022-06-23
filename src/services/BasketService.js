@@ -150,6 +150,8 @@ class BasketService {
     this.totalDiscount = totalDisc
     this.total = totalAfterDisc
 
+    console.log(this)
+
     BasketLocalStorage.save(this)
   }
 
