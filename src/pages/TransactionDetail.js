@@ -21,17 +21,19 @@ class TransactionDetail extends Page {
   }
 
   viewDetail(data) {
-    data.items = data.items.map((item) => {
+    let items = data.items.map((item) => {
       item.price_after_disc = item.price - (item.price * (item.discount / 100))
       return item
     })
 
-    data.discount = data.discount > 0 ? (data.discount_type == '%' ? `${data.discount}% (Rp${(data.total_sub * (data.discount / 100)).format()})` : `(Rp${data.discount})`) : '(Rp0)'
+    let discount = data.discount > 0 ? (data.discount_type == '%' ? `${data.discount}% (${(data.total_sub * (data.discount / 100)).format(2)})` : `(${data.discount.format(2)})`) : '(' + (0).format(2) + ')'
     $('#app').html(transactionDetailView({
       data: data,
+      items: items,
+      discount: discount
     }))
 
-    $('.items-list').html(transactionDetailItem({ items: data.items }))
+    $('.items-list').html(transactionDetailItem({ items: items }))
   }
 
   async action() {
@@ -60,6 +62,8 @@ class TransactionDetail extends Page {
 
       localStorage.setItem('basket', JSON.stringify({
         id: data.id,
+        trxDate: data.trx_date,
+        trxNumber: data.trx_number,
         shift: data.shift,
         type: data.outlet,
         items: items,
@@ -68,12 +72,12 @@ class TransactionDetail extends Page {
         totalRound: data.round,
         discount: {
           discount: data.discount,
-          discount_type: data.discount_type,
+          discount_type: data.discount_type == '%' ? 0 : 1,
           discount_note: data.discount_note,
         },
         table: data.table,
-        numberOfGuest: data.numberOfGuest,
-        status: data.status
+        numberOfGuest: data.number_of_guest,
+        status: data.status.id
       }))
 
       let basketService = new BasketService()

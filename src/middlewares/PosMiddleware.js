@@ -4,6 +4,7 @@ import TableLocalStorage from "../repositories/localstorage/TableLocalStorage";
 import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 import Middleware from "./Middleware";
 import BasketService from "../services/BasketService";
+import MyToast from "../utils/MyToast";
 
 class MustSelectTypeMiddleware extends Middleware {
   before() {
@@ -50,13 +51,13 @@ class MustSelectedPaymentTypeMiddleware extends Middleware {
 }
 
 class MustSelectedRoomOrTableMiddleware extends Middleware {
-  before() {
+  async before() {
     const table = BasketLocalStorage.get('table')
     const table_id = TransactionLocalStorage.get('table_id')
 
     if (!table.id && !table_id) {
       // Redirect('/pos/basket', true);
-      alert('Silahkan Pilih Meja Terlebih Dahulu');
+      await MyToast.show('Silahkan Pilih Meja Terlebih Dahulu');
       window.history.back()
       return false
     }
@@ -70,7 +71,7 @@ class MustNotSelectItemMiddleware extends Middleware {
     const item = BasketLocalStorage.get('items')
 
     if (item.length > 0) {
-      alert('Silahkan Kosongkan Keranjang Terlebih Dahulu');
+      MyToast.show('Silahkan Kosongkan Keranjang Terlebih Dahulu');
       Redirect('/pos')
       return false;
     }
@@ -83,14 +84,14 @@ class TransactionValidateMiddleware extends Middleware {
   before() {
     const basketService = new BasketService()
 
-    if (!basketService.table.id) {
-      alert('Silahkan pilih meja terlebih dahulu');
+    if (!basketService.table.id && basketService.type.isroom.toString() == "0") {
+      MyToast.show('Silahkan pilih meja terlebih dahulu');
       window.history.back()
       return false;
     }
 
-    if (basketService.numberOfGuest < 1) {
-      alert('Isi jumlah tamu terlebih dahulu');
+    if (basketService.numberOfGuest < 1 && basketService.type.isroom.toString() == "0") {
+      MyToast.show('Isi jumlah tamu terlebih dahulu');
       window.history.back()
       return false;
     }

@@ -20,11 +20,23 @@
 <!-- * App Header -->
 
 {{!-- App Capsule --}}
-<div id="appCapsule" >
+<div id="appCapsule">
     <ul class="listview simple-listview">
         <li>
             ID Hotel
-            <span>{{ hotel_id }}</span>
+            <span>{{ hotelId }}</span>
+        </li>
+        <li>
+            Nama Hotel
+            <span>{{ hotelName }}</span>
+        </li>
+        <li>
+            Round
+            <span>{{ isRound }}</span>
+        </li>
+        <li>
+            Mata Uang
+            <span>{{ currency }}</span>
         </li>
     </ul>
     <div class="section">
@@ -40,7 +52,8 @@
                 <h5 class="modal-title">Konfirmasi Reset</h5>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin akan Reset ID Hotel? Jika anda reset ID Hotel anda akan diarahkan ke halaman Setup Hotel
+                Apakah Anda yakin akan Reset ID Hotel? Jika anda reset ID Hotel anda akan diarahkan ke halaman Setup
+                Hotel
             </div>
             <div class="modal-footer">
                 <div class="btn-inline">

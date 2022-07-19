@@ -1,13 +1,13 @@
 import Middleware from "./Middleware"
-import Redirect from "../core/Redirect"
 import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
+import MyToast from "../utils/MyToast";
 
 class MustOpenShiftMidlleware extends Middleware {
   before() {
     const shift_id = ShiftLocalStorage.get('id');
 
     if (!shift_id) {
-      alert("Silahkan Buka Shift Terlebih Dahulu")
+      MyToast.show("Silahkan Buka Shift Terlebih Dahulu")
       window.history.back();
       return false
     }
@@ -21,7 +21,7 @@ class MustCloseShiftMiddleware extends Middleware {
     const shift_id = ShiftLocalStorage.get('id');
 
     if (shift_id) {
-      alert("Silahkan Tutup Shift Terlebih Dahulu")
+      MyToast.show("Silahkan Tutup Shift Terlebih Dahulu")
       window.history.back();
       return false
     }
@@ -30,4 +30,4 @@ class MustCloseShiftMiddleware extends Middleware {
   }
 }
 
-export { MustOpenShiftMidlleware, MustCloseShiftMiddleware}
+export { MustOpenShiftMidlleware, MustCloseShiftMiddleware }

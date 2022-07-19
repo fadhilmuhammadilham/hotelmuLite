@@ -1,4 +1,6 @@
-export default (number, n) => {
+import ConfigLocalStorage from "../../repositories/localstorage/ConfigLocalStorage";
+
+export default (number, n, withCurrency = true) => {
   const x = 3;
   const s = '.';
   const c = ',';
@@ -6,5 +8,6 @@ export default (number, n) => {
   var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
     num = number.toFixed(Math.max(0, ~~n));
 
-  return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+  const currency = ConfigLocalStorage.get('currency')
+  return (withCurrency ? currency.symbol : '') + (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
 }

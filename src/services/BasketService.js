@@ -1,4 +1,5 @@
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
+import ConfigLocalStorage from "../repositories/localstorage/ConfigLocalStorage";
 import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 
 class BasketService {
@@ -6,6 +7,8 @@ class BasketService {
     const basketLocalStorage = BasketLocalStorage.getAll()
 
     this.id = typeof basketLocalStorage.id != 'undefined' ? basketLocalStorage.id : 0;
+    this.trxDate = typeof basketLocalStorage.trxDate != 'undefined' ? basketLocalStorage.trxDate : '';
+    this.trxNumber = typeof basketLocalStorage.trxNumber != 'undefined' ? basketLocalStorage.trxNumber : '';
     this.shift = typeof basketLocalStorage.shift != 'undefined' ? basketLocalStorage.shift : ShiftLocalStorage.getAll()
     this.type = typeof basketLocalStorage.type != 'undefined' ? basketLocalStorage.type : {}
     this.items = typeof basketLocalStorage.items != 'undefined' ? basketLocalStorage.items : []
@@ -15,7 +18,7 @@ class BasketService {
     this.totalDiscount = typeof basketLocalStorage.totalDiscount != 'undefined' ? basketLocalStorage.totalDiscount : 0
     this.totalQty = typeof basketLocalStorage.totalQty != 'undefined' ? basketLocalStorage.totalQty : 0
     this.payment = typeof basketLocalStorage.payment != 'undefined' ? basketLocalStorage.payment : {}
-    this.discount = typeof basketLocalStorage.discount != 'undefined' ? basketLocalStorage.discount : { "discount": 0 }
+    this.discount = typeof basketLocalStorage.discount != 'undefined' ? basketLocalStorage.discount : { discount: 0 }
     this.table = typeof basketLocalStorage.table != 'undefined' ? basketLocalStorage.table : {}
     this.guest = typeof basketLocalStorage.guest != 'undefined' ? basketLocalStorage.guest : {}
     this.numberOfGuest = typeof basketLocalStorage.numberOfGuest != 'undefined' ? basketLocalStorage.numberOfGuest : 0
@@ -38,6 +41,8 @@ class BasketService {
   }
 
   calculateRound() {
+    if (!ConfigLocalStorage.get('isRound')) return
+
     this.totalRound = this.round(this.total, 100)
     if (this.totalRound > 0) this.total = this.total + this.totalRound
   }
@@ -150,8 +155,6 @@ class BasketService {
     this.totalDiscount = totalDisc
     this.total = totalAfterDisc
 
-    console.log(this)
-
     BasketLocalStorage.save(this)
   }
 
@@ -173,6 +176,12 @@ class BasketService {
 
   setTrxNumber(trxNumber) {
     this.trxNumber = trxNumber
+
+    BasketLocalStorage.save(this)
+  }
+
+  setTrxDate(trxDate) {
+    this.trxDate = trxDate
 
     BasketLocalStorage.save(this)
   }

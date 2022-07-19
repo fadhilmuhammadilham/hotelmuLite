@@ -49,8 +49,8 @@ class Home extends Page {
 
     this.getSummary((summary) => {
       let total_sales = parseFloat(summary.total_sales)
-      $('#totalSaleToday').html(`Rp${total_sales.format()}`)
-      $('#totalTransactionToday').html(summary.total_transactions)
+      $('#totalSaleToday').html(`${total_sales.format(2)}`)
+      $('#totalTransactionToday').html(parseInt(summary.total_transactions).format(0, false))
     })
 
     this.getNewTransaction((newTransactions) => {
@@ -98,13 +98,13 @@ class Home extends Page {
           <div class="flex-grow-1 ">
               <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">${shift.start}</span></div>
               <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">${shift.start_time}</span></div>
-              <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp${shift.begining_balance.format()}</span></div>
+              <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">${shift.begining_balance.format(2)}</span></div>
           </div>
       </div>`)
     }
 
     this.getOpenedShift(shift => {
-      if (!ShiftLocalStorage.isExists() && typeof shift.user.id != "undefined") {
+      if (typeof shift.user.id != "undefined") {
         ShiftLocalStorage.set(shift)
         viewShiftOpened(shift)
         actionShift()

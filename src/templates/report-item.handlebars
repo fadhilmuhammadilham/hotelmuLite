@@ -13,29 +13,29 @@
         </thead>
         <tbody>
             {{#if ([helpers/equal] type "month")}}
-                {{#each transaction_data as | item |}}
-                <tr>
-                    <th scope="row">{{[helpers/date_format] item.day 'Full'}}</th>
-                    <td class="text-right">{{item.trx_count}}</td>
-                    <td class="text-right">Rp{{[helpers/currency] item.trx_total_prices}}</td>
-                </tr>
-                {{else}}
-                <tr>
-                    <td colspan="3" class="text-center"><i>Belum Ada Transaksi</i></td>
-                </tr>
-                {{/each}}
+            {{#each transaction_data as | item |}}
+            <tr>
+                <th scope="row">{{[helpers/date_format] item.day 'Full'}}</th>
+                <td class="text-right">{{[helpers/currency] item.trx_count 0 false}}</td>
+                <td class="text-right">{{[helpers/currency] item.trx_total_prices 2}}</td>
+            </tr>
             {{else}}
-                {{#each transaction_data as | item |}}
-                <tr>
-                    <th scope="row">{{[helpers/date_format] item.month 'Year'}}</th>
-                    <td class="text-right">{{item.trx_count}}</td>
-                    <td class="text-right">Rp{{[helpers/currency] item.trx_total_prices}}</td>
-                </tr>
-                {{else}}
-                <tr>
-                    <td colspan="3" class="text-center"><i>Belum Ada Transaksi</i></td>
-                </tr>
-                {{/each}}
+            <tr>
+                <td colspan="3" class="text-center"><i>Belum Ada Transaksi</i></td>
+            </tr>
+            {{/each}}
+            {{else}}
+            {{#each transaction_data as | item |}}
+            <tr>
+                <th scope="row">{{[helpers/date_format] item.month 'Year'}}</th>
+                <td class="text-right">{{[helpers/currency] item.trx_count 0 false}}</td>
+                <td class="text-right">{{[helpers/currency] item.trx_total_prices 2}}</td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="3" class="text-center"><i>Belum Ada Transaksi</i></td>
+            </tr>
+            {{/each}}
             {{/if}}
         </tbody>
     </table>

@@ -46,14 +46,14 @@
                     <div>
                         {{item.name}}
                         <div class="text-muted">{{item.qty}} X {{#if ([helpers/nequal] item.discount
-                            0)}}<s>Rp{{[helpers/currency]
-                                item.price}}</s>{{else}}Rp{{[helpers/currency] item.price}}{{/if}} </div>
+                            0)}}<s>{{[helpers/currency]
+                                item.price}}</s>{{else}}{{[helpers/currency] item.price 2}}{{/if}} </div>
                         {{#if ([helpers/nequal] item.discount 0)}}
-                        <div class="text-muted">Rp{{[helpers/currency] item.price_after_discount}}
+                        <div class="text-muted">{{[helpers/currency] item.price_after_discount 2}}
                             (disc
                             {{item.discount}}%)</div>{{/if}}
                     </div>
-                    <span>Rp{{[helpers/currency]item.total}}</span>
+                    <span>{{[helpers/currency]item.total 2}}</span>
                 </div>
             </div>
         </li>
@@ -69,13 +69,13 @@
 
     <div class="listview-title mt-2">Transaksi</div>
     <ul class="listview simple-listview">
-        <li>Sub Total <span class="text-bold" id="total-payment">Rp{{[helpers/currency] total_sub}}</span></li>
+        <li>Sub Total <span class="text-bold" id="total-payment">{{[helpers/currency] total_sub 2}}</span></li>
         <li>Diskon <span class="text-bold">{{ discount_text }}</span></li>
-        <li>Round <span class="text-bold">Rp{{[helpers/currency] round}}</span></li>
-        <li>Total <span class="text-bold">Rp{{[helpers/currency] total}}</span></li>
-        <li>Total Pembayaran <span class="text-bold" id="cash_receive">Rp{{[helpers/currency]
-                payment.total_payment}}</span></li>
-        <li>Kembalian <span class="text-bold" id="refund">Rp{{[helpers/currency] payment.refund}}</span></li>
+        <li>Round <span class="text-bold">{{[helpers/currency] round 2 }}</span></li>
+        <li>Total <span class="text-bold">{{[helpers/currency] total 2}}</span></li>
+        <li>Total Pembayaran <span class="text-bold" id="cash_receive">{{[helpers/currency]
+                payment.total_payment 2}}</span></li>
+        <li>Kembalian <span class="text-bold" id="refund">{{[helpers/currency] payment.refund 2}}</span></li>
     </ul>
 
     <div class="section pt-4 pb-4">&nbsp;</div>

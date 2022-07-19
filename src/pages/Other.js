@@ -4,6 +4,7 @@ import $ from "jquery"
 import { unSetCookie } from "../core/Cookies"
 import Redirect from "../core/Redirect"
 import UserLocalStorage from "../repositories/localstorage/UserLocalStorage"
+import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 
 class PosPayment extends Page {
   constructor(params) {
@@ -20,7 +21,10 @@ class PosPayment extends Page {
       console.log('Confirmed: True')
       $('#DialogBasic-logout').modal('hide');
       unSetCookie('token')
+
       UserLocalStorage.removeAll();
+      ShiftLocalStorage.removeAll();
+
       Redirect('/login', true)
       return true
     })

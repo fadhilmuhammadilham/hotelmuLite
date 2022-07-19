@@ -13,7 +13,7 @@ class ReportApi {
     let response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization' : bearer,
+        'Authorization': bearer,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -22,9 +22,10 @@ class ReportApi {
     let json = await response.json();
 
     json.data = json.data.map((item) => {
-        item.trx_total_prices = parseInt(item.trx_total_prices) 
+      item.trx_total_prices = parseFloat(item.trx_total_prices)
+      item.trx_count = parseInt(item.trx_count)
 
-        return item
+      return item
     })
 
     return json;
@@ -37,7 +38,7 @@ class ReportApi {
     let response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization' : bearer,
+        'Authorization': bearer,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -46,9 +47,10 @@ class ReportApi {
     let json = await response.json();
 
     json.data = json.data.map((item) => {
-        item.trx_total_prices = parseInt(item.trx_total_prices) 
+      item.trx_total_prices = parseFloat(item.trx_total_prices)
+      item.trx_count = parseInt(item.trx_count)
 
-        return item
+      return item
     })
 
     return json;
@@ -61,7 +63,7 @@ class ReportApi {
     let response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization' : bearer,
+        'Authorization': bearer,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -70,9 +72,10 @@ class ReportApi {
     let json = await response.json();
 
     json.data = json.data.map((item) => {
-        item.trx_total_prices = parseInt(item.trx_total_prices) 
+      item.trx_total_prices = parseFloat(item.trx_total_prices)
+      item.trx_count = parseInt(item.trx_count)
 
-        return item
+      return item
     })
 
     return json;

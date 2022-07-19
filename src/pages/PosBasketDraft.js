@@ -6,9 +6,9 @@ import TransactionApi from "../repositories/api/TransactionApi"
 import Redirect from "../core/Redirect"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
 import TableApi from "../repositories/api/TableApi"
-import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
 import BasketService from "../services/BasketService"
 import AutoNumeric from 'autonumeric'
+import MyToast from '../utils/MyToast';
 
 class PosBasketDraft extends Page {
   constructor(params) {
@@ -45,6 +45,16 @@ class PosBasketDraft extends Page {
     }
   }
 
+  async updateTransaction(basketService) {
+    try {
+      let res = await TransactionApi.update(basketService)
+
+      return res.status
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async print(basketService, type = 0) {
     const types = { 1: 'Dapur', 2: 'Pantry' }
     let items = basketService.items
@@ -56,10 +66,7 @@ class PosBasketDraft extends Page {
     }
 
     if (items.length < 1) {
-      // alert("Tidak ada menu")
-      await Toast.show({
-        text: `Tidak ada menu untuk ${_type}`
-      });
+      await MyToast.show(`Tidak ada menu untuk ${_type}`);
       return
     }
 
@@ -94,11 +101,11 @@ class PosBasketDraft extends Page {
         })
       }
       else {
-        alert("Printer tidak terdeteksi")
+        MyToast.show("Printer tidak terdeteksi")
       }
     }, err => {
       console.log(err)
-      alert("Printer tidak terdeteksi")
+      MyToast.show("Printer tidak terdeteksi")
     })
   }
 
@@ -135,35 +142,35 @@ class PosBasketDraft extends Page {
       this.print(basketService, 2)
     })
 
-    $(document).on('click', '.btn-min', async (e) => {
+    $(document).on('click', '.form-qty .btn-min', async (e) => {
       let id = $(e.currentTarget).closest('li').data('id')
-      
+
       basketService.qtyHandler(id, '-')
       let item = basketService.items.find((item) => item.id == parseInt(id))
-      
+
       if (typeof item != 'undefined') {
         let result = await this.updateItem(basketService.id, id, item.qty, item.disc, item.note)
-        
+
         if (result) {
           viewBasket(basketService);
         }
       } else {
         let result = await this.deleteItem(basketService.id, id);
-        
+
         if (result) {
           viewBasket(basketService);
         }
       }
     })
 
-    $(document).on('click', '.btn-plus', async (e) => {
+    $(document).on('click', '.form-qty .btn-plus', async (e) => {
       let id = $(e.currentTarget).closest('li').data('id')
 
       basketService.qtyHandler(id, '+')
-      
+
       let item = basketService.items.find((item) => item.id == parseInt(id))
       let result = await this.updateItem(basketService.id, id, item.qty, item.disc, item.note)
-      
+
       if (result) {
         viewBasket(basketService);
       }
@@ -182,10 +189,10 @@ class PosBasketDraft extends Page {
     $(document).on('click', '.item-select', (e) => {
       let id = $(e.currentTarget).closest('li').data('id')
       let item = basketService.items.find(_item => _item.id == id)
-      
+
       $('#item_id').val(id)
       $('#modal-diskon').modal('show')
-      $('#diskon-item').val(item.disc)
+      $('#diskon-item').val(item.discount || '')
       $('#catatan_item').val(item.note)
     })
 
@@ -212,8 +219,26 @@ class PosBasketDraft extends Page {
       viewBasket(basketService)
     })
 
-    $('#jumlah-tamu').on('keyup change', () => {
+    $(document).on('keyup change', '#jumlah-tamu', () => {
       basketService.setNumberOfGuest(parseInt($('#jumlah-tamu').val()))
+
+      this.updateTransaction(basketService)
+    })
+
+    $('.form-guest-total .btn-min').on('click', (event) => {
+      let guestTotal = $('#jumlah-tamu').val()
+      guestTotal = guestTotal - 1
+
+      $('#jumlah-tamu').val(guestTotal < 0 ? 0 : guestTotal)
+      $('#jumlah-tamu').trigger('change')
+    })
+
+    $('.form-guest-total .btn-plus').on('click', (event) => {
+      let guestTotal = $('#jumlah-tamu').val()
+      guestTotal = parseInt(guestTotal) + 1
+
+      $('#jumlah-tamu').val(guestTotal < 0 ? 0 : guestTotal)
+      $('#jumlah-tamu').trigger('change')
     })
 
     if (basketService.table) {
@@ -235,7 +260,7 @@ class PosBasketDraft extends Page {
       discountInput.set(basketService.discount.discount)
 
       if (typeof basketService.discount.discount_type != 'undefined') $('.type-disc').each((index, item) => {
-        if ($(item).data('type_id') == basketService.discount.discount_type) {
+        if ($(item).data('type_id') == basketService.discount.discount_type && basketService.discount.discount != 0) {
           $(item).addClass('active')
         }
       })
@@ -248,6 +273,8 @@ class PosBasketDraft extends Page {
     }
 
     const checkDiscount = () => {
+
+
       if ($('.type-disc').hasClass('active')) {
         let isFree = false
         let jml_disc = discountInput.get()
@@ -282,10 +309,14 @@ class PosBasketDraft extends Page {
           discount: parseFloat(discountInput.get() || 0),
           discount_note: discount_note
         })
+
+        this.updateTransaction(basketService)
+
         viewBasket(basketService)
 
-        if (!$('#choose-payment-btn').attr('data-link')) $('#choose-payment-btn').attr('data-link', null)
+        $('#choose-payment-btn').attr('data-link', 1)
         $('#choose-payment-btn').text('Pilih pembayaran')
+
         if (isFree) {
           $('#choose-payment-btn').removeAttr('data-link')
           $('#choose-payment-btn').text('Simpan Transaksi')
@@ -336,25 +367,76 @@ class PosBasketDraft extends Page {
     })
 
     $('#save-transaction').on('click', async (e) => {
-      let jumlah_tamu = TransactionLocalStorage.get('number_of_guest')
-      let trx_id = TransactionLocalStorage.get('id')
       e.preventDefault()
 
-      if (jumlah_tamu == 0) {
-        alert('Silahkan isi Jumlah Tamu terlebih dahulu!')
+      let isRoom = basketService.type.isroom
+      let table = basketService.table
+      let numberOfGuest = basketService.numberOfGuest
+
+      if (typeof table.id == "undefined" && isRoom !== "1") {
+        await MyToast.show('Silahkan Pilih Meja terlebih dahulu!')
+
+        return
       }
 
-      if (jumlah_tamu !== 0) {
-        let res = await TransactionApi.update(trx_id, 0)
+      if (numberOfGuest === "0" && isRoom != "1") {
+        await MyToast.show('Silahkan isi Jumlah Tamu terlebih dahulu!')
 
-        if (res.status) {
-          alert("Transaksi Berhasil Disimpan")
-          Redirect('/', true)
-        } else {
-          alert("Transaksi Gagal Disimpan")
-          console.log(res);
-        }
+        return
       }
+
+      let res = await this.updateTransaction(basketService)
+
+      if (!res) {
+        await MyToast.show('Transaksi Gagal Disimpan');
+
+        return
+      }
+
+      await MyToast.show('Transaksi Berhasil Disimpan');
+
+      basketService.clear()
+      Redirect('/', true)
+    })
+
+    $('#choose-payment-btn').on('click', async (e) => {
+      e.preventDefault()
+
+      if ((basketService.discount.discount_type.toString() == '0' && basketService.discount.discount.toString() != '100') ||
+        (basketService.discount.discount_type.toString() == '1' && basketService.discount.discount != basketService.totalSub)) {
+        return
+      }
+
+      if (typeof basketService.table.id == "undefined" && basketService.type.isroom !== "1") {
+        await MyToast.show('Silahkan Pilih Meja terlebih dahulu!')
+
+        return
+      }
+
+      if (basketService.numberOfGuest === "0" && basketService.type.isroom != "1") {
+        await MyToast.show('Silahkan isi Jumlah Tamu terlebih dahulu!')
+
+        return
+      }
+
+      if (basketService.discount.discount_note == null) {
+        await MyToast.show('Pilih catatan diskon!')
+
+        return
+      }
+
+      basketService.setStatus(1);
+
+      let res = await this.updateTransaction(basketService)
+
+      if (!res.status) {
+        await MyToast.show('Transaksi Gagal Disimpan');
+
+        return
+      }
+
+      basketService.clear()
+      Redirect('/pos/payment/finish/' + res.data.id, true)
     })
   }
 

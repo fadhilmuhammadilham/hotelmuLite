@@ -8,7 +8,8 @@ import TransactionApi from "../repositories/api/TransactionApi"
 import Redirect from "../core/Redirect"
 import AutoNumeric from 'autonumeric'
 import DateCustom from "../utils/DateCustom"
-import { Toast } from '@capacitor/toast';
+import ConfigLocalStorage from "../repositories/localstorage/ConfigLocalStorage"
+import MyToast from '../utils/MyToast'
 
 class PosBasket extends Page {
   constructor(params) {
@@ -19,6 +20,7 @@ class PosBasket extends Page {
     const types = { 1: 'Dapur', 2: 'Pantry' }
     let items = basketService.items
     let _type = ''
+    let hotelName = ConfigLocalStorage.get('hotelName')
 
     if (type != 0) {
       _type = types[type]
@@ -26,10 +28,8 @@ class PosBasket extends Page {
     }
 
     if (items.length < 1) {
-      // alert("Tidak ada menu")
-      await Toast.show({
-        text: `Tidak ada menu untuk ${_type}`
-      });
+      await MyToast.show(`Tidak ada menu untuk ${_type}`)
+
       return
     }
 
@@ -38,7 +38,7 @@ class PosBasket extends Page {
       if (typeof res[0] != 'undefined') {
         let time = DateCustom.getNowFormated()
 
-        let body = `[C]<b>HOTELMU POS</b>\n[C]${time}\n\n`
+        let body = `[C]<b>${hotelName}</b>\n[C]${time}\n\n`
 
         if (type != 0) body += `[C]${_type}\n\n`
 
@@ -64,11 +64,11 @@ class PosBasket extends Page {
         })
       }
       else {
-        alert("Printer tidak terdeteksi")
+        MyToast.show("Printer tidak terdeteksi")
       }
     }, err => {
       console.log(err)
-      alert("Printer tidak terdeteksi")
+      MyToast.show("Printer tidak terdeteksi")
     })
   }
 
@@ -76,18 +76,18 @@ class PosBasket extends Page {
     const basketService = new BasketService()
     const viewBasket = (basketService) => {
       $('.basket-items').html(basketItemView({ items: basketService.items }))
-      $('#total-sub').text('Rp' + basketService.totalSub.format(2))
-      $('#total-discount').text('(Rp' + basketService.totalDiscount.format(2) + ')')
-      $('#total').text('Rp' + basketService.total.format(2))
-      $('#total-qty').text(basketService.totalQty.format())
-      $('#total-round').text('Rp' + basketService.totalRound.format(2))
-      
+      $('#total-sub').text(basketService.totalSub.format(2))
+      $('#total-discount').text('(' + basketService.totalDiscount.format(2) + ')')
+      $('#total').text(basketService.total.format(2))
+      $('#total-qty').text(basketService.totalQty.format(0, false))
+      $('#total-round').text(basketService.totalRound.format(2))
+
     }
-    
-    if (basketService.type.isroom == '1') {
-      $('#order-info').addClass('d-none');
+
+    if (basketService.type.isroom.toString() == '1') {
+      $('#order-info').addClass('d-none')
     }
-    
+
     let type_id = typeof basketService.discount.discount_type != "undefined" ? basketService.discount.discount_type : null
     let discount_note = typeof basketService.discount.discount_note != "undefined" ? basketService.discount.discount_note : null
 
@@ -108,14 +108,14 @@ class PosBasket extends Page {
     $(document).on('click', '.form-qty .btn-min', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
 
-      basketService.qtyHandler(id, '-');
+      basketService.qtyHandler(id, '-')
       viewBasket(basketService)
     })
 
     $(document).on('click', '.form-qty .btn-plus', (event) => {
       let id = $(event.currentTarget).closest('li').data('id')
 
-      basketService.qtyHandler(id, '+');
+      basketService.qtyHandler(id, '+')
       viewBasket(basketService)
     })
 
@@ -196,13 +196,13 @@ class PosBasket extends Page {
       decimalCharacter: ',',
       decimalCharacterAlternative: '.',
       minimumValue: 0
-    });
+    })
 
     if (typeof basketService.discount != 'undefined') {
       discountInput.set(basketService.discount.discount)
 
       if (typeof basketService.discount.discount_type != 'undefined') $('.type-disc').each((index, item) => {
-        if ($(item).data('type_id') == basketService.discount.discount_type) {
+        if ($(item).data('type_id') == basketService.discount.discount_type && basketService.discount.discount != 0) {
           $(item).addClass('active')
         }
       })
@@ -251,7 +251,7 @@ class PosBasket extends Page {
         })
         viewBasket(basketService)
 
-        if (!$('#choose-payment-btn').attr('data-link')) $('#choose-payment-btn').attr('data-link', null)
+        if (!$('#choose-payment-btn').attr('data-link')) $('#choose-payment-btn').attr('data-link', '')
         $('#choose-payment-btn').text('Pilih pembayaran')
         if (isFree) {
           $('#choose-payment-btn').removeAttr('data-link')
@@ -267,7 +267,7 @@ class PosBasket extends Page {
       $('.type-disc').removeClass('active')
       $(e.currentTarget).addClass('active')
       type_id = $(e.currentTarget).data('type_id')
-      checkDiscount();
+      checkDiscount()
 
       $('#jumlah-diskon').trigger('focus')
     })
@@ -276,7 +276,7 @@ class PosBasket extends Page {
       $('.note-disc').removeClass('active')
       $(e.currentTarget).addClass('active')
       discount_note = $(e.currentTarget).data('note_type')
-      checkDiscount();
+      checkDiscount()
     })
 
     $('#jumlah-diskon').on('keyup change', () => {
@@ -310,17 +310,13 @@ class PosBasket extends Page {
       let numberOfGuest = basketService.numberOfGuest
 
       if (typeof table.id == "undefined" && isRoom !== "1") {
-        await Toast.show({
-          text: 'Silahkan Pilih Meja terlebih dahulu!'
-        })
+        await MyToast.show('Silahkan Pilih Meja terlebih dahulu!')
 
         return
       }
 
       if (numberOfGuest === "0" && isRoom != "1") {
-        await Toast.show({
-          text: 'Silahkan isi Jumlah Tamu terlebih dahulu!'
-        })
+        await MyToast.show('Silahkan isi Jumlah Tamu terlebih dahulu!')
 
         return
       }
@@ -328,16 +324,12 @@ class PosBasket extends Page {
       let res = await TransactionApi.save(basketService)
 
       if (!res.status) {
-        await Toast.show({
-          text: 'Transaksi Gagal Disimpan'
-        });
+        await MyToast.show('Transaksi Gagal Disimpan')
 
         return
       }
 
-      await Toast.show({
-        text: 'Transaksi Berhasil Disimpan'
-      });
+      await MyToast.show('Transaksi Berhasil Disimpan')
 
       basketService.clear()
       Redirect('/', true)
@@ -346,43 +338,37 @@ class PosBasket extends Page {
     $('#choose-payment-btn').on('click', async (e) => {
       e.preventDefault()
 
+      if (typeof basketService.discount.discount_type == 'undefined') return
+
       if ((basketService.discount.discount_type == '0' && basketService.discount.discount != '100') ||
         (basketService.discount.discount_type == '1' && basketService.discount.discount != basketService.totalSub)) {
         return
       }
 
-      if (typeof basketService.table.id == "undefined" && basketService.type.isroom !== "1") {
-        await Toast.show({
-          text: 'Silahkan Pilih Meja terlebih dahulu!'
-        })
+      if (typeof basketService.table.id == "undefined" && basketService.type.isroom.toString() !== "1") {
+        await MyToast.show('Silahkan pilih meja terlebih dahulu!')
 
         return
       }
 
-      if (basketService.numberOfGuest === "0" && basketService.type.isroom != "1") {
-        await Toast.show({
-          text: 'Silahkan isi Jumlah Tamu terlebih dahulu!'
-        })
+      if (basketService.numberOfGuest === "0" && basketService.type.isroom.toString() != "1") {
+        await MyToast.show('Silahkan isi jumlah tamu terlebih dahulu!')
 
         return
       }
 
       if (basketService.discount.discount_note == null) {
-        await Toast.show({
-          text: 'Pilih catatan diskon!'
-        })
+        await MyToast.show('Pilih catatan diskon!')
 
         return
       }
 
-      basketService.setStatus(1);
+      basketService.setStatus(1)
 
       let res = await TransactionApi.save(basketService)
 
       if (!res.status) {
-        await Toast.show({
-          text: 'Transaksi Gagal Disimpan'
-        });
+        await MyToast.show('Transaksi Gagal Disimpan')
 
         return
       }

@@ -8,14 +8,17 @@
             <div>
                 {{item.name}}
                 <div class="text-muted">{{item.qty}} X {{#if ([helpers/nequal] item.discount
-                    0)}}<s>Rp{{[helpers/currency]
-                        item.price}}</s>{{else}}Rp{{[helpers/currency] item.price}}{{/if}} </div>
+                    0)}}<s>{{[helpers/currency]
+                        item.price 2}}</s>{{else}}{{[helpers/currency] item.price 2}}{{/if}} </div>
                 {{#if ([helpers/nequal] item.discount 0)}}
-                <div class="text-muted">Rp{{[helpers/currency] item.price_after_disc}}
+                <div class="text-muted">{{[helpers/currency] item.price_after_disc 2}}
                     (disc
                     {{item.discount}}%)</div>{{/if}}
+                {{#if ([helpers/nequal] item.note '')}}
+                <div class="text-muted">*{{ item.note }}</div>
+                {{/if}}
             </div>
-            <span>Rp{{[helpers/currency]item.total}}</span>
+            <span>{{[helpers/currency]item.total 2}}</span>
         </div>
     </div>
 </li>

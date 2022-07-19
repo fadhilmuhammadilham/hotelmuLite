@@ -4,6 +4,7 @@ import setupView from "../templates/setup.handlebars"
 import HotelApi from "../repositories/api/HotelApi";
 import ConfigLocalStorage from "../repositories/localstorage/ConfigLocalStorage";
 import $ from 'jquery'
+import MyToast from "../utils/MyToast";
 
 class Setup extends Page {
   constructor(params) {
@@ -14,7 +15,7 @@ class Setup extends Page {
     const idInput = $('#id-hotel-input')
     const passwordInput = $('#security-code-input')
     const submitButton = $('#submit-button')
-    
+
     const checkForm = () => {
       if (idInput.val().length < 5 || passwordInput.val().length < 1) submitButton.attr('disabled', true)
       else submitButton.removeAttr('disabled')
@@ -37,10 +38,10 @@ class Setup extends Page {
         Redirect('/login', true)
       }
       else {
-        alert(res.message)
+        $('#alert-wrapper').html(`<div class="alert alert-danger mb-2">${res.message}</div>`)
       }
-      
-    }) 
+
+    })
   }
 
   render() {

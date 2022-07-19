@@ -3,7 +3,7 @@ import $ from "jquery"
 import reportView from "../templates/report.handlebars"
 import reportItemView from "../templates/report-item.handlebars"
 import ReportApi from "../repositories/api/ReportApi"
-import date_format from "../templates/helpers/date_format"
+import TransactionApi from "../repositories/api/TransactionApi"
 
 class PosPayment extends Page {
   constructor(params) {
@@ -20,9 +20,24 @@ class PosPayment extends Page {
     }
   }
 
+  async getSummary(cb) {
+    try {
+      let res = await TransactionApi.summaryToday()
+      cb(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async action() {
+    this.getSummary((summary) => {
+      let total_sales = parseFloat(summary.total_sales)
+      $('#totalSaleToday').html(`${total_sales.format(2)}`)
+      $('#totalTransactionToday').html(parseInt(summary.total_transactions).format(0, false))
+    })
+
     const recentData = await this.getRecent()
-    $('.item-transaski').html(reportItemView({transaction_data: recentData, type: "month"}))
+    $('.item-transaski').html(reportItemView({ transaction_data: recentData, type: "month" }))
   }
 
   render() {

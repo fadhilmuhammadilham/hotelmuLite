@@ -30,9 +30,12 @@
             <div id="sessionCardBody" class="card-body">
                 <div class="flex-grow-1 ">
                     {{!-- <div id="nameDiv" class="font-weight-bold">POS/2021/02/25/0001</div> --}}
-                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">{{ shift.start }}</span></div>
-                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">{{ shift.start_time }}</span></div>
-                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp{{ [helpers/currency] shift.begining_balance }}</span></div>
+                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">{{ shift.start }}</span>
+                    </div>
+                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">{{ shift.start_time }}</span>
+                    </div>
+                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">{{
+                            [helpers/currency] shift.begining_balance 2}}</span></div>
                 </div>
             </div>
             {{/if}}
@@ -48,7 +51,7 @@
                         <h6 class="card-subtitle">Penjualan Hari Ini</h6>
                         <h5 class="card-title mb-0 d-flex align-items-center justify-content-between"
                             id="totalSaleToday">
-                            <span class="animated-background">Rp1.500.000</span>
+                            <span class="animated-background">1.500.000</span>
                         </h5>
                     </div>
                 </div>

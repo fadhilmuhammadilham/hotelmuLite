@@ -1,6 +1,7 @@
 import { App as CapacitorApp } from '@capacitor/app'
 import Router from './core/Router'
 import Redirect from './core/Redirect'
+import ConfigLocalStorage from './repositories/localstorage/ConfigLocalStorage'
 import './assets/css/style.css'
 import './assets/css/custom.css'
 import './assets/img/logo.png'
@@ -21,17 +22,19 @@ window.addEventListener("popstate", Router)
  * @param mixed   s: sections delimiter
  * @param mixed   c: decimal delimiter
  */
-Number.prototype.format = function(n, s = '.', c = ',') {
+Number.prototype.format = function (n, withCurrency = true, s = '.', c = ',') {
   var x = 3;
   var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
-      num = this.toFixed(Math.max(0, ~~n));
+    num = this.toFixed(Math.max(0, ~~n));
 
-  return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+  const currency = ConfigLocalStorage.get('currency')
+
+  return (withCurrency ? currency.symbol : '') + (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", e => {
-    if (e.target.closest('a') != null){
+    if (e.target.closest('a') != null) {
       if (e.target.closest('a').matches("[data-link]")) {
         e.preventDefault()
         Redirect(e.target.closest('a').href)
@@ -42,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   Router()
 })
 
-CapacitorApp.addListener('backButton', ({canGoBack}) => {
-  if(!canGoBack){
+CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+  if (!canGoBack) {
     CapacitorApp.exitApp()
   } else {
     window.history.back()

@@ -16,7 +16,7 @@ class ShiftOpen extends Page {
     const beginBalance = new AutoNumeric('#saldo-awal', {
       digitGroupSeparator: '.',
       decimalCharacter: ',',
-      decimalPlaces: 0
+      decimalPlaces: 2
     });
 
     const checkFrom = () => {

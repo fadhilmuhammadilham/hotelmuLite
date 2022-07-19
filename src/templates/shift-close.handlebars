@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="pageTitle">
-       Informasi Tutup Shift
+        Informasi Tutup Shift
     </div>
     <div class="right">
 
@@ -20,7 +20,7 @@
 <!-- * App Header -->
 
 {{!-- App Capsule --}}
-<div id="appCapsule" >
+<div id="appCapsule">
     <ul class="listview simple-listview">
         <li>
             Tanggal Buka
@@ -32,7 +32,7 @@
         </li>
         <li>
             Saldo Awal
-            <span>Rp{{ [helpers/currency] shift.begining_balance }}</span>
+            <span>{{ [helpers/currency] shift.begining_balance 2 }}</span>
         </li>
         <li>
             Tanggal Tutup
@@ -44,7 +44,7 @@
         </li>
         <li>
             Saldo Akhir
-            <span>Rp{{ [helpers/currency] shift.ending_balance }}</span>
+            <span>{{ [helpers/currency] shift.ending_balance 2 }}</span>
         </li>
     </ul>
 </div>

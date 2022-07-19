@@ -1,22 +1,23 @@
 import API from "../../configs/ApiConfig"
 import { getCookie } from "../../core/Cookies"
 import DateCustom from "../../utils/DateCustom"
-import BasketLocalStorage from "../localstorage/BasketLocalStorage"
-import ShiftLocalStorage from "../localstorage/ShiftLocalStorage"
-import TransactionFilterLocalStorage from "../localstorage/TransactionFilterLocalStorage"
-import TransactionLocalStorage from "../localstorage/TransactionLocalStorage"
 
 class TransactionApi {
-  static async getAll({ limit, order }) {
+  static async getAll({ limit, order, offset }, filters = {}) {
     let url = `${API.url}/resto/transaction`
     let bearer = 'Bearer ' + getCookie('token')
 
-    if (typeof limit != 'undefined') {
-      url = `${API.url}/resto/transaction?limit=${limit}`
-    }
+    let params = []
+
+    if (typeof limit != 'undefined') params.push(`limit=${limit}`)
+    if (typeof offset != 'undefined') params.push(`offset=${offset}`)
+
+    if (typeof filters.trxNumber != 'undefined') if (filters.trxNumber != '') params.push(`&search[trx_number]=${filters.trxNumber}`)
+    if (typeof filters.trxDate != 'undefined') if (filters.trxDate != '') params.push(`&filter[trx_date]=${filters.trxDate}`)
+    if (typeof filters.status != 'undefined') if (filters.status != '') params.push(`&filter[status]=${filters.status}`)
 
     try {
-      let response = await fetch(url, {
+      let response = await fetch(url + '?' + params.join('&'), {
         method: 'GET',
         headers: {
           'Authorization': bearer,
@@ -29,8 +30,10 @@ class TransactionApi {
       let status = { "Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info" }
 
       json.data = json.data.map(item => {
-        item.total_prices = parseFloat(item.total_prices)
         item.status.badge = status[item.status.name]
+        item.total = parseFloat(item.total)
+        item.total_sub = parseFloat(item.total_sub)
+
         return item
       })
 
@@ -61,52 +64,39 @@ class TransactionApi {
     }
   }
 
-  static async getByFilter() {
-    let bearer = 'Bearer ' + getCookie('token')
-    let trx_number = TransactionFilterLocalStorage.get('code')
-    let trx_date = TransactionFilterLocalStorage.get('date')
-    let status = TransactionFilterLocalStorage.get('status')
-    let url = `${API.url}/resto/transaction?limit=25`
+  // static async getByFilter(filters) {
+  //   let url = `${API.url}/resto/transaction?limit=25`
+  //   let bearer = 'Bearer ' + getCookie('token')
 
-    if (trx_number.length === 0 && trx_date.length > 0 && status.length > 0) {
-      url = url + `&filter[trx_date]=${trx_date}&filter[status]=${status}`
-    } else if (trx_number.length > 0 && trx_date.length === 0 && status.length > 0) {
-      url = url + `&search[trx_number]=${trx_number}&filter[status]=${status}`
-    } else if (trx_number.length > 0 && trx_date.length > 0 && status.length === 0) {
-      url = url + `&search[trx_number]=${trx_number}&filter[trx_date]=${trx_date}`
-    } else if (trx_number.length > 0 && trx_date.length === 0 && status.length === 0) {
-      url = url + `&search[trx_number]=${trx_number}`
-    } else if (trx_number.length === 0 && trx_date.length > 0 && status.length === 0) {
-      url = url + `&filter[trx_date]=${trx_date}`
-    } else if (trx_number.length === 0 && trx_date.length === 0 && status.length > 0) {
-      url = url + `&filter[status]=${status}`
-    } else {
-      url = url + `&search[trx_number]=${trx_number}&filter[trx_date]=${trx_date}&filter[status]=${status}`
-    }
+  //   if (filters.trxNumber) url += `&search[trx_number]=${trxNumber}`
+  //   if (filters.trxDate) url += `&filter[trx_date]=${filters.trxDate}`
+  //   if (filters.status) url += `&filter[status]=${filters.status}`
 
-    try {
-      let response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Authorization': bearer,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      })
+  //   try {
+  //     let response = await fetch(url, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Authorization': bearer,
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //     })
 
-      let json = await response.json()
-      let status = { "Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info" }
+  //     let json = await response.json()
+  //     let status = { "Paid": "badge-success", "Draft": "badge-secondary", "Billed": "badge-info" }
 
-      json.data = json.data.map(item => {
-        item.status.badge = status[item.status.name]
-        return item
-      })
+  //     json.data = json.data.map(item => {
+  //       item.status.badge = status[item.status.name]
+  //       item.total = parseFloat(item.total)
+  //       item.total_sub = parseFloat(item.total_sub)
+  //       return item
+  //     })
 
-      return json
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     return json
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   static async save(basketService) {
     let url = `${API.url}/resto/transaction`
@@ -154,19 +144,31 @@ class TransactionApi {
     }
   }
 
-  static async update(trx_id, status) {
-    let url = `${API.url}/resto/transaction/${trx_id}`
+  static async update(basketService) {
+    let url = `${API.url}/resto/transaction/${basketService.id}`
     let bearer = 'Bearer ' + getCookie('token')
-    let d = new Date()
-    let month = d.getMonth() + 1
-    let date = [d.getFullYear(), month.toString().padStart(2, '0'), d.getDate().toString().padStart(2, '0')].join('-') + ' ' + [d.getHours().toString().padStart(2, '0'), d.getMinutes().toString().padStart(2, '0'), d.getSeconds().toString().padStart(2, '0')].join(':')
-    let guest_id = TransactionLocalStorage.get('guest_id') !== null ? TransactionLocalStorage.get('guest_id') : null
-    let table_id = TransactionLocalStorage.get('table_id')
-    let outlet_id = TransactionLocalStorage.get('outlet_id')
-    let number_of_guest = TransactionLocalStorage.get('number_of_guest')
-    let discount = TransactionLocalStorage.get('discount').discount > 0 ? TransactionLocalStorage.get('discount').discount : 0
-    let discount_type = TransactionLocalStorage.get('discount').discount_type !== "" ? TransactionLocalStorage.get('discount').discount_type : null
-    let discount_note = TransactionLocalStorage.get('discount').discount_note !== "" ? TransactionLocalStorage.get('discount').discount_note : null
+
+    let items = basketService.items.map(item => {
+      return { item_id: item.id, name: item.name, qty: item.qty, price: item.price, discount: item.discount, note: item.note, total_sub: item.totalSub, total: item.total }
+    })
+
+    const transactionData = {
+      trx_date: basketService.trxDate,
+      shift_id: basketService.shift.id,
+      guest_id: typeof basketService.guest.id != 'undefined' ? basketService.guest.id : 0,
+      waiter_id: basketService.shift.user.id,
+      table_id: basketService.table.id,
+      outlet_id: basketService.type.id,
+      number_of_guest: basketService.numberOfGuest,
+      status: basketService.status,
+      items: items,
+      total_sub: basketService.totalSub,
+      discount: basketService.discount.discount,
+      discount_type: typeof basketService.discount.discount_type != 'undefined' ? basketService.discount.discount_type : null,
+      discount_note: typeof basketService.discount.discount_note != 'undefined' ? basketService.discount.discount_note : null,
+      round: basketService.totalRound,
+      total: basketService.total
+    }
 
     try {
       let response = await fetch(url, {
@@ -176,18 +178,7 @@ class TransactionApi {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          trx_date: date,
-          guest_id: guest_id,
-          waiter_id: 2,
-          table_id: table_id,
-          outlet_id: outlet_id,
-          number_of_guest: number_of_guest,
-          status: status,
-          discount: discount,
-          discount_type: discount_type,
-          discount_note: discount_note
-        })
+        body: JSON.stringify(transactionData)
       })
 
       let json = await response.json()

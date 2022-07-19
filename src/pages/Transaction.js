@@ -3,72 +3,79 @@ import transactionView from '../templates/transaction.handlebars'
 import transactionListView from '../templates/transaction-list.handlebars'
 import TransactionApi from "../repositories/api/TransactionApi";
 import $ from 'jquery'
-import InfiniteScroll from 'infinite-scroll'
 import TransactionFilterLocalStorage from "../repositories/localstorage/TransactionFilterLocalStorage";
-import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
-import Redirect from "../core/Redirect"
 
 class Transaction extends Page {
   constructor(params) {
     super(params)
+
+    this.data = {
+      total: 0,
+      limit: 20,
+      offset: 0,
+      page: 1
+    }
   }
 
   async getTransaction() {
     try {
-      let res = await TransactionApi.getAll({limit: 20, order:'desc'})
+      let filters = TransactionFilterLocalStorage.getAll()
+      this.data.offset = (this.data.page - 1) * this.data.limit
+
+      let res = await TransactionApi.getAll({ limit: this.data.limit, order: 'desc', offset: this.data.offset }, filters)
 
       const transactions = res.data
-      $('#transaction-list').html(transactionListView({transactions}))
+      this.data.total = res.total
+      $('#transaction-list').append(transactionListView({ transactions }))
     } catch (error) {
       console.log(error)
     }
   }
 
-  async getFilteredTransaction() {
-    try {
-      let res = await TransactionApi.getByFilter();
+  hasMore() {
+    const startIndex = this.data.page * this.data.limit;
 
-      const transactions = res.data
-      $('#transaction-list').html(transactionListView({transactions}))
-    } catch (error) {
-      console.log(error)      
-    }
+    return this.data.total === 0 || startIndex < this.data.total;
   }
 
   async action() {
-    // let infScroll = new InfiniteScroll('.trx',{
-    //   path: () => {
-    //     let offset = (this.pageIndex + 1) * 20
-    //     return `${API.url}/resto/transaction?limit=${20}&offset=${offset}`
-    //   },
-    //   append: '.trx-item',
-    //   history: false
-    // })
+    const showLoading = (is = true) => {
+      if (!is) {
+        $('#loading').addClass('d-none')
+        return
+      }
 
-    // infScroll.on('load.infiniteScroll', (event, body) => {
-    //   console.log(event);
-    //   console.log(body);
-    // })
-    
-    $('#eraser-btn').on('click', async () => {
-      TransactionFilterLocalStorage.removeAll()
-      await this.getTransaction()
-      $('#eraser-btn').remove()
-    })
-
-    let is_filtered = TransactionFilterLocalStorage.getAll();
-
-    if(Object.keys(is_filtered).length === 0){
-      await this.getTransaction()
-    }else{
-      await this.getFilteredTransaction()
+      $('#loading').removeClass('d-none')
     }
 
+    $('#eraser-btn').on('click', async () => {
+      TransactionFilterLocalStorage.removeAll()
+      $('#transaction-list').html('')
+      showLoading()
+
+      await this.getTransaction()
+      $('#eraser-btn').remove()
+      showLoading(false)
+    })
+
+    const self = this
+    $('#appCapsule').on('scroll', async function () {
+      if ($('#appCapsule').scrollTop() >= $('#transaction-list').height() - $('#appCapsule').height() && self.hasMore()) {
+        self.data.page++;
+        showLoading()
+        await self.getTransaction()
+        showLoading(false)
+      }
+    });
+
+    await this.getTransaction()
+
+    showLoading(false)
   }
 
   render() {
-    let is_filtered = TransactionFilterLocalStorage.getAll();
-    return transactionView({is_filtered: Object.keys(is_filtered).length === 0 ? false : true})
+    let filtered = TransactionFilterLocalStorage.getAll();
+    return transactionView({ is_filtered: Object.keys(filtered).length === 0 ? false : true })
   }
 }
 

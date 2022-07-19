@@ -24,7 +24,7 @@
     <div class="section mt-2 mb-2">
         <div class="transaction-total">
             <h5>Nilai Transaksi</h5>
-            <h2 class="value-transaction">Rp{{[helpers/currency] total 2}}</h2>
+            <h2 class="value-transaction">{{[helpers/currency] total 2}}</h2>
         </div>
     </div>
 
@@ -90,12 +90,12 @@
                     <div class="action-sheet-content">
                         <p>
                             Anda akan menyelesaikan pembayaran dengan nilai transaksi sebesar <br>
-                            <span class="value-transaction">Rp{{[helpers/currency] total}}</span>
+                            <span class="value-transaction">{{[helpers/currency] total}}</span>
                         </p>
                         <div class="text-bold mb-2 d-flex justify-content-between">Uang diterima <span id="cash-recive"
-                                class="text-right">Rp0</span></div>
+                                class="text-right">0</span></div>
                         <div class="text-bold mb-2 d-flex justify-content-between refund-container">Kembalian <span
-                                id="refund" class="text-right">Rp0</span></div>
+                                id="refund" class="text-right">0</span></div>
                         <a href="javascript:;" class="btn btn-secondary btn-block btn-lg"
                             id="pay-confirm-btn">Konfirmasi pembayaran</a>
                     </div>

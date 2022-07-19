@@ -42,24 +42,28 @@
         </li>
         {{/if}}
         <li>
+            Tipe
+            <span>{{ data.outlet.name }}</span>
+        </li>
+        <li>
             Status
             <span class="badge {{ data.status.badge }}">{{ data.status.name }}</span>
         </li>
         <li>
             Subtotal
-            <span>Rp{{ [helpers/currency] data.total_sub }}</span>
+            <span>{{ [helpers/currency] data.total_sub 2 }}</span>
         </li>
         <li>
             Diskon
-            <span>{{ data.discount }}</span>
+            <span>{{ discount }}</span>
         </li>
         <li>
             Round
-            <span>Rp{{ [helpers/currency] data.round }}</span>
+            <span>{{ [helpers/currency] data.round 2 }}</span>
         </li>
         <li>
             Total
-            <span class="font-weight-bold">Rp{{ [helpers/currency] data.total }}</span>
+            <span class="font-weight-bold">{{ [helpers/currency] data.total 2 }}</span>
         </li>
     </ul>
     <div class="listview-title mt-2">Informasi Pembayaran</div>
@@ -75,11 +79,11 @@
 
         <li>
             Total Pembayaran
-            <span>Rp{{ [helpers/currency] data.payment.total_payment }}</span>
+            <span>{{ [helpers/currency] data.payment.total_payment 2 }}</span>
         </li>
         <li>
             Kembalian
-            <span>Rp{{ [helpers/currency] data.payment.refund }}</span>
+            <span>{{ [helpers/currency] data.payment.refund 2 }}</span>
         </li>
     </ul>
 

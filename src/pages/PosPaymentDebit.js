@@ -6,7 +6,6 @@ import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage";
 import EDCLocalStorage from "../repositories/localstorage/EDCLocalStorage";
 import Redirect from "../core/Redirect";
 import TransactionApi from "../repositories/api/TransactionApi";
-import TransactionService from "../services/TransactionService";
 import DateCustom from "../utils/DateCustom";
 
 class PosPaymentDebit extends Page {
@@ -14,7 +13,6 @@ class PosPaymentDebit extends Page {
     super(params)
 
     this.basketService = new BasketService()
-    this.transactionService = new TransactionService()
 
     this.cardType = 0
   }
@@ -33,19 +31,30 @@ class PosPaymentDebit extends Page {
     })
 
     try {
-      let res = await TransactionApi.save(this.basketService)
+      let res
 
-      if (!res.status) throw new Error("Simpan transaksi gagal")
+      if (this.basketService.id == 0) {
+        res = await TransactionApi.save(this.basketService)
 
-      this.basketService.setId(res.data.id)
-      this.basketService.setTrxNumber(res.data.trx_number)
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+
+        this.basketService.setId(res.data.id)
+        this.basketService.setTrxNumber(res.data.trx_number)
+      }
+      else {
+        this.basketService.setStatus(2)
+
+        res = await TransactionApi.update(this.basketService)
+
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+      }
 
       let payment = await TransactionApi.payment(this.basketService)
 
       if (!payment.status) throw new Error("Simpan pembayaran gagal");
 
       $('#pay-modal').modal('hide')
-      Redirect('/pos/payment/finish/' + res.data.id)
+      Redirect('/pos/payment/finish/' + this.basketService.id)
 
     } catch (error) {
       alert(error.message)

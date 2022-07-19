@@ -3,12 +3,8 @@ import posPaymentCashView from "../templates/pos-payment-cash.handlebars"
 import BasketService from "../services/BasketService"
 import $ from 'jquery'
 import Redirect from "../core/Redirect"
-import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage"
 import ShiftLocalStorage from "../repositories/localstorage/ShiftLocalStorage"
 import TransactionApi from "../repositories/api/TransactionApi"
-import round from "../templates/helpers/round"
-import TransactionService from "../services/TransactionService"
-import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage"
 import AutoNumeric from 'autonumeric'
 import DateCustom from "../utils/DateCustom"
 
@@ -16,7 +12,6 @@ class PosPaymentCash extends Page {
   constructor(params) {
     super(params)
     this.basketService = new BasketService()
-    this.transactionService = new TransactionService()
 
     this.paymentValue = 0
     this.refund = 0
@@ -37,8 +32,8 @@ class PosPaymentCash extends Page {
     }
     else $('.form-button-group').addClass('d-none')
 
-    $('#cash-recive').text('Rp' + this.paymentValue.format(2))
-    $('#refund').text('Rp' + this.refund.format(2))
+    $('#cash-recive').text(this.paymentValue.format(2))
+    $('#refund').text(this.refund.format(2))
 
     $('.refund-container').addClass('d-none')
     $('.refund-container').removeClass('d-flex')
@@ -61,90 +56,33 @@ class PosPaymentCash extends Page {
     })
 
     try {
-      let res = await TransactionApi.save(this.basketService)
+      let res
 
-      if (!res.status) throw new Error("Simpan transaksi gagal")
+      if (this.basketService.id == 0) {
+        res = await TransactionApi.save(this.basketService)
 
-      this.basketService.setId(res.data.id)
-      this.basketService.setTrxNumber(res.data.trx_number)
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+
+        this.basketService.setId(res.data.id)
+        this.basketService.setTrxNumber(res.data.trx_number)
+      }
+      else {
+        this.basketService.setStatus(2)
+        res = await TransactionApi.update(this.basketService)
+
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+      }
 
       let payment = await TransactionApi.payment(this.basketService)
 
       if (payment.status) {
         $('#pay-modal').modal('hide')
-        Redirect('/pos/payment/finish/' + res.data.id)
+        Redirect('/pos/payment/finish/' + this.basketService.id)
       }
 
     } catch (error) {
       alert(error.message)
     }
-
-    // if (BasketLocalStorage.get('type')) {
-    //   if (BasketLocalStorage.get('discount').hasOwnProperty('discount_type')) {
-    //     this.basketService.setPayment({
-    //       payment_method: 0,
-    //       shift_id: ShiftLocalStorage.get('id'),
-    //       payment_date: date,
-    //       round: round(this.basketService.totalAfterDiscount, 100),
-    //       total_payment: this.paymentValue,
-    //       refund: this.refund,
-    //       discount_type: parseInt(BasketLocalStorage.get('discount').discount_type),
-    //       discount: parseFloat(this.basketService.discount.discount),
-    //       discount_note: parseInt(BasketLocalStorage.get('discount').discount_note)
-    //     })
-    //   }
-    //   else {
-    //     this.basketService.setPayment({
-    //       payment_method: 0,
-    //       shift_id: ShiftLocalStorage.get('id'),
-    //       payment_date: date,
-    //       round: round(this.basketService.totalPrice, 100),
-    //       total_payment: this.paymentValue,
-    //       refund: this.refund,
-    //     })
-    //   }
-
-    //   let res = await TransactionApi.save()
-
-    //   if (res.status) {
-    //     let payment = await TransactionApi.payment(res.data)
-
-    //     if (payment.status) {
-    //       $('#pay-modal').modal('hide')
-    //       Redirect('/pos/payment/finish')
-    //     }
-    //   }
-    // } else {
-    //   if (TransactionLocalStorage.get('discount').discount > 0) {
-    //     this.transactionService.setPayment({
-    //       payment_method: 0,
-    //       shift_id: ShiftLocalStorage.get('id'),
-    //       payment_date: date,
-    //       round: round(this.transactionService.total_prices, 100),
-    //       total_payment: this.paymentValue,
-    //       refund: this.refund,
-    //       discount_type: parseInt(TransactionLocalStorage.get('discount').discount_type),
-    //       discount: parseFloat(this.transactionService.discount.discount),
-    //       discount_note: parseInt(TransactionLocalStorage.get('discount').discount_note)
-    //     })
-    //   } else {
-    //     this.transactionService.setPayment({
-    //       payment_method: 0,
-    //       shift_id: ShiftLocalStorage.get('id'),
-    //       payment_date: date,
-    //       round: round(this.transactionService.total_prices, 100),
-    //       total_payment: this.paymentValue,
-    //       refund: this.refund,
-    //     })
-    //   }
-
-    //   let res = await TransactionApi.payment(TransactionLocalStorage.get('id'))
-
-    //   if (res.status) {
-    //     $('#pay-modal').modal('hide')
-    //     Redirect('/pos/payment/finish')
-    //   }
-    // }
   }
 
   sugestionPay() {
@@ -169,10 +107,10 @@ class PosPaymentCash extends Page {
     sugs = sugs.slice(0)
 
     $('#payment-suggestion .row').prepend('<div class="col-6 mb-2">\
-        <a href="javascript:;" class="btn btn-outline-secondary btn-block" data-action="pay-option" data-value="'+ total + '">' + total.format() + '</a>\
+        <a href="javascript:;" class="btn btn-outline-secondary btn-block" data-action="pay-option" data-value="'+ total + '">' + total.format(0, false) + '</a>\
       </div>\
       <div class="col-6 mb-2">\
-        <a href="javascript:;" class="btn btn-outline-secondary btn-block" data-action="pay-option" data-value="'+ sugs[0] + '">' + sugs[0].format() + '</a>\
+        <a href="javascript:;" class="btn btn-outline-secondary btn-block" data-action="pay-option" data-value="'+ sugs[0] + '">' + sugs[0].format(0, false) + '</a>\
       </div>')
 
     $('#uangpas').attr('data-value', totalPrices)
@@ -211,7 +149,7 @@ class PosPaymentCash extends Page {
       this.paymentValue = val
 
       $('#payment-nominal input').val(val)
-      $('#cash-receive').text('Rp' + val.format())
+      $('#cash-receive').text(val.format())
 
       this.checkValue()
 

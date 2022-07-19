@@ -30,16 +30,6 @@ class PosGuest extends Page {
   }
 
   async paymentConfirmed() {
-    // console.log({
-    //   payment_method: 2,
-    //   shift_id: ShiftLocalStorage.get('id'),
-    //   payment_date: DateCustom.getNowFormated(),
-    //   total_payment: this.basketService.total,
-    //   refund: 0,
-    //   room_id: parseInt(this.room_id),
-    //   folio_number: this.folio_number,
-    // })
-
     this.basketService.setPayment({
       payment_method: 2,
       shift_id: ShiftLocalStorage.get('id'),
@@ -51,19 +41,30 @@ class PosGuest extends Page {
     })
 
     try {
-      let res = await TransactionApi.save(this.basketService)
+      let res
 
-      if (!res.status) throw new Error("Simpan transaksi gagal")
+      if (this.basketService.id == 0) {
+        res = await TransactionApi.save(this.basketService)
 
-      this.basketService.setId(res.data.id)
-      this.basketService.setTrxNumber(res.data.trx_number)
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+
+        this.basketService.setId(res.data.id)
+        this.basketService.setTrxNumber(res.data.trx_number)
+      }
+      else {
+        this.basketService.setStatus(2)
+
+        res = await TransactionApi.update(this.basketService)
+
+        if (!res.status) throw new Error("Simpan transaksi gagal")
+      }
 
       let payment = await TransactionApi.payment(this.basketService)
 
       if (!payment.status) throw new Error("Simpan pembayaran gagal");
 
       $('#pay-modal').modal('hide')
-      Redirect('/pos/payment/finish/' + res.data.id)
+      Redirect('/pos/payment/finish/' + this.basketService.id)
 
     } catch (error) {
       alert(error.message)
