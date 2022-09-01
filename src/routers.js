@@ -10,7 +10,7 @@ import MustNotLoginMidlleware from "./middlewares/MustNotLoginMiddleware"
 import {
   MustChooseHotelMidlleware, MustNotChooseHotelMidlleware
 } from './middlewares/SetupMiddleware'
-import { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, TransactionValidateMiddleware, MustNotSelectItemMiddleware } from './middlewares/PosMiddleware';
+import { MustHaveTransactionReadyMiddleware, MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, TransactionValidateMiddleware, MustNotSelectItemMiddleware } from './middlewares/PosMiddleware';
 import { MustOpenShiftMidlleware, MustCloseShiftMiddleware } from "./middlewares/ShiftMiddleware"
 import PosPayment from "./pages/PosPayment"
 import PosPaymentCash from "./pages/PosPaymentCash"
@@ -43,16 +43,16 @@ const routers = [
   { path: "/shift/close", view: ShiftClose, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
   { path: "/pos", view: Pos, middlewares: [MustLoginMidlleware, MustSelectTypeMiddleware] },
   { path: "/pos/type", view: PosType, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware, MustNotSelectItemMiddleware] },
-  { path: "/pos/basket", view: PosBasket, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
+  { path: "/pos/basket", view: PosBasket, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware, MustHaveTransactionReadyMiddleware] },
   { path: "/pos/table", view: PosTable, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
-  { path: "/pos/payment", view: PosPayment, middlewares: [MustLoginMidlleware, TransactionValidateMiddleware] },
-  { path: "/pos/payment/cash", view: PosPaymentCash, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
-  { path: "/pos/payment/debit", view: PosPaymentDebit, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
+  { path: "/pos/payment", view: PosPayment, middlewares: [MustLoginMidlleware, MustHaveTransactionReadyMiddleware, TransactionValidateMiddleware] },
+  { path: "/pos/payment/cash", view: PosPaymentCash, middlewares: [MustLoginMidlleware, MustHaveTransactionReadyMiddleware, MustSelectedPaymentTypeMiddleware] },
+  { path: "/pos/payment/debit", view: PosPaymentDebit, middlewares: [MustLoginMidlleware, MustHaveTransactionReadyMiddleware, MustSelectedPaymentTypeMiddleware] },
   { path: "/pos/payment/debit/edc", view: PosEDC, middlewares: [MustLoginMidlleware, MustSelectedPaymentTypeMiddleware] },
-  { path: "/pos/payment/guest", view: PosGuest, middlewares: [MustLoginMidlleware, MustHaveSelectedItemsMiddleware] },
+  { path: "/pos/payment/guest", view: PosGuest, middlewares: [MustLoginMidlleware, MustHaveTransactionReadyMiddleware, MustHaveSelectedItemsMiddleware] },
   { path: "/pos/payment/finish/:transaction_id", view: PosPaymentFinish, middlewares: [MustLoginMidlleware] },
-  { path: "/pos/draft", view: PosDraft, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware] },
-  { path: "/pos/draft/basket", view: PosBasketDraft, middlewares: [MustLoginMidlleware] },
+  { path: "/pos/draft", view: PosDraft, middlewares: [MustLoginMidlleware, MustOpenShiftMidlleware, MustHaveTransactionReadyMiddleware] },
+  { path: "/pos/draft/basket", view: PosBasketDraft, middlewares: [MustLoginMidlleware, MustHaveTransactionReadyMiddleware] },
   { path: "/report", view: Report, middlewares: [MustLoginMidlleware] },
   { path: "/report/monthly", view: ReportMonthly, middlewares: [MustLoginMidlleware] },
   { path: "/report/annual", view: ReportAnnual, middlewares: [MustLoginMidlleware] },

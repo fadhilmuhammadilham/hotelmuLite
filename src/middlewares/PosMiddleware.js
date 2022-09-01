@@ -1,10 +1,18 @@
 import Redirect from "../core/Redirect";
 import BasketLocalStorage from "../repositories/localstorage/BasketLocalStorage";
-import TableLocalStorage from "../repositories/localstorage/TableLocalStorage";
-import TransactionLocalStorage from "../repositories/localstorage/TransactionLocalStorage";
 import Middleware from "./Middleware";
 import BasketService from "../services/BasketService";
 import MyToast from "../utils/MyToast";
+
+class MustHaveTransactionReadyMiddleware extends Middleware {
+  before() {
+    if (BasketLocalStorage.get('id') === false) {
+      window.history.back()
+      return false
+    }
+    return true
+  }
+}
 
 class MustSelectTypeMiddleware extends Middleware {
   before() {
@@ -23,9 +31,8 @@ class MustSelectTypeMiddleware extends Middleware {
 class MustHaveSelectedItemsMiddleware extends Middleware {
   before() {
     const items = BasketLocalStorage.get('items')
-    const items_draft = TransactionLocalStorage.get('items')
 
-    if (!items && !items_draft) {
+    if (!items) {
       window.history.back()
       // Redirect('/pos', true);
       return false
@@ -38,9 +45,8 @@ class MustHaveSelectedItemsMiddleware extends Middleware {
 class MustSelectedPaymentTypeMiddleware extends Middleware {
   before() {
     const payment = BasketLocalStorage.get('payment')
-    const payment_draft = TransactionLocalStorage.get('payment')
 
-    if (!payment && !payment_draft) {
+    if (!payment) {
       // Redirect('/pos/payment', true);
       window.history.back()
       return false
@@ -53,9 +59,8 @@ class MustSelectedPaymentTypeMiddleware extends Middleware {
 class MustSelectedRoomOrTableMiddleware extends Middleware {
   async before() {
     const table = BasketLocalStorage.get('table')
-    const table_id = TransactionLocalStorage.get('table_id')
 
-    if (!table.id && !table_id) {
+    if (!table.id) {
       // Redirect('/pos/basket', true);
       await MyToast.show('Silahkan Pilih Meja Terlebih Dahulu');
       window.history.back()
@@ -100,4 +105,4 @@ class TransactionValidateMiddleware extends Middleware {
   }
 }
 
-export { MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware, TransactionValidateMiddleware }
+export { MustHaveTransactionReadyMiddleware, MustSelectTypeMiddleware, MustHaveSelectedItemsMiddleware, MustSelectedPaymentTypeMiddleware, MustSelectedRoomOrTableMiddleware, MustNotSelectItemMiddleware, TransactionValidateMiddleware }
