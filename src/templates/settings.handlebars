@@ -38,6 +38,14 @@
             Mata Uang
             <span>{{ currency }}</span>
         </li>
+        <li>
+            Cetak struk otomatis
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="automatic-print" {{#if
+                    automaticPrint}}checked{{/if}}>
+                <label class="custom-control-label" for="automatic-print"></label>
+            </div>
+        </li>
     </ul>
     <div class="section">
         <div class="mt-2">

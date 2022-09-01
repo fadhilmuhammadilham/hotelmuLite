@@ -29,6 +29,11 @@ class Settings extends Page {
       Redirect('/setup', true)
       return true
     })
+
+    $(document).on('change', '#automatic-print', (e) => {
+      let is = $(e.currentTarget).is(':checked')
+      ConfigLocalStorage.set('automaticPrint', is)
+    })
   }
 
   render() {
@@ -36,6 +41,7 @@ class Settings extends Page {
 
     setting.currency = setting.currency.code
     setting.isRound = setting.isRound ? 'Ya' : 'Tidak'
+    setting.automaticPrint = typeof setting.automaticPrint == 'undefined' ? false : setting.automaticPrint
 
     return settingView(setting)
   }
