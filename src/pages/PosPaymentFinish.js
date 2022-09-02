@@ -4,6 +4,8 @@ import posPaymentFinishView from "../templates/pos-payment-finish.handlebars"
 import { listPrinters, printFormattedTextAndCut } from 'thermal-printer-cordova-plugin/www/thermal-printer'
 import TransactionApi from '../repositories/api/TransactionApi'
 import ConfigLocalStorage from '../repositories/localstorage/ConfigLocalStorage'
+import BasketLocalStorage from '../repositories/localstorage/BasketLocalStorage'
+import MyToast from '../utils/MyToast'
 
 class PosPaymentFinish extends Page {
   constructor(params) {
@@ -25,46 +27,53 @@ class PosPaymentFinish extends Page {
   print(transactionDetail) {
     let hotelName = ConfigLocalStorage.get('hotelName')
 
-    listPrinters({ type: 'bluetooth' }, res => {
-      if (typeof res[0] == 'undefined') {
-        alert("Printer tidak terdeteksi")
-        return
-      }
+    let res = new Promise(resolve => {
+      listPrinters({ type: 'bluetooth' }, res => {
+        if (typeof res[0] == 'undefined') {
+          MyToast.show("Printer tidak terdeteksi")
 
-      let body = `[C]<b>${hotelName}</b>\n[C]${transactionDetail.trx_date}\n\n`
-      body += `[C]#${transactionDetail.trx_number}\n`
-
-      body += `[C]${transactionDetail.payment.payment_method}\n\n`
-
-      for (const item of transactionDetail.items) {
-        if (item.discount > 0) {
-          body += `[L]${item.name}[R](${item.discount}%) ${item.total.format(2)}\n<s>${item.price}</s> ${item.price_after_discount} x ${item.qty}\n\n`
-        } else {
-          body += `[L]${item.name}[R]${item.total.format(2)}\n${item.price} x ${item.qty}\n\n`
+          resolve(false)
+          return
         }
-      }
 
-      body += `[L]Sub Total[R]${transactionDetail.total_sub.format(2)}\n`
-      body += `[L]Diskon[R]${transactionDetail.discount_text}\n`
-      body += `[L]Round[R]${transactionDetail.round.format(2)}\n`
-      body += `[L]Total[R]${transactionDetail.total.format(2)}\n`
-      body += `[L]Pembayaran[R]${transactionDetail.payment.total_payment.format(2)}\n`
-      body += `[L]Kembalian[R]${transactionDetail.payment.refund.format(2)}\n`
+        let body = `[C]<b>${hotelName}</b>\n[C]${transactionDetail.trx_date}\n\n`
+        body += `[C]#${transactionDetail.trx_number}\n`
 
-      printFormattedTextAndCut({
-        type: 'bluetooth',
-        id: res[0].address,
-        mmFeedPaper: 50,
-        text: body
+        body += `[C]${transactionDetail.payment.payment_method}\n\n`
+
+        for (const item of transactionDetail.items) {
+          if (item.discount > 0) {
+            body += `[L]${item.name}[R](${item.discount}%) ${item.total.format(2)}\n<s>${item.price}</s> ${item.price_after_discount} x ${item.qty}\n\n`
+          } else {
+            body += `[L]${item.name}[R]${item.total.format(2)}\n${item.price} x ${item.qty}\n\n`
+          }
+        }
+
+        body += `[L]Sub Total[R]${transactionDetail.total_sub.format(2)}\n`
+        body += `[L]Diskon[R]${transactionDetail.discount_text}\n`
+        body += `[L]Round[R]${transactionDetail.round.format(2)}\n`
+        body += `[L]Total[R]${transactionDetail.total.format(2)}\n`
+        body += `[L]Pembayaran[R]${transactionDetail.payment.total_payment.format(2)}\n`
+        body += `[L]Kembalian[R]${transactionDetail.payment.refund.format(2)}\n`
+
+        printFormattedTextAndCut({
+          type: 'bluetooth',
+          id: res[0].address,
+          mmFeedPaper: 50,
+          text: body
+        }, res => resolve(true), err => resolve(false))
+
+      }, async err => {
+        resolve(false)
+        await MyToast.show("Printer tidak terdeteksi")
       })
-
-    }, err => {
-      console.log(err)
-      alert("Printer tidak terdeteksi")
     })
+
+    return res
   }
 
   async action() {
+    BasketLocalStorage.clear()
 
     this.getDetail((transactionDetail) => {
       if (transactionDetail.payment.payment_method == 'Credit') {
@@ -72,11 +81,20 @@ class PosPaymentFinish extends Page {
       }
 
       $('#app').html(posPaymentFinishView(transactionDetail))
-      $('#print-receive-btn').on('click', () => this.print(transactionDetail))
 
-      // this.print(transactionDetail)
+      const printHanlder = async () => {
+        $('#print-receive-btn').attr('disabled', true)
+        $('#print-receive-btn').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
+
+        await this.print(transactionDetail)
+        $('#print-receive-btn').attr('disabled', false)
+        $('#print-receive-btn').html(`Cetak ulang struk`)
+      }
+
+      $('#print-receive-btn').on('click', printHanlder)
+
+      if (ConfigLocalStorage.get('automaticPrint')) printHanlder()
     })
-
   }
 
   render() {
