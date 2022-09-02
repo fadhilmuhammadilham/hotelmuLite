@@ -114,11 +114,11 @@ class PosBasketDraft extends Page {
 
     const viewBasket = (basketService) => {
       $('.basket-items').html(basketItemView({ items: basketService.items }))
-      $('#total-sub').text('Rp' + basketService.totalSub.format(2))
-      $('#total-discount').text('(Rp' + basketService.totalDiscount.format(2) + ')')
-      $('#total').text('Rp' + basketService.total.format(2))
-      $('#total-qty').text(basketService.totalQty.format())
-      $('#total-round').text('Rp' + basketService.totalRound.format(2))
+      $('#total-sub').text(basketService.totalSub.format(2))
+      $('#total-discount').text('(' + basketService.totalDiscount.format(2) + ')')
+      $('#total').text(basketService.total.format(2))
+      $('#total-qty').text(basketService.totalQty.format(0, false))
+      $('#total-round').text(basketService.totalRound.format(2))
     }
 
     if (basketService.type.isroom == '1') {
@@ -369,32 +369,38 @@ class PosBasketDraft extends Page {
     $('#save-transaction').on('click', async (e) => {
       e.preventDefault()
 
-      let isRoom = basketService.type.isroom
+      let isRoom = parseInt(basketService.type.isroom)
       let table = basketService.table
-      let numberOfGuest = basketService.numberOfGuest
+      let numberOfGuest = parseInt(basketService.numberOfGuest)
 
-      if (typeof table.id == "undefined" && isRoom !== "1") {
+      if (typeof table.id == "undefined" && isRoom !== 1) {
         await MyToast.show('Silahkan Pilih Meja terlebih dahulu!')
 
         return
       }
 
-      if (numberOfGuest === "0" && isRoom != "1") {
+      if (numberOfGuest === 0 && isRoom != 1) {
         await MyToast.show('Silahkan isi Jumlah Tamu terlebih dahulu!')
 
         return
       }
 
+      $('#save-transaction').attr('disabled', true)
+      $('#save-transaction').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
       let res = await this.updateTransaction(basketService)
 
       if (!res) {
         await MyToast.show('Transaksi Gagal Disimpan');
 
+        $('#save-transaction').attr('disabled', false)
+        $('#save-transaction').html(`Simpan Draft`)
         return
       }
 
       await MyToast.show('Transaksi Berhasil Disimpan');
 
+      $('#save-transaction').attr('disabled', false)
+      $('#save-transaction').html(`Simpan Draft`)
       basketService.clear()
       Redirect('/', true)
     })

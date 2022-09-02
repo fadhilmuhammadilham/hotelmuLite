@@ -305,31 +305,39 @@ class PosBasket extends Page {
     $('#save-transaction').on('click', async (e) => {
       e.preventDefault()
 
-      let isRoom = basketService.type.isroom
+      let isRoom = parseInt(basketService.type.isroom)
       let table = basketService.table
-      let numberOfGuest = basketService.numberOfGuest
+      let numberOfGuest = parseInt(basketService.numberOfGuest)
 
-      if (typeof table.id == "undefined" && isRoom !== "1") {
+      if (typeof table.id == "undefined" && isRoom !== 1) {
         await MyToast.show('Silahkan Pilih Meja terlebih dahulu!')
 
         return
       }
 
-      if (numberOfGuest === "0" && isRoom != "1") {
+      if (numberOfGuest === 0 && isRoom != 1) {
         await MyToast.show('Silahkan isi Jumlah Tamu terlebih dahulu!')
 
         return
       }
+
+      $('#save-transaction').attr('disabled', true)
+      $('#save-transaction').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
 
       let res = await TransactionApi.save(basketService)
 
       if (!res.status) {
         await MyToast.show('Transaksi Gagal Disimpan')
 
+        $('#save-transaction').attr('disabled', false)
+        $('#save-transaction').html(`Simpan Draft`)
         return
       }
 
       await MyToast.show('Transaksi Berhasil Disimpan')
+
+      $('#save-transaction').attr('disabled', false)
+      $('#save-transaction').html(`Simpan Draft`)
 
       basketService.clear()
       Redirect('/', true)
