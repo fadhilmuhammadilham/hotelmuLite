@@ -33,43 +33,54 @@ class PosBasket extends Page {
       return
     }
 
-    listPrinters({ type: 'bluetooth' }, res => {
+    let res = new Promise(async resolve => {
+      if (typeof cordova == 'undefined') {
+        await new Promise(resolve => setTimeout(() => resolve(true), 2000))
+        resolve(false);
 
-      if (typeof res[0] != 'undefined') {
-        let time = DateCustom.getNowFormated()
+        await MyToast.show("Printer tidak terdeteksi")
+        return
+      }
+      listPrinters({ type: 'bluetooth' }, res => {
 
-        let body = `[C]<b>${hotelName}</b>\n[C]${time}\n\n`
+        if (typeof res[0] != 'undefined') {
+          let time = DateCustom.getNowFormated()
 
-        if (type != 0) body += `[C]${_type}\n\n`
+          let body = `[C]<b>${hotelName}</b>\n[C]${time}\n\n`
 
-        for (const item of items) {
-          body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
-          if (item.note.length > 0) {
-            body += `[L]*${item.note}\n\n`
+          if (type != 0) body += `[C]${_type}\n\n`
+
+          for (const item of items) {
+            body += `[L]${item.name}[R]${item.qty}[R]${item.total.format()}\n`
+            if (item.note.length > 0) {
+              body += `[L]*${item.note}\n\n`
+            }
           }
+
+          body += `\n`
+
+          if (type == 0) {
+            body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
+            body += `[L][L]Total[R]${basketService.total.format()}\n`
+          }
+
+          printFormattedTextAndCut({
+            type: 'bluetooth',
+            id: res[0].address,
+            mmFeedPaper: 50,
+            text: body
+          }, res => resolve(true), err => resolve(false))
         }
-
-        body += `\n`
-
-        if (type == 0) {
-          body += `[L][L]Jumlah item[R]${basketService.totalQty.format()}\n`
-          body += `[L][L]Total[R]${basketService.total.format()}\n`
+        else {
+          MyToast.show("Printer tidak terdeteksi")
         }
-
-        printFormattedTextAndCut({
-          type: 'bluetooth',
-          id: res[0].address,
-          mmFeedPaper: 50,
-          text: body
-        })
-      }
-      else {
+      }, err => {
+        resolve(false)
         MyToast.show("Printer tidak terdeteksi")
-      }
-    }, err => {
-      console.log(err)
-      MyToast.show("Printer tidak terdeteksi")
+      })
     })
+
+    return res
   }
 
   async action() {
@@ -93,16 +104,29 @@ class PosBasket extends Page {
 
     viewBasket(basketService)
 
-    $('#print').on('click', () => {
-      this.print(basketService)
+    $('#print').on('click', async (e) => {
+      $(e.currentTarget).addClass('disabled')
+      $(e.currentTarget).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
+      await this.print(basketService)
+      $(e.currentTarget).removeClass('disabled')
+      $(e.currentTarget).html(`Cetak Semua`)
     })
 
-    $('#printKitchen').on('click', () => {
-      this.print(basketService, 1)
+    $('#printKitchen').on('click', async (e) => {
+      $(e.currentTarget).addClass('disabled')
+      $(e.currentTarget).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
+      await this.print(basketService, 1)
+      $(e.currentTarget).removeClass('disabled')
+      $(e.currentTarget).html(`Cetak Untuk Dapur`)
     })
 
-    $('#printBeverage').on('click', () => {
-      this.print(basketService, 2)
+    $('#printBeverage').on('click', async (e) => {
+      console.log(e.currentTarget)
+      $(e.currentTarget).addClass('disabled')
+      $(e.currentTarget).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`)
+      await this.print(basketService, 2)
+      $(e.currentTarget).removeClass('disabled')
+      $(e.currentTarget).html(`Cetak Untuk Pantry`)
     })
 
     $(document).on('click', '.form-qty .btn-min', (event) => {
