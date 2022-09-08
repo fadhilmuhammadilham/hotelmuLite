@@ -16,6 +16,7 @@ export default class MyToast {
             position: absolute;
             width: 100%;
             top: 50%;
+            z-index: 9999;
           }
           .toast-wrapper.show{
             display:block;
