@@ -2,6 +2,7 @@ import { App as CapacitorApp } from '@capacitor/app'
 import Router from './core/Router'
 import Redirect from './core/Redirect'
 import ConfigLocalStorage from './repositories/localstorage/ConfigLocalStorage'
+import $ from 'jquery'
 import './assets/css/style.css'
 import './assets/css/custom.css'
 import './assets/img/logo.png'
@@ -12,7 +13,26 @@ import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
 
-window.addEventListener("popstate", Router)
+window.addEventListener("popstate", async () => {
+  let modalIs = await new Promise(resolve => {
+    let found = false
+    $('.modal').each((i, elm) => {
+      if ($(elm).hasClass('show')) {
+        $(elm).modal('hide')
+        found = true
+      }
+    })
+
+    resolve(found)
+  })
+
+  if (modalIs) {
+    history.forward()
+    return
+  }
+
+  Router()
+})
 
 /**
  * Number.prototype.format(n, x, s, c)
@@ -45,10 +65,24 @@ document.addEventListener("DOMContentLoaded", () => {
   Router()
 })
 
-CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+CapacitorApp.addListener('backButton', async ({ canGoBack }) => {
   if (!canGoBack) {
     CapacitorApp.exitApp()
   } else {
+    let modalIs = await new Promise(resolve => {
+      let found = false
+      $('.modal').each((i, elm) => {
+        if ($(elm).hasClass('show')) {
+          $(elm).modal('hide')
+          found = true
+        }
+      })
+
+      resolve(found)
+    })
+
+    if (modalIs) return
+
     window.history.back()
   }
 })
