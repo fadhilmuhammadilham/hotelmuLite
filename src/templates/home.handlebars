@@ -2,8 +2,8 @@
 <div id="appCapsule" class="pt-2">
 
     <div class="header-large-title">
-        <h1 class="title">Hi, <span id="name">{{ name }}</span></h1>
-        <h4 class="subtitle">Selamat datang di Hotelmu POS</h4>
+        <h1 class="title"><span id="name">{{ name }}</span></h1>
+        <h4 class="subtitle">Selamat datang di HotelMu Lite</h4>
     </div>
 
     <div class="section mt-2 mb-2">
@@ -13,7 +13,7 @@
         <!-- <div>UTC Date : <span id="utcDate"></span></div>
 			<div>Local Date : <span id="localDate"></span></div> -->
         <div class="card" id="sessionCard">
-            <div class="card-header d-flex">
+            {{!-- <div class="card-header d-flex">
                 <div class="flex-grow-1 d-flex align-self-center">
                     Shift
                 </div>
@@ -22,23 +22,22 @@
                     <button class="btn btn-sm btn-secondary rounded" id="closeSessionButton" data-toggle="modal"
                         data-target="#dialogConfirmCloseSession">Tutup</button>
                     {{else}}
-                    <a href="/shift/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
                     {{/if}}
+                    <a href="/shift/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
                 </div>
-            </div>
-            {{#if isSessionOpened}}
+            </div> --}}
+            {{!-- {{#if isSessionOpened}} --}}
             <div id="sessionCardBody" class="card-body">
                 <div class="flex-grow-1 ">
                     {{!-- <div id="nameDiv" class="font-weight-bold">POS/2021/02/25/0001</div> --}}
-                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">{{ shift.start }}</span>
+                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">Jumat, 29 Januari 2024</span>
                     </div>
-                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">{{ shift.start_time }}</span>
+                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">12:45:23</span>
                     </div>
-                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">{{
-                            [helpers/currency] shift.begining_balance 2}}</span></div>
+                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp800.000</div>
                 </div>
             </div>
-            {{/if}}
+            {{!-- {{/if}} --}}
         </div>
     </div>
 
@@ -49,8 +48,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h6 class="card-subtitle">Penjualan Hari Ini</h6>
-                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between"
-                            id="totalSaleToday">
+                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between" id="totalSaleToday">
                             <span class="animated-background">1.500.000</span>
                         </h5>
                     </div>
@@ -60,8 +58,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-subtitle">Transaksi Hari Ini</h6>
-                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between"
-                            id="totalTransactionToday">
+                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between" id="totalTransactionToday">
                             <span class="animated-background">500</span>
                         </h5>
                     </div>
@@ -73,7 +70,7 @@
     <div class="listview-title mt-2">Penjualan Terbaru</div>
     <ul class="listview image-listview text" id="new-transaction-list">
         <li class="justify-content-center">
-            <div class="text-center py-3"><span class="spinner-border" role="status" aria-hidden="true"></span></div>
+            <div class="text-center py-3">Belum ada transaksi.</div>
         </li>
     </ul>
 </div>

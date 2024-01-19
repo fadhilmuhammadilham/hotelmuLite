@@ -29,17 +29,17 @@ class Setup extends Page {
 
       e.preventDefault()
 
-      let res = await HotelApi.signin(idInput.val(), passwordInput.val())
+      // let res = await HotelApi.signin(idInput.val(), passwordInput.val())
 
-      submitButton.attr('disabled', false)
-      submitButton.html('Submit')
-      if (res.status) {
-        ConfigLocalStorage.set('hotelId', idInput.val())
-        Redirect('/login', true)
-      }
-      else {
-        $('#alert-wrapper').html(`<div class="alert alert-danger mb-2">${res.message}</div>`)
-      }
+      Redirect('/login', true)
+      // submitButton.attr('disabled', false)
+      // submitButton.html('Submit')
+      // if (res.status) {
+      //   ConfigLocalStorage.set('hotelId', idInput.val())
+      // }
+      // else {
+      //   $('#alert-wrapper').html(`<div class="alert alert-danger mb-2">${res.message}</div>`)
+      // }
 
     })
   }
