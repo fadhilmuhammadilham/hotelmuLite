@@ -1,145 +1,5 @@
-<!-- App Header -->
-<div class="appHeader">
-    <div class="left">
-        <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-            </svg>
-        </a>
-    </div>
-</div>
-<!-- * App Header -->
-
-<!-- App Sidebar -->
-{{!-- <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-
-                <!-- profile box -->
-                <div class="profileBox">
-                    <div class="image-wrapper">
-                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged rounded">
-                    </div>
-                    <div class="in">
-                        <strong>Julian Gruber</strong>
-                        <div class="text-muted">
-                            <ion-icon name="location"></ion-icon>
-                            California
-                        </div>
-                    </div>
-                    <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
-                        <ion-icon name="close"></ion-icon>
-                    </a>
-                </div>
-                <!-- * profile box -->
-
-                <ul class="listview flush transparent no-line image-listview mt-2">
-                    <li>
-                        <a href="index.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="home-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Home
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-components.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="cube-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Cloud
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-components.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="cube-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Setings
-                            </div>
-                        </a>
-                    </li>
-
-                    <div class="listview-title mt-2 mb-1">
-                        <span>Friends</span>
-                    </div>
-                    <ul class="listview image-listview flush transparent no-line">
-                        <li>
-                            <a href="page-chat.html" class="item">
-                                <img src="assets/img/sample/avatar/avatar7.jpg" alt="image" class="image">
-                                <div class="in">
-                                    <div>Sophie Asveld</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="page-chat.html" class="item">
-                                <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="image">
-                                <div class="in">
-                                    <div>Sebastian Bennett</div>
-                                    <span class="badge badge-danger">6</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="page-chat.html" class="item">
-                                <img src="assets/img/sample/avatar/avatar10.jpg" alt="image" class="image">
-                                <div class="in">
-                                    <div>Beth Murphy</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="page-chat.html" class="item">
-                                <img src="assets/img/sample/avatar/avatar2.jpg" alt="image" class="image">
-                                <div class="in">
-                                    <div>Amelia Cabal</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="page-chat.html" class="item">
-                                <img src="assets/img/sample/avatar/avatar5.jpg" alt="image" class="image">
-                                <div class="in">
-                                    <div>Henry Doe</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-
-            </div>
-
-            <!-- sidebar buttons -->
-            <div class="sidebar-buttons">
-                <a href="javascript:;" class="button">
-                    <ion-icon name="person-outline"></ion-icon>
-                </a>
-                <a href="javascript:;" class="button">
-                    <ion-icon name="archive-outline"></ion-icon>
-                </a>
-                <a href="javascript:;" class="button">
-                    <ion-icon name="settings-outline"></ion-icon>
-                </a>
-                <a href="javascript:;" class="button">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </a>
-            </div>
-            <!-- * sidebar buttons -->
-        </div>
-    </div>
-</div> --}}
-<!-- * App Sidebar -->
-
 <!-- App Capsule -->
-<div id="appCapsule">
+<div id="appCapsule" class="pt-2">
     <div class="section mt-2 mb-2">
         <div class="card" id="sessionCard">
             <div id="sessionCardBody" class="card-menu grid-container">
@@ -190,30 +50,74 @@
             <div class="col-12 col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <table>
-                            
-                        </table>
+                        <div class="scroll-horizontal">
+                            <div class="container-status">
+                                <div class="status kosong"></div>
+                                <div class="status terisi"></div>
+                                <div class="status reservasi"></div>
+                                <div class="status akan-checkin"></div>
+                                <div class="status rusak"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="room">
+                            <div class="component-kecil"></div>
+                            <div>Standard Roo m -10 kamar</div>
+                        </div>
+                        <div class="scroll-horizontal">
+                            <div class="container-status">
+                                <div class="kamar kosong"></div>
+                                <div class="kamar kosong"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                            </div>
+                        </div>
+                        <div class="room">
+                            <div class="component-kecil"></div>
+                            <div>Deluxe Roo m -10 kamar</div>
+                        </div>
+                        <div class="scroll-horizontal">
+                            <div class="container-status">
+                                <div class="kamar kosong"></div>
+                                <div class="kamar kosong"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                                <div class="kamar"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-<!-- * App Capsule -->
+            <!-- * App Capsule -->
 
-<div class="modal fade dialogbox" id="DialogBasic-close-shift" data-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Konfirmasi Tutup Shift</h5>
-            </div>
-            <div class="modal-body">
-                Apakah Anda yakin akan tutup shift?
-            </div>
-            <div class="modal-footer">
-                <div class="btn-inline">
-                    <a href="#" class="btn btn-text-secondary" data-dismiss="modal">Kembali</a>
-                    <a href="#" class="btn btn-text-danger" id="confirm-close-shift">Tutup</a>
+            <div class="modal fade dialogbox" id="DialogBasic-close-shift" data-backdrop="static" tabindex="-1"
+                role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Konfirmasi Tutup Shift</h5>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin akan tutup shift?
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-inline">
+                                <a href="#" class="btn btn-text-secondary" data-dismiss="modal">Kembali</a>
+                                <a href="#" class="btn btn-text-danger" id="confirm-close-shift">Tutup</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-{{> buttom-menus }}
+            {{> buttom-menus }}
