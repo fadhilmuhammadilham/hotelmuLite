@@ -1,8 +1,27 @@
+.kosong {
+    background-color: green;
+}
+
+.terisi {
+    background-color: red;
+}
+
+.reservasi {
+    background-color: yellow;
+}
+
+.akan-checkin {
+    background-color: blue;
+}
+
+.rusak {
+    background-color: purple;
+}
+
 .card-menu {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 2px; 
-  }
+    padding: 2px; }
 
 .grid-container {
     display: grid;
@@ -10,21 +29,10 @@
   }
   
   .grid-item {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.185);
+    background-color: rgba(179, 59, 59, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
     margin: 5px;
     padding: 20px;
     font-size: 10px;
     text-align: center;
-    display: block;
-    font-size: small;
-    border-radius: 15px;
-    height: 105px;
-    width: auto;
   }
-
-  .icon-menu{
-    size: 15px;
-    
-  }
-  
