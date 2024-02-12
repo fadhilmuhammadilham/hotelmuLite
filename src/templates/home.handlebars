@@ -1,43 +1,186 @@
-<!-- App Capsule -->
-<div id="appCapsule" class="pt-2">
-
-    <div class="header-large-title">
-        <h1 class="title"><span id="name">{{ name }}</span></h1>
-        <h4 class="subtitle">Selamat datang di HotelMu Lite</h4>
+<!-- App Header -->
+<div class="appHeader">
+    <div class="left">
+        <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+            </svg>
+        </a>
     </div>
+</div>
+<!-- * App Header -->
 
-    <div class="section mt-2 mb-2">
-        <div id="alertWrapper">
-            {{!-- <div class="alert alert-warning">Device ini belum diatur pengaturan tokonya.</div> --}}
-        </div>
-        <!-- <div>UTC Date : <span id="utcDate"></span></div>
-			<div>Local Date : <span id="localDate"></span></div> -->
-        <div class="card" id="sessionCard">
-            {{!-- <div class="card-header d-flex">
-                <div class="flex-grow-1 d-flex align-self-center">
-                    Shift
-                </div>
-                <div>
-                    {{#if isSessionOpened}}
-                    <button class="btn btn-sm btn-secondary rounded" id="closeSessionButton" data-toggle="modal"
-                        data-target="#dialogConfirmCloseSession">Tutup</button>
-                    {{else}}
-                    {{/if}}
-                    <a href="/shift/open" data-link class="btn btn-sm btn-info rounded" id="openSessionButton">Buka</a>
-                </div>
-            </div> --}}
-            {{!-- {{#if isSessionOpened}} --}}
-            <div id="sessionCardBody" class="card-body">
-                <div class="flex-grow-1 ">
-                    {{!-- <div id="nameDiv" class="font-weight-bold">POS/2021/02/25/0001</div> --}}
-                    <div class="">Tanggal Buka: <span id="dateAtSpan" class="font-weight-bold">Jumat, 29 Januari 2024</span>
+<!-- App Sidebar -->
+{{!-- <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+
+                <!-- profile box -->
+                <div class="profileBox">
+                    <div class="image-wrapper">
+                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged rounded">
                     </div>
-                    <div class="">Jam Buka: <span id="timeAtSpan" class="font-weight-bold">12:45:23</span>
+                    <div class="in">
+                        <strong>Julian Gruber</strong>
+                        <div class="text-muted">
+                            <ion-icon name="location"></ion-icon>
+                            California
+                        </div>
                     </div>
-                    <div class="">Saldo Awal: <span id="beginingBalanceAtSpan" class="font-weight-bold">Rp800.000</div>
+                    <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
+                        <ion-icon name="close"></ion-icon>
+                    </a>
                 </div>
+                <!-- * profile box -->
+
+                <ul class="listview flush transparent no-line image-listview mt-2">
+                    <li>
+                        <a href="index.html" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Home
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="app-components.html" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="cube-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Cloud
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="app-components.html" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="cube-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Setings
+                            </div>
+                        </a>
+                    </li>
+
+                    <div class="listview-title mt-2 mb-1">
+                        <span>Friends</span>
+                    </div>
+                    <ul class="listview image-listview flush transparent no-line">
+                        <li>
+                            <a href="page-chat.html" class="item">
+                                <img src="assets/img/sample/avatar/avatar7.jpg" alt="image" class="image">
+                                <div class="in">
+                                    <div>Sophie Asveld</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page-chat.html" class="item">
+                                <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="image">
+                                <div class="in">
+                                    <div>Sebastian Bennett</div>
+                                    <span class="badge badge-danger">6</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page-chat.html" class="item">
+                                <img src="assets/img/sample/avatar/avatar10.jpg" alt="image" class="image">
+                                <div class="in">
+                                    <div>Beth Murphy</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page-chat.html" class="item">
+                                <img src="assets/img/sample/avatar/avatar2.jpg" alt="image" class="image">
+                                <div class="in">
+                                    <div>Amelia Cabal</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page-chat.html" class="item">
+                                <img src="assets/img/sample/avatar/avatar5.jpg" alt="image" class="image">
+                                <div class="in">
+                                    <div>Henry Doe</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
             </div>
-            {{!-- {{/if}} --}}
+
+            <!-- sidebar buttons -->
+            <div class="sidebar-buttons">
+                <a href="javascript:;" class="button">
+                    <ion-icon name="person-outline"></ion-icon>
+                </a>
+                <a href="javascript:;" class="button">
+                    <ion-icon name="archive-outline"></ion-icon>
+                </a>
+                <a href="javascript:;" class="button">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </a>
+                <a href="javascript:;" class="button">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                </a>
+            </div>
+            <!-- * sidebar buttons -->
+        </div>
+    </div>
+</div> --}}
+<!-- * App Sidebar -->
+
+<!-- App Capsule -->
+<div id="appCapsule">
+    <div class="section mt-2 mb-2">
+        <div class="card" id="sessionCard">
+            <div id="sessionCardBody" class="card-menu grid-container">
+                <div class="grid-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                    Checkin
+                </div>
+                <div class="grid-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                    Reservasi
+                </div>
+                <div class="grid-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                    Kasir
+                </div>
+                <div class="grid-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg></div>
+                <div class="grid-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg></div>
+                <div class="grid-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg></div>
+            </div>
         </div>
     </div>
 
@@ -47,33 +190,12 @@
             <div class="col-12 col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h6 class="card-subtitle">Penjualan Hari Ini</h6>
-                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between" id="totalSaleToday">
-                            <span class="animated-background">1.500.000</span>
-                        </h5>
+                        <table>
+                            
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle">Transaksi Hari Ini</h6>
-                        <h5 class="card-title mb-0 d-flex align-items-center justify-content-between" id="totalTransactionToday">
-                            <span class="animated-background">500</span>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="listview-title mt-2">Penjualan Terbaru</div>
-    <ul class="listview image-listview text" id="new-transaction-list">
-        <li class="justify-content-center">
-            <div class="text-center py-3">Belum ada transaksi.</div>
-        </li>
-    </ul>
-</div>
 <!-- * App Capsule -->
 
 <div class="modal fade dialogbox" id="DialogBasic-close-shift" data-backdrop="static" tabindex="-1" role="dialog">
