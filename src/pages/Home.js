@@ -1,8 +1,7 @@
 import Page from "./Page"
 import homeView from "../templates/home.handlebars"
+import "../assets/css/home.css"
 import $ from 'jquery'
-import currency from '../templates/helpers/currency'
-import Redirect from "../core/Redirect"
 
 class Home extends Page {
   constructor(params) {
