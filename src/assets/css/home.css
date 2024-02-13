@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Menjadikan tinggi item-menu sesuai dengan tinggi grid-item */
+    height: 100%;
 }
 
 

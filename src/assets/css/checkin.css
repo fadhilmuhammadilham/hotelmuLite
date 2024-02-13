@@ -1,13 +1,70 @@
 .top-text {
     display: flex;
+    height: 10px;
+}
+
+.icon-comments{
+    height: 16px;
+    width: 16px;
+    margin-top: -5px;
+    padding-top: -10px;
+}
+
+.text-comments{
+    margin-top: -9px;
+    padding-top: -13px;
+}
+
+.text-atas{
+    display: flex;
+    margin-top: 1%;
 }
 
 .rates-plan {
     display: flex;
+    padding-bottom: 10px;
+}
+
+.room-check{
+    margin-top: -7px;
+}
+
+.room{
+    margin-top: 3px;
+}
+
+.checkin{
+    padding-bottom: 10px;
+    margin-top: 2px;
+}
+
+.date-checkin{
+    padding-left: 10px;
+    margin-left: 5px;
+    width: 93%;
+}
+
+.checkout{
+    padding-bottom: 10px;
+    margin-top: 12px;
+}
+
+.date-checkout{
+    padding-left: 10px;
+    margin-left: 5px;
+    width: 93%;
 }
 
 .input {
     display: flex;
+}
+
+.pilih-segmen{
+    background-color: blue;
+}
+
+.pilih-data-tamu{
+    background-color: red;
 }
 
 .tambah-kurang {
