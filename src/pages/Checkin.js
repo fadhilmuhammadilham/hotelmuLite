@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/home.handlebars"
-import "../assets/css/home.css"
+import homeView from "../templates/check-in-page.handlebars"
+import "../assets/css/checkin.css"
 import $ from 'jquery'
 
-class Home extends Page {
+class Checkin extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Home extends Page {
   }
 }
 
-export default Home
+export default Checkin

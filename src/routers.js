@@ -1,7 +1,9 @@
-import Home from "./pages/home"
+import Checkin from "./pages/Checkin"
+import Home from "./pages/Home"
 
 const routers = [
-  { path: "/", view: Home, middlewares: []}
+  { path: "/", view: Home, middlewares: []},
+  { path: "/checkin", view: Checkin, middlewares: []}
 ]
 
 // const routers = [

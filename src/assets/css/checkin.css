@@ -1,0 +1,15 @@
+.top-text {
+    display: flex;
+}
+
+.rates-plan {
+    display: flex;
+}
+
+.input {
+    display: flex;
+}
+
+.tambah-kurang {
+    display: flex; align-items: center;
+}
