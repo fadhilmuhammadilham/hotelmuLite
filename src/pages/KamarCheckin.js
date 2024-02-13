@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/home.handlebars"
+import homeView from "../templates/kamar-checkin.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Home extends Page {
+class Kamar extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Home extends Page {
   }
 }
 
-export default Home
+export default Kamar

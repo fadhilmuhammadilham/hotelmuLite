@@ -1,6 +1,6 @@
 import Page from "./Page"
 import homeView from "../templates/check-in-page.handlebars"
-import "../assets/css/checkin.css"
+import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
 class Checkin extends Page {
