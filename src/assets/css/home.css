@@ -21,19 +21,17 @@
 .card-menu {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 2px; 
-  }
+    padding: 2px;
+}
 
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-  }
-  
-  .grid-item {
+}
+.grid-item {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgba(0, 0, 0, 0.185);
     margin: 5px;
-    padding: 20px;
     font-size: 10px;
     text-align: center;
     display: block;
@@ -41,7 +39,15 @@
     border-radius: 15px;
     height: 105px;
     width: auto;
-  }
+}
+
+.item-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Menjadikan tinggi item-menu sesuai dengan tinggi grid-item */
+}
 
 
 .scroll-horizontal {

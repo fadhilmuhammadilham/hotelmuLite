@@ -1,0 +1,69 @@
+<!-- App Capsule -->
+<div id="appCapsule" class="pt-2">
+    <div class="section mt-2 mb-2">
+        <div class="card p-2" id="sessionCard">
+            <div class="top-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg>
+                <p class="ml-1">Isi Form Check-In</p>
+            </div>
+            <hr>
+            <h5>Rates Plan</h5>
+            <div class="rates-plan ml-1">
+                <input type="radio" id="roomOnly" name="roomOption" value="roomOnly">
+                <label for="roomOnly" class="ml-1 ">Room Only</label><br>
+
+                <input type="radio" id="roomBreakfast" class="ml-2" name="roomOption" value="roomBreakfast">
+                <label for="roomBreakfast" class="ml-1">Room Breakfast</label><br>
+            </div>
+
+            <h5>Check-In</h5>
+            <input type="date">
+            <h5>Check-Out</h5>
+            <input type="date">
+        </div>
+    </div>
+    <div class="section mt-2 mb-2">
+        <div class="card p-2" id="sessionCard">
+            <div class="top-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg>
+                <p class="ml-1">Isi Data Tamu</p>
+            </div>
+            <hr>
+            <h5>Market Segmen</h5>
+            <div class="input">
+                <input type="text" placeholder="Pilih Segmentasi">
+                <div>
+                    Pilih Segmen
+                </div>
+            </div>
+            <br>
+            <h5>Isi Data Tamu</h5>
+            <div class="input">
+                <input type="text" placeholder="Pilih Segmentasi">
+                <div>
+                    Pilih Segmen
+                </div>
+            </div>
+            <h5>Jumlah Orangtua</h5>
+            <div class="tambah-kurang">
+                <button id="minusButton">-</button>
+                <input type="number" id="numberInput" value="0" style="width: 50px; text-align: center;">
+                <button id="plusButton">+</button>
+            </div>
+            <h5>Jumlah Anak</h5>
+            <div class="tambah-kurang">
+                <button id="minusButton">-</button>
+                <input type="number" id="numberInput" value="0" style="width: 50px; text-align: center;">
+                <button id="plusButton">+</button>
+            </div>
+        </div>
+    </div>
+</div>
