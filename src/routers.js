@@ -1,9 +1,11 @@
 import Checkin from "./pages/Checkin"
 import Home from "./pages/Home"
+import Kamar from "./pages/KamarCheckin"
 
 const routers = [
   { path: "/", view: Home, middlewares: []},
-  { path: "/checkin", view: Checkin, middlewares: []}
+  { path: "/checkin", view: Checkin, middlewares: []},
+  { path: "/kamarcheckin", view: Kamar, middlewares: []}
 ]
 
 // const routers = [
