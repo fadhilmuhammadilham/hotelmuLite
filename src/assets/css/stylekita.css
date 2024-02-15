@@ -28,6 +28,7 @@
     display: grid;
     grid-template-columns: auto auto auto;
 }
+
 .grid-item {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgba(0, 0, 0, 0.185);
@@ -95,32 +96,32 @@
     margin-top: 10px;
 }
 
-.text-status{
+.text-status {
     height: 10px;
     padding-top: 2px;
-    padding-right: 0,5px;
+    padding-right: 0, 5px;
     margin-right: 8px;
 }
 
-.text-status-akanCheckout{
+.text-status-akanCheckout {
     width: 120px;
     height: 10px;
     margin-top: 5px;
 }
 
-.kamar-content{
+.kamar-content {
     display: flex;
     margin-top: 17%;
     margin-left: 20%;
 }
 
-.icon-kamar-content{
+.icon-kamar-content {
     width: 17px;
     height: 17x;
 
 }
 
-.text-kamar-content{
+.text-kamar-content {
     padding-top: 17%;
     color: white;
     font-size: 15px;
@@ -132,19 +133,19 @@
     height: 10px;
 }
 
-.icon-comments{
+.icon-comments {
     height: 16px;
     width: 16px;
     margin-top: -5px;
     padding-top: -10px;
 }
 
-.text-comments{
+.text-comments {
     margin-top: -9px;
     padding-top: -13px;
 }
 
-.text-atas{
+.text-atas {
     display: flex;
     margin-top: 1%;
 }
@@ -154,31 +155,31 @@
     padding-bottom: 10px;
 }
 
-.room-check{
+.room-check {
     margin-top: -7px;
 }
 
-.room{
+.room {
     margin-top: 3px;
 }
 
-.checkin{
+.checkin {
     padding-bottom: 10px;
     margin-top: 2px;
 }
 
-.date-checkin{
+.date-checkin {
     padding-left: 10px;
     margin-left: 5px;
     width: 93%;
 }
 
-.checkout{
+.checkout {
     padding-bottom: 10px;
     margin-top: 12px;
 }
 
-.date-checkout{
+.date-checkout {
     padding-left: 10px;
     margin-left: 5px;
     width: 93%;
@@ -188,19 +189,130 @@
     display: flex;
 }
 
-.pilih-segmen{
-    background-color: blue;
+.pilih-segmen {
+    height: 45px;
+    border-radius: 7px;
 }
 
-.pilih-data-tamu{
-    background-color: red;
+.button-segmen {
+    border: none;
+    background-color: #470829;
+    border-top-right-radius: 10px;
+    border-end-end-radius: 10px;
+    margin-top: 1px;
+    height: 43px;
+    width: 110px;
+}
+
+.text-button-segmen {
+    margin-top: 7px;
+    font-size: 12px;
+    color: white;
+}
+
+.pilih-data-tamu {
+    height: 45px;
+    border-radius: 7px;
+}
+
+.button-data-tamu {
+    border: none;
+    background-color: #470829;
+    border-top-right-radius: 10px;
+    border-end-end-radius: 10px;
+    margin-top: 1px;
+    height: 43px;
+    width: 110px
+}
+
+.text-data-tamu {
+    margin-top: 7px;
+    font-size: 12px;
+    color: white;
 }
 
 .tambah-kurang {
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
 }
 
-.pilih-kamar{
+.btn-minus{
+    border: none;
+    border-start-start-radius: 7px;
+    border-end-start-radius: 7px ;
+    background-color: #DDDDDD;
+    width: 50px;
+    height: 40px;
+}
+ 
+.form-jumlah{
+    width: 250px;
+    text-align: start;
+    height: 40px;
+}
+
+.btn-plus{
+    border: none;
+    border-start-end-radius: 7px;
+    border-bottom-right-radius: 7px ;
+    background-color: #DDDDDD;
+    width: 50px;
+    height: 40px;
+}
+
+.btn-kembali{
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 110px;
+    background-color: red;
+}
+
+.content-btn-kembali{
+    display: flex;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.panah-kembali{
+    margin-top: 3%;
+    width: 17px;
+    height: 17px;
+}
+
+.text-kembali{
+    padding-left: 3px;
+    color: white;
+}
+
+
+.btn-selanjutnya{
+    margin-left: 75px; 
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 120px;
+    background-color: blue;
+}
+
+.content-btn-selanjutnya{
+    display: flex;
+    margin-top: 8px;
+    margin-left: 5px;
+}
+
+.panah-selanjutnya{
+    margin-top: 3%;
+    width: 17px;
+    height: 17px;
+}
+
+.text-selanjutnya{
+    padding-right: 3px;
+    color: white;
+}
+
+.pilih-kamar {
     display: flex;
     margin: 5px;
     align-items: center;

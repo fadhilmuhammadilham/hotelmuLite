@@ -49,7 +49,11 @@
             <div class="input">
                 <input type="text" placeholder="Pilih Segmentasi">
                 <div class="pilih-segmen">
-                    Pilih Segmen
+                    <button class="button-segmen">
+                        <p class="text-button-segmen">
+                            Pilih Segmen
+                        </p>
+                    </button>
                 </div>
             </div>
             <br>
@@ -57,38 +61,50 @@
             <div class="input">
                 <input type="text" placeholder="Pilih Segmentasi">
                 <div class="pilih-data-tamu">
-                    Data Tamu
+                    <button class="button-data-tamu">
+                        <p class="text-data-tamu">
+                            Data Tamu
+                        </p>
+                    </button>
                 </div>
             </div>
-            <h5>Jumlah Orangtua</h5>
+            <h5 class="mt-2">Jumlah Orangtua</h5>
             <div class="tambah-kurang">
-                <button id="minusButton">-</button>
-                <input type="number" id="numberInput" value="0" style="width: 50px; text-align: center;">
-                <button id="plusButton">+</button>
+                <button id="minusButton" class="btn-minus">-</button>
+                <input class="form-jumlah" type="number" id="numberInput" value="0">
+                <button id="plusButton" class="btn-plus">+</button>
             </div>
-            <h5>Jumlah Anak</h5>
+            <h5 class="mt-2 ">Jumlah Anak</h5>
             <div class="tambah-kurang">
-                <button id="minusButton">-</button>
-                <input type="number" id="numberInput" value="0" style="width: 50px; text-align: center;">
-                <button id="plusButton">+</button>
+                <button id="minusButton" class="btn-minus">-</button>
+                <input class="form-jumlah" type="number" id="numberInput" value="0">
+                <button id="plusButton" class="btn-plus">+</button>
             </div>
-            <div class="button mt-3">
-                <a href="/" data-link>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                    </svg>
-                    Kembali
-                </a>
-                <a href="/kamarcheckin" data-link>
-                    Selanjutnya
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                    </svg>
-                </a>
+            <div class="button mt-3" style="display: flex;">
+                <button class="btn-kembali">
+                    <a href="/" data-link class="content-btn-kembali">
+                        <svg class="panah-kembali" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path fill="#ffffff"
+                                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+                        </svg>
+                        <p class="text-kembali">
+                            Kembali
+                        </p>
+                    </a>
+                </button>
+                <button class="btn-selanjutnya">
+                    <a href="/kamarcheckin" data-link class="content-btn-selanjutnya">
+                        <p class="text-selanjutnya">
+                            selanjutnya
+                        </p>
+                        <svg class="panah-selanjutnya" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path fill="#ffffff"
+                                d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+                        </svg>
+                    </a>
+                </button>
             </div>
         </div>
     </div>
