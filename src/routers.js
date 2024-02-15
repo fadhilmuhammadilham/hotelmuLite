@@ -37,7 +37,6 @@ const routers = [
 //   { path: "/report/monthly", view: ReportMonthly, middlewares: [MustLoginMidlleware] },
 //   { path: "/report/annual", view: ReportAnnual, middlewares: [MustLoginMidlleware] },
 //   { path: "/other", view: Other, middlewares: [MustLoginMidlleware] },
-//   { path: "/profile", view: Profile, middlewares: [MustLoginMidlleware] },
 //   { path: "/settings", view: Settings, middlewares: [MustLoginMidlleware] },
 // ]
 
