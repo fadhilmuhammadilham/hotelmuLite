@@ -1,11 +1,15 @@
 import Checkin from "./pages/Checkin"
 import Home from "./pages/Home"
 import Kamar from "./pages/KamarCheckin"
+import PreviewCheckin from "./pages/PreviewCheckin"
+import Setting from "./pages/Settings"
 
 const routers = [
   { path: "/", view: Home, middlewares: []},
   { path: "/checkin", view: Checkin, middlewares: []},
-  { path: "/kamarcheckin", view: Kamar, middlewares: []}
+  { path: "/kamarcheckin", view: Kamar, middlewares: []},
+  { path: "/previewcheckin", view: PreviewCheckin, middlewares: []},
+  { path: "/settings", view: Setting, middlewares: []},
 ]
 
 // const routers = [

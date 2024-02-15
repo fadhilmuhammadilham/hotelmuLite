@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/setting.handlebars"
+import homeView from "../templates/preview-checkin.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Setting extends Page {
+class PreviewCheckin extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Setting extends Page {
   }
 }
 
-export default Setting
+export default PreviewCheckin
