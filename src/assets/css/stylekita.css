@@ -129,6 +129,7 @@
 
 .top-text {
     display: flex;
+    justify-content: space-between;
     height: 10px;
 }
 
@@ -319,4 +320,28 @@
     background-color: #1BC5BD;
     height: 90px;
     border-radius: 10px;
+}
+
+.pengaturan {
+    display: flex;
+}
+
+.text-setting {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-setting p {
+    margin: 0;
+}
+
+.button-back {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-setting {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
 }
