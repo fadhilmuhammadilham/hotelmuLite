@@ -365,3 +365,47 @@
     height: auto;
     max-height: 80%;
 }
+
+.btn-modal-data-tamu {
+    background-color: #663259;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.btn-modal-close {
+    background-color: #F4E1F0;
+    color: #663259;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+
+}
+
+.form-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 15px;
+}
+
+.form-id{
+    display: flex;
+    gap: 15px;
+}
+
+.data-diri {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
+.data-diri input {
+    width: 100%; 
+}
+
+.form-component p {
+    margin-bottom: 0;
+}
