@@ -361,11 +361,6 @@
     margin: 0;
 }
 
-.button-back {
-    display: flex;
-    gap: 10px;
-}
-
 .icon-setting {
     color: #ffb3ff;
     display: flex;
@@ -426,4 +421,9 @@
 
 .form-component p {
     margin-bottom: 0;
+}
+
+.header-preview {
+    display: flex;
+    justify-content: space-between;
 }
