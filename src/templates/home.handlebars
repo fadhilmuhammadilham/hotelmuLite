@@ -102,17 +102,41 @@
                                 </td>
 
                                 <td>
-                                    <div class="status akan-checkin"></div>
+                                    <div class="status akan-checkout"></div>
                                 </td>
                                 <td>
                                     <p class="text-status-akanCheckout">Akan Checkout</p>
                                 </td>
-
                                 <td>
                                     <div class="status rusak"></div>
                                 </td>
                                 <td>
                                     <p class="text-status">Rusak</p>
+                                </td>
+                                <td>
+                                    <div class="scd-status ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="grey"
+                                            class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td>
+                                    Bersih
+                                </td>
+                                <td>
+                                    <div class="scd-status ml-1">
+                                        <svg fill="grey" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            width="25"
+                                            height="25"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path
+                                                d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td>
+                                    Kotor
                                 </td>
                             </tr>
                         </table>
@@ -128,106 +152,126 @@
                 </div>
                 <div class="scroll-horizontal">
                     <div class="container-status">
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">101</p>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">101</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">102</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">102</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar reservasi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">103</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar reservasi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">103</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">104</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">104</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar rusak">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">105</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar rusak">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">105</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">106</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">106</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">107</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">107</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">108</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">108</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">109</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">109</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">110</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">110</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <br>
@@ -240,108 +284,177 @@
                 </div>
                 <div class="scroll-horizontal">
                     <div class="container-status">
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">201</p>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">201</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">202</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">202</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar terisi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">203</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar terisi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">203</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">204</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">204</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">205</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">205</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar kosong">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">206</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar kosong">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">206</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar reservasi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">207</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar reservasi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">207</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar reservasi">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">208</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar reservasi">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">208</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar rusak">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">209</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar rusak">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">209</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="kamar akan-checkout">
-                            <div class="kamar-content">
-                                <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#ffffff"
-                                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                </svg>
-                                <p class="ml-1 text-kamar-content">210</p>
+                        </a>
+                        <a data-toggle="modal" data-target="#setkamar">
+                            <div class="kamar akan-checkout">
+                                <div class="kamar-content pt-2">
+                                    <svg class="icon-kamar-content" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                    </svg>
+                                    <p class="ml-1 text-kamar-content">210</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        {{> buttom-menus }}
+    </div>
+</div>
+{{> buttom-menus }}
+
+<!-- Modal Basic -->
+<div class="modal fade" id="setkamar" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Set Status Kamar
+            </div>
+            <div class="modal-body">
+                <p>Set Status</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="flexRadioDefaultSet" id="setstatus_bersih">
+                    <label class="form-check-label" for="setstatus_bersih">
+                        Bersih
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="flexRadioDefaultSet" id="setstatus_kotor">
+                    <label class="form-check-label" for="setstatus_kotor">
+                        Kotor
+                    </label>
+                </div>
+                <p>Apakah kamar sudah di bersihakan?</p>
+                <p>Kondisi Kamar</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi" id="kondisikamar_baik">
+                    <label class="form-check-label" for="kondisikamar_baik">
+                        Baik
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi" id="kondisikamar_kotor">
+                    <label class="form-check-label" for="kondisikamar_kotor">
+                        Kotor
+                    </label>
+                </div>
+                <p>Apakah kamar sudah di bersihakan?</p>
+            </div>
+            <div class="modal-footer"> 
+                <button type="button" class="btn btn-primary"
+                    data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->

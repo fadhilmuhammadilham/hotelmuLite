@@ -1,21 +1,21 @@
 .kosong {
-    background-color: green;
+    background-color: #37C174;
 }
 
 .terisi {
-    background-color: red;
+    background-color: #F64E60;
 }
 
 .reservasi {
-    background-color: yellow;
+    background-color: #FFA800;
 }
 
 .akan-checkout {
-    background-color: blue;
+    background-color: #1da1f2;
 }
 
 .rusak {
-    background-color: purple;
+    background-color: #8950FC;
 }
 
 .card-menu {
@@ -67,6 +67,18 @@
     height: 35px;
     margin-right: 10px;
 }
+
+.scd-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #C9F7F5;
+    border-radius: 15px;
+    width: 60px;
+    height: 35px;
+    margin-right: 10px;
+}
+
 
 .component-kecil {
     flex: 0 0 auto;
@@ -236,31 +248,31 @@
     align-items: center;
 }
 
-.btn-minus{
+.btn-minus {
     border: none;
     border-start-start-radius: 7px;
-    border-end-start-radius: 7px ;
+    border-end-start-radius: 7px;
     background-color: #DDDDDD;
     width: 50px;
     height: 40px;
 }
- 
-.form-jumlah{
+
+.form-jumlah {
     width: 250px;
     text-align: start;
     height: 40px;
 }
 
-.btn-plus{
+.btn-plus {
     border: none;
     border-start-end-radius: 7px;
-    border-bottom-right-radius: 7px ;
+    border-bottom-right-radius: 7px;
     background-color: #DDDDDD;
     width: 50px;
     height: 40px;
 }
 
-.btn-kembali{
+.btn-kembali {
     border: none;
     border-radius: 10px;
     height: 40px;
@@ -268,26 +280,26 @@
     background-color: red;
 }
 
-.content-btn-kembali{
+.content-btn-kembali {
     display: flex;
     margin-top: 8px;
     margin-left: 10px;
 }
 
-.panah-kembali{
+.panah-kembali {
     margin-top: 3%;
     width: 17px;
     height: 17px;
 }
 
-.text-kembali{
+.text-kembali {
     padding-left: 3px;
     color: white;
 }
 
 
-.btn-selanjutnya{
-    margin-left: 75px; 
+.btn-selanjutnya {
+    margin-left: 75px;
     border: none;
     border-radius: 10px;
     height: 40px;
@@ -295,19 +307,19 @@
     background-color: blue;
 }
 
-.content-btn-selanjutnya{
+.content-btn-selanjutnya {
     display: flex;
     margin-top: 8px;
     margin-left: 5px;
 }
 
-.panah-selanjutnya{
+.panah-selanjutnya {
     margin-top: 3%;
     width: 17px;
     height: 17px;
 }
 
-.text-selanjutnya{
+.text-selanjutnya {
     padding-right: 3px;
     color: white;
 }
@@ -344,4 +356,12 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
+}
+
+.custom-modal-dialog {
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    max-height: 80%;
 }
