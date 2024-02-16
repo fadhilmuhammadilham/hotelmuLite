@@ -416,43 +416,55 @@
 <div class="modal fade" id="setkamar" tabindex="-1" role="dialog">
     <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="font-size: 20px; font-weight: bold;">
                 Set Status Kamar
             </div>
             <div class="modal-body">
-                <p>Set Status</p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="flexRadioDefaultSet" id="setstatus_bersih">
-                    <label class="form-check-label" for="setstatus_bersih">
-                        Bersih
-                    </label>
+                <div style="display: flex; font-size: 15px;">
+                    <p>Set Status</p>
+                    <div style="margin-left: 4rem;">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefaultSet"
+                                id="setstatus_bersih">
+                            <label class="form-check-label" for="setstatus_bersih">
+                                Bersih
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefaultSet"
+                                id="setstatus_kotor">
+                            <label class="form-check-label" for="setstatus_kotor">
+                                Kotor
+                            </label>
+                        </div>
+                        <p style="font-size: 12px;">Apakah kamar sudah di bersihakan?</p>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="flexRadioDefaultSet" id="setstatus_kotor">
-                    <label class="form-check-label" for="setstatus_kotor">
-                        Kotor
-                    </label>
+                <br>
+                <div style="display: flex; font-size: 15px;">
+                    <p style="width: 40%;">Kondisi Kamar</p>
+                    <div style="margin-left: 1px;">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi"
+                                id="kondisikamar_baik">
+                            <label class="form-check-label" for="kondisikamar_baik">
+                                Baik
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi"
+                                id="kondisikamar_kotor">
+                            <label class="form-check-label" for="kondisikamar_kotor">
+                                Kotor
+                            </label>
+                        </div>
+                        <p style="font-size: 12px;">Apakah kamar sudah di bersihakan?</p>
+                    </div>
                 </div>
-                <p>Apakah kamar sudah di bersihakan?</p>
-                <p>Kondisi Kamar</p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi" id="kondisikamar_baik">
-                    <label class="form-check-label" for="kondisikamar_baik">
-                        Baik
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="flexRadioDefaultKondisi" id="kondisikamar_kotor">
-                    <label class="form-check-label" for="kondisikamar_kotor">
-                        Kotor
-                    </label>
-                </div>
-                <p>Apakah kamar sudah di bersihakan?</p>
             </div>
-            <div class="modal-footer"> 
-                <button type="button" class="btn btn-primary"
-                    data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                <button type="button" class="btn-modal-data-tamu">Save changes</button>
             </div>
         </div>
     </div>
