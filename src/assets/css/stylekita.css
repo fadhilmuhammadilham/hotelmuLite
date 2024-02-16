@@ -277,7 +277,7 @@
     border-radius: 10px;
     height: 40px;
     width: 110px;
-    background-color: red;
+    background-color: #f64e60;
 }
 
 .content-btn-kembali {
@@ -298,13 +298,13 @@
 }
 
 
-.btn-selanjutnya {
-    margin-left: 75px;
+.btn-selanjutnya{
+    margin-left: 75px; 
     border: none;
     border-radius: 10px;
     height: 40px;
     width: 120px;
-    background-color: blue;
+    background-color: #8950fc;
 }
 
 .content-btn-selanjutnya {
@@ -334,6 +334,20 @@
     border-radius: 10px;
 }
 
+.btn-atas-preview{
+    background-color: #470829;
+    height: 30px;
+    margin-left: 10px;
+    border: 0;
+    border-radius: 5px;
+    margin-top: -11px;
+}
+
+.text-btn-preview{
+    font-size: small;
+    color: white;
+}
+
 .pengaturan {
     display: flex;
 }
@@ -353,17 +367,21 @@
 }
 
 .icon-setting {
+    color: #ffb3ff;
     display: flex;
     align-items: center;
     margin-right: 10px;
 }
 
-.custom-modal-dialog {
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
-    height: auto;
-    max-height: 80%;
+.comments-setting{
+    width: 20px;
+    height: 20px;
+}
+
+.text-head-setting{
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .btn-modal-data-tamu {
