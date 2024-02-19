@@ -298,8 +298,8 @@
 }
 
 
-.btn-selanjutnya{
-    margin-left: 75px; 
+.btn-selanjutnya {
+    margin-left: 75px;
     border: none;
     border-radius: 10px;
     height: 40px;
@@ -334,7 +334,7 @@
     border-radius: 10px;
 }
 
-.btn-atas-preview{
+.btn-atas-preview {
     background-color: #470829;
     height: 30px;
     margin-left: 10px;
@@ -343,7 +343,7 @@
     margin-top: -11px;
 }
 
-.text-btn-preview{
+.text-btn-preview {
     font-size: small;
     color: white;
 }
@@ -368,12 +368,12 @@
     margin-right: 10px;
 }
 
-.comments-setting{
+.comments-setting {
     width: 20px;
     height: 20px;
 }
 
-.text-head-setting{
+.text-head-setting {
     font-size: 20px;
     margin-left: 10px;
     margin-top: 10px;
@@ -387,6 +387,7 @@
     border-radius: 8px;
     font-weight: bold;
 }
+
 .btn-modal-close {
     background-color: #F4E1F0;
     color: #663259;
@@ -404,7 +405,7 @@
     padding-top: 15px;
 }
 
-.form-id{
+.form-id {
     display: flex;
     gap: 15px;
 }
@@ -416,7 +417,7 @@
 }
 
 .data-diri input {
-    width: 100%; 
+    width: 100%;
 }
 
 .form-component p {
@@ -426,4 +427,71 @@
 .header-preview {
     display: flex;
     justify-content: space-between;
+}
+
+.top-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-img {
+    background-color: #470829;
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+}
+
+.email {
+    display: flex;
+}
+
+.setting {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.img-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F3F6F9;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.setting-component {
+    display: flex;
+    gap: 10px;
+}
+
+.text-setting h3, .text-setting p {
+    margin: 0;
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.notification-component {
+    display: flex;
+    border-radius: 13px;
+}
+
+.notification-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-text {
+    margin-left: 15px;
+}
+
+.notification-persen {
+    margin-left: auto;
+    font-weight: bold;
 }

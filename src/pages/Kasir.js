@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/profile.handlebars"
+import homeView from "../templates/kamar-reservasi.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Profile extends Page {
+class KamarReservasi extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Profile extends Page {
   }
 }
 
-export default Profile
+export default KamarReservasi
