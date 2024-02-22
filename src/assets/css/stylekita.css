@@ -18,6 +18,10 @@
     background-color: #8950FC;
 }
 
+.appHeader {
+    background-color: transparent;
+}
+
 .card-menu {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
@@ -86,7 +90,7 @@
     width: 5px;
     height: 35px;
     margin-right: 10px;
-    background-color: #1BC5BD;
+    background-color: rgb(46, 46, 186);
 }
 
 .text-component {
@@ -494,4 +498,159 @@
 .notification-persen {
     margin-left: auto;
     font-weight: bold;
+}
+
+.top-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-left {
+    display: flex;
+    gap: 10px;
+}
+
+
+.notifikasi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.2px solid grey;
+    width: auto; 
+    height: auto; 
+    border-radius: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.img-profile{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(46, 46, 186);
+}
+
+.text-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.top-left p, .top-left h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.top-menu {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border-radius: 23px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    background-image: url('../img/topmenu.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.top-menu h3 {
+    color: white;
+    text-align: start;
+}
+
+.all-menu{
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    flex-grow: 1;
+}
+
+.circle-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 10px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu p {
+    margin-top: 3px; 
+    font-weight: bold; 
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    background-color: white;
+    gap: 7px;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    color: white;
+}
+
+.bersih-kotor {
+    color: black;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: #fff; 
+}
+
+
+@media (min-width: 768px) {
+    .notifikasi {
+        border-radius: 35px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .notifikasi svg {
+        width: 35px;
+        height: 35px;
+    }
+    .top-left p {
+        font-size: 20px;
+    }
+    .top-left h3 {
+        font-size: 28px; 
+    }
+    .img-profile{
+        width: 80px;
+        height: 80px;
+    }
+    .top-menu {
+        justify-content: space-evenly;
+        border-radius: 35px;
+    }
+    .circle-menu svg {
+        width: 105px;
+        height: 105px;
+    }
+    .menu p {
+        font-size: 16px;
+    }
 }

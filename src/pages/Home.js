@@ -1,5 +1,5 @@
 import Page from "./Page"
-import homeView from "../templates/home.handlebars"
+import homeView from "../templates/index.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
