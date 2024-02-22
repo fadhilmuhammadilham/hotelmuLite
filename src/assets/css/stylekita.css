@@ -164,7 +164,7 @@
 
 .rates-plan {
     display: flex;
-    padding-bottom: 10px;
+    padding-bottom: 1px;
 }
 
 .room-check {
@@ -176,22 +176,26 @@
 }
 
 .checkin {
-    padding-bottom: 10px;
+    padding-bottom: 1px;
     margin-top: 2px;
 }
 
 .date-checkin {
+    border: 0;
+    border-bottom: 0.1px solid grey;
     padding-left: 10px;
     margin-left: 5px;
     width: 93%;
 }
 
 .checkout {
-    padding-bottom: 10px;
-    margin-top: 12px;
+    padding-bottom: 1px;
+    margin-top: 6px;
 }
 
 .date-checkout {
+    border: 0;
+    border-bottom: 0.1px solid grey;
     padding-left: 10px;
     margin-left: 5px;
     width: 93%;
@@ -223,6 +227,7 @@
 }
 
 .pilih-data-tamu {
+    margin-top: 1px;
     height: 45px;
     border-radius: 7px;
 }
@@ -258,6 +263,8 @@
 }
 
 .form-jumlah {
+    border: 0px;
+    border-bottom: 1px solid grey;
     width: 250px;
     text-align: start;
     height: 40px;
