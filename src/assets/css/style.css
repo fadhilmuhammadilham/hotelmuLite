@@ -7561,7 +7561,7 @@ button {
   left: 0;
   right: 0;
   z-index: 999;
-  background: #f8f4ff;
+  background: #ffff;
   color: #141515;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08); }
   .appHeader:before {
