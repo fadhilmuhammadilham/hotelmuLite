@@ -3,7 +3,7 @@ import homeView from "../templates/form-reservasi.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Reservasi extends Page {
+class formReservasi extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Reservasi extends Page {
   }
 }
 
-export default Reservasi
+export default formReservasi
