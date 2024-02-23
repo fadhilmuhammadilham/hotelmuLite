@@ -647,6 +647,19 @@
     padding: 10px; /* Padding default */
 }
 
+.buat-reservasi {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.card-buat-reservasi{
+    text-align: start;
+    font-size: small;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+}
+
 @media (min-width: 768px) {
     .badge-container .p-1 {
         padding: 13px !important; /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
