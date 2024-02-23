@@ -179,18 +179,18 @@
 }
 
 .pilih-segmen {
-    height: 45px;
+    margin-left: 50px;
+    height: 20px;
     border-radius: 7px;
 }
 
 .button-segmen {
     border: none;
     background-color: #470829;
-    border-top-right-radius: 10px;
-    border-end-end-radius: 10px;
     margin-top: 1px;
-    height: 43px;
-    width: 110px;
+    margin-left: 1px;
+    height: 30px;
+    width: 30px;
 }
 
 .text-button-segmen {
@@ -589,8 +589,10 @@
     color: white;
     padding: 15px;
 }
+
 .badge.kosong {
-    padding: 10px; /* Atur padding sesuai kebutuhan Anda */
+    padding: 10px;
+    /* Atur padding sesuai kebutuhan Anda */
 }
 
 
@@ -607,12 +609,14 @@
     background-color: #007bff;
     color: #fff;
 }
+
 .pilih-reservasi {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.card-reservasi{
+
+.card-reservasi {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -626,8 +630,9 @@
 /* Optional: Custom styling for the accordion */
 .accordion-item {
     margin-bottom: 10px;
-  }
-  .accordion-button {
+}
+
+.accordion-button {
     background-color: #f8f9fa;
     color: #495057;
     border-color: #dee2e6;
@@ -636,26 +641,29 @@
     padding: 10px;
     width: 100%;
     text-align: left;
-  }
-  .accordion-button:hover {
+}
+
+.accordion-button:hover {
     background-color: #e9ecef;
-  }
-  .accordion-body {
+}
+
+.accordion-body {
     border: 1px solid #dee2e6;
     border-top: none;
     border-radius: 0 0 5px 5px;
     display: none;
     padding: 10px;
-  }
-  .show {
+}
+
+.show {
     display: block;
-  }
+}
+
 .all-room {
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 10px;
 }
-
 
 .kamar {
     border-radius: 15px;
@@ -673,6 +681,7 @@
 .kamar p {
     margin-top: 15px;
 }
+
 .badge-container .p-1 {
     padding: 10px;
 }
@@ -682,7 +691,8 @@
     flex-direction: column;
     gap: 15px;
 }
-.card-buat-reservasi{
+
+.card-buat-reservasi {
     text-align: start;
     font-size: small;
     padding: 15px;
@@ -690,26 +700,83 @@
     border-radius: 10px;
 }
 
+.wizard {
+    position: relative;
+}
+
+.step-content {
+    display: none;
+}
+
+input[type="radio"]:checked+.step-content {
+    display: block;
+}
+
+.wizard__step {
+    display: none;
+}
+
+.wizard__content {
+    display: none;
+}
+
+.wizard__step:checked+.wizard__content {
+    display: block;
+}
+
+.next-button {
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+.button {
+    border: 1px;
+    color: #007bff;
+}
+
+/* Menunjukkan tombol Next yang berkaitan dengan langkah yang aktif */
+input[type="radio"]:checked+.wizard__content .next-button {
+    display: block;
+}
+
+/* Sembunyikan tombol Next pada langkah terakhir */
+input[type="radio"]:last-of-type:checked+.wizard__content .next-button {
+    display: none;
+}
+
+.button-step {
+ display: flex;
+}
+
+
+
 @media (min-width: 768px) {
     .badge-container .p-1 {
-        padding: 13px !important; /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
+        padding: 13px !important;
+        /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
     }
+
     .kamar p {
         font-size: 25px;
     }
+
     .badge-container .badge {
         font-size: 25px;
         width: auto;
         height: auto;
     }
+
     .badge-container svg {
         width: 30px;
-        height: 30px; 
+        height: 30px;
     }
+
     .nav-tabs .nav-item .nav-link {
-        font-size: 25px; 
-        padding: 15px 20px; 
+        font-size: 25px;
+        padding: 15px 20px;
     }
+
     .notifikasi {
         border-radius: 35px;
         padding-top: 15px;
@@ -748,26 +815,32 @@
     .circle-menu {
         border-radius: 65px;
     }
+
     .menu p {
         font-size: 22px;
         margin-top: 10px;
     }
+
     .circle-menu svg {
         width: 105px;
         height: 105px;
     }
+
     .component-kecil {
         height: 45px;
     }
+
     .nama-room h3 {
         font-size: 25px;
     }
-    .all-room{
+
+    .all-room {
         gap: 8px;
     }
-    .kamar{
+
+    .kamar {
         width: 120px;
         height: 110px;
     }
-    
+
 }

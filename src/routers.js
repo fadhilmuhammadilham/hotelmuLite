@@ -1,5 +1,5 @@
 import PilihReservasi from "./pages/PilihReservasi"
-import BuatReservasi from "./pages/BuatReservasi"
+import GuaranteedReservasi from "./pages/GuaranteedReservasi"
 import inventory from "./pages/inventory"
 import Checkin from "./pages/Checkin"
 import formReservasi from "./pages/FormReservasi"
@@ -23,7 +23,7 @@ const routers = [
   { path: "/profil", view: Profile, middlewares: []},
   { path: "/inventory", view: inventory, middlewares: []},
   { path: "/pilih-reservasi", view: PilihReservasi, middlewares: []},
-  { path: "/buat-reservasi", view: BuatReservasi, middlewares: []},
+  { path: "/guaranteed-reservasi", view: GuaranteedReservasi, middlewares: []},
 ]
 
 // const routers = [

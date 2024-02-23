@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/buat-reservasi.handlebars"
+import homeView from "../templates/guaranteed-reservasi.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class BuatReservasi extends Page {
+class GuaranteedReservasi extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class BuatReservasi extends Page {
   }
 }
 
-export default BuatReservasi
+export default GuaranteedReservasi
