@@ -613,13 +613,43 @@
     gap: 15px;
 }
 .card-reservasi{
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 50px;
     padding: 15px;
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Optional: Custom styling for the accordion */
+.accordion-item {
+    margin-bottom: 10px;
+  }
+  .accordion-button {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-color: #dee2e6;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+  }
+  .accordion-button:hover {
+    background-color: #e9ecef;
+  }
+  .accordion-body {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    display: none;
+    padding: 10px;
+  }
+  .show {
+    display: block;
+  }
 .all-room {
     display: flex;
     flex-wrap: wrap;
@@ -644,7 +674,7 @@
     margin-top: 15px;
 }
 .badge-container .p-1 {
-    padding: 10px; /* Padding default */
+    padding: 10px;
 }
 
 .buat-reservasi {
