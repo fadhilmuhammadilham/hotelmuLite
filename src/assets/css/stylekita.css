@@ -360,8 +360,8 @@
 }
 
 .btn-modal-data-tamu {
-    background-color: #663259;
-    color: white;
+    background-color: #4a53e7;
+    color: #F3F6F9;
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -369,8 +369,8 @@
 }
 
 .btn-modal-close {
-    background-color: #F4E1F0;
-    color: #663259;
+    background-color: #F3F6F9;
+    color: #4a53e7;
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -592,7 +592,6 @@
 
 .badge.kosong {
     padding: 10px;
-    /* Atur padding sesuai kebutuhan Anda */
 }
 
 
@@ -627,37 +626,49 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: Custom styling for the accordion */
-.accordion-item {
-    margin-bottom: 10px;
-}
-
 .accordion-button {
-    background-color: #f8f9fa;
-    color: #495057;
-    border-color: #dee2e6;
-    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
     cursor: pointer;
-    padding: 10px;
     width: 100%;
     text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
-.accordion-button:hover {
-    background-color: #e9ecef;
-}
 
 .accordion-body {
+    background-color: #F3F6F9;
     border: 1px solid #dee2e6;
     border-top: none;
     border-radius: 0 0 5px 5px;
-    display: none;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-body p{
+    font-size: 12px;
+}
+
+.collapse.show {
+    max-height: 1000px;
     padding: 10px;
 }
 
-.show {
-    display: block;
+.text-reservasi h3,
+.text-reservasi p {
+    margin: 0;
 }
+
+.text-reservasi p {
+    font-size: 13px;
+}
+
 
 .all-room {
     display: flex;
@@ -686,75 +697,52 @@
     padding: 10px;
 }
 
-.buat-reservasi {
+.circle-img {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    padding: 9px;
+    background-color: #F3F6F9;
 }
 
-.card-buat-reservasi {
-    text-align: start;
-    font-size: small;
-    padding: 15px;
-    background-color: white;
-    border-radius: 10px;
+.circle-img svg {
+    color: #4a53e7;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.wizard {
-    position: relative;
+#collapseOne h4 {
+    margin-bottom: 0;
+    font-weight: bold;
 }
 
-.step-content {
-    display: none;
+#collapseOne p {
+    margin-top: 0;
 }
 
-input[type="radio"]:checked+.step-content {
-    display: block;
+.modal-body p:not([style="font-weight: bold;"]) {
+    font-size: 13px;
 }
 
-.wizard__step {
-    display: none;
+.set-status {
+    display: flex;
+    justify-content: space-between;
 }
 
-.wizard__content {
-    display: none;
+.set-status {
+    font-size: 18px;
 }
 
-.wizard__step:checked+.wizard__content {
-    display: block;
+.set-status p {
+    color: grey;
 }
-
-.next-button {
-    color: white;
-    cursor: pointer;
-    display: none;
-}
-
-.button {
-    border: 1px;
-    color: #007bff;
-}
-
-/* Menunjukkan tombol Next yang berkaitan dengan langkah yang aktif */
-input[type="radio"]:checked+.wizard__content .next-button {
-    display: block;
-}
-
-/* Sembunyikan tombol Next pada langkah terakhir */
-input[type="radio"]:last-of-type:checked+.wizard__content .next-button {
-    display: none;
-}
-
-.button-step {
- display: flex;
-}
-
-
 
 @media (min-width: 768px) {
     .badge-container .p-1 {
         padding: 13px !important;
-        /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
     }
 
     .kamar p {
@@ -843,4 +831,30 @@ input[type="radio"]:last-of-type:checked+.wizard__content .next-button {
         height: 110px;
     }
 
+    .accordion-button h3 {
+        font-size: 25px;
+    }
+
+    .accordion-button p {
+        font-size: 18px;
+    }
+    
+    .circle-img{
+        padding: 15px;
+    }
+    .card-reservasi h3{
+        font-size: 25px;
+    }
+    .card-reservasi p {
+        font-size: 18px;
+    }
+    .accordion-body h4 {
+        font-size: 23px;
+    }
+    .accordion-body p {
+        font-size: 18px;
+    }
+    .pageTitle h3{
+        font-size: 23px;
+    }
 }
