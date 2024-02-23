@@ -1,45 +1,94 @@
-<div id="appCapsule" class="pt-2">
-    <div class="section mb-2">
+<!-- App Header -->
+<div class="appHeader">
+    <div class="left">
+
+    </div>
+    <div class="pageTitle">
+        <h3>
+        Reservasi
+        </h3>
+    </div>
+    <div class="right">
+
+    </div>
+</div>
+<!-- * App Header -->
+
+<div id="appCapsule">
+    <div class="section mb-2 mt-2">
         <div class="pilih-reservasi">
-            <div class="container">
-                <div class="accordion-item">
-                    <div class="accordion-header" id="headingOne">
-                        <button class="accordion-button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="false" aria-controls="collapseOne">
-                            Accordion Item
-                        </button>
-                    </div>
-                    <a href="#" class="text-muted">
-                    <div id="collapseOne" class="accordion-body collapse">
-                        guaranteed
-                    </div>
-                    </a>
-                    <a href="#" class="text-muted">
-                    <div id="collapseOne" class="accordion-body collapse">
-                        tentative
-                    </div>
-                    </a>
+            <div class="accordion-item">
+                <div class="accordion-header" id="headingOne">
+                    <button class="accordion-button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        <div class="text-reservasi">
+                            <h3>
+                                Form Reservasi
+                            </h3>
+                            <p>Isi form untuk reservasi baru</p>
+                        </div>
+                        <div class="circle-img" style="margin-left: 2px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="30" height="30">
+                                <path fill="#4a53e7"
+                                    d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V299.6l-94.7 94.7c-8.2 8.2-14 18.5-16.8 29.7l-15 60.1c-2.3 9.4-1.8 19 1.4 27.8H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM549.8 235.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4-71-71 29.4-29.4c15.6-15.6 40.9-15.6 56.6 0zM311.9 417L441.1 287.8l71 71L382.9 487.9c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z" />
+                            </svg>
+                        </div>
+                    </button>
                 </div>
+                <a href="#" class="text-muted">
+                    <div id="collapseOne" class="accordion-body collapse">
+                        <h4>
+                            Guaranteed Reservation
+                        </h4>
+                        <p>Reservasi yang membutuhkan jaminan pembayaran. Misal :
+                            Agoda.com,PegiPegi.com,dll</p>
+                    </div>
+                </a>
+                <a href="#" class="text-muted">
+                    <div id="collapseOne" class="accordion-body collapse">
+                        <h4>
+                            Tentative Reservation
+                        </h4>
+                        <p >Reservasi tanpa jaminan pembayaran. Misal : Booking.com,Walk-In,dll
+                        </p>
+                    </div>
+                </a>
             </div>
             <a href="">
                 <div class="card-reservasi text-muted">
-                    <h3>
-                        Form Reservasi
-                    </h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 576 512">
-                        <path
-                            d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V299.6l-94.7 94.7c-8.2 8.2-14 18.5-16.8 29.7l-15 60.1c-2.3 9.4-1.8 19 1.4 27.8H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM549.8 235.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4-71-71 29.4-29.4c15.6-15.6 40.9-15.6 56.6 0zM311.9 417L441.1 287.8l71 71L382.9 487.9c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z" />
-                    </svg>
+                    <div class="text-reservasi">
+                        <h3>
+                            Reservasi List
+                        </h3>
+                        <p>Lihat data reservasi</p>
+                    </div>
+                    <div class="circle-img">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#4a53e7"
+                            fill="currentColor" class="bi bi-calendar2-check-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5m-2.6 5.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z" />
+                        </svg>
+                    </div>
                 </div>
             </a>
             <a href="">
                 <div class="card-reservasi text-muted">
-                    Reservasi List
+                    <div class="text-reservasi">
+                        <h3>
+                            Void Booking
+                        </h3>
+                        <p>Pembatalan reservasi</p>
+                    </div>
+                    <div class="circle-img">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#4a53e7"
+                            fill="currentColor" class="bi bi-calendar2-x-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5m-6.6 5.146a.5.5 0 1 0-.708.708L7.293 10l-1.147 1.146a.5.5 0 0 0 .708.708L8 10.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 10l1.147-1.146a.5.5 0 0 0-.708-.708L8 9.293z" />
+                        </svg>
+                    </div>
                 </div>
-            </a>
-            <a href="">
-                <div class="card-reservasi text-muted">Void Booking</div>
             </a>
         </div>
     </div>
 </div>
+{{> buttom-menus }}
