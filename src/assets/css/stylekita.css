@@ -1,25 +1,21 @@
 .kosong {
-    background-color: #37C174;
+    background-color: #28a745;
 }
 
 .terisi {
-    background-color: #F64E60;
+    background-color: #dc3545;
 }
 
 .reservasi {
-    background-color: #FFA800;
+    background-color: #ff9900;
 }
 
 .akan-checkout {
-    background-color: #1da1f2;
+    background-color: #007bff;
 }
 
 .rusak {
-    background-color: #8950FC;
-}
-
-.appHeader {
-    background-color: transparent;
+    background-color: #6f42c1;
 }
 
 .card-menu {
@@ -103,15 +99,6 @@
     align-items: center;
 }
 
-.kamar {
-    border-radius: 15px;
-    flex: 0 0 auto;
-    width: 90px;
-    height: 80px;
-    margin-right: 10px;
-    margin-top: 10px;
-}
-
 .text-status {
     height: 10px;
     padding-top: 2px;
@@ -123,24 +110,6 @@
     width: 120px;
     height: 10px;
     margin-top: 5px;
-}
-
-.kamar-content {
-    display: flex;
-    margin-top: 17%;
-    margin-left: 20%;
-}
-
-.icon-kamar-content {
-    width: 17px;
-    height: 17x;
-
-}
-
-.text-kamar-content {
-    padding-top: 17%;
-    color: white;
-    font-size: 15px;
 }
 
 .top-text {
@@ -477,7 +446,8 @@
     gap: 10px;
 }
 
-.text-setting h3, .text-setting p {
+.text-setting h3,
+.text-setting p {
     margin: 0;
 }
 
@@ -507,7 +477,7 @@
     font-weight: bold;
 }
 
-.top-bar{
+.top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -524,8 +494,8 @@
     justify-content: center;
     align-items: center;
     border: 1.2px solid grey;
-    width: auto; 
-    height: auto; 
+    width: auto;
+    height: auto;
     border-radius: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -534,20 +504,21 @@
 }
 
 
-.img-profile{
+.img-profile {
     border-radius: 50%;
     width: 50px;
     height: 50px;
     background-color: rgb(46, 46, 186);
 }
 
-.text-profile{
+.text-profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.top-left p, .top-left h3 {
+.top-left p,
+.top-left h3 {
     margin: 0;
     padding: 0;
 }
@@ -558,20 +529,21 @@
     width: auto;
     height: auto;
     padding: 10px;
-    border-radius: 23px; 
+    border-radius: 23px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; 
-    background-image: url('../img/topmenu.png'); 
+    overflow: hidden;
+    background-image: url('../img/topmenu.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
+
 .top-menu h3 {
     color: white;
     text-align: start;
 }
 
-.all-menu{
+.all-menu {
     display: flex;
 }
 
@@ -589,13 +561,13 @@
     justify-content: center;
     background-color: #ffffff;
     border-radius: 30px;
-    padding: 10px; 
+    padding: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .menu p {
-    margin-top: 3px; 
-    font-weight: bold; 
+    margin-top: 3px;
+    font-weight: bold;
     color: #ffffff;
     font-size: 14px;
 }
@@ -603,7 +575,7 @@
 .badge-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
     background-color: white;
     gap: 7px;
     padding: 12px;
@@ -615,15 +587,25 @@
     align-items: center;
     margin-right: 5px;
     color: white;
+    padding: 15px;
 }
+.badge.kosong {
+    padding: 10px; /* Atur padding sesuai kebutuhan Anda */
+}
+
 
 .bersih-kotor {
     color: black;
 }
 
+.status-kamar {
+    background-color: white;
+    border-radius: 20px;
+}
+
 .nav-tabs .nav-link.active {
     background-color: #007bff;
-    color: #fff; 
+    color: #fff;
 }
 .pilih-reservasi {
     display: flex;
@@ -638,7 +620,53 @@
     border-radius: 10px;
 }
 
+.all-room {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+
+.kamar {
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 70px;
+    margin-right: 5px;
+    margin-top: 5px;
+    gap: 5px;
+    color: white;
+}
+
+.kamar p {
+    margin-top: 15px;
+}
+.badge-container .p-1 {
+    padding: 10px; /* Padding default */
+}
+
 @media (min-width: 768px) {
+    .badge-container .p-1 {
+        padding: 13px !important; /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
+    }
+    .kamar p {
+        font-size: 25px;
+    }
+    .badge-container .badge {
+        font-size: 25px;
+        width: auto;
+        height: auto;
+    }
+    .badge-container svg {
+        width: 30px;
+        height: 30px; 
+    }
+    .nav-tabs .nav-item .nav-link {
+        font-size: 25px; 
+        padding: 15px 20px; 
+    }
     .notifikasi {
         border-radius: 35px;
         padding-top: 15px;
@@ -646,29 +674,57 @@
         padding-left: 25px;
         padding-right: 25px;
     }
+
     .notifikasi svg {
         width: 35px;
         height: 35px;
     }
+
     .top-left p {
         font-size: 20px;
     }
+
     .top-left h3 {
-        font-size: 28px; 
+        font-size: 28px;
     }
-    .img-profile{
+
+    .img-profile {
         width: 80px;
         height: 80px;
     }
+
     .top-menu {
         justify-content: space-evenly;
         border-radius: 35px;
+    }
+
+    .top-menu h3 {
+        font-size: 30px;
+    }
+
+    .circle-menu {
+        border-radius: 65px;
+    }
+    .menu p {
+        font-size: 22px;
+        margin-top: 10px;
     }
     .circle-menu svg {
         width: 105px;
         height: 105px;
     }
-    .menu p {
-        font-size: 16px;
+    .component-kecil {
+        height: 45px;
     }
+    .nama-room h3 {
+        font-size: 25px;
+    }
+    .all-room{
+        gap: 8px;
+    }
+    .kamar{
+        width: 120px;
+        height: 110px;
+    }
+    
 }
