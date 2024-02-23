@@ -18,10 +18,6 @@
     background-color: #6f42c1;
 }
 
-.appHeader {
-    background-color: transparent;
-}
-
 .card-menu {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
@@ -584,7 +580,12 @@
     align-items: center;
     margin-right: 5px;
     color: white;
+    padding: 15px;
 }
+.badge.kosong {
+    padding: 10px; /* Atur padding sesuai kebutuhan Anda */
+}
+
 
 .bersih-kotor {
     color: black;
@@ -624,8 +625,17 @@
 .kamar p {
     margin-top: 15px;
 }
+.badge-container .p-1 {
+    padding: 10px; /* Padding default */
+}
 
 @media (min-width: 768px) {
+    .badge-container .p-1 {
+        padding: 13px !important; /* Atur padding lebih besar untuk perangkat dengan layar lebih besar */
+    }
+    .kamar p {
+        font-size: 25px;
+    }
     .badge-container .badge {
         font-size: 25px;
         width: auto;
@@ -698,4 +708,5 @@
         width: 120px;
         height: 110px;
     }
+    
 }
