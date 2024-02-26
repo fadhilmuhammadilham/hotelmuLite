@@ -1,4 +1,6 @@
 import PilihReservasi from "./pages/PilihReservasi"
+import GuaranteedReservasi from "./pages/GuaranteedReservasi"
+import inventory from "./pages/inventory"
 import Checkin from "./pages/Checkin"
 import formReservasi from "./pages/FormReservasi"
 import Home from "./pages/Home"

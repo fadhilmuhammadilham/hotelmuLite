@@ -179,18 +179,18 @@
 }
 
 .pilih-segmen {
-    height: 45px;
+    margin-left: 50px;
+    height: 20px;
     border-radius: 7px;
 }
 
 .button-segmen {
     border: none;
     background-color: #470829;
-    border-top-right-radius: 10px;
-    border-end-end-radius: 10px;
     margin-top: 1px;
-    height: 43px;
-    width: 110px;
+    margin-left: 1px;
+    height: 30px;
+    width: 30px;
 }
 
 .text-button-segmen {
@@ -665,7 +665,6 @@
     flex-wrap: wrap;
     padding-bottom: 10px;
 }
-
 
 .kamar {
     border-radius: 15px;
