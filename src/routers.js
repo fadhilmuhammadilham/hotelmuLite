@@ -9,6 +9,7 @@ import PreviewCheckin from "./pages/PreviewCheckin"
 import Profile from "./pages/Profile"
 import Setting from "./pages/Settings"
 import inventory from "./pages/inventory"
+import TentativeReservasi from "./pages/TentativeReservasi"
 
 const routers = [
   { path: "/", view: Home, middlewares: []},
@@ -22,6 +23,7 @@ const routers = [
   { path: "/profil", view: Profile, middlewares: []},
   { path: "/inventory", view: inventory, middlewares: []},
   { path: "/pilih-reservasi", view: PilihReservasi, middlewares: []},
+  { path: "/tentative-reservasi", view: TentativeReservasi, middlewares: []},
 ]
 
 // const routers = [
