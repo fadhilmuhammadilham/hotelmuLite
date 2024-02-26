@@ -132,6 +132,7 @@
 
 .text-atas {
     display: flex;
+    justify-content: space-between;
     margin-top: 1%;
 }
 
@@ -651,7 +652,7 @@
     transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
-.accordion-body p{
+.accordion-body p {
     font-size: 12px;
 }
 
@@ -739,6 +740,96 @@
 .set-status p {
     color: grey;
 }
+
+#regForm {
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+.tab {
+    display: none;
+}
+
+.btn-step {
+    background-color: #4a53e7;
+    color: #F3F6F9;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #F3F6F9;
+    color: #4a53e7;
+}
+
+.step-container {
+    text-align: right;
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #4a53e7;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+.step.finish {
+    background-color: #04AA6D;
+}
+
+.btn-rates {
+    width: 40px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #4a53e7;
+    color: #F3F6F9;
+}
+
+.select-radio {
+    display: flex;
+    gap: 5px;
+}
+
+.select-radio input[type="radio"] {
+    width: auto;
+    height: auto;
+}
+
+.btn-pilih-segmen {
+    background-color: #4a53e7;
+    color: #F3F6F9;
+    border-radius: 5px;
+}
+
 
 @media (min-width: 768px) {
     .badge-container .p-1 {
@@ -838,23 +929,28 @@
     .accordion-button p {
         font-size: 18px;
     }
-    
-    .circle-img{
+
+    .circle-img {
         padding: 15px;
     }
-    .card-reservasi h3{
+
+    .card-reservasi h3 {
         font-size: 25px;
     }
+
     .card-reservasi p {
         font-size: 18px;
     }
+
     .accordion-body h4 {
         font-size: 23px;
     }
+
     .accordion-body p {
         font-size: 18px;
     }
-    .pageTitle h3{
+
+    .pageTitle h3 {
         font-size: 23px;
     }
 }

@@ -1,159 +1,393 @@
-<div id="appCapsule" class="pt-2">
-    <div class="section mb-2">
-        <div class="top-bar">
-            <div class="top-left">
-                <a href="/pilih-reservasi" class="text-muted">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor"
-                        class="bi bi-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-                    </svg>
-                </a>
-            </div>
-        </div>
+<!-- App Header -->
+<div class="appHeader">
+    <div class="left ml-1">
+        <a href="/pilih-reservasi" class="text-muted">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+        </a>
     </div>
-    <div class="section mb-2">
-        <div class="buat-reservasi">
-            <div class="wizard">
-                <!-- Step 1 -->
-                <input type="radio" name="step" id="step1" class="wizard__step" checked>
-                <div class="wizard__content">
-                    <div class="content-step1">
-                        <div class="card p-2" id="sessionCard">
-                            <a href="">
-                                <div class="text-muted">
-                                    <h3>
-                                        Step 1
-                                    </h3>
-                                </div>
-                            </a>
-                        </div>
-                        <br>
-                        <div class="card p-2" id="sessionCard">
-                            <div>
-                            <div style="display: flex; flex-direction: row;">
-                                <h5>Rate Plan</h5>
-                                <div class="pilih-segmen">
-                                    <input type="text" placeholder="Normal Rates">
-                                    <button class="button-segmen" data-toggle="modal" data-target="#piligsegmentasi">
-                                        <p class="text-button-segmen">
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                            </div>
-                            <h5>Tipe Reservasi</h5>
-                            <div class="rates-plan ml-1">
-                                <input type="radio" id="roomOnly" name="roomOption" value="roomOnly" class="room-check">
-                                <label for="roomOnly" class="ml-1 room">Room Only</label><br>
+    <div class="pageTitle mt-1">
+        <h3>
+            Guaranteed Reservation
+        </h3>
+    </div>
+    <div class="right">
 
-                                <input type="radio" id="roomBreakfast" class="ml-2 room-check" name="roomOption"
-                                    value="roomBreakfast">
-                                <label for="roomBreakfast" class="ml-1 room">Room Breakfast</label><br>
-                            </div>
-                            <div class="checkin">
-                                <h5>Check-In</h5>
-                                <input type="date" class="date-checkin">
-                            </div>
-                            <div class="checkout">
-                                <h5>Check-Out</h5>
-                                <input type="date" class="date-checkout">
-                            </div>
+    </div>
+</div>
+<!-- * App Header -->
+
+<!-- App Capsule -->
+<div id="appCapsule">
+    <div class="section mb-2 mt-2">
+        <form id="regForm" action="/action_page.php">
+            <div class="top-text">
+                <div class="text-atas">
+                    <svg class="icon-comments" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#000000"
+                            d="M88.2 309.1c9.8-18.3 6.8-40.8-7.5-55.8C59.4 230.9 48 204 48 176c0-63.5 63.8-128 160-128s160 64.5 160 128s-63.8 128-160 128c-13.1 0-25.8-1.3-37.8-3.6c-10.4-2-21.2-.6-30.7 4.2c-4.1 2.1-8.3 4.1-12.6 6c-16 7.2-32.9 13.5-49.9 18c2.8-4.6 5.4-9.1 7.9-13.6c1.1-1.9 2.2-3.9 3.2-5.9zM0 176c0 41.8 17.2 80.1 45.9 110.3c-.9 1.7-1.9 3.5-2.8 5.1c-10.3 18.4-22.3 36.5-36.6 52.1c-6.6 7-8.3 17.2-4.6 25.9C5.8 378.3 14.4 384 24 384c43 0 86.5-13.3 122.7-29.7c-4.8-2.2-9.6-4.5-14.2-6.8c-15.1 3-30.9 4.5-47.1 4.5c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176zM432 480c16.2 0 31.9-1.6 47.1-4.5c4.6 2.3 9.4 4.6 14.2 6.8C529.5 498.7 573 512 616 512c9.6 0 18.2-5.7 22-14.5c3.8-8.8 2-19-4.6-25.9c-14.2-15.6-26.2-33.7-36.6-52.1c-.9-1.7-1.9-3.4-2.8-5.1C622.8 384.1 640 345.8 640 304c0-94.4-87.9-171.5-198.2-175.8c4.1 15.2 6.2 31.2 6.2 47.8l0 .6c87.2 6.7 144 67.5 144 127.4c0 28-11.4 54.9-32.7 77.2c-14.3 15-17.3 37.6-7.5 55.8c1.1 2 2.2 4 3.2 5.9c2.5 4.5 5.2 9 7.9 13.6c-17-4.5-33.9-10.7-49.9-18c-4.3-1.9-8.5-3.9-12.6-6c-9.5-4.8-20.3-6.2-30.7-4.2c-12.1 2.4-24.7 3.6-37.8 3.6c-61.7 0-110-26.5-136.8-62.3c-16 5.4-32.8 9.4-50 11.8C279 439.8 350 480 432 480z" />
+                    </svg>
+                    <p class="ml-1 text-comments">Form Reservasi</p>
+                </div>
+                <div class="step-container mr-1">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+            </div>
+            <hr>
+
+            <!-- step 1 -->
+            <div class="tab">
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Rates Plan</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 90%;">
+                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder=""
+                                readonly>
+                        </div>
+                        <div class="ml-1">
+                            <button type="button" class="btn-rates" data-toggle="modal" data-target="#pilihrates">
+                                <p class="txt-btn-rates">..</p>
+                            </button>
                         </div>
                     </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Pilih Segmen</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 90%;">
+                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm1" placeholder=""
+                                readonly>
+                        </div>
+                        <div class="ml-1">
+                            <button type="button" class="btn-rates" data-toggle="modal" data-target="#segmentasi">
+                                <p class="txt-btn-rates">..</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Arrival Date</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 98%;">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Departure Date</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 98%;">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Total of Adult</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 98%;">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Total of Child</label>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div style="width: 98%;">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label mt-1">Baquet</label>
+                    <div class="select-radio ml-1">
+                        <input type="radio" id="tidak" name="baquet" value="tidak">
+                        <label for="" class="mt-1">Tidak</label>
+                        <input type="radio" id="ya" name="baquet" value="ya" class="ml-1">
+                        <label for="" class="mt-1">Ya</label>
+                    </div>
+                </div>
+            </div>
 
-                    <div class="section mt-2 mb-2">
-                        <div class="card p-2" id="sessionCard">
-                            <div class="top-text">
-                                <div class="text-atas">
-                                    <svg class="icon-comments" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                        <path fill="#000000"
-                                            d="M88.2 309.1c9.8-18.3 6.8-40.8-7.5-55.8C59.4 230.9 48 204 48 176c0-63.5 63.8-128 160-128s160 64.5 160 128s-63.8 128-160 128c-13.1 0-25.8-1.3-37.8-3.6c-10.4-2-21.2-.6-30.7 4.2c-4.1 2.1-8.3 4.1-12.6 6c-16 7.2-32.9 13.5-49.9 18c2.8-4.6 5.4-9.1 7.9-13.6c1.1-1.9 2.2-3.9 3.2-5.9zM0 176c0 41.8 17.2 80.1 45.9 110.3c-.9 1.7-1.9 3.5-2.8 5.1c-10.3 18.4-22.3 36.5-36.6 52.1c-6.6 7-8.3 17.2-4.6 25.9C5.8 378.3 14.4 384 24 384c43 0 86.5-13.3 122.7-29.7c4.8-2.2 9.6-4.5 14.2-6.8c15.1 3 30.9 4.5 47.1 4.5c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176zM432 480c16.2 0 31.9-1.6 47.1-4.5c4.6 2.3 9.4 4.6 14.2 6.8C529.5 498.7 573 512 616 512c9.6 0 18.2-5.7 22-14.5c3.8-8.8 2-19-4.6-25.9c-14.2-15.6-26.2-33.7-36.6-52.1c-.9-1.7-1.9-3.4-2.8-5.1C622.8 384.1 640 345.8 640 304c0-94.4-87.9-171.5-198.2-175.8c4.1 15.2 6.2 31.2 6.2 47.8l0 .6c87.2 6.7 144 67.5 144 127.4c0 28-11.4 54.9-32.7 77.2c-14.3 15-17.3 37.6-7.5 55.8c1.1 2 2.2 4 3.2 5.9c2.5 4.5 5.2 9 7.9 13.6c-17-4.5-33.9-10.7-49.9-18c-4.3-1.9-8.5-3.9-12.6-6c-9.5-4.8-20.3-6.2-30.7-4.2c-12.1 2.4-24.7 3.6-37.8 3.6c-61.7 0-110-26.5-136.8-62.3c-16 5.4-32.8 9.4-50 11.8C279 439.8 350 480 432 480z" />
-                                    </svg>
-                                    <p class="ml-1 text-comments">Isi Data Tamu</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <h5>Market Segmen</h5>
-                            <div class="input">
-                                <input type="text" placeholder="Pilih Segmentasi">
-                                <div class="pilih-segmen">
-                                    <button class="button-segmen" data-toggle="modal" data-target="#piligsegmentasi">
-                                        <p class="text-button-segmen">
-                                            Pilih Segmen
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                            <br>
-                            <h5>Isi Data Tamu</h5>
-                            <div class="input">
-                                <input type="text" placeholder="Pilih Segmentasi">
-                                <div class="pilih-data-tamu">
-                                    <button class="button-data-tamu" data-toggle="modal" data-target="#datatamu">
-                                        <p class="text-data-tamu">
-                                            Data Tamu
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                            <h5 class="mt-2">Jumlah Orangtua</h5>
-                            <div class="tambah-kurang">
-                                <button id="minusButton" class="btn-minus">-</button>
-                                <input class="form-jumlah" type="number" id="numberInput" value="0">
-                                <button id="plusButton" class="btn-plus">+</button>
-                            </div>
-                            <h5 class="mt-2 ">Jumlah Anak</h5>
-                            <div class="tambah-kurang">
-                                <button id="minusButton" class="btn-minus">-</button>
-                                <input class="form-jumlah" type="number" id="numberInput" value="0">
-                                <button id="plusButton" class="btn-plus">+</button>
-                            </div>
-                            <div class="button mt-3 ml-3" style="display: flex;">
-                                <button class="btn-selanjutnya">
-                                    <div class="content-btn-selanjutnya" style="justify-content: center;">
-                                        <label class="next-button" for="step2">selanjutnya</label>
-                                    </div>
-                                </button>
+            <!-- step 2 -->
+            <div class="tab">
+                <div class="row mb-3">
+                    <div class="col-sm-4">
+                        <h4 class="ml-1">Form</h4>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+
+            <!-- step 3 -->
+            <div class="tab">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3 style="text-align: center;">Room Rates</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div>
+                            <label for="formGroupExampleInput" class="form-label">Kamar 101</label>
+                            <div style="display: flex;">
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="">
+                                <p class="ml-1 mt-1 mr-1">(Rp.)</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Step 2 -->
-                <input type="radio" name="step" id="step2" class="wizard__step">
-                <div class="wizard__content">
-                    <label for="step2">Step 2</label>
-                    <div style="display:flex;">
-                        <div style="padding-right: 10px;">
-                            <button class="button-step button"><label class="prev-button" for="step1">Previous</label>
-                            </button>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-sm-4">
+                        <h3 style="text-align: center;">Down Payment</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-1">
+                            <label for="formGroupExampleInput" class="form-label">Tanggal Payment</label>
+                            <input type="date" class="form-control" id="formGroupExampleInput" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mt-1">
+                            <label for="formGroupExampleInput" class="form-label">Total of Payment</label>
+                            <div style="display: flex;">
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="">
+                                <p class="ml-1 mt-1 mr-1">(Rp.)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10" style="display: flex;">
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">Type Payment</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm2"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="ml-1">
+                                    <button type="button" class="btn-rates" data-toggle="modal"
+                                        data-target="#typepayment">
+                                        <p class="txt-btn-rates">..</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="ml-2" style="font-size: 11px;">klik tombol biru untuk memilih type payment, lalu
+                                tekan ceklis
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3 style="text-align: center;">Data Guest</h3>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <label for="colFormLabel" class="col-sm-1 col-form-label ml-1">Name</label>
+                            <div class="col" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="First name"
+                                    aria-label="First name">
+                                <input type="text" class="form-control" placeholder="Last name" id="colFormLabelSm"
+                                    aria-label="Last name">
+                                <div class="ml-1">
+                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#datatamu">
+                                        <p class="txt-btn-rates">..</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="ml-2 mr-1 mb-1" style="font-size: 11px;">
+                                Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
+                            </p>
                         </div>
                         <div>
-                            <button class="button-step button"><label class="next-button" for="step3">Next</label>
-                            </button>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label ">ID Number</label>
+                            <div style="display: flex;">
+                                <select id="inputState" class="form-select ml-1">
+                                    <option selected>---</option>
+                                    <option>KTP</option>
+                                    <option>SIM</option>
+                                    <option>Pasport</option>
+                                </select>
+                                <div style="width: 70%;" class="ml-1">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm2"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Guest Type</label>
+                            <div class="select-radio ml-2">
+                                <input type="radio" id="reguler" name="guesttype" value="reguler">
+                                <label for="" class="mt-1">Reguler</label>
+                                <input type="radio" id="vip" name="guesttype" value="vip" class="ml-1">
+                                <label for="" class="mt-1">VIP</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label">Date of Birth</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 98%;">
+                                    <input type="date" class="form-control form-control-sm" id="colFormLabelSm1"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Gender</label>
+                            <div class="select-radio ml-2">
+                                <input type="radio" id="Laki-laki" name="gender" value="Laki-laki">
+                                <label for="" class="mt-1">Laki-laki</label>
+                                <input type="radio" id="Perempuan" name="gender" value="Perempuan" class="ml-1">
+                                <label for="" class="mt-1">Perempuan</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label ">Religion</label>
+                            <div style="display: flex; ">
+                                <select id="inputState" class="form-select ml-2" style="width: 90%;">
+                                    <option selected>---</option>
+                                    <option>Islam</option>
+                                    <option>Kristen Katolik</option>
+                                    <option>Krinten Protestan</option>
+                                    <option>Hindu</option>
+                                    <option>Budha</option>
+                                    <option>Konhuchu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Title</label>
+                            <div class="select-radio ml-2">
+                                <input type="radio" id="Mr" name="title" value="Mr">
+                                <label for="" class="mt-1">Mr</label>
+                                <input type="radio" id="Mrs" name="title" value="Mrs" class="ml-1">
+                                <label for="" class="mt-1">Mrs</label>
+                                <input type="radio" id="Miss" name="title" value="Miss" class="ml-1">
+                                <label for="" class="mt-1">Miss</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label ">Job</label>
+                            <div style="display: flex; ">
+                                <select id="inputState" class="form-select ml-2" style="width: 90%;">
+                                    <option selected>---</option>
+                                    <option>Wiraswasta</option>
+                                    <option>Pegawai Swasta</option>
+                                    <option>PNS</option>
+                                    <option>Pelajar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1">Address</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 98%;">
+                                    <textarea class="form-control form-control-sm" id="colFormLabelSm"
+                                        placeholder=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">Country</label>
+                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm4"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="ml-1">
+                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#country">
+                                        <p class="txt-btn-rates">..</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">Province</label>
+                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm5"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="ml-1">
+                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#province">
+                                        <p class="txt-btn-rates">..</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">City</label>
+                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm6"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="ml-1">
+                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#city">
+                                        <p class="txt-btn-rates">..</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">Postial Code</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">Email</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">No.Telp</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">No.Handphone</label>
+                            <div class="col-sm-10" style="display: flex;">
+                                <div style="width: 90%;">
+                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
+                                        placeholder="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Step 3 -->
-                <input type="radio" name="step" id="step3" class="wizard__step">
-                <div class="wizard__content">
-                    <label for="step3">Step 3</label>
-                    <div>
-                        <button class="button-step button">
-                            <label class="prev-button" for="step2">Previous</label>
-                    </div>
+            <div style="overflow:auto;">
+                <div style="float:right; margin-top: 10px;">
+                    <button type="button" id="prevBtn" class="btn-step">Previous</button>
+                    <button type="button" id="nextBtn" class="btn-step">Next</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-</div>
+<!-- App Capsule -->
 
 <!-- Modal Basic -->
-<div class="modal fade" id="piligsegmentasi" tabindex="-1" role="dialog">
+<div class="modal fade" id="pilihrates" tabindex="-1" role="dialog">
     <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -171,61 +405,91 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Segmentasi</th>
+                            <th scope="col">Nama Plan</th>
+                            <th scope="col">Plan Value</th>
                             <th scope="col">Pilih</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1-WKN</td>
-                            <td>Walk-in</td>
+                            <td>1</td>
+                            <td>NORMAL RATE</td>
+                            <td>1 Days</td>
                             <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                                 </svg>
                             </td>
                         </tr>
                         <tr>
-                            <td>2-PHN</td>
-                            <td>Phone</td>
+                            <td>2</td>
+                            <td>WALK IN RATE</td>
+                            <td>1 Days</td>
                             <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                                 </svg>
                             </td>
                         </tr>
                         <tr>
-                            <td>3-WEB</td>
-                            <td>Web-in</td>
+                            <td>3</td>
+                            <td>Harga Kuning</td>
+                            <td>1 Days</td>
                             <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                                 </svg>
                             </td>
                         </tr>
                         <tr>
-                            <td>4-TRK</td>
-                            <td>Traveloka</td>
+                            <td>4</td>
+                            <td>Harga Merah</td>
+                            <td>1 Days</td>
                             <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                                 </svg>
                             </td>
                         </tr>
                         <tr>
-                            <td>5-TKT</td>
-                            <td>Tiket.com</td>
+                            <td>5</td>
+                            <td>PSSI</td>
+                            <td>1 Days</td>
                             <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Monthly Rates</td>
+                            <td>1 Bulanan</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Plan perPerson</td>
+                            <td>1 Person</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                                 </svg>
@@ -235,7 +499,507 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <a class="pr-2 pb-2" data-dismiss="modal">Close</a>
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="segmentasi" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Market Segmen</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>WALK-IN</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>PHONE-IN</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>WEB-IN</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>TRAVELOKA</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>ansvin</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>BOOKING.COM</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>celebes</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>AGENT A</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="typepayment" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Type Payment</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Cash (FO)</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Cash (BO)</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Credit (Bank)</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>City Ledger</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Transfer</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Guest Ledger</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="datatamu" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama lenkap</th>
+                            <th scope="col">No.Handphone</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Agus Baswedan</td>
+                            <td>081253912439</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Deden Subianto</td>
+                            <td>081253912453</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Agnes Widodo</td>
+                            <td>081253911237</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="country" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Negara</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Indonesia</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Malaysia</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Thailand</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="province" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Provinsi</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Jawa Barat</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jawa Tengah</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Jawa Timur</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Modal Basic -->
+
+<!-- Modal Basic -->
+<div class="modal fade" id="city" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form class="search-form">
+                    <div class="form-group searchbox">
+                        <input type="text" class="form-control" placeholder="Seacrh">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Kota</th>
+                            <th scope="col">Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Bandung</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bekasi</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Garut</td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
+                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
