@@ -305,16 +305,6 @@
     color: white;
 }
 
-.pilih-kamar {
-    display: flex;
-    margin: 5px;
-    align-items: center;
-    align-content: center;
-    background-color: #1BC5BD;
-    height: 90px;
-    border-radius: 10px;
-}
-
 .btn-atas-preview {
     background-color: #470829;
     height: 30px;
@@ -417,7 +407,7 @@
 }
 
 .profile-img {
-    background-color: #470829;
+    background-color: rgb(46, 46, 186);
     height: 150px;
     width: 150px;
     border-radius: 100%;
@@ -773,18 +763,10 @@ input.invalid {
     cursor: pointer;
 }
 
-
-button:hover {
-    opacity: 0.8;
-}
-
 #prevBtn {
     background-color: #F3F6F9;
     color: #4a53e7;
-}
-
-.step-container {
-    text-align: right;
+    border-radius: 10px;
 }
 
 .step {
@@ -792,6 +774,7 @@ button:hover {
     width: 15px;
     margin: 0 2px;
     background-color: #4a53e7;
+    color: #F3F6F9;
     border: none;
     border-radius: 50%;
     display: inline-block;
@@ -814,6 +797,19 @@ button:hover {
     color: #F3F6F9;
 }
 
+.input-btn-kanan {
+    display: flex;
+    gap: 10px;
+}
+
+.form-btn-kanan {
+    width: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4a53e7;
+    color: white;
+}
+
 .select-radio {
     display: flex;
     gap: 5px;
@@ -824,10 +820,34 @@ button:hover {
     height: auto;
 }
 
-.btn-pilih-segmen {
-    background-color: #4a53e7;
-    color: #F3F6F9;
-    border-radius: 5px;
+.pilih-kamar {
+    display: flex; 
+    gap: 2px;
+    align-items: center;
+    background-color: #1BC5BD;
+    height: 60px;
+    width: 70px;
+    border-radius: 10px;
+}
+
+.pilih-kamar input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+}
+.pilih-kamar label {
+    margin: 0;
+    padding: 0;
+}
+
+
+.form-kamar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.checkbox-kamar {
+    transform: scale(0.5);
 }
 
 
