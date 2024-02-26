@@ -10,6 +10,7 @@ import Profile from "./pages/Profile"
 import Setting from "./pages/Settings"
 import inventory from "./pages/inventory"
 import TentativeReservasi from "./pages/TentativeReservasi"
+import GuaranteedReservasi from "./pages/GuaranteedReservasi"
 
 const routers = [
   { path: "/", view: Home, middlewares: []},
@@ -24,6 +25,7 @@ const routers = [
   { path: "/inventory", view: inventory, middlewares: []},
   { path: "/pilih-reservasi", view: PilihReservasi, middlewares: []},
   { path: "/tentative-reservasi", view: TentativeReservasi, middlewares: []},
+  { path: "/guaranteed-reservasi", view: GuaranteedReservasi, middlewares: []},
 ]
 
 // const routers = [

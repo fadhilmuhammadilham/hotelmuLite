@@ -49,11 +49,17 @@ class GuaranteedReservasi extends Page {
           }
         });
         if (isValid) {
-          currentTab++;
-          showTab(currentTab);
+          if (currentTab == $(".tab").length - 1) {
+            // Redirect to "/"
+            window.location.href = "/";
+          } else {
+            currentTab++;
+            showTab(currentTab);
+          }
         }
       });
     });
+
 
     $(document).ready(function () {
       $('#pilihrates .modal-body table tbody tr svg').click(function () {

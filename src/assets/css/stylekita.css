@@ -850,6 +850,12 @@ input.invalid {
     transform: scale(0.5);
 }
 
+.btn-pilih-segmen{
+    border-radius: 5px;
+    background-color: #4a53e7;
+    color: #E3E6E9;
+}
+
 
 @media (min-width: 768px) {
     .badge-container .p-1 {
