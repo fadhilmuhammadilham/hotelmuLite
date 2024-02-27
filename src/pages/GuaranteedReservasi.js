@@ -70,10 +70,10 @@ class GuaranteedReservasi extends Page {
     });
 
     $(document).ready(function () {
-      $('#segmentasi .modal-body table tbody tr td svg').click(function () {
+      $('#pilih-segmentasi .modal-body table tbody tr svg').click(function () {
         var pilihsegmentasi = $(this).parent().siblings().eq(1).text();
         $('#colFormLabelSm1').val(pilihsegmentasi);
-        $('#segmentasi').modal('hide');
+        $('#pilih-segmentasi').modal('hide');
       });
     });
 
@@ -106,6 +106,13 @@ class GuaranteedReservasi extends Page {
         var city = $(this).parent().siblings().eq(1).text();
         $('#colFormLabelSm6').val(city);
         $('#city').modal('hide');
+      });
+    });
+
+    $(document).ready(function () {
+      $('.pilih-kamar').click(function () {
+        var checkbox = $(this).find('.checkbox-kamar');
+        checkbox.prop('checked', !checkbox.prop('checked'));
       });
     });
   }

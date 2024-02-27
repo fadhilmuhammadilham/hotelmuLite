@@ -41,76 +41,36 @@
             </div>
             <hr>
 
-            <!-- step 1 -->
-            <div class="tab">
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Rates Plan</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 90%;">
-                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder=""
-                                readonly>
-                        </div>
-                        <div class="ml-1">
-                            <button type="button" class="btn-rates" data-toggle="modal" data-target="#pilihrates">
-                                <p class="txt-btn-rates">..</p>
-                            </button>
-                        </div>
-                    </div>
+            <!-- Step 1 -->
+            <div class="tab p-1">
+                <label class="form-label mt-1">Rates Plan</label>
+                <div class="input-btn-kanan">
+                    <input type="text" class="form-control" id="colFormLabelSm" placeholder="" readonly>
+                    <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#pilihrates">
+                        ..
+                    </button>
                 </div>
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Pilih Segmen</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 90%;">
-                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm1" placeholder=""
-                                readonly>
-                        </div>
-                        <div class="ml-1">
-                            <button type="button" class="btn-rates" data-toggle="modal" data-target="#segmentasi">
-                                <p class="txt-btn-rates">..</p>
-                            </button>
-                        </div>
-                    </div>
+                <label class="form-label mt-1">Market Segment</label>
+                <div class="input-btn-kanan">
+                    <input type="text" id="colFormLabelSm1" class="form-control" placeholder="" readonly>
+                    <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#pilih-segmentasi">
+                        ..
+                    </button>
                 </div>
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Arrival Date</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 98%;">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Departure Date</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 98%;">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Total of Adult</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 98%;">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Total of Child</label>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div style="width: 98%;">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm1" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <label class="form-label mt-1">Baquet</label>
-                    <div class="select-radio ml-1">
-                        <input type="radio" id="tidak" name="baquet" value="tidak">
-                        <label for="" class="mt-1">Tidak</label>
-                        <input type="radio" id="ya" name="baquet" value="ya" class="ml-1">
-                        <label for="" class="mt-1">Ya</label>
-                    </div>
+                <label class="form-label mt-1">Arrival Date</label>
+                <input type="date" id="segmentasi" class="form-control">
+                <label class="form-label mt-1">Dapature Date</label>
+                <input type="date" id="segmentasi" class="form-control">
+                <label class="form-label mt-1">Total Adult</label>
+                <input type="number" id="segmentasi" class="form-control">
+                <label class="form-label mt-1">Total Child</label>
+                <input type="number" id="segmentasi" class="form-control">
+                <label class="form-label mt-1">Baquet</label>
+                <div class="select-radio">
+                    <input type="radio" id="tidak" name="baquet" value="tidak">
+                    <label for="" class="mt-1">Tidak</label>
+                    <input type="radio" id="ya" name="baquet" value="ya">
+                    <label for="" class="mt-1">Ya</label>
                 </div>
             </div>
 
@@ -236,255 +196,148 @@
                 </div>
             </div>
 
-            <!-- step 3 -->
-            <div class="tab">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3 style="text-align: center;">Room Rates</h3>
-                    </div>
-                    <div class="col-sm-6">
-                        <div>
-                            <label for="formGroupExampleInput" class="form-label">Kamar 101</label>
-                            <div style="display: flex;">
-                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="">
-                                <p class="ml-1 mt-1 mr-1">(Rp.)</p>
-                            </div>
-                        </div>
+            <!-- Step 3 -->
+            <div class="tab p-1">
+                <div class="bill">
+                    <h3 style="display: flex; justify-content: center; align-items: center;">Room Rates</h3>
+                    <label class="form-label">Total</label>
+                    <div style="display: flex; ">
+                        <input type="number" class="form-control">
+                        <p class="mt-1 ml-1">(Rp.)</p>
                     </div>
                 </div>
                 <hr>
-                <div class="row mb-1">
-                    <div class="col-sm-4">
-                        <h3 style="text-align: center;">Down Payment</h3>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mb-1">
-                            <label for="formGroupExampleInput" class="form-label">Tanggal Payment</label>
-                            <input type="date" class="form-control" id="formGroupExampleInput" placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mt-1">
-                            <label for="formGroupExampleInput" class="form-label">Total of Payment</label>
-                            <div style="display: flex;">
-                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="">
-                                <p class="ml-1 mt-1 mr-1">(Rp.)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-10" style="display: flex;">
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label">Type Payment</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm2"
-                                        placeholder="" readonly>
-                                </div>
-                                <div class="ml-1">
-                                    <button type="button" class="btn-rates" data-toggle="modal"
-                                        data-target="#typepayment">
-                                        <p class="txt-btn-rates">..</p>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="ml-2" style="font-size: 11px;">klik tombol biru untuk memilih type payment, lalu
-                                tekan ceklis
-                            </p>
-                        </div>
-                    </div>
+                <h3 style="display: flex; justify-content: center; align-items: center;">Down Payment</h3>
+                <label class="form-label">Tanggal Pembayaran</label>
+                <input type="date" class="form-control">
+                <label class="form-label mt-1">Total Pembayaran</label>
+                <div style="display: flex; ">
+                    <input type="number" class="form-control">
+                    <p class="mt-1 ml-1">(Rp.)</p>
                 </div>
+                <label class="form-label">Tipe Pembayaran</label>
+                <div class="input-btn-kanan">
+                    <input type="text" id="colFormLabelSm2" class="form-control" placeholder="" readonly>
+                    <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#typepayment">
+                        ..
+                    </button>
+                </div>
+                <p style="font-size: 11px; text-align: start;">klik tombol biru untuk memilih type payment, lalu
+                    tekan ceklis
+                </p>
                 <hr>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3 style="text-align: center;">Data Guest</h3>
-                    </div>
-                    <div>
-                        <div class="row">
-                            <label for="colFormLabel" class="col-sm-1 col-form-label ml-1">Name</label>
-                            <div class="col" style="display: flex;">
-                                <input type="text" class="form-control" placeholder="First name"
-                                    aria-label="First name">
-                                <input type="text" class="form-control" placeholder="Last name" id="colFormLabelSm"
-                                    aria-label="Last name">
-                                <div class="ml-1">
-                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#datatamu">
-                                        <p class="txt-btn-rates">..</p>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="ml-2 mr-1 mb-1" style="font-size: 11px;">
-                                Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
-                            </p>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label ">ID Number</label>
-                            <div style="display: flex;">
-                                <select id="inputState" class="form-select ml-1">
-                                    <option selected>---</option>
-                                    <option>KTP</option>
-                                    <option>SIM</option>
-                                    <option>Pasport</option>
-                                </select>
-                                <div style="width: 70%;" class="ml-1">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm2"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Guest Type</label>
-                            <div class="select-radio ml-2">
-                                <input type="radio" id="reguler" name="guesttype" value="reguler">
-                                <label for="" class="mt-1">Reguler</label>
-                                <input type="radio" id="vip" name="guesttype" value="vip" class="ml-1">
-                                <label for="" class="mt-1">VIP</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label">Date of Birth</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 98%;">
-                                    <input type="date" class="form-control form-control-sm" id="colFormLabelSm1"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Gender</label>
-                            <div class="select-radio ml-2">
-                                <input type="radio" id="Laki-laki" name="gender" value="Laki-laki">
-                                <label for="" class="mt-1">Laki-laki</label>
-                                <input type="radio" id="Perempuan" name="gender" value="Perempuan" class="ml-1">
-                                <label for="" class="mt-1">Perempuan</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label ">Religion</label>
-                            <div style="display: flex; ">
-                                <select id="inputState" class="form-select ml-2" style="width: 90%;">
-                                    <option selected>---</option>
-                                    <option>Islam</option>
-                                    <option>Kristen Katolik</option>
-                                    <option>Krinten Protestan</option>
-                                    <option>Hindu</option>
-                                    <option>Budha</option>
-                                    <option>Konhuchu</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1 ">Title</label>
-                            <div class="select-radio ml-2">
-                                <input type="radio" id="Mr" name="title" value="Mr">
-                                <label for="" class="mt-1">Mr</label>
-                                <input type="radio" id="Mrs" name="title" value="Mrs" class="ml-1">
-                                <label for="" class="mt-1">Mrs</label>
-                                <input type="radio" id="Miss" name="title" value="Miss" class="ml-1">
-                                <label for="" class="mt-1">Miss</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label ">Job</label>
-                            <div style="display: flex; ">
-                                <select id="inputState" class="form-select ml-2" style="width: 90%;">
-                                    <option selected>---</option>
-                                    <option>Wiraswasta</option>
-                                    <option>Pegawai Swasta</option>
-                                    <option>PNS</option>
-                                    <option>Pelajar</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="colFormLabel" class="col-sm-1 col-form-label mt-1">Address</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 98%;">
-                                    <textarea class="form-control form-control-sm" id="colFormLabelSm"
-                                        placeholder=""></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">Country</label>
-                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm4"
-                                        placeholder="" readonly>
-                                </div>
-                                <div class="ml-1">
-                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#country">
-                                        <p class="txt-btn-rates">..</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">Province</label>
-                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm5"
-                                        placeholder="" readonly>
-                                </div>
-                                <div class="ml-1">
-                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#province">
-                                        <p class="txt-btn-rates">..</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1 mt-1">City</label>
-                            <div class="col-sm-10 ml-1 mr-1" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm6"
-                                        placeholder="" readonly>
-                                </div>
-                                <div class="ml-1">
-                                    <button type="button" class="btn-rates" data-toggle="modal" data-target="#city">
-                                        <p class="txt-btn-rates">..</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">Postial Code</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">Email</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">No.Telp</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="colFormLabel" class="col-sm-2 col-form-label ml-1">No.Handphone</label>
-                            <div class="col-sm-10" style="display: flex;">
-                                <div style="width: 90%;">
-                                    <input type="email" class="form-control form-control-sm ml-1" id="colFormLabelSm"
-                                        placeholder="">
-                                </div>
+                <div class="Data Guest">
+                    <h3 style="display: flex; justify-content: center; align-items: center;">Data Guest</h3>
+                    <label class="form-label ">Nama</label>
+                    <div class="row">
+                        <div class="col" style="display: flex;">
+                            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                            <input type="text" class="form-control ml-1" placeholder="Last name" id="colFormLabelSm"
+                                aria-label="Last name">
+                            <div class="ml-1">
+                                <button type="button" class="form-btn-kanan p-1" data-toggle="modal"
+                                    data-target="#datatamu">
+                                    ..
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <p class="ml-2 mr-1" style="font-size: 11px;">
+                        Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
+                    </p>
+                    <label class="form-label ">ID Number</label>
+                    <div class="row">
+                        <div class="col" style="display: flex;">
+                            <select class="form-select form-control">
+                                <option selected>---</option>
+                                <option value="1">SIM</option>
+                                <option value="2">KTP</option>
+                                <option value="3">Pasport</option>
+                            </select>
+                            <input type="text" class="form-control ml-1" placeholder="">
+                        </div>
+                    </div>
+                    <label class="form-label mt-2">Guest Type</label>
+                    <div class="select-radio ml-1">
+                        <input type="radio" id="Regular" name="GuestType" value="Regular">
+                        <label for="" class="mt-1">Regular</label>
+                        <input class="ml-1" type="radio" id="vip" name="GuestType" value="vip">
+                        <label for="" class="mt-1">Vip</label>
+                    </div>
+                    <label class="form-label mt-2">Tempat, Tanggal Lahir</label>
+                    <div class="row">
+                        <div class="col" style="display: flex;">
+                            <input type="text" class="form-control" placeholder="">
+                            <input type="date" class="form-control ml-1" placeholder="">
+                        </div>
+                    </div>
+                    <label class="form-label mt-2">Jenis Kelamin</label>
+                    <div class="select-radio ml-1">
+                        <input type="radio" id="laki-laki" name="jenkel" value="laki-laki">
+                        <label for="" class="mt-1">Laki-laki</label>
+                        <input class="ml-1" type="radio" id="perempuan" name="jenkel" value="perempuan">
+                        <label for="" class="mt-1">Perempuan</label>
+                    </div>
+                    <label class="form-label mt-2">Agama</label>
+                    <select class="form-select form-control">
+                        <option selected>---</option>
+                        <option value="1">Islam</option>
+                        <option value="2">Kristen Protestan</option>
+                        <option value="3">Kristen Katolik</option>
+                        <option value="4">Budha</option>
+                        <option value="5">Hindu</option>
+                    </select>
+                    <label class="form-label mt-2">Title</label>
+                    <div class="select-radio ml-1">
+                        <input type="radio" id="mr" name="title" value="mr">
+                        <label for="" class="mt-1">Mr.</label>
+                        <input class="ml-1" type="radio" id="mrs" name="title" value="mrs">
+                        <label for="" class="mt-1">Mrs.</label>
+                        <input class="ml-1" type="radio" id="miss" name="title" value="miss">
+                        <label for="" class="mt-1">Miss.</label>
+                    </div>
+                    <label class="form-label mt-2">Pekerjaan</label>
+                    <select class="form-select form-control">
+                        <option selected>---</option>
+                        <option value="1">Wiraswasta</option>
+                        <option value="2">Pegawai Swasta</option>
+                        <option value="3">PNS</option>
+                        <option value="4">Pelajar</option>
+                    </select>
+                    <label class="form-label mt-2">Alamat</label>
+                    <textarea type="text" class="form-control"></textarea>
+                    <label class="form-label">Negara</label>
+                    <div class="input-btn-kanan">
+                        <input type="text" id="colFormLabelSm4" class="form-control" placeholder="" readonly>
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#country">
+                            ..
+                        </button>
+                    </div>
+                    <label class="form-label">Provinsi</label>
+                    <div class="input-btn-kanan">
+                        <input type="text" id="colFormLabelSm5" class="form-control" placeholder="" readonly>
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#province">
+                            ..
+                        </button>
+                    </div>
+                    <label class="form-label">Kota</label>
+                    <div class="input-btn-kanan">
+                        <input type="text" id="colFormLabelSm6" class="form-control" placeholder="" readonly>
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#city">
+                            ..
+                        </button>
+                    </div>
+                    <label class="form-label mt-1">Kode Pos</label>
+                    <input type="text" class="form-control">
+                    <label class="form-label mt-1">Email</label>
+                    <input type="text" class="form-control">
+                    <label class="form-label mt-1">No.Telp</label>
+                    <input type="text" class="form-control">
+                    <label class="form-label mt-1">No.Handphone</label>
+                    <input type="text" class="form-control">
                 </div>
             </div>
+
 
             <div style="overflow:auto;">
                 <div style="float:right; margin-top: 10px;">
@@ -618,7 +471,7 @@
 <!-- * Modal Basic -->
 
 <!-- Modal Basic -->
-<div class="modal fade" id="segmentasi" tabindex="-1" role="dialog">
+<div class="modal fade" id="pilih-segmentasi" tabindex="-1" role="dialog">
     <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
