@@ -132,6 +132,7 @@
 
 .text-atas {
     display: flex;
+    justify-content: space-between;
     margin-top: 1%;
 }
 
@@ -754,8 +755,8 @@ input.invalid {
 .btn-step {
     background-color: #4a53e7;
     color: #F3F6F9;
-    border: none;
     border-radius: 10px;
+    border: none;
     padding: 10px 20px;
     font-size: 17px;
     font-family: Raleway;
@@ -785,6 +786,13 @@ input.invalid {
 }
 
 .step.finish {
+    background-color: #04AA6D;
+}
+
+.btn-rates {
+    width: 40px;
+    height: 30px;
+    border-radius: 8px;
     background-color: #4a53e7;
     color: #F3F6F9;
 }
@@ -840,6 +848,12 @@ input.invalid {
 
 .checkbox-kamar {
     transform: scale(0.5);
+}
+
+.btn-pilih-segmen{
+    border-radius: 5px;
+    background-color: #4a53e7;
+    color: #E3E6E9;
 }
 
 
