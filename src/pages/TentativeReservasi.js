@@ -22,7 +22,7 @@ class TentativeReservasi extends Page {
           $("#prevBtn").show();
         }
         if (n == $(".tab").length - 1) {
-          $("#nextBtn").html("Submit");
+          $("#nextBtn").html("Finish");
         } else {
           $("#nextBtn").html("Next");
         }
@@ -38,20 +38,38 @@ class TentativeReservasi extends Page {
       });
 
       $("#nextBtn").click(function () {
-        var x = $(".tab:eq(" + currentTab + ")").find("input");
-        var isValid = true;
-        x.each(function () {
-          if ($(this).val() === "") {
-            $(this).addClass("invalid");
-            isValid = false;
-          } else {
-            $(this).removeClass("invalid");
+        if ($(this).html() === "Finish") {
+          window.location.href = "/";
+        } else {
+          var x = $(".tab:eq(" + currentTab + ")").find("input");
+          var isValid = true;
+          x.each(function () {
+            if ($(this).val() === "") {
+              $(this).addClass("invalid");
+              isValid = false;
+            } else {
+              $(this).removeClass("invalid");
+            }
+          });
+          if (isValid) {
+            currentTab++;
+            showTab(currentTab);
           }
-        });
-        if (isValid) {
-          currentTab++;
-          showTab(currentTab);
         }
+      });
+    });
+    $(document).ready(function () {
+      $('#arrivalDate').change(function () {
+        var arrivalDate = new Date($(this).val());
+        $('#departureDate').attr('min', $(this).val());
+
+        var departureDate = new Date(arrivalDate);
+        departureDate.setDate(arrivalDate.getDate() + 1);
+        if (departureDate < arrivalDate) {
+          departureDate.setDate(arrivalDate.getDate() + 1);
+        }
+        var formattedDepartureDate = departureDate.toISOString().split('T')[0];
+        $('#departureDate').val(formattedDepartureDate);
       });
     });
     $(document).ready(function () {
