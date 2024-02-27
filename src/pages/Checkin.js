@@ -58,6 +58,7 @@ class Checkin extends Page {
         }
       });
     });
+
     $(document).ready(function () {
       $('#arrivalDate').change(function () {
         var arrivalDate = new Date($(this).val());
@@ -70,6 +71,49 @@ class Checkin extends Page {
         }
         var formattedDepartureDate = departureDate.toISOString().split('T')[0];
         $('#departureDate').val(formattedDepartureDate);
+      });
+    });
+
+    $(document).ready(function () {
+      $('#rateplane .modal-body .table tbody tr td svg').click(function (event) {
+        var planName = $(this).closest('tr').find('td:eq(1)').text();
+        $('#inputPlan').val(planName);
+        $('#rateplane').modal('hide');
+      });
+    });
+    $(document).ready(function () {
+      $('#piligsegmentasi .modal-body .table tbody tr td svg').click(function (event) {
+        var segmentasi = $(this).closest('tr').find('td:eq(1)').text();
+        $('#segmentasi').val(segmentasi);
+        $('#piligsegmentasi').modal('hide');
+      });
+    });
+
+    $(document).ready(function () {
+      $('.pilih-kamar').click(function () {
+        var checkbox = $(this).find('.checkbox-kamar');
+        checkbox.prop('checked', !checkbox.prop('checked'));
+      });
+    });
+
+    $(document).ready(function () {
+      $('#negara .modal-body .table tbody tr svg').click(function (event) {
+        var negaraName = $(this).closest('tr').find('td:eq(1)').text();
+        $('#inputNegara').val(negaraName);
+        $('#negara').modal('hide');
+        event.stopPropagation();
+      });
+      $('#propinsi .modal-body .table tbody tr svg').click(function (event) {
+        var propinsiName = $(this).closest('tr').find('td:eq(1)').text();
+        $('#inputPropinsi').val(propinsiName);
+        $('#propinsi').modal('hide');
+        event.stopPropagation();
+      });
+      $('#kota .modal-body .table tbody tr svg').click(function (event) {
+        var kotaName = $(this).closest('tr').find('td:eq(1)').text();
+        $('#inputKota').val(kotaName);
+        $('#kota').modal('hide');
+        event.stopPropagation();
       });
     });
   }
