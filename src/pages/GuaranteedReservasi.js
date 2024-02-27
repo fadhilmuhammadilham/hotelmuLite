@@ -115,6 +115,21 @@ class GuaranteedReservasi extends Page {
         checkbox.prop('checked', !checkbox.prop('checked'));
       });
     });
+
+    $(document).ready(function () {
+      $('#arrivalDate').change(function () {
+        var arrivalDate = new Date($(this).val());
+        $('#departureDate').attr('min', $(this).val());
+
+        var departureDate = new Date(arrivalDate);
+        departureDate.setDate(arrivalDate.getDate() + 1);
+        if (departureDate < arrivalDate) {
+          departureDate.setDate(arrivalDate.getDate() + 1);
+        }
+        var formattedDepartureDate = departureDate.toISOString().split('T')[0];
+        $('#departureDate').val(formattedDepartureDate);
+      });
+    });
   }
 
   render() {
