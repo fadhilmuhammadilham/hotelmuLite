@@ -202,20 +202,20 @@
             <!-- Step 3 -->
             <div class="tab p-1">
                 <div class="bill">
-                    <h3 style="display: flex; justify-content: center; align-items: center;">BILL</h3>
-                    <label class="form-label">Total Bill</label>
-                    <input type="text" class="form-control" readonly>
+                    <label class="form-label">Total</label>
+                    <div style="display: flex; ">
+                        <input type="number" class="form-control" readonly>
+                        <p class="mt-1 ml-1">(Rp.)</p>
+                    </div>
                 </div>
                 <hr>
                 <div class="Data Guest">
-                    <div class="col-sm-4">
-                        <h3 style="text-align: center;" class="mt-2">Data Guest</h3>
-                    </div>
+                    <h3 style="display: flex; justify-content: center; align-items: center;">Data Guest</h3>
+                    <label class="form-label ">Nama</label>
                     <div class="row">
-                        <label for="colFormLabel" class="col-sm-1 col-form-label">Nama</label>
                         <div class="col" style="display: flex;">
                             <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-                            <input type="text" class="form-control" placeholder="Last name" id="colFormLabelSm"
+                            <input type="text" class="form-control ml-1" placeholder="Last name" id="colFormLabelSm"
                                 aria-label="Last name">
                             <div class="ml-1">
                                 <button type="button" class="form-btn-kanan p-1" data-toggle="modal"
@@ -224,10 +224,10 @@
                                 </button>
                             </div>
                         </div>
-                        <p class="ml-2 mr-1" style="font-size: 11px;">
-                            Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
-                        </p>
                     </div>
+                    <p class="ml-2 mr-1" style="font-size: 11px;">
+                        Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
+                    </p>
                     <label class="form-label ">ID</label>
                     <div class="row">
                         <div class="col" style="display: flex;">
@@ -240,7 +240,7 @@
                             <input type="text" class="form-control ml-1" placeholder="">
                         </div>
                     </div>
-                    <label class="form-label mt-2">Blok Kamar</label>
+                    <label class="form-label mt-2">Guest Type</label>
                     <div class="select-radio ml-1">
                         <input type="radio" id="Regular" name="GuestType" value="Regular">
                         <label for="" class="mt-1">Regular</label>
@@ -296,7 +296,7 @@
                             ..
                         </button>
                     </div>
-                    <label class="form-label">Propinsi</label>
+                    <label class="form-label">Provinsi</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="inputPropinsi" class="form-control" placeholder="" readonly>
                         <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#propinsi">
