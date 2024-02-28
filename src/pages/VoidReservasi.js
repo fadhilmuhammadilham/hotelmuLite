@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/kasir.handlebars"
+import homeView from "../templates/void-reservasi.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Kasir extends Page {
+class VoidReservasi extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Kasir extends Page {
   }
 }
 
-export default Kasir
+export default VoidReservasi
