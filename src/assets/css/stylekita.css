@@ -856,6 +856,41 @@ input.invalid {
     color: #E3E6E9;
 }
 
+.card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 20px; 
+}
+
+.data-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrival{
+display: flex;
+}
+
+.depature{
+display: flex;
+}
+
+.arrival p, .depature p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.data-tabel{
+    align-items: start;
+    font-weight: bold;
+}
+
+.tabel{
+    display: flex;
+    justify-content: space-between;
+}
 
 @media (min-width: 768px) {
     .badge-container .p-1 {
