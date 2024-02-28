@@ -3,14 +3,16 @@ import Checkin from "./pages/Checkin"
 import formReservasi from "./pages/FormReservasi"
 import Home from "./pages/Home"
 import Kamar from "./pages/KamarCheckin"
-import Kasir from "./pages/KamarReservasi"
-import KamarReservasi from "./pages/KamarReservasi"
 import PreviewCheckin from "./pages/PreviewCheckin"
 import Profile from "./pages/Profile"
 import Setting from "./pages/Settings"
 import inventory from "./pages/inventory"
 import TentativeReservasi from "./pages/TentativeReservasi"
 import GuaranteedReservasi from "./pages/GuaranteedReservasi"
+import VoidReservasi from "./pages/VoidReservasi"
+import DetailVoid from "./pages/DetailVoid"
+import Kasir from "./pages/Kasir"
+import DetailKasir from "./pages/DetailKasir"
 
 const routers = [
   { path: "/", view: Home, middlewares: []},
@@ -18,14 +20,16 @@ const routers = [
   { path: "/kamarcheckin", view: Kamar, middlewares: []},
   { path: "/previewcheckin", view: PreviewCheckin, middlewares: []},
   { path: "/formReservasi", view: formReservasi, middlewares: []},
-  { path: "/kamarreservasi", view: KamarReservasi, middlewares: []},
-  { path: "/kasir", view: Kasir, middlewares: []},
   { path: "/settings", view: Setting, middlewares: []},
   { path: "/profil", view: Profile, middlewares: []},
   { path: "/inventory", view: inventory, middlewares: []},
   { path: "/pilih-reservasi", view: PilihReservasi, middlewares: []},
   { path: "/tentative-reservasi", view: TentativeReservasi, middlewares: []},
   { path: "/guaranteed-reservasi", view: GuaranteedReservasi, middlewares: []},
+  { path: "/void-reservasi", view: VoidReservasi, middlewares: []},
+  { path: "/detail-void", view: DetailVoid, middlewares: []},
+  { path: "/kasir", view: Kasir, middlewares: []},
+  { path: "/detail-kasir", view: DetailKasir, middlewares: []},
 ]
 
 // const routers = [

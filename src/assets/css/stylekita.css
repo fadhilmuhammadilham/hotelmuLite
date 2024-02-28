@@ -535,7 +535,10 @@
 }
 
 .all-menu {
+    padding: 10px;
     display: flex;
+    justify-content: space-around;
+    
 }
 
 .menu {
@@ -543,16 +546,14 @@
     flex-direction: column;
     align-items: center;
     width: 100px;
-    flex-grow: 1;
 }
 
 .circle-menu {
-    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
     border-radius: 30px;
-    padding: 10px;
+    padding: 17px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -855,6 +856,80 @@ input.invalid {
     background-color: #4a53e7;
     color: #E3E6E9;
 }
+.card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 20px; 
+}
+
+.data-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrival, .depature {
+    display: flex;
+    gap: 10px;
+}
+
+.arrival p, .depature p {
+    margin: 0; 
+    font-size: 14px; 
+}
+
+.arrival p:first-child, .depature p:first-child {
+    font-weight: bold; 
+}
+
+.all-data{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-satuan{
+    display: flex;
+    justify-content: space-between;
+}
+
+.data{
+    display: flex;
+    align-items: center;
+}
+
+.data-header{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.alasan-void{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.all-action{
+    display: flex;
+    justify-content: space-around;
+}
+
+.action{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.action svg{
+    width: 30px;
+    height: 30px;
+}
 
 
 @media (min-width: 768px) {
@@ -918,7 +993,8 @@ input.invalid {
     }
 
     .circle-menu {
-        border-radius: 65px;
+        border-radius: 100px;
+        padding: 30px;
     }
 
     .menu p {
@@ -927,8 +1003,8 @@ input.invalid {
     }
 
     .circle-menu svg {
-        width: 105px;
-        height: 105px;
+        width:85px;
+        height: 85px;
     }
 
     .component-kecil {
