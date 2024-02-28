@@ -1,9 +1,9 @@
 import Page from "./Page"
-import homeView from "../templates/login.handlebars"
+import homeView from "../templates/login-user.handlebars"
 import "../assets/css/stylekita.css"
 import $ from 'jquery'
 
-class Login extends Page {
+class LoginUser extends Page {
   constructor(params) {
     super(params)
   }
@@ -17,4 +17,4 @@ class Login extends Page {
   }
 }
 
-export default Login
+export default LoginUser

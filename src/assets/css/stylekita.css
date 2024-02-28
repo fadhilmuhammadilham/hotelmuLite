@@ -967,6 +967,11 @@ display: flex;
     justify-content: space-between;
 }
 
+.image-login{
+    height: 150px;
+    width: auto;
+}
+
 @media (min-width: 768px) {
     .badge-container .p-1 {
         padding: 13px !important;
