@@ -1,9 +1,6 @@
 import PilihReservasi from "./pages/PilihReservasi"
 import Checkin from "./pages/Checkin"
-import formReservasi from "./pages/FormReservasi"
 import Home from "./pages/Home"
-import Kamar from "./pages/KamarCheckin"
-import PreviewCheckin from "./pages/PreviewCheckin"
 import Profile from "./pages/Profile"
 import Setting from "./pages/Settings"
 import inventory from "./pages/inventory"
@@ -26,9 +23,6 @@ const routers = [
   { path: "/login-user", view: LoginUser, middlewares: [] },
   { path: "/homepage", view: Home, middlewares: []},
   { path: "/checkin", view: Checkin, middlewares: []},
-  { path: "/kamarcheckin", view: Kamar, middlewares: []},
-  { path: "/previewcheckin", view: PreviewCheckin, middlewares: []},
-  { path: "/formReservasi", view: formReservasi, middlewares: []},
   { path: "/settings", view: Setting, middlewares: []},
   { path: "/profil", view: Profile, middlewares: []},
   { path: "/inventory", view: inventory, middlewares: []},
