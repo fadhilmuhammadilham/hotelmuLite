@@ -538,7 +538,7 @@
     padding: 10px;
     display: flex;
     justify-content: space-around;
-    
+
 }
 
 .menu {
@@ -822,7 +822,7 @@ input.invalid {
 }
 
 .pilih-kamar {
-    display: flex; 
+    display: flex;
     gap: 2px;
     align-items: center;
     background-color: #1BC5BD;
@@ -835,6 +835,7 @@ input.invalid {
     margin: 0;
     padding: 0;
 }
+
 .pilih-kamar label {
     margin: 0;
     padding: 0;
@@ -851,17 +852,18 @@ input.invalid {
     transform: scale(0.5);
 }
 
-.btn-pilih-segmen{
+.btn-pilih-segmen {
     border-radius: 5px;
     background-color: #4a53e7;
     color: #E3E6E9;
 }
+
 .card {
     background-color: #f0f0f0;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
-    padding: 20px; 
+    padding: 20px;
 }
 
 .data-top {
@@ -869,55 +871,58 @@ input.invalid {
     justify-content: space-between;
 }
 
-.arrival, .depature {
+.arrival,
+.depature {
     display: flex;
     gap: 10px;
 }
 
-.arrival p, .depature p {
-    margin: 0; 
-    font-size: 14px; 
+.arrival p,
+.depature p {
+    margin: 0;
+    font-size: 14px;
 }
 
-.arrival p:first-child, .depature p:first-child {
-    font-weight: bold; 
+.arrival p:first-child,
+.depature p:first-child {
+    font-weight: bold;
 }
 
-.all-data{
+.all-data {
     background-color: white;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.data-satuan{
+.data-satuan {
     display: flex;
     justify-content: space-between;
 }
 
-.data{
+.data {
     display: flex;
     align-items: center;
 }
 
-.data-header{
+.data-header {
     display: flex;
     align-items: center;
     font-weight: bold;
 }
 
-.alasan-void{
+.alasan-void {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.all-action{
+.all-action {
     display: flex;
     justify-content: space-around;
 }
 
-.action{
+.action {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -926,7 +931,7 @@ input.invalid {
     border-radius: 20px;
 }
 
-.action svg{
+.action svg {
     width: 30px;
     height: 30px;
 }
@@ -936,41 +941,73 @@ input.invalid {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
-    padding: 20px; 
+    padding: 20px;
 }
 
-.data-top{
+.data-top {
     display: flex;
     justify-content: space-between;
 }
 
-.arrival{
-display: flex;
+.arrival {
+    display: flex;
 }
 
-.depature{
-display: flex;
+.depature {
+    display: flex;
 }
 
-.arrival p, .depature p{
+.arrival p,
+.depature p {
     margin: 0;
     font-size: 14px;
 }
 
-.data-tabel{
+.data-tabel {
     align-items: start;
     font-weight: bold;
 }
 
-.tabel{
+.tabel {
     display: flex;
     justify-content: space-between;
 }
 
-.image-login{
+.image-login {
     height: 150px;
     width: auto;
 }
+
+.btn-logout {
+    background-color: #FFE2E5;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #F64E60;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-btn-group {
+    background-color: none;
+}
+
+.logout-btn {
+    position: fixed;
+    bottom: 5px; 
+    left: 20px; 
+    right: 20px; 
+    width: calc(100% - 40px); 
+    padding: 10px 0; 
+    background-color: #FFE2E5;
+    color: #F64E60;
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+
+
+
 
 @media (min-width: 768px) {
     .badge-container .p-1 {
@@ -1043,7 +1080,7 @@ display: flex;
     }
 
     .circle-menu svg {
-        width:85px;
+        width: 85px;
         height: 85px;
     }
 

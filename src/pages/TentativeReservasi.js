@@ -39,7 +39,7 @@ class TentativeReservasi extends Page {
 
       $("#nextBtn").click(function () {
         if ($(this).html() === "Finish") {
-          window.location.href = "/";
+          window.location.href = "/pilih-reservasi";
         } else {
           var x = $(".tab:eq(" + currentTab + ")").find("input");
           var isValid = true;

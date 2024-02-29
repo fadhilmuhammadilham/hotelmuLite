@@ -51,7 +51,7 @@ class GuaranteedReservasi extends Page {
         if (isValid) {
           if (currentTab == $(".tab").length - 1) {
             // Redirect to "/"
-            window.location.href = "/";
+            window.location.href = "/pilih-reservasi";
           } else {
             currentTab++;
             showTab(currentTab);

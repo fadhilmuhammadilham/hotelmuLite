@@ -21,7 +21,9 @@ import Login from "./pages/Login"
 import LoginUser from "./pages/LoginUser"
 
 const routers = [
-  { path: "/", view: Home, middlewares: []},
+  { path: "/", view: Login, middlewares: [] },
+  { path: "/login-user", view: LoginUser, middlewares: [] },
+  { path: "/homepage", view: Home, middlewares: []},
   { path: "/checkin", view: Checkin, middlewares: []},
   { path: "/kamarcheckin", view: Kamar, middlewares: []},
   { path: "/previewcheckin", view: PreviewCheckin, middlewares: []},
@@ -40,8 +42,6 @@ const routers = [
   { path: "/detail-list", view: DetailList, middlewares: [] },
   { path: "/guest-in-house", view: GuestInHouse, middlewares: [] },
   { path: "/detail-guest", view: GuestDetail, middlewares: [] },
-  { path: "/login", view: Login, middlewares: [] },
-  { path: "/login-user", view: LoginUser, middlewares: [] },
 ]
 
 // const routers = [
