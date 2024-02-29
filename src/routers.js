@@ -19,6 +19,7 @@ import GuestInHouse from "./pages/GuestInHouse"
 import GuestDetail from "./pages/DetailGuest"
 import Login from "./pages/Login"
 import LoginUser from "./pages/LoginUser"
+import DetailProfile from "./pages/DetailProfile"
 
 const routers = [
   { path: "/", view: Login, middlewares: [] },
@@ -42,6 +43,7 @@ const routers = [
   { path: "/detail-list", view: DetailList, middlewares: [] },
   { path: "/guest-in-house", view: GuestInHouse, middlewares: [] },
   { path: "/detail-guest", view: GuestDetail, middlewares: [] },
+  { path: "/detail-profile", view: DetailProfile, middlewares: [] },
 ]
 
 // const routers = [
