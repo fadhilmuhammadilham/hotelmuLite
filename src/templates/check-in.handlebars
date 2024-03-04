@@ -195,23 +195,19 @@
                 <div class="Data Guest">
                     <h3 style="display: flex; justify-content: center; align-items: center;">Data Guest</h3>
                     <label class="form-label ">Nama</label>
-                    <div class="row">
-                        <div class="col" style="display: flex;">
-                            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-                            <input type="text" class="form-control ml-1" placeholder="Last name" id="colFormLabelSm"
-                                aria-label="Last name">
-                            <div class="ml-1">
-                                <button type="button" class="form-btn-kanan p-1" data-toggle="modal"
-                                    data-target="#datatamu">
-                                    ..
-                                </button>
-                            </div>
+                    <input type="text" class="form-control mb-1" placeholder="First name" aria-label="First name">
+                    <input type="text" class="form-control mb-1" placeholder="Last name" aria-label="Last name">
+                    <div class="btn-data-nama">
+                        <div class="col-2">
+                            <button type="button" class="form-btn-kanan p-1 mr-1">..</button>
+                        </div>
+                        <div class="col-10">
+                            <p style="font-size: 11px;">Klik tombol biru untuk memilih Data tamu, jika tamu telah
+                                check-in
+                                sebelumnya.</p>
                         </div>
                     </div>
-                    <p class="ml-2 mr-1" style="font-size: 11px;">
-                        Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
-                    </p>
-                    <label class="form-label ">ID Number</label>
+<label class="form-label ">ID Number</label>
                     <div class="row">
                         <div class="col" style="display: flex;">
                             <select class="form-select form-control">
@@ -223,20 +219,17 @@
                             <input type="text" class="form-control ml-1" placeholder="">
                         </div>
                     </div>
-                    <label class="form-label mt-2">GUest Type</label>
+                    <label class="form-label mt-2">Guest Type</label>
                     <div class="select-radio">
                         <input type="radio" id="Regular" name="GuestType" value="Regular" checked>
                         <label for="">Regular</label>
                         <input class="ml-2" type="radio" id="vip" name="GuestType" value="vip">
                         <label for="">Vip</label>
                     </div>
-                    <label class="form-label mt-2">Tempat, Tanggal Lahir</label>
-                    <div class="row">
-                        <div class="col" style="display: flex;">
-                            <input type="text" class="form-control" placeholder="">
-                            <input type="date" class="form-control ml-1" placeholder="">
-                        </div>
-                    </div>
+                    <label class="form-label mt-2">Tempat</label>
+                    <input type="text" class="form-control" placeholder="">
+                    <label class="form-label mt-2">Tanggal Lahir</label>
+                    <input type="date" class="form-control" placeholder="">
                     <label class="form-label mt-2">Jenis Kelamin</label>
                     <div class="select-radio">
                         <input type="radio" id="laki-laki" name="jenkel" value="laki-laki" checked>
@@ -275,21 +268,21 @@
                     <label class="form-label">Negara</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm4" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#country">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#negara">
                             ..
                         </button>
                     </div>
                     <label class="form-label">Provinsi</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm5" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#province">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#propinsi">
                             ..
                         </button>
                     </div>
                     <label class="form-label">Kota</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm6" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#city">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#kota">
                             ..
                         </button>
                     </div>
@@ -309,421 +302,421 @@
                     <button type="button" id="nextBtn" class="btn-step">Next</button>
                 </div>
             </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-<!-- App Capsule -->
+    <!-- App Capsule -->
 
-<!-- Modal Basic -->
-<div class="modal fade" id="rateplane" tabindex="-1" role="dialog">
-    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form class="search-form">
-                    <div class="form-group searchbox">
-                        <input type="text" class="form-control" placeholder="Seacrh">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </i>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Plan</th>
-                            <th scope="col">Plan Value</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Normal Rate</td>
-                            <td>1 Days</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Walk IN Rate</td>
-                            <td>1 Days</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Harga Kuning</td>
-                            <td>1 Days</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Harga Merah</td>
-                            <td>1 Days</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>PSSI</td>
-                            <td>1 Days</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Monthly Rates</td>
-                            <td>1 Bulanan</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Plan perPerson</td>
-                            <td>1 Person</td>
-                            <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- * Modal Basic -->
-<!-- Modal Basic -->
-<div class="modal fade" id="piligsegmentasi" tabindex="-1" role="dialog">
-    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form class="search-form">
-                    <div class="form-group searchbox">
-                        <input type="text" class="form-control" placeholder="Seacrh">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </i>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Market Segmentasi</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Walk-IN</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Phone-IN</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Web-IN</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Traveloka</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>ansvin</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>BOOKING.COM</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>celebes</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>AGENT A</td>
-                            <td>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+    <!-- Modal Basic -->
+    <div class="modal fade" id="rateplane" tabindex="-1" role="dialog">
+        <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form class="search-form">
+                        <div class="form-group searchbox">
+                            <input type="text" class="form-control" placeholder="Seacrh">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Plan</th>
+                                <th scope="col">Plan Value</th>
+                                <th scope="col">Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Normal Rate</td>
+                                <td>1 Days</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Walk IN Rate</td>
+                                <td>1 Days</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Harga Kuning</td>
+                                <td>1 Days</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Harga Merah</td>
+                                <td>1 Days</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>PSSI</td>
+                                <td>1 Days</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Monthly Rates</td>
+                                <td>1 Bulanan</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Plan perPerson</td>
+                                <td>1 Person</td>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- * Modal Basic -->
-<!-- Modal Basic -->
-<div class="modal fade" id="negara" tabindex="-1" role="dialog">
-    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form class="search-form">
-                    <div class="form-group searchbox">
-                        <input type="text" class="form-control" placeholder="Seacrh">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </i>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Negara</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Andora</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>United Arab Emirates</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Afghanistan</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- * Modal Basic -->
-<!-- Modal Basic -->
-<div class="modal fade" id="propinsi" tabindex="-1" role="dialog">
-    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form class="search-form">
-                    <div class="form-group searchbox">
-                        <input type="text" class="form-control" placeholder="Seacrh">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </i>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Propinsi</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bali</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Bangka Belitung</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Banten</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- * Modal Basic -->
-<!-- Modal Basic -->
-<div class="modal fade" id="kota" tabindex="-1" role="dialog">
-    <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form class="search-form">
-                    <div class="form-group searchbox">
-                        <input type="text" class="form-control" placeholder="Seacrh">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </i>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Kota</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bandung</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jakarta</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Cimindi</td>
-                            <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16" height="16"
-                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                </svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+    <!-- * Modal Basic -->
+    <!-- Modal Basic -->
+    <div class="modal fade" id="piligsegmentasi" tabindex="-1" role="dialog">
+        <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form class="search-form">
+                        <div class="form-group searchbox">
+                            <input type="text" class="form-control" placeholder="Seacrh">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Market Segmentasi</th>
+                                <th scope="col">Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Walk-IN</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Phone-IN</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Web-IN</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Traveloka</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>ansvin</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>BOOKING.COM</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>celebes</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>AGENT A</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- * Modal Basic -->
+    <!-- * Modal Basic -->
+    <!-- Modal Basic -->
+    <div class="modal fade" id="negara" tabindex="-1" role="dialog">
+        <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form class="search-form">
+                        <div class="form-group searchbox">
+                            <input type="text" class="form-control" placeholder="Seacrh">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Negara</th>
+                                <th scope="col">Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Andora</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>United Arab Emirates</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Afghanistan</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Modal Basic -->
+    <!-- Modal Basic -->
+    <div class="modal fade" id="propinsi" tabindex="-1" role="dialog">
+        <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form class="search-form">
+                        <div class="form-group searchbox">
+                            <input type="text" class="form-control" placeholder="Seacrh">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Propinsi</th>
+                                <th scope="col">Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Bali</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Bangka Belitung</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Banten</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Modal Basic -->
+    <!-- Modal Basic -->
+    <div class="modal fade" id="kota" tabindex="-1" role="dialog">
+        <div class="modal-dialog custom-modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form class="search-form">
+                        <div class="form-group searchbox">
+                            <input type="text" class="form-control" placeholder="Seacrh">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Kota</th>
+                                <th scope="col">Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Bandung</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jakarta</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Cimindi</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" class="btn-pilih-segmen" width="16"
+                                        height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                                    </svg></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Modal Basic -->

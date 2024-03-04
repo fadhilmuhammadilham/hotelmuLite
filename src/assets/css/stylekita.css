@@ -811,6 +811,11 @@ input.invalid {
     color: white;
 }
 
+.btn-data-nama{
+    display: flex;
+    gap: auto;
+}
+
 .select-radio {
     display: flex;
     gap: 5px;
