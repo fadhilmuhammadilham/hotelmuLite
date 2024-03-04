@@ -40,7 +40,6 @@
                 </div>
             </div>
             <hr>
-
             <!-- Step 1 -->
             <div class="tab p-1">
                 <label class="form-label">Rates-Plan</label>
@@ -76,7 +75,6 @@
                     <label for="" class="mt-1">Ya</label>
                 </div>
             </div>
-
             <!-- Step 2 -->
             <div class="tab p-1">
                 <div class="room">
@@ -198,11 +196,12 @@
                     </div>
                 </div>
             </div>
-
             <!-- Step 3 -->
             <div class="tab p-1">
                 <div class="bill">
-                    <label class="form-label">Total</label>
+                    <h3 style="display: flex; justify-content: center; align-items: center;">Data Guest</h3>
+
+                    <label class="form-label">Total Bill</label>
                     <div style="display: flex; ">
                         <input type="number" class="form-control" readonly>
                         <p class="mt-1 ml-1">(Rp.)</p>
@@ -212,22 +211,18 @@
                 <div class="Data Guest">
                     <h3 style="display: flex; justify-content: center; align-items: center;">Data Guest</h3>
                     <label class="form-label ">Nama</label>
-                    <div class="row">
-                        <div class="col" style="display: flex;">
-                            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-                            <input type="text" class="form-control ml-1" placeholder="Last name" id="colFormLabelSm"
-                                aria-label="Last name">
-                            <div class="ml-1">
-                                <button type="button" class="form-btn-kanan p-1" data-toggle="modal"
-                                    data-target="#datatamu">
-                                    ..
-                                </button>
-                            </div>
+                    <input type="text" class="form-control mb-1" placeholder="First name" aria-label="First name">
+                    <input type="text" class="form-control mb-1" placeholder="Last name" aria-label="Last name">
+                    <div class="btn-data-nama">
+                        <div class="col-2">
+                            <button type="button" class="form-btn-kanan p-1 mr-1">..</button>
+                        </div>
+                        <div class="col-10">
+                            <p style="font-size: 11px;">Klik tombol biru untuk memilih Data tamu, jika tamu telah
+                                check-in
+                                sebelumnya.</p>
                         </div>
                     </div>
-                    <p class="ml-2 mr-1" style="font-size: 11px;">
-                        Klik tombol biru untuk memilih Data tamu, jika tamu telah check-in sebelumnya.
-                    </p>
                     <label class="form-label ">ID Number</label>
                     <div class="row">
                         <div class="col" style="display: flex;">
@@ -241,25 +236,22 @@
                         </div>
                     </div>
                     <label class="form-label mt-2">Guest Type</label>
-                    <div class="select-radio ml-1">
+                    <div class="select-radio">
                         <input type="radio" id="Regular" name="GuestType" value="Regular" checked>
-                        <label for="" class="mt-1">Regular</label>
-                        <input class="ml-1" type="radio" id="vip" name="GuestType" value="vip">
-                        <label for="" class="mt-1">Vip</label>
+                        <label for="">Regular</label>
+                        <input class="ml-2" type="radio" id="vip" name="GuestType" value="vip">
+                        <label for="">Vip</label>
                     </div>
-                    <label class="form-label mt-2">Tempat, Tanggal Lahir</label>
-                    <div class="row">
-                        <div class="col" style="display: flex;">
-                            <input type="text" class="form-control" placeholder="">
-                            <input type="date" class="form-control ml-1" placeholder="">
-                        </div>
-                    </div>
+                    <label class="form-label mt-2">Tempat</label>
+                    <input type="text" class="form-control" placeholder="">
+                    <label class="form-label mt-2">Tanggal Lahir</label>
+                    <input type="date" class="form-control" placeholder="">
                     <label class="form-label mt-2">Jenis Kelamin</label>
-                    <div class="select-radio ml-1">
+                    <div class="select-radio">
                         <input type="radio" id="laki-laki" name="jenkel" value="laki-laki" checked>
-                        <label for="" class="mt-1">Laki-laki</label>
-                        <input class="ml-1" type="radio" id="perempuan" name="jenkel" value="perempuan">
-                        <label for="" class="mt-1">Perempuan</label>
+                        <label for="">Laki-laki</label>
+                        <input class="ml-2" type="radio" id="perempuan" name="jenkel" value="perempuan">
+                        <label for="">Perempuan</label>
                     </div>
                     <label class="form-label mt-2">Agama</label>
                     <select class="form-select form-control">
@@ -271,13 +263,13 @@
                         <option value="5">Hindu</option>
                     </select>
                     <label class="form-label mt-2">Title</label>
-                    <div class="select-radio ml-1">
+                    <div class="select-radio">
                         <input type="radio" id="mr" name="title" value="mr" checked>
-                        <label for="" class="mt-1">Mr.</label>
-                        <input class="ml-1" type="radio" id="mrs" name="title" value="mrs">
-                        <label for="" class="mt-1">Mrs.</label>
-                        <input class="ml-1" type="radio" id="miss" name="title" value="miss">
-                        <label for="" class="mt-1">Miss.</label>
+                        <label for="">Mr.</label>
+                        <input class="ml-2" type="radio" id="mrs" name="title" value="mrs">
+                        <label for="">Mrs.</label>
+                        <input class="ml-2" type="radio" id="miss" name="title" value="miss">
+                        <label for="">Miss.</label>
                     </div>
                     <label class="form-label mt-2">Pekerjaan</label>
                     <select class="form-select form-control">
@@ -292,21 +284,21 @@
                     <label class="form-label">Negara</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm4" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#country">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#negara">
                             ..
                         </button>
                     </div>
                     <label class="form-label">Provinsi</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm5" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#province">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#propinsi">
                             ..
                         </button>
                     </div>
                     <label class="form-label">Kota</label>
                     <div class="input-btn-kanan">
                         <input type="text" id="colFormLabelSm6" class="form-control" placeholder="" readonly>
-                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#city">
+                        <button type="button" class="form-btn-kanan" data-toggle="modal" data-target="#kota">
                             ..
                         </button>
                     </div>
@@ -320,7 +312,6 @@
                     <input type="text" class="form-control">
                 </div>
             </div>
-
             <div style="overflow:auto;">
                 <div style="float:right; margin-top: 10px;">
                     <button type="button" id="prevBtn" class="btn-step">Previous</button>
