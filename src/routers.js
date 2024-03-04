@@ -17,6 +17,9 @@ import GuestDetail from "./pages/DetailGuest"
 import Login from "./pages/Login"
 import LoginUser from "./pages/LoginUser"
 import DetailProfile from "./pages/DetailProfile"
+import RoomType from "./pages/RoomType"
+import DetailRoomType from "./pages/DetailRoomType"
+import RatesType from "./pages/RatesType"
 
 const routers = [
   { path: "/", view: Login, middlewares: [] },
@@ -38,6 +41,9 @@ const routers = [
   { path: "/guest-in-house", view: GuestInHouse, middlewares: [] },
   { path: "/detail-guest", view: GuestDetail, middlewares: [] },
   { path: "/detail-profile", view: DetailProfile, middlewares: [] },
+  { path: "/room-type", view: RoomType, middlewares: [] },
+  { path: "/detail-room-type", view: DetailRoomType, middlewares: [] },
+  { path: "/rates-type", view: RatesType, middlewares: [] },
 ]
 
 // const routers = [
