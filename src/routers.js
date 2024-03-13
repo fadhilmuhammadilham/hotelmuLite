@@ -20,6 +20,8 @@ import DetailProfile from "./pages/DetailProfile"
 import RoomType from "./pages/RoomType"
 import DetailRoomType from "./pages/DetailRoomType"
 import RatesType from "./pages/RatesType"
+import DetailInventory from "./pages/DetailInventor"
+import DetailRates from "./pages/DetailRates"
 
 const routers = [
   { path: "/", view: Login, middlewares: [] },
@@ -44,6 +46,8 @@ const routers = [
   { path: "/room-type", view: RoomType, middlewares: [] },
   { path: "/detail-room-type", view: DetailRoomType, middlewares: [] },
   { path: "/rates-type", view: RatesType, middlewares: [] },
+  { path: "/detail-inventory", view: DetailInventory, middlewares: [] },
+  { path: "/detail-rates", view: DetailRates, middlewares: [] },
 ]
 
 // const routers = [
