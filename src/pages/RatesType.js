@@ -8,7 +8,7 @@ class RatesType extends Page {
     super(params)
   }
 
-  action() {
+  action() { 
   }
 
   render() {
